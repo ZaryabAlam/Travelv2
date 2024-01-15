@@ -32,7 +32,12 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
     'Bookings',
     'Check In',
   ];
-  var tabsIcons = [];
+  var tabsIcons = <Widget>[
+    const Icon(Icons.home),
+    const Icon(Icons.flight),
+    const Icon(Icons.calendar_month_rounded),
+    const Icon(Icons.location_on),
+  ];
 
   @override
   Widget build(BuildContext context) {
