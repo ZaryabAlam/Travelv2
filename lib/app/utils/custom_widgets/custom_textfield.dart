@@ -3,16 +3,19 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:travel_app/app/configs/app_border_radius.dart';
 import 'package:travel_app/app/configs/app_size_config.dart';
+import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController textEditingController;
   final TextInputType? keyboardType;
   final String? Function(String?)? validator;
   final bool? readOnly;
-  final String labelText;
+  final String hintText;
+  final String? labelText;
   final String? errorText;
   final Widget? icon;
   final bool? obscureText;
+  final bool? isRequired;
   final Function()? onTap;
   final Function(String? value)? onChanged;
   final FocusNode? focusNode;
@@ -27,7 +30,8 @@ class CustomTextField extends StatelessWidget {
     required this.textEditingController,
     this.validator,
     this.readOnly,
-    required this.labelText,
+    required this.hintText,
+    this.labelText = '',
     this.icon,
     this.obscureText,
     this.onTap,
@@ -42,6 +46,7 @@ class CustomTextField extends StatelessWidget {
     this.suffixText,
     this.maxLines = 1,
     this.contentpadding,
+    this.isRequired = false,
     super.key,
   });
   @override
@@ -73,14 +78,14 @@ class CustomTextField extends StatelessWidget {
           ),
           borderRadius: AppBorderRadius.circularBorderNormal,
         ),
-        focusedBorder: OutlineInputBorder(
+        focusedBorder: UnderlineInputBorder(
             borderSide: const BorderSide(
-              color: Colors.transparent,
+              color: Colors.grey,
             ),
             borderRadius: AppBorderRadius.circularBorderNormal),
-        enabledBorder: OutlineInputBorder(
+        enabledBorder: UnderlineInputBorder(
           borderSide: const BorderSide(
-            color: Colors.transparent,
+            color: Colors.grey,
           ),
           borderRadius: AppBorderRadius.circularBorderNormal,
         ),
@@ -94,9 +99,9 @@ class CustomTextField extends StatelessWidget {
           icon: icon ?? const SizedBox.shrink(),
           onPressed: onTap,
         ),
-        border: OutlineInputBorder(
+        border: UnderlineInputBorder(
           borderSide: const BorderSide(
-            color: Colors.transparent,
+            color: Colors.grey,
           ),
           borderRadius: AppBorderRadius.circularBorderNormal,
         ),
@@ -107,10 +112,12 @@ class CustomTextField extends StatelessWidget {
         ),
         floatingLabelAlignment: FloatingLabelAlignment.start,
         floatingLabelBehavior: FloatingLabelBehavior.auto,
-        hintText: labelText,
-        hintStyle: TextStyle(color: theme.onSecondary, fontSize: 16.0),
+        hintText: hintText,
+        hintStyle: const TextStyle(color: Colors.grey, fontSize: 14.0, fontWeight: FontWeight.bold),
         filled: false,
         errorText: errorText,
+        // label: CommonText(text: labelText!),
+        // labelStyle: const TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.bold),
       ),
     );
   }
