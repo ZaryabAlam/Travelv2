@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+// import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:travel_app/app/configs/app_colors.dart';
 
 class CommonText extends StatelessWidget {
   final String text;
@@ -36,7 +37,7 @@ class CommonText extends StatelessWidget {
         textStyle: TextStyle(
           overflow: overFlow,
         ),
-        color: color ?? Get.theme.colorScheme.onSecondary,
+        color: color ?? AppColors.appColorBlack, //Get.theme.colorScheme.onSecondary,
         fontWeight: weight,
         fontSize: fontSize,
         height: lineHeight,
