@@ -41,7 +41,7 @@ class _PopUpDialogState extends State<PopUpDialog> {
     return AlertDialog(
       elevation: 16.0,
       titlePadding: const EdgeInsets.only(top: 8.0),
-      insetPadding: const EdgeInsets.symmetric(horizontal: AppPAddings.appMainPaddingSmall),
+      insetPadding: const EdgeInsets.symmetric(horizontal: AppPaddings.appMainPaddingSmall),
       title: widget.isHeader
           ? widget.isCancel == true
               ? Align(
@@ -82,8 +82,8 @@ class _PopUpDialogState extends State<PopUpDialog> {
         letterSpacing: 0.5,
       ),
       contentPadding: EdgeInsets.symmetric(
-          vertical: AppPAddings.appMainPaddingMedium,
-          horizontal: widget.horizontalContentPadding != null ? widget.horizontalContentPadding! : AppPAddings.appMainPaddingSmall),
+          vertical: AppPaddings.appMainPaddingMedium,
+          horizontal: widget.horizontalContentPadding != null ? widget.horizontalContentPadding! : AppPaddings.appMainPaddingSmall),
       titleTextStyle: TextStyle(
         fontFamily: 'Roboto',
         fontSize: AppFontSizes.appFontSizeh9,

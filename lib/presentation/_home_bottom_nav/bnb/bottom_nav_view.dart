@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:travel_app/app/configs/app_colors.dart';
+import 'package:travel_app/app/configs/app_fontweights.dart';
+import 'package:travel_app/app/configs/app_size_config.dart';
+import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
 import 'package:travel_app/presentation/_home_bottom_nav/tabs/check_in_view.dart';
 import 'package:travel_app/presentation/_home_bottom_nav/tabs/home_view.dart';
 import 'package:travel_app/presentation/_home_bottom_nav/tabs/search_view.dart';
@@ -15,9 +19,7 @@ class BottomNavScreen extends StatefulWidget {
 class _BottomNavScreenState extends State<BottomNavScreen> {
   int selectedIndex = 0;
 
-  onSelectTab(int index) {
-    setState(() => selectedIndex = index);
-  }
+  onSelectTab(int index) => setState(() => selectedIndex = index);
 
   var tabsList = <Widget>[
     const HomeScreen(),
@@ -26,11 +28,11 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
     const CheckInScreen(),
   ];
 
-  var tabsNames = [
+  var tabsLables = [
     'Home',
     'Search',
-    'Bookings',
-    'Check In',
+    'My Bookings',
+    'Check-Ins',
   ];
   var tabsIcons = <Widget>[
     const Icon(Icons.home),
@@ -39,19 +41,78 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
     const Icon(Icons.location_on),
   ];
 
+  List<Map<String, dynamic>> appDrawerData = [
+    {'Icon': Icons.home, 'Name': 'Home'},
+    {'Icon': Icons.arrow_back_sharp, 'Name': 'Book a flight'},
+    {'Icon': Icons.arrow_back_sharp, 'Name': 'My Bookings'},
+    {'Icon': Icons.arrow_back_sharp, 'Name': 'Check-Ins'},
+    {'Icon': Icons.settings, 'Name': 'Settings'},
+    {'Icon': Icons.logout, 'Name': 'Logout'},
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: tabsList[selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: selectedIndex,
+    HeightWidth(context);
+    return SafeArea(
+      child: Scaffold(
         backgroundColor: AppColors.appColorPrimaryDark,
-        selectedItemColor: AppColors.appColorWhite,
-        unselectedItemColor: AppColors.appColorPrimary,
-        items: List.generate(tabsNames.length, (ind) {
-          return BottomNavigationBarItem(icon: tabsIcons[ind]);
-        }),
+        appBar: AppBar(
+          title: CommonText(text: tabsLables[selectedIndex], weight: AppFontWeights.appTextFontWeightBold, fontSize: 20.0),
+        ),
+        // --------------------------------
+        drawer: Drawer(
+          backgroundColor: AppColors.appColorWhite,
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                0.02.ph,
+                const CommonText(
+                  text: 'Hello User',
+                  fontSize: 20.0,
+                ),
+                0.02.ph,
+                Column(
+                  children: List.generate(appDrawerData.length, (i) {
+                    var item = appDrawerData[i];
+                    return ListTile(
+                      dense: true,
+                      onTap: () {
+                        if (i < tabsList.length) {
+                          onSelectTab(i);
+                        }
+                        Get.back();
+                      },
+                      leading: Icon(item['Icon']),
+                      title: CommonText(text: item['Name']),
+                      subtitle: const Divider(),
+                    );
+                  }),
+                ),
+              ],
+            ),
+          ),
+          // width: 50.0,
+        ),
+
+        // --------------------------------
+        body: tabsList[selectedIndex],
+        // --------------------------------
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          currentIndex: selectedIndex,
+          onTap: (index) => onSelectTab(index),
+          backgroundColor: AppColors.appColorPrimaryDark,
+          selectedItemColor: AppColors.appColorPrimary,
+          unselectedItemColor: AppColors.appColorSeparator,
+          items: List.generate(tabsIcons.length, (ind) {
+            return BottomNavigationBarItem(icon: tabsIcons[ind], label: '' //tabslables[ind]
+                );
+          }),
+        ),
       ),
     );
   }

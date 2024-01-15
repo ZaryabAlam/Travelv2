@@ -1,9 +1,9 @@
-class AppPAddings {
+class AppPaddings {
   static const appMainPaddingLarge = 20.0;
   static const appMainPaddingMedium = 15.0;
   static const appMainPaddingSmall = 10.0;
   static const appMainPaddingExtraSmall = 5.0;
-  static const appMainBodyVerticalPadding = 15.0;
+  static const appMainBodyVerticalPadding = 12.0;
   static const appMainBodyHorizontalPadding = 20.0;
 
   // APP Border Radius ---------------------------------------------------------------

@@ -33,7 +33,7 @@ class Slice extends StatelessWidget {
         onPress();
       },
       child: Padding(
-        padding: const EdgeInsets.only(bottom: AppPAddings.appMainPaddingSmall),
+        padding: const EdgeInsets.only(bottom: AppPaddings.appMainPaddingSmall),
         child: PhysicalModel(
           color: Colors.transparent,
           elevation: 5.0,
@@ -57,8 +57,8 @@ class Slice extends StatelessWidget {
                   child: Container(
                     height: containerHeight,
                     padding: EdgeInsets.symmetric(
-                      vertical: AppPAddings.appMainPaddingLarge,
-                      horizontal: contentHorizontalPadding ?? AppPAddings.appMainPaddingLarge,
+                      vertical: AppPaddings.appMainPaddingLarge,
+                      horizontal: contentHorizontalPadding ?? AppPaddings.appMainPaddingLarge,
                     ),
                     decoration: BoxDecoration(
                       color: theme.primary,
