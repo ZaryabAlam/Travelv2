@@ -27,10 +27,10 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
   ];
 
   var tabsNames = [
-    'Home',
-    'Search',
-    'Bookings',
-    'Check In',
+    '',
+    '',
+    '',
+    '',
   ];
   var tabsIcons = <Widget>[
     const Icon(Icons.home),
@@ -41,17 +41,24 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: tabsList[selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: selectedIndex,
+    return SafeArea(
+      child: Scaffold(
         backgroundColor: AppColors.appColorPrimaryDark,
-        selectedItemColor: AppColors.appColorWhite,
-        unselectedItemColor: AppColors.appColorPrimary,
-        items: List.generate(tabsNames.length, (ind) {
-          return BottomNavigationBarItem(icon: tabsIcons[ind]);
-        }),
+        appBar: AppBar(),
+        body: tabsList[selectedIndex],
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          currentIndex: selectedIndex,
+          onTap: (index) => onSelectTab(index),
+          backgroundColor: AppColors.appColorPrimaryDark,
+          selectedItemColor: AppColors.appColorPrimary,
+          unselectedItemColor: AppColors.appColorSeparator,
+          items: List.generate(tabsNames.length, (ind) {
+            return BottomNavigationBarItem(icon: tabsIcons[ind], label: tabsNames[ind]);
+          }),
+        ),
       ),
     );
   }
