@@ -32,7 +32,7 @@ class CommonText extends StatelessWidget {
       text,
       textAlign: textAlign,
       maxLines: maxLines,
-      style: GoogleFonts.robotoFlex(
+      style: GoogleFonts.poppins(
         textStyle: TextStyle(
           overflow: overFlow,
         ),

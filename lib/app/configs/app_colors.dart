@@ -5,6 +5,7 @@ class AppColors {
   //APP Colors ---------------------------------------------------------------
   static const Color appColorPrimary = Color(0xff00b3f0);
 
+  static const Color appColorSplashBG = Color(0xFF171D25);
   static const Color appColorSecondary = Color(0xFFFFCC00);
   static const Color appColorPrimaryDark = Color(0xFF242f3d); // bnb bg color
   static const Color appColorAccent = Color(0xFFFBFBFB);
