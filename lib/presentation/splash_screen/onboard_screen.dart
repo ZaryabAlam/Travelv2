@@ -50,17 +50,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           ],
         ),
       ),
-      // body: Container(
-      //   decoration: BoxDecoration(
-      //       gradient: LinearGradient(
-      //     begin: Alignment.topRight,
-      //     end: Alignment.bottomLeft,
-      //     colors: [
-      //       Colors.blue.withOpacity(0.5),
-      //       Colors.black.withOpacity(0.5),
-      //     ],
-      //   )),
-      // ),
     );
   }
 
@@ -143,7 +132,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       onPressed: () {
                         Get.to(() => LoginScreen());
                       },
-                      child: CommonText(text: "Skip")),
+                      child: CommonText(text: "Skip", color: Colors.white)),
               SizedBox(height: 100)
             ],
           )
