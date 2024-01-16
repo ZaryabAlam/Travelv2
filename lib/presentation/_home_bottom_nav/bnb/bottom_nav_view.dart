@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:travel_app/app/configs/app_colors.dart';
 import 'package:travel_app/app/configs/app_fontweights.dart';
@@ -17,7 +18,7 @@ class BottomNavScreen extends StatefulWidget {
 }
 
 class _BottomNavScreenState extends State<BottomNavScreen> {
-  int selectedIndex = 0;
+  int selectedIndex = 1;
 
   onSelectTab(int index) => setState(() => selectedIndex = index);
 
@@ -36,7 +37,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
   ];
   var tabsIcons = <Widget>[
     const Icon(Icons.home),
-    const Icon(Icons.flight),
+    const Icon(FontAwesomeIcons.plane),
     const Icon(Icons.calendar_month_rounded),
     const Icon(Icons.location_on),
   ];
