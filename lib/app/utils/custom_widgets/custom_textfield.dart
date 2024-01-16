@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:travel_app/app/configs/app_border_radius.dart';
 import 'package:travel_app/app/configs/app_size_config.dart';
 import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
+// import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController textEditingController;
@@ -66,6 +67,7 @@ class CustomTextField extends StatelessWidget {
       cursorColor: theme.onPrimary,
       onChanged: onChanged,
       decoration: InputDecoration(
+        // prefixIcon: Icon(Icons.flight_takeoff_rounded),
         prefixText: prefixText,
         suffixText: suffixText,
         prefixStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.w400, color: theme.onPrimary),
@@ -111,13 +113,13 @@ class CustomTextField extends StatelessWidget {
           fontSize: 11,
         ),
         floatingLabelAlignment: FloatingLabelAlignment.start,
-        floatingLabelBehavior: FloatingLabelBehavior.auto,
+        floatingLabelBehavior: FloatingLabelBehavior.always,
         hintText: hintText,
         hintStyle: const TextStyle(color: Colors.grey, fontSize: 14.0, fontWeight: FontWeight.bold),
         filled: false,
         errorText: errorText,
-        // label: CommonText(text: labelText!),
-        // labelStyle: const TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.bold),
+        label: CommonText(text: labelText!),
+        labelStyle: const TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.bold),
       ),
     );
   }

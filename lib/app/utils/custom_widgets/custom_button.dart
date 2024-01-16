@@ -7,12 +7,7 @@ class CustomButton extends StatelessWidget {
   final double? width;
   final String text;
   final Function() onPress;
-  CustomButton(
-      {super.key,
-      required this.text,
-      required this.onPress,
-      this.height,
-      this.width});
+  CustomButton({super.key, required this.text, required this.onPress, this.height, this.width});
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +16,7 @@ class CustomButton extends StatelessWidget {
       width: width ?? 250.0,
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [
-            AppColors.appColorPrimary,
-            AppColors.appColorPrimary.withOpacity(0.8)
-          ],
+          colors: [AppColors.appColorPrimary, AppColors.appColorPrimary.withOpacity(0.8)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -36,7 +28,11 @@ class CustomButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(2.0),
           onTap: onPress,
           child: Center(
-            child: CommonText(text: text, color: Colors.white),
+            child: CommonText(
+              text: text,
+              color: Colors.white,
+              weight: FontWeight.w500,
+            ),
           ),
         ),
       ),
