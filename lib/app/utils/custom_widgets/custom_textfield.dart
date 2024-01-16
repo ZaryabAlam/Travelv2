@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:travel_app/app/configs/app_border_radius.dart';
 import 'package:travel_app/app/configs/app_size_config.dart';
 import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
-// import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
+
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController textEditingController;
