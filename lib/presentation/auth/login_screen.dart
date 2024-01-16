@@ -5,6 +5,7 @@ import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_button.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_textfield_required.dart';
 import 'package:travel_app/presentation/auth/register_screen.dart';
+import 'package:travel_app/presentation/home_bottom_nav/bnb/bottom_nav_view.dart';
 
 import '../../app/utils/custom_widgets/custom_outline_button_Wicon.dart';
 
@@ -155,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             SizedBox(height: 10),
                             CustomButton(
                                 onPress: () {
-                                  // Get.to(() => RegisterScreen());
+                                  Get.to(() => BottomNavScreen());
                                 },
                                 text: "Login"),
                             SizedBox(height: 20),
