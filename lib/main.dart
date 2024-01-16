@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:travel_app/app/configs/app_colors.dart';
 import 'package:travel_app/presentation/auth/login_screen.dart';
-import 'package:travel_app/presentation/splash_screen/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());

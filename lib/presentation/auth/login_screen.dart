@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_button.dart';
+import 'package:travel_app/app/utils/custom_widgets/custom_textfield_required.dart';
 import 'package:travel_app/presentation/auth/register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -12,6 +13,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final userController = TextEditingController();
+  final agentController = TextEditingController();
+  final passController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,6 +60,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                          Custom_textfield_required(
+                              requiredLabel: "Username",
+                              hint: "Enter username here",
+                              controller: userController),
+                          Custom_textfield_required(
+                              requiredLabel: "Password",
+                              hint: "Enter password here",
+                              obscureText: true,
+                              controller: passController),
                           CustomButton(
                               onPress: () {
                                 Get.to(() => RegisterScreen());

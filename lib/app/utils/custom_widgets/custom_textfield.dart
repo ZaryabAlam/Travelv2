@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:travel_app/app/configs/app_border_radius.dart';
 import 'package:travel_app/app/configs/app_size_config.dart';
 
+
 class CustomTextField extends StatelessWidget {
   final TextEditingController textEditingController;
   final TextInputType? keyboardType;
