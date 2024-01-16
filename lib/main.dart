@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:travel_app/presentation/_home_bottom_nav/bnb/bottom_nav_view.dart';
+import 'package:travel_app/presentation/home_bottom_nav/bnb/bottom_nav_view.dart';
 // import 'package:travel_app/presentation/splash_screen/splash_screen.dart';
 
 void main() {

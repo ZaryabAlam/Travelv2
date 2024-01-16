@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:travel_app/app/configs/app_size_config.dart';
 import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_button.dart';
-import 'package:travel_app/presentation/_home_bottom_nav/tabs/components/search_tabs/return_tab.dart';
+import 'package:travel_app/presentation/home_bottom_nav/tabs/components/search_tabs/return_tab.dart';
 
 class OneWayTabView extends StatefulWidget {
   const OneWayTabView({super.key});
