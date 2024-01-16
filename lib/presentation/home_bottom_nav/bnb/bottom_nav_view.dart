@@ -5,10 +5,10 @@ import 'package:travel_app/app/configs/app_colors.dart';
 import 'package:travel_app/app/configs/app_fontweights.dart';
 import 'package:travel_app/app/configs/app_size_config.dart';
 import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
-import 'package:travel_app/presentation/_home_bottom_nav/tabs/check_in_view.dart';
-import 'package:travel_app/presentation/_home_bottom_nav/tabs/home_view.dart';
-import 'package:travel_app/presentation/_home_bottom_nav/tabs/search_view.dart';
-import 'package:travel_app/presentation/_home_bottom_nav/tabs/ticket_view.dart';
+import 'package:travel_app/presentation/home_bottom_nav/tabs/check_in_view.dart';
+import 'package:travel_app/presentation/home_bottom_nav/tabs/home_view.dart';
+import 'package:travel_app/presentation/home_bottom_nav/tabs/search_view.dart';
+import 'package:travel_app/presentation/home_bottom_nav/tabs/ticket_view.dart';
 
 class BottomNavScreen extends StatefulWidget {
   const BottomNavScreen({super.key});
