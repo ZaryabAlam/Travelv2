@@ -18,7 +18,7 @@ class BottomNavScreen extends StatefulWidget {
 }
 
 class _BottomNavScreenState extends State<BottomNavScreen> {
-  int selectedIndex = 1;
+  int selectedIndex = 0;
 
   onSelectTab(int index) => setState(() => selectedIndex = index);
 
@@ -58,6 +58,8 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
       child: Scaffold(
         backgroundColor: AppColors.appColorPrimaryDark,
         appBar: AppBar(
+          shadowColor: Colors.transparent,
+          elevation: 0.0,
           title: CommonText(text: tabsLables[selectedIndex], weight: AppFontWeights.appTextFontWeightBold, fontSize: 20.0),
         ),
         // --------------------------------
