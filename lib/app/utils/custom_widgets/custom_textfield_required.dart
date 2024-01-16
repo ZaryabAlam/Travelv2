@@ -65,6 +65,7 @@ class Custom_textfield_required extends StatelessWidget {
               children: [
                 TextSpan(
                   text: requiredLabel,
+                  style: TextStyle(color: Colors.black,  ),
                 ),
                 TextSpan(
                   text: ' *',
