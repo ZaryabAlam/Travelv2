@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:travel_app/app/configs/app_size_config.dart';
 import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_button.dart';
 import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/components/search_tabs/return_tab.dart';
+import 'package:travel_app/presentation/home_bottom_nav/views/search_flights.dart';
 
 class MultiTabView extends StatefulWidget {
   const MultiTabView({super.key});
@@ -96,7 +98,9 @@ class _MultiTabViewState extends State<MultiTabView> {
           // Search Flight Button -----------------------------------
 
           Spacer(),
-          CustomButton(height: 40, width: w, text: 'Search Flight', onPress: () {}),
+          CustomButton(height: 40, width: w, text: 'Search Flight', onPress: () {
+            Get.to(() => SearchFlightScreen());
+          }),
 
           // OneWayTabView()
         ],

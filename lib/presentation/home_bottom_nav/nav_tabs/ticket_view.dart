@@ -36,7 +36,8 @@ class _BookingScreenState extends State<BookingScreen> {
             ),
             // --------------------------------------------------
             Spacer(),
-            CustomButton(height: 40.0, width: w, text: 'Download Ticket', onPress: () {})
+            CustomButton(
+                height: 40.0, width: w, text: 'Download Ticket', onPress: () {})
           ],
         ),
       ),

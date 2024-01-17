@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:travel_app/app/configs/app_size_config.dart';
 import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_button.dart';
+import 'package:travel_app/presentation/home_bottom_nav/views/search_flights.dart';
 
 class ReturnTabView extends StatefulWidget {
   const ReturnTabView({super.key});
@@ -63,7 +65,8 @@ class _ReturnTabViewState extends State<ReturnTabView> {
                 value: selectedTraveller,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22.0),
                 items: travellerList.map((String item) {
-                  return DropdownMenuItem(value: item, child: CommonText(text: item));
+                  return DropdownMenuItem(
+                      value: item, child: CommonText(text: item));
                 }).toList(),
                 onChanged: (String? val) {
                   setState(() => selectedTraveller = val!);
@@ -83,7 +86,8 @@ class _ReturnTabViewState extends State<ReturnTabView> {
                 value: selectedCabin,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22.0),
                 items: cabinList.map((String item) {
-                  return DropdownMenuItem(value: item, child: CommonText(text: item));
+                  return DropdownMenuItem(
+                      value: item, child: CommonText(text: item));
                 }).toList(),
                 onChanged: (String? val) {
                   setState(() => selectedCabin = val!);
@@ -92,7 +96,13 @@ class _ReturnTabViewState extends State<ReturnTabView> {
 
           // Search Flight Button -----------------------------------
           Spacer(),
-          CustomButton(height: 40, width: w, text: 'Search Flight', onPress: () {}),
+          CustomButton(
+              height: 40,
+              width: w,
+              text: 'Search Flight',
+              onPress: () {
+                Get.to(() => SearchFlightScreen());
+              }),
         ],
       ),
     );
