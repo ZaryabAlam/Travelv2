@@ -25,124 +25,7 @@ class _BookingScreenState extends State<BookingScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             /// Main ----------------------------------
-            DottedBorder(
-              dashPattern: [10, 8],
-              strokeWidth: 1,
-              color: AppColors.appColorPrimary,
-              child: Container(
-                padding: EdgeInsets.fromLTRB(15.0, 15, 15, 30),
-                margin: const EdgeInsets.all(20.0),
-                // height: h * 0.43,
-                decoration: BoxDecoration(color: Colors.white),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // 1st  FROM TO ------------------------------------------------
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        FromToFlightWidget(
-                          date: 'Fri 29 Dec 23',
-                          time: '19:30',
-                          city: 'CAI',
-                        ),
-                        Column(
-                          children: [
-                            Icon(
-                              FontAwesomeIcons.plane,
-                              color: AppColors.appColorPrimary,
-                              size: 20.0,
-                            ),
-                            0.01.ph,
-                            CommonText(
-                              text: 'EK06',
-                              fontSize: 12.0,
-                            )
-                          ],
-                        ),
-                        FromToFlightWidget(
-                          date: 'Sat 29 Dec 23',
-                          time: '22:30',
-                          city: 'DXB',
-                        ),
-                      ],
-                    ),
-                    0.04.ph,
-                    CommonText(
-                      text: 'Fare Information',
-                      weight: FontWeight.w600,
-                    ),
-                    0.02.ph,
-                    CommonText(
-                      text: 'Adult x 01',
-                      fontSize: 11,
-                    ),
-                    0.02.ph,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CommonText(
-                          text: 'Fare',
-                          fontSize: 11,
-                        ),
-                        CommonText(
-                          text: '\$ 125',
-                          fontSize: 11,
-                        ),
-                      ],
-                    ),
-                    0.02.ph,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CommonText(
-                          text: 'Taxes and Fees',
-                          fontSize: 11,
-                        ),
-                        CommonText(
-                          text: '\$ 2',
-                          fontSize: 11,
-                        ),
-                      ],
-                    ),
-                    0.02.ph,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CommonText(
-                          text: 'Extra Baggage',
-                          fontSize: 11,
-                        ),
-                        CommonText(
-                          text: '\$ 20',
-                          fontSize: 11,
-                        ),
-                      ],
-                    ),
-
-                    0.02.ph,
-                    Divider(color: Colors.black),
-
-                    0.02.ph,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CommonText(
-                          text: 'Total Charges',
-                          fontSize: 11,
-                          weight: FontWeight.w700,
-                        ),
-                        CommonText(
-                          text: '\$ 147',
-                          fontSize: 11,
-                          weight: FontWeight.w700,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            FlightSummaryWidget(),
 
             // --------------------------------------------------
             0.02.ph,
@@ -154,6 +37,134 @@ class _BookingScreenState extends State<BookingScreen> {
             // --------------------------------------------------
             Spacer(),
             CustomButton(height: 40.0, width: w, text: 'Download Ticket', onPress: () {})
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class FlightSummaryWidget extends StatelessWidget {
+  const FlightSummaryWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return DottedBorder(
+      dashPattern: [10, 8],
+      strokeWidth: 1,
+      color: AppColors.appColorPrimary,
+      child: Container(
+        padding: EdgeInsets.fromLTRB(15.0, 15, 15, 30),
+        margin: const EdgeInsets.all(20.0),
+        // height: h * 0.43,
+        decoration: BoxDecoration(color: Colors.white),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // 1st  FROM TO ------------------------------------------------
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                FromToFlightWidget(
+                  date: 'Fri 29 Dec 23',
+                  time: '19:30',
+                  city: 'CAI',
+                ),
+                Column(
+                  children: [
+                    Icon(
+                      FontAwesomeIcons.plane,
+                      color: AppColors.appColorPrimary,
+                      size: 20.0,
+                    ),
+                    0.01.ph,
+                    CommonText(
+                      text: 'EK06',
+                      fontSize: 12.0,
+                    )
+                  ],
+                ),
+                FromToFlightWidget(
+                  date: 'Sat 29 Dec 23',
+                  time: '22:30',
+                  city: 'DXB',
+                ),
+              ],
+            ),
+            0.04.ph,
+            CommonText(
+              text: 'Fare Information',
+              weight: FontWeight.w600,
+            ),
+            0.02.ph,
+            CommonText(
+              text: 'Adult x 01',
+              fontSize: 11,
+            ),
+            0.02.ph,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CommonText(
+                  text: 'Fare',
+                  fontSize: 11,
+                ),
+                CommonText(
+                  text: '\$ 125',
+                  fontSize: 11,
+                ),
+              ],
+            ),
+            0.02.ph,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CommonText(
+                  text: 'Taxes and Fees',
+                  fontSize: 11,
+                ),
+                CommonText(
+                  text: '\$ 2',
+                  fontSize: 11,
+                ),
+              ],
+            ),
+            0.02.ph,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CommonText(
+                  text: 'Extra Baggage',
+                  fontSize: 11,
+                ),
+                CommonText(
+                  text: '\$ 20',
+                  fontSize: 11,
+                ),
+              ],
+            ),
+
+            0.02.ph,
+            Divider(color: Colors.black),
+
+            0.02.ph,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CommonText(
+                  text: 'Total Charges',
+                  fontSize: 11,
+                  weight: FontWeight.w700,
+                ),
+                CommonText(
+                  text: '\$ 147',
+                  fontSize: 11,
+                  weight: FontWeight.w700,
+                ),
+              ],
+            ),
           ],
         ),
       ),
