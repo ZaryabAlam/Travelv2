@@ -5,7 +5,6 @@ import 'package:travel_app/app/configs/app_border_radius.dart';
 import 'package:travel_app/app/configs/app_size_config.dart';
 import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
 
-
 class CustomTextField extends StatelessWidget {
   final TextEditingController textEditingController;
   final TextInputType? keyboardType;
@@ -55,6 +54,7 @@ class CustomTextField extends StatelessWidget {
     var theme = context.theme.colorScheme;
     HeightWidth(context);
     return TextFormField(
+      onTap: onTap,
       maxLines: maxLines,
       maxLength: maxlength,
       inputFormatters: inputformatter,
