@@ -1,11 +1,13 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:travel_app/app/configs/app_colors.dart';
 import 'package:travel_app/app/configs/app_fontweights.dart';
 import 'package:travel_app/app/configs/app_size_config.dart';
 import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
+import 'package:travel_app/presentation/home_bottom_nav/views/details_view.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -281,19 +283,24 @@ class _HomeScreenState extends State<HomeScreen> {
                           physics: AlwaysScrollableScrollPhysics(),
                           itemCount: 4,
                           itemBuilder: (context, i) {
-                            return Container(
-                              alignment: Alignment.bottomCenter,
-                              padding: EdgeInsets.only(bottom: 20.0),
-                              margin: EdgeInsets.all(8.0),
-                              height: 300,
-                              width: 230,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15.0), image: DecorationImage(image: AssetImage('assets/images/aa.png'))),
-                              child: CommonText(
-                                text: cabinList[i],
-                                color: Colors.white,
-                                fontSize: 22.0,
-                                weight: FontWeight.w500,
+                            return GestureDetector(
+                              onTap: () {
+                                Get.to(DetailsScreen(title: cabinList[i]));
+                              },
+                              child: Container(
+                                alignment: Alignment.bottomCenter,
+                                padding: EdgeInsets.only(bottom: 20.0),
+                                margin: EdgeInsets.all(8.0),
+                                height: 300,
+                                width: 230,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15.0), image: DecorationImage(image: AssetImage('assets/images/aa.png'))),
+                                child: CommonText(
+                                  text: cabinList[i],
+                                  color: Colors.white,
+                                  fontSize: 22.0,
+                                  weight: FontWeight.w500,
+                                ),
                               ),
                             );
                           },

@@ -145,7 +145,7 @@ class _BookingScreenState extends State<BookingScreen> {
             ),
 
             // --------------------------------------------------
-            0.04.ph,
+            0.02.ph,
             CommonText(
               text: 'Your Ticket has been Downloaded',
               fontSize: 18.0,
