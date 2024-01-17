@@ -146,13 +146,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
                       // Categories ---------------------------------
 
-                      0.1.ph,
+                      0.08.ph,
                       CommonText(
                         text: 'Let\'s Get Started',
                         weight: FontWeight.w500,
                       ),
                       Container(
-                        height: h * 0.3,
+                        height: h * 0.32,
                         margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 20.0),
                         child: GridView.builder(
                           physics: NeverScrollableScrollPhysics(),
@@ -164,10 +164,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               onTap: () => categoriesList[i].onTap,
                               child: Container(
                                 alignment: Alignment.center,
-                                padding: EdgeInsets.all(15.0),
+                                // padding: EdgeInsets.all(15.0),
                                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(12.0), border: Border.all(color: Colors.grey)),
                                 child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Icon(
                                       categoriesList[i].icon,
