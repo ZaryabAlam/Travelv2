@@ -30,9 +30,9 @@ class _BookingScreenState extends State<BookingScreen> {
               strokeWidth: 1,
               color: AppColors.appColorPrimary,
               child: Container(
-                padding: EdgeInsets.all(15.0),
+                padding: EdgeInsets.fromLTRB(15.0, 15, 15, 30),
                 margin: const EdgeInsets.all(20.0),
-                height: h * 0.43,
+                // height: h * 0.43,
                 decoration: BoxDecoration(color: Colors.white),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

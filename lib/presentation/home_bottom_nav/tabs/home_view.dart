@@ -74,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                       // 3rd  Dotted Container -------------------------
                       SizedBox(
-                        height: h * 0.26,
+                        height: h * 0.3,
                         width: double.infinity,
                         child: ListView.builder(
                           padding: EdgeInsets.only(right: 4.0),
@@ -91,15 +91,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                 margin: EdgeInsets.only(right: 4.0),
                                 alignment: Alignment.topCenter,
                                 padding: const EdgeInsets.fromLTRB(12.0, 12, 12, 0),
-                                height: h * 0.25,
+                                height: h * 0.27,
                                 width: w * 0.8,
                                 child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Image.asset(
                                       'assets/images/bb.png',
                                     ),
-                                    0.008.ph,
+                                    // 0.008.ph,
                                     CommonText(
                                       text: 'Kenya',
                                       fontSize: 11.0,
@@ -137,71 +138,82 @@ class _HomeScreenState extends State<HomeScreen> {
 
                       Center(
                         child: Container(
-                          margin: const EdgeInsets.only(top: 30.0, bottom: 30.0),
+                          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 30.0),
                           padding: const EdgeInsets.fromLTRB(30.0, 30, 20, 20),
-                          height: h * 0.2,
-                          width: w * 0.84,
+                          // height: h * 0.22,
+                          // width: w * 0.84,
                           decoration: BoxDecoration(
                             color: AppColors.appColorPrimaryDark,
                             borderRadius: BorderRadius.circular(12.0),
                           ),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               // 0.03.pw,
-                              Text(
-                                'ICON',
-                                style: GoogleFonts.bebasNeue(color: Colors.white, fontSize: 32.0),
+                              Expanded(
+                                flex: 2,
+                                child: Text(
+                                  'ICON',
+                                  style: GoogleFonts.bebasNeue(color: Colors.white, fontSize: 32.0),
+                                ),
                               ),
-                              0.03.pw,
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  0.01.ph,
-                                  Container(
-                                    width: 220,
-                                    child: CommonText(
-                                      text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.',
+                              // 0.03.pw,
+                              Expanded(
+                                flex: 5,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    0.01.ph,
+                                    CommonText(
+                                      text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.',
                                       color: Colors.white,
                                       fontSize: 11.0,
                                       textAlign: TextAlign.justify,
+                                      maxLines: 5,
                                     ),
-                                  ),
-                                  0.03.ph,
-                                  Row(
-                                    children: [
-                                      InkWell(
-                                        onTap: () {},
-                                        child: Container(
-                                          alignment: Alignment.center,
-                                          height: 25.0,
-                                          width: 80.0,
-                                          decoration: BoxDecoration(
-                                            color: AppColors.appColorPrimary,
-                                            borderRadius: BorderRadius.circular(20.0),
-                                          ),
-                                          child: CommonText(
-                                            text: 'Sign In',
-                                            color: Colors.white,
-                                            weight: FontWeight.w400,
+                                    0.03.ph,
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Expanded(
+                                          flex: 2,
+                                          child: InkWell(
+                                            onTap: () {},
+                                            child: Container(
+                                              alignment: Alignment.center,
+                                              height: 25.0,
+                                              width: 80.0,
+                                              decoration: BoxDecoration(
+                                                color: AppColors.appColorPrimary,
+                                                borderRadius: BorderRadius.circular(20.0),
+                                              ),
+                                              child: CommonText(
+                                                text: 'Sign In',
+                                                color: Colors.white,
+                                                weight: FontWeight.w400,
+                                              ),
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      0.04.pw,
-                                      InkWell(
-                                        onTap: () {},
-                                        child: CommonText(
-                                          text: 'Learn about it more',
-                                          color: Colors.white,
-                                          fontSize: 11.0,
-                                          textAlign: TextAlign.justify,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ],
+                                        0.04.pw,
+                                        Expanded(
+                                          flex: 3,
+                                          child: InkWell(
+                                            onTap: () {},
+                                            child: CommonText(
+                                              text: 'Learn about it more',
+                                              color: Colors.white,
+                                              fontSize: 11.0,
+                                              // textAlign: TextAlign.justify,
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
@@ -221,7 +233,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             return Container(
                               alignment: Alignment.bottomCenter,
                               padding: EdgeInsets.only(bottom: 20.0),
-                              margin: EdgeInsets.all(10.0),
+                              margin: EdgeInsets.all(8.0),
                               height: 300,
                               width: 230,
                               decoration: BoxDecoration(
