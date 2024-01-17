@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:travel_app/app/configs/app_size_config.dart';
 import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_appbar.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_button.dart';
+import 'package:travel_app/presentation/home_bottom_nav/bnb/bottom_nav_view.dart';
 
 class DetailsScreen extends StatefulWidget {
   const DetailsScreen({required this.title, super.key});
@@ -59,7 +61,15 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
-            child: CustomButton(height: 40, width: w, text: 'Search Flight', onPress: () {}),
+            child: CustomButton(
+                height: 40,
+                width: w,
+                text: 'Search Flight',
+                onPress: () {
+                  Get.to(() => BottomNavScreen(
+                        fromDetails: true,
+                      ));
+                }),
           ),
         ],
       ),

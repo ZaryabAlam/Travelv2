@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -12,13 +14,26 @@ import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/search_view.dar
 import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/ticket_view.dart';
 
 class BottomNavScreen extends StatefulWidget {
-  const BottomNavScreen({super.key});
+  BottomNavScreen({this.fromDetails = false, super.key});
+  bool? fromDetails;
 
   @override
   State<BottomNavScreen> createState() => _BottomNavScreenState();
 }
 
 class _BottomNavScreenState extends State<BottomNavScreen> {
+  @override
+  void initState() {
+    setArgs();
+    super.initState();
+  }
+
+  setArgs() {
+    if (widget.fromDetails!) {
+      onSelectTab(1);
+    }
+  }
+
   int selectedIndex = 0;
 
   onSelectTab(int index) => setState(() => selectedIndex = index);
