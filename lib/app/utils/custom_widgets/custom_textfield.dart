@@ -54,6 +54,9 @@ class CustomTextField extends StatelessWidget {
     var theme = context.theme.colorScheme;
     HeightWidth(context);
     return TextFormField(
+      onTapOutside: (_) {
+        Get.focusScope!.unfocus();
+      },
       onTap: onTap,
       maxLines: maxLines,
       maxLength: maxlength,
