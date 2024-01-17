@@ -1,5 +1,6 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:travel_app/app/configs/app_colors.dart';
 import 'package:travel_app/app/configs/app_fontweights.dart';
@@ -20,6 +21,15 @@ class _HomeScreenState extends State<HomeScreen> {
     'Premium',
     'First Class',
   ];
+
+  var categoriesList = [
+    CategoriesModel('Stays', Icons.location_city, () {}),
+    CategoriesModel('Flights', FontAwesomeIcons.plane, () {}),
+    CategoriesModel('Cars', FontAwesomeIcons.car, () {}),
+    CategoriesModel('Things to do', Icons.airplane_ticket_outlined, () {}),
+    CategoriesModel('Cruises', FontAwesomeIcons.ship, () {}),
+    CategoriesModel('Packages', Icons.luggage, () {}),
+  ];
   @override
   Widget build(BuildContext context) {
     HeightWidth(context);
@@ -39,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // 1st ------------
+                      // 1st -------------
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -54,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                       0.02.ph,
-                      // 2nd ---------------------
+                      // 2nd ----------------------
                       Row(
                         children: [
                           const CommonText(
@@ -258,4 +268,12 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+}
+
+class CategoriesModel {
+  CategoriesModel(this.name, this.icon, this.onTap);
+
+  final String name;
+  final IconData icon;
+  final Function onTap;
 }
