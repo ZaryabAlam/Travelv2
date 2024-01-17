@@ -144,6 +144,47 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
 
+                      // Categories ---------------------------------
+
+                      0.1.ph,
+                      CommonText(
+                        text: 'Let\'s Get Started',
+                        weight: FontWeight.w500,
+                      ),
+                      Container(
+                        height: h * 0.3,
+                        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 20.0),
+                        child: GridView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: categoriesList.length,
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              childAspectRatio: 6 / 5, crossAxisCount: 3, mainAxisSpacing: 12.0, crossAxisSpacing: 12.0),
+                          itemBuilder: (context, i) {
+                            return GestureDetector(
+                              onTap: () => categoriesList[i].onTap,
+                              child: Container(
+                                alignment: Alignment.center,
+                                padding: EdgeInsets.all(15.0),
+                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(12.0), border: Border.all(color: Colors.grey)),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Icon(
+                                      categoriesList[i].icon,
+                                      size: 24.0,
+                                    ),
+                                    CommonText(
+                                      text: categoriesList[i].name,
+                                      fontSize: 12.0,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+
                       // 4th ICON SIGNIN Container -------------------------
 
                       Center(
