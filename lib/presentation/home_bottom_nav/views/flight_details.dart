@@ -1,11 +1,12 @@
 import 'package:dotted_border/dotted_border.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:travel_app/app/configs/app_colors.dart';
 import 'package:travel_app/app/configs/app_size_config.dart';
 import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_appbar.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_button.dart';
+import 'package:travel_app/presentation/home_bottom_nav/views/passenger_details.dart';
 
 class FlightDetailsScreen extends StatefulWidget {
   const FlightDetailsScreen({super.key});
@@ -207,7 +208,13 @@ class FlightPackageWidget extends StatelessWidget {
             0.04.ph,
 // -----------------------------------------------------
 
-            CustomButton(height: 35, width: w, text: 'Avail this Flight for \$125', onPress: () {}),
+            CustomButton(
+                height: 35,
+                width: w,
+                text: 'Avail this Flight for \$125',
+                onPress: () {
+                  Get.to(() => PassengerDetailsScreen());
+                }),
           ],
         ),
       ),
