@@ -1,11 +1,13 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:travel_app/app/configs/app_colors.dart';
 import 'package:travel_app/app/configs/app_fontweights.dart';
 import 'package:travel_app/app/configs/app_size_config.dart';
 import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
+import 'package:travel_app/presentation/home_bottom_nav/views/details_view.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -144,6 +146,47 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
 
+                      // Categories ---------------------------------
+
+                      0.08.ph,
+                      CommonText(
+                        text: 'Let\'s Get Started',
+                        weight: FontWeight.w500,
+                      ),
+                      Container(
+                        height: h * 0.32,
+                        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 20.0),
+                        child: GridView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: categoriesList.length,
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              childAspectRatio: 6 / 5, crossAxisCount: 3, mainAxisSpacing: 12.0, crossAxisSpacing: 12.0),
+                          itemBuilder: (context, i) {
+                            return GestureDetector(
+                              onTap: () => categoriesList[i].onTap,
+                              child: Container(
+                                alignment: Alignment.center,
+                                // padding: EdgeInsets.all(15.0),
+                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(12.0), border: Border.all(color: Colors.grey)),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Icon(
+                                      categoriesList[i].icon,
+                                      size: 24.0,
+                                    ),
+                                    CommonText(
+                                      text: categoriesList[i].name,
+                                      fontSize: 12.0,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+
                       // 4th ICON SIGNIN Container -------------------------
 
                       Center(
@@ -240,19 +283,24 @@ class _HomeScreenState extends State<HomeScreen> {
                           physics: AlwaysScrollableScrollPhysics(),
                           itemCount: 4,
                           itemBuilder: (context, i) {
-                            return Container(
-                              alignment: Alignment.bottomCenter,
-                              padding: EdgeInsets.only(bottom: 20.0),
-                              margin: EdgeInsets.all(8.0),
-                              height: 300,
-                              width: 230,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15.0), image: DecorationImage(image: AssetImage('assets/images/aa.png'))),
-                              child: CommonText(
-                                text: cabinList[i],
-                                color: Colors.white,
-                                fontSize: 22.0,
-                                weight: FontWeight.w500,
+                            return GestureDetector(
+                              onTap: () {
+                                Get.to(DetailsScreen(title: cabinList[i]));
+                              },
+                              child: Container(
+                                alignment: Alignment.bottomCenter,
+                                padding: EdgeInsets.only(bottom: 20.0),
+                                margin: EdgeInsets.all(8.0),
+                                height: 300,
+                                width: 230,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15.0), image: DecorationImage(image: AssetImage('assets/images/aa.png'))),
+                                child: CommonText(
+                                  text: cabinList[i],
+                                  color: Colors.white,
+                                  fontSize: 22.0,
+                                  weight: FontWeight.w500,
+                                ),
                               ),
                             );
                           },

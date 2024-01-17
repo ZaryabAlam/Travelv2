@@ -5,10 +5,11 @@ import 'package:travel_app/app/configs/app_colors.dart';
 import 'package:travel_app/app/configs/app_fontweights.dart';
 import 'package:travel_app/app/configs/app_size_config.dart';
 import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
-import 'package:travel_app/presentation/home_bottom_nav/tabs/check_in_view.dart';
-import 'package:travel_app/presentation/home_bottom_nav/tabs/home_view.dart';
-import 'package:travel_app/presentation/home_bottom_nav/tabs/search_view.dart';
-import 'package:travel_app/presentation/home_bottom_nav/tabs/ticket_view.dart';
+import 'package:travel_app/app/utils/custom_widgets/custom_appbar.dart';
+import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/check_in_view.dart';
+import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/home_view.dart';
+import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/search_view.dart';
+import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/ticket_view.dart';
 
 class BottomNavScreen extends StatefulWidget {
   const BottomNavScreen({super.key});
@@ -57,11 +58,15 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: AppColors.appColorPrimaryDark,
-        appBar: AppBar(
-          shadowColor: Colors.transparent,
-          elevation: 0.0,
-          title: CommonText(text: tabsLables[selectedIndex], weight: AppFontWeights.appTextFontWeightBold, fontSize: 20.0),
+        appBar: CustomAppBar(
+          title: tabsLables[selectedIndex],
         ),
+
+        // AppBar(
+        //   shadowColor: Colors.transparent,
+        //   elevation: 0.0,
+        //   title: CommonText(text: tabsLables[selectedIndex], weight: AppFontWeights.appTextFontWeightBold, fontSize: 20.0),
+        // ),
         // --------------------------------
         drawer: Drawer(
           backgroundColor: AppColors.appColorWhite,

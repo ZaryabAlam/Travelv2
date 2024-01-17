@@ -3,9 +3,9 @@ import 'package:travel_app/app/configs/app_colors.dart';
 import 'package:travel_app/app/configs/app_size_config.dart';
 import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_textfield.dart';
-import 'package:travel_app/presentation/home_bottom_nav/tabs/components/search_tabs/multi_tab.dart';
-import 'package:travel_app/presentation/home_bottom_nav/tabs/components/search_tabs/one_way_tab.dart';
-import 'package:travel_app/presentation/home_bottom_nav/tabs/components/search_tabs/return_tab.dart';
+import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/components/search_tabs/multi_tab.dart';
+import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/components/search_tabs/one_way_tab.dart';
+import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/components/search_tabs/return_tab.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
