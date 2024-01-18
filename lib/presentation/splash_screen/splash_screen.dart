@@ -23,23 +23,19 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: AppColors.appColorSplashBG,
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                  height: 120,
-                  width: 120,
-                  // decoration: BoxDecoration(
-                  //     shape: BoxShape.circle, color: Colors.white),
-                  child: Image(
-                      image: AssetImage("assets/icons/logo.png"),
-                      fit: BoxFit.cover)),
-            ],
-          ),
+    return Scaffold(
+      backgroundColor: AppColors.appColorSplashBG,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+                height: 120,
+                width: 120,
+                // decoration: BoxDecoration(
+                //     shape: BoxShape.circle, color: Colors.white),
+                child: Image(image: AssetImage("assets/icons/logo.png"), fit: BoxFit.cover)),
+          ],
         ),
       ),
     );

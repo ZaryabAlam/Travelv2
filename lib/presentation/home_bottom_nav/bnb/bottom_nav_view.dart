@@ -69,72 +69,68 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
   @override
   Widget build(BuildContext context) {
     HeightWidth(context);
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: AppColors.appColorPrimaryDark,
-        appBar: CustomAppBar(
-          title: tabsLables[selectedIndex],
-        ),
+    return Scaffold(
+      backgroundColor: AppColors.appColorPrimaryDark,
+      appBar: CustomAppBar(title: tabsLables[selectedIndex]),
 
-        // AppBar(
-        //   shadowColor: Colors.transparent,
-        //   elevation: 0.0,
-        //   title: CommonText(text: tabsLables[selectedIndex], weight: AppFontWeights.appTextFontWeightBold, fontSize: 20.0),
-        // ),
-        // --------------------------------
-        drawer: Drawer(
-          backgroundColor: AppColors.appColorWhite,
-          child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                0.02.ph,
-                const CommonText(
-                  text: 'Hello User',
-                  fontSize: 20.0,
-                ),
-                0.02.ph,
-                Column(
-                  children: List.generate(appDrawerData.length, (i) {
-                    var item = appDrawerData[i];
-                    return ListTile(
-                      dense: true,
-                      onTap: () {
-                        if (i < tabsList.length) {
-                          onSelectTab(i);
-                        }
-                        Get.back();
-                      },
-                      leading: Icon(item['Icon']),
-                      title: CommonText(text: item['Name']),
-                      subtitle: const Divider(),
-                    );
-                  }),
-                ),
-              ],
-            ),
+      // AppBar(
+      //   shadowColor: Colors.transparent,
+      //   elevation: 0.0,
+      //   title: CommonText(text: tabsLables[selectedIndex], weight: AppFontWeights.appTextFontWeightBold, fontSize: 20.0),
+      // ),
+      // --------------------------------
+      drawer: Drawer(
+        backgroundColor: AppColors.appColorWhite,
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              0.02.ph,
+              const CommonText(
+                text: 'Hello User',
+                fontSize: 20.0,
+              ),
+              0.02.ph,
+              Column(
+                children: List.generate(appDrawerData.length, (i) {
+                  var item = appDrawerData[i];
+                  return ListTile(
+                    dense: true,
+                    onTap: () {
+                      if (i < tabsList.length) {
+                        onSelectTab(i);
+                      }
+                      Get.back();
+                    },
+                    leading: Icon(item['Icon']),
+                    title: CommonText(text: item['Name']),
+                    subtitle: const Divider(),
+                  );
+                }),
+              ),
+            ],
           ),
-          // width: 50.0,
         ),
+        // width: 50.0,
+      ),
 
-        // --------------------------------
-        body: tabsList[selectedIndex],
-        // --------------------------------
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          currentIndex: selectedIndex,
-          onTap: (index) => onSelectTab(index),
-          backgroundColor: AppColors.appColorPrimaryDark,
-          selectedItemColor: AppColors.appColorPrimary,
-          unselectedItemColor: AppColors.appColorSeparator,
-          items: List.generate(tabsIcons.length, (ind) {
-            return BottomNavigationBarItem(icon: tabsIcons[ind], label: '' //tabslables[ind]
-                );
-          }),
-        ),
+      // --------------------------------
+      body: tabsList[selectedIndex],
+      // --------------------------------
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        currentIndex: selectedIndex,
+        onTap: (index) => onSelectTab(index),
+        backgroundColor: AppColors.appColorPrimaryDark,
+        selectedItemColor: AppColors.appColorPrimary,
+        unselectedItemColor: AppColors.appColorSeparator,
+        items: List.generate(tabsIcons.length, (ind) {
+          return BottomNavigationBarItem(icon: tabsIcons[ind], label: '' //tabslables[ind]
+              );
+        }),
       ),
     );
   }
