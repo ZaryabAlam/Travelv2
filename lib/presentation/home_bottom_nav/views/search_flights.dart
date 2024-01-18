@@ -8,7 +8,6 @@ import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_appbar.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_button.dart';
 import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/ticket_view.dart';
-import 'package:travel_app/presentation/home_bottom_nav/views/details_view.dart';
 import 'package:travel_app/presentation/home_bottom_nav/views/filter_view.dart';
 import 'package:travel_app/presentation/home_bottom_nav/views/flight_details.dart';
 import 'package:travel_app/presentation/home_bottom_nav/views/sort_view.dart';
@@ -129,6 +128,15 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
                                         Get.to(() => FlightDetailsScreen());
                                       },
                                       text: "Economy Starts from \$125"),
+                                  0.01.ph,
+                                  Align(
+                                    alignment: Alignment.centerRight,
+                                    child: IconButton(
+                                        onPressed: () {
+                                          _showAlertDialog(context);
+                                        },
+                                        icon: Icon(Icons.shopping_bag_rounded)),
+                                  )
                                 ],
                               ),
                             )),
@@ -139,6 +147,30 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  void _showAlertDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          contentPadding: EdgeInsets.zero,
+          title: Text('Baggage Info'),
+          // content: Text('This is the content of the alert dialog.'),
+          actions: <Widget>[
+            FlightPackageWidget(name: 'Saver'),
+            SizedBox(height: 10),
+            TextButton(
+              onPressed: () {
+                // Function to be executed when the "OK" button is pressed
+                Navigator.of(context).pop();
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
     );
   }
 }
@@ -184,7 +216,7 @@ class PlaneNameWidget extends StatelessWidget {
         Container(
             height: 30,
             width: 30,
-            child: Image(image: AssetImage(image), fit: BoxFit.cover)),
+            child: Image(image: AssetImage(image), fit: BoxFit.contain)),
         CommonText(
           text: name,
           fontSize: 12.0,
