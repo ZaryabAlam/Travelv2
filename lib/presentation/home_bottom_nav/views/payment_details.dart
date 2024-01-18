@@ -8,6 +8,7 @@ import 'package:travel_app/app/utils/custom_widgets/custom_outline_button.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_textfield.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_textfield_required.dart';
 import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/ticket_view.dart';
+import 'package:travel_app/presentation/home_bottom_nav/views/booking_details.dart';
 
 class PaymentDetailsScreen extends StatefulWidget {
   const PaymentDetailsScreen({super.key});
@@ -78,7 +79,12 @@ class _PaymentDetailsScreenState extends State<PaymentDetailsScreen> {
                     onPress: () {
                       Get.back();
                     }),
-                CustomButton(width: 150, text: "Confirm", onPress: () {}),
+                CustomButton(
+                    width: 150,
+                    text: "Confirm",
+                    onPress: () {
+                      Get.to(() => BookingDetailsScreen());
+                    }),
               ],
             )
           ],
