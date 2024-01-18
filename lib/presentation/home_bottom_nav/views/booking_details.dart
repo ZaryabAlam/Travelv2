@@ -52,7 +52,7 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                 height: 35,
                 text: "Go to Booking",
                 onPress: () {
-                  Get.to(() => BottomNavScreen(fromDetails: true));
+                  Get.to(() => BottomNavScreen());
                 }),
           ],
         ),
