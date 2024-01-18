@@ -43,7 +43,8 @@ class _HomeScreenState extends State<HomeScreen> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const CommonText(text: 'Join Silicon Reservation System and enjoy benefits'),
+                const CommonText(
+                    text: 'Join Silicon Reservation System and enjoy benefits'),
                 Container(
                   margin: const EdgeInsets.only(top: 10.0),
                   width: w,
@@ -65,8 +66,57 @@ class _HomeScreenState extends State<HomeScreen> {
                               )),
                         ],
                       ),
-                      0.02.ph,
+                      0.04.ph,
                       // 2nd ----------------------
+
+                      CommonText(
+                        text: 'Let\'s Get Started',
+                        weight: FontWeight.w500,
+                      ),
+                      0.02.ph,
+                      Container(
+                        height: h * 0.4,
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 20.0),
+                        child: GridView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: categoriesList.length,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  childAspectRatio: 6 / 5,
+                                  crossAxisCount: 3,
+                                  mainAxisSpacing: 12.0,
+                                  crossAxisSpacing: 12.0),
+                          itemBuilder: (context, i) {
+                            return GestureDetector(
+                              onTap: () => categoriesList[i].onTap,
+                              child: Container(
+                                alignment: Alignment.center,
+                                // padding: EdgeInsets.all(15.0),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12.0),
+                                    border: Border.all(color: Colors.grey)),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Icon(
+                                      categoriesList[i].icon,
+                                      size: 24.0,
+                                    ),
+                                    CommonText(
+                                      text: categoriesList[i].name,
+                                      fontSize: 12.0,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+
+                      // 3rd  Dotted Container -------------------------
                       Row(
                         children: [
                           const CommonText(
@@ -81,10 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           )
                         ],
                       ),
-
-                      0.02.ph,
-
-                      // 3rd  Dotted Container -------------------------
+                      0.04.ph,
                       SizedBox(
                         height: h * 0.3,
                         width: double.infinity,
@@ -102,11 +149,13 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: Container(
                                 margin: EdgeInsets.only(right: 4.0),
                                 alignment: Alignment.topCenter,
-                                padding: const EdgeInsets.fromLTRB(12.0, 12, 12, 0),
+                                padding:
+                                    const EdgeInsets.fromLTRB(12.0, 12, 12, 0),
                                 height: h * 0.27,
                                 width: w * 0.8,
                                 child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Image.asset(
@@ -146,52 +195,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
 
-                      // Categories ---------------------------------
-
-                      0.08.ph,
-                      CommonText(
-                        text: 'Let\'s Get Started',
-                        weight: FontWeight.w500,
-                      ),
-                      Container(
-                        height: h * 0.32,
-                        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 20.0),
-                        child: GridView.builder(
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: categoriesList.length,
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                              childAspectRatio: 6 / 5, crossAxisCount: 3, mainAxisSpacing: 12.0, crossAxisSpacing: 12.0),
-                          itemBuilder: (context, i) {
-                            return GestureDetector(
-                              onTap: () => categoriesList[i].onTap,
-                              child: Container(
-                                alignment: Alignment.center,
-                                // padding: EdgeInsets.all(15.0),
-                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(12.0), border: Border.all(color: Colors.grey)),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Icon(
-                                      categoriesList[i].icon,
-                                      size: 24.0,
-                                    ),
-                                    CommonText(
-                                      text: categoriesList[i].name,
-                                      fontSize: 12.0,
-                                    )
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-
                       // 4th ICON SIGNIN Container -------------------------
 
                       Center(
                         child: Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 30.0),
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 30.0),
                           padding: const EdgeInsets.fromLTRB(30.0, 30, 20, 20),
                           // height: h * 0.22,
                           // width: w * 0.84,
@@ -208,7 +217,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 flex: 2,
                                 child: Text(
                                   'ICON',
-                                  style: GoogleFonts.bebasNeue(color: Colors.white, fontSize: 32.0),
+                                  style: GoogleFonts.bebasNeue(
+                                      color: Colors.white, fontSize: 32.0),
                                 ),
                               ),
                               // 0.03.pw,
@@ -220,7 +230,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   children: [
                                     0.01.ph,
                                     CommonText(
-                                      text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.',
+                                      text:
+                                          'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.',
                                       color: Colors.white,
                                       fontSize: 11.0,
                                       textAlign: TextAlign.justify,
@@ -228,7 +239,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                     0.03.ph,
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
                                       children: [
                                         Expanded(
                                           flex: 2,
@@ -239,8 +251,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                               height: 25.0,
                                               width: 80.0,
                                               decoration: BoxDecoration(
-                                                color: AppColors.appColorPrimary,
-                                                borderRadius: BorderRadius.circular(20.0),
+                                                color:
+                                                    AppColors.appColorPrimary,
+                                                borderRadius:
+                                                    BorderRadius.circular(20.0),
                                               ),
                                               child: CommonText(
                                                 text: 'Sign In',
@@ -294,7 +308,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                 height: 300,
                                 width: 230,
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15.0), image: DecorationImage(image: AssetImage('assets/images/aa.png'))),
+                                    borderRadius: BorderRadius.circular(15.0),
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            'assets/images/aa.png'))),
                                 child: CommonText(
                                   text: cabinList[i],
                                   color: Colors.white,

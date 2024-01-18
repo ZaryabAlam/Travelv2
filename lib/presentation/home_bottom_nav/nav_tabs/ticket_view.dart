@@ -25,6 +25,16 @@ class _BookingScreenState extends State<BookingScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             /// Main ----------------------------------
+
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.all(0.0),
+                child: SearchBar(),
+              ),
+            ),
+
+            /// Search Bar ----------------------------------
+            0.02.ph,
             FlightSummaryWidget(),
 
             // --------------------------------------------------
@@ -205,6 +215,32 @@ class FromToFlightWidget extends StatelessWidget {
           weight: FontWeight.w600,
         ),
       ],
+    );
+  }
+}
+
+class SearchBar extends StatefulWidget {
+  @override
+  _SearchBarState createState() => _SearchBarState();
+}
+
+class _SearchBarState extends State<SearchBar> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8.0),
+        color: AppColors.appColorPrimary.withOpacity(0.1),
+      ),
+      child: TextField(
+        decoration: InputDecoration(
+          hintText: 'Search PNR',
+          prefixIcon: Icon(Icons.search),
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.all(16.0),
+        ),
+        onChanged: (value) {},
+      ),
     );
   }
 }
