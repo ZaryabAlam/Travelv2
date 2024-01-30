@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:travel_app/app/configs/app_colors.dart';
+import 'package:travel_app/presentation/auth/view/login_screen.dart';
 import 'package:travel_app/presentation/home_bottom_nav/bnb/bottom_nav_view.dart';
 import 'package:travel_app/presentation/splash_screen/splash_screen.dart';
 
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: GoogleFonts.poppins().fontFamily,
       ),
-      home: BottomNavScreen(),
+      home: LoginScreen(),
       // SplashScreen(),
     );
   }

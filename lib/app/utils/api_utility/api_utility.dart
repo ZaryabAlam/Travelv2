@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+
 // some functions specifically used to handle api calls
 class ApiUtility {
   // encrypting the credentials to base64 format for security

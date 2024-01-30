@@ -33,6 +33,13 @@ class AppColors {
   static const Color appColorHoliday = Color(0xFFEAA254);
   static const Color appColorEarlyOut = Color(0xFFF4B309);
   static const Color appColorAbsent2 = Color(0xFFFD0000);
+  static const Color black = Colors.black;
+  static const Color white = Colors.white;
+  static const Color red = Colors.red;
+  static const Color blue = Colors.blue;
+  static const Color green = Colors.green;
+  static const Color orange = Colors.orange;
+  static const Color transparent = Colors.transparent;
 
   // -----------------
   static const Color appColordivider = Color(0xFFBADEFC);
