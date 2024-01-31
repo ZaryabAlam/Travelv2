@@ -20,9 +20,9 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final LoginController loginController = Get.put(LoginController());
   final userController =
-      TextEditingController(text: "shoaibuldin5@hotmail.com");
+      TextEditingController();
   final agentController = TextEditingController();
-  final passController = TextEditingController(text: "1234");
+  final passController = TextEditingController();
   String? username = "shoaibuldin5@hotmail.com";
   String? password = "1234";
   bool isButton1Selected = true;
@@ -154,18 +154,36 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ? Custom_textfield_required(
                                       requiredLabel: "Username",
                                       hint: "Enter username here",
-                                      controller: userController)
+                                      controller: userController,
+                                      validator: (inputValue) {
+                                if (inputValue!.isEmpty) {
+                                  return "Enter Username";
+                                }
+                                return null;
+                              })
                                   : Custom_textfield_required(
                                       requiredLabel: "Agent",
-                                      hint: "Enter username here",
+                                      hint: "Enter agent here",
                                       // controller: agentController
-                                      controller: userController),
+                                      controller: userController,
+                                      validator: (inputValue) {
+                                if (inputValue!.isEmpty) {
+                                  return "Enter Agent";
+                                }
+                                return null;
+                              }),
                               SizedBox(height: 20),
                               Custom_textfield_required(
                                   requiredLabel: "Password",
                                   hint: "Enter password here",
                                   obscureText: true,
-                                  controller: passController),
+                                  controller: passController,
+                                  validator: (inputValue) {
+                                if (inputValue!.isEmpty) {
+                                  return "Enter Password";
+                                }
+                                return null;
+                              }),
                               SizedBox(height: 10),
                               Align(
                                 alignment: Alignment.centerRight,

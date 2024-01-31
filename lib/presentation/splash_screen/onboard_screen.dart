@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_button.dart';
@@ -15,6 +16,7 @@ class OnBoardingScreen extends StatefulWidget {
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
   final controller = PageController();
   bool isLastPage = false;
+
   @override
   void dispose() {
     controller.dispose();
@@ -122,15 +124,21 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               ),
               Spacer(),
               CustomButton(
-                  onPress: () {
+                  onPress: () async {
+                    SharedPreferences prefs =
+                        await SharedPreferences.getInstance();
                     Get.to(() => LoginScreen());
+                    prefs.setBool('isOnboardedStatus', true);
                   },
                   text: "Get Started"),
               isLastPage
                   ? TextButton(onPressed: () {}, child: CommonText(text: ""))
                   : TextButton(
-                      onPressed: () {
+                      onPressed: () async {
+                        SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
                         Get.to(() => LoginScreen());
+                        prefs.setBool('isOnboardedStatus', true);
                       },
                       child: CommonText(text: "Skip", color: Colors.white)),
               SizedBox(height: 100)

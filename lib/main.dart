@@ -41,8 +41,8 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: GoogleFonts.poppins().fontFamily,
       ),
-      home: LoginScreen(),
-      // SplashScreen(),
+      // home: LoginScreen(),
+     home: SplashScreen(),
     );
   }
 }

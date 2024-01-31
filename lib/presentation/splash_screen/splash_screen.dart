@@ -2,8 +2,12 @@ import "dart:async";
 
 import "package:flutter/material.dart";
 import "package:get/get.dart";
+import "package:shared_preferences/shared_preferences.dart";
 import "package:travel_app/app/configs/app_colors.dart";
 import "package:travel_app/presentation/splash_screen/onboard_screen.dart";
+
+import "../auth/view/login_screen.dart";
+import "../home_bottom_nav/bnb/bottom_nav_view.dart";
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -13,11 +17,28 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  bool? isOnboarded;
+
+  Future<void> checkLoggedInStatus() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      isOnboarded = prefs.getBool('isOnboardedStatus') ?? false;
+    });
+    print("SplashPage Onboard Status: $isOnboarded");
+  }
+
   @override
   void initState() {
     super.initState();
+    checkLoggedInStatus();
     Timer(Duration(seconds: 3), () {
-      Get.to(() => OnBoardingScreen());
+      if (isOnboarded == true) {
+        print("Going to Login");
+        Get.to(() => LoginScreen());
+      } else {
+        print("Staying on OnBoard");
+        Get.to(() => OnBoardingScreen());
+      }
     });
   }
 
@@ -34,7 +55,9 @@ class _SplashScreenState extends State<SplashScreen> {
                 width: 120,
                 // decoration: BoxDecoration(
                 //     shape: BoxShape.circle, color: Colors.white),
-                child: Image(image: AssetImage("assets/icons/logo.png"), fit: BoxFit.cover)),
+                child: Image(
+                    image: AssetImage("assets/icons/logo.png"),
+                    fit: BoxFit.cover)),
           ],
         ),
       ),
