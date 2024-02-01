@@ -32,7 +32,7 @@ class SearchController1 extends GetxController {
         'Content-Type': 'application/json',
         'authorization': 'Bearer ${dataController.myToken.value}'
       };
-      var body = json.encode({"search": search ?? "adasd"});
+      var body = json.encode({"search": search});
 
       var response = await http.post(
         Uri.parse('https://api.taajnetwork.com/api/Airport/search'),
@@ -68,7 +68,7 @@ class SearchController1 extends GetxController {
         'Content-Type': 'application/json',
         'authorization': 'Bearer ${dataController.myToken.value}'
       };
-      var body = json.encode({"search": search ?? "adasd"});
+      var body = json.encode({"search": search });
 
       var response = await http.post(
         Uri.parse('https://api.taajnetwork.com/api/Airport/search'),

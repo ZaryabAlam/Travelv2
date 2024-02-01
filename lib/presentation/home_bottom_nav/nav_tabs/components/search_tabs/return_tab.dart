@@ -40,6 +40,7 @@ class _ReturnTabViewState extends State<ReturnTabView> {
       lastDate: DateTime(2101),
     );
 
+    // ignore: unrelated_type_equality_checks
     if (picked != null && picked != arriveDate) {
       setState(() {
         arriveDate = _formatDate(picked).toString();
@@ -51,10 +52,11 @@ class _ReturnTabViewState extends State<ReturnTabView> {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
+      firstDate: DateTime.now(),
       lastDate: DateTime(2101),
     );
 
+    // ignore: unrelated_type_equality_checks
     if (picked != null && picked != departDate) {
       setState(() {
         departDate = _formatDate(picked).toString();

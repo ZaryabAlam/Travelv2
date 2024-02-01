@@ -7,7 +7,6 @@ import 'package:travel_app/app/utils/custom_widgets/custom_button.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_outline_button.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_textfield.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_textfield_required.dart';
-import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/ticket_view.dart';
 import 'package:travel_app/presentation/home_bottom_nav/views/booking_details.dart';
 
 class PaymentDetailsScreen extends StatefulWidget {

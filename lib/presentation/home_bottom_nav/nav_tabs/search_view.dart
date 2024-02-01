@@ -7,7 +7,6 @@ import 'package:travel_app/app/utils/custom_widgets/custom_textfield.dart';
 import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/components/search_tabs/multi_tab.dart';
 import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/components/search_tabs/one_way_tab.dart';
 import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/components/search_tabs/return_tab.dart';
-import 'package:travel_app/presentation/home_bottom_nav/views/search_date_pick.dart';
 
 import 'controller/search_controller.dart';
 
@@ -83,6 +82,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
                 Obx(
                   () {
+                    // ignore: unrelated_type_equality_checks
                     return searchController.mySearch1 == ""
                         ? Container()
                         : Container(
@@ -156,6 +156,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 0.02.ph,
                 Obx(
                   () {
+                    // ignore: unrelated_type_equality_checks
                     return searchController.mySearch2 == ""
                         ? Container()
                         : Container(
@@ -200,8 +201,8 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
 
                 // Tab Bar Container --------------------------------------
-                CommonText(text: fromCity.toString()),
-                CommonText(text: toCity.toString()),
+                // CommonText(text: fromCity.toString()),
+                // CommonText(text: toCity.toString()),
                 Container(
                   margin: const EdgeInsets.only(top: 30.0),
                   width: w,

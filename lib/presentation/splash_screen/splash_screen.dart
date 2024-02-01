@@ -40,7 +40,6 @@ class _SplashScreenState extends State<SplashScreen> {
     loadGetxData();
     Timer(Duration(seconds: 3), () {
       if (isOnboarded == true) {
-        
         if (dataController.myLoggedIn == true) {
           print("Going to App");
           Get.to(() => BottomNavScreen());
@@ -48,7 +47,6 @@ class _SplashScreenState extends State<SplashScreen> {
           print("Going to Login");
           Get.to(() => LoginScreen());
         }
-        
       } else {
         print("Staying on OnBoard");
         Get.to(() => OnBoardingScreen());

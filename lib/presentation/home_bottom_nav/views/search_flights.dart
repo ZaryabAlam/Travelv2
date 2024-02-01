@@ -175,6 +175,7 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
   }
 }
 
+// ignore: must_be_immutable
 class IconTextButton extends StatelessWidget {
   String text;
   IconData icon;

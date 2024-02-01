@@ -5,7 +5,6 @@ import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_button.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_textfield_required.dart';
 import 'package:travel_app/presentation/auth/view/register_screen.dart';
-import 'package:travel_app/presentation/home_bottom_nav/bnb/bottom_nav_view.dart';
 
 import '../../../app/utils/custom_widgets/custom_outline_button_Wicon.dart';
 import '../controller/login_controller.dart';

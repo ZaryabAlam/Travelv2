@@ -58,6 +58,7 @@ class _FilterScreenState extends State<FilterScreen> {
   }
 }
 
+// ignore: must_be_immutable
 class FilterHeadings extends StatelessWidget {
   String title;
   String text;
@@ -90,7 +91,7 @@ class FilterHeadings extends StatelessWidget {
   }
 }
 
-// ignore: camel_case_types
+// ignore:  must_be_immutable, camel_case_types
 class buildFilterButton extends StatelessWidget {
   String title;
   String? trailing;
