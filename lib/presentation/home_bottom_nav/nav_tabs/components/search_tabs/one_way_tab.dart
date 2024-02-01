@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:travel_app/app/configs/app_size_config.dart';
 import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_button.dart';
@@ -7,7 +8,9 @@ import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/components/sear
 import 'package:travel_app/presentation/home_bottom_nav/views/search_flights.dart';
 
 class OneWayTabView extends StatefulWidget {
-  const OneWayTabView({super.key});
+  String? toCity;
+  String? fromCity;
+   OneWayTabView({super.key, this.toCity, this.fromCity});
 
   @override
   State<OneWayTabView> createState() => _OneWayTabViewState();
@@ -29,6 +32,46 @@ class _OneWayTabViewState extends State<OneWayTabView> {
 
   var selectedTraveller = '1 Child';
   var selectedCabin = 'Economy';
+  
+  String? arriveDate = "Select Date";
+  String? departDate = "Select Date";
+
+  Future<void> _selectArriveDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+    );
+
+    // ignore: unrelated_type_equality_checks
+    if (picked != null && picked != arriveDate) {
+      setState(() {
+        arriveDate = _formatDate(picked).toString();
+      });
+    }
+  }
+
+  Future<void> _selectDepartDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2101),
+    );
+
+    // ignore: unrelated_type_equality_checks
+    if (picked != null && picked != departDate) {
+      setState(() {
+        departDate = _formatDate(picked).toString();
+      });
+    }
+  }
+
+  String _formatDate(DateTime date) {
+    return DateFormat('E, d MMM y').format(date);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +139,12 @@ class _OneWayTabViewState extends State<OneWayTabView> {
           // Search Flight Button -----------------------------------
           Spacer(),
           CustomButton(height: 40, width: w, text: 'Search Flight', onPress: () {
-            Get.to(() => SearchFlightScreen());
+            Get.to(() => SearchFlightScreen(
+                      toCity: widget.toCity.toString(),
+                      fromCity: widget.fromCity.toString(),
+                      arriveDate: arriveDate.toString(),
+                      departDate: departDate.toString(),
+                    ));
           }),
         ],
       ),

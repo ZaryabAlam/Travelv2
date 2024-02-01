@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:travel_app/app/configs/app_size_config.dart';
 import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_button.dart';
@@ -7,7 +8,9 @@ import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/components/sear
 import 'package:travel_app/presentation/home_bottom_nav/views/search_flights.dart';
 
 class MultiTabView extends StatefulWidget {
-  const MultiTabView({super.key});
+  String? toCity;
+  String? fromCity;
+  MultiTabView({super.key, this.toCity, this.fromCity});
 
   @override
   State<MultiTabView> createState() => _MultiTabViewState();
@@ -29,6 +32,45 @@ class _MultiTabViewState extends State<MultiTabView> {
 
   var selectedTraveller = '1 Child';
   var selectedCabin = 'Economy';
+
+  String? arriveDate = "Select Date";
+  String? departDate = "Select Date";
+
+  Future<void> _selectArriveDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+    );
+
+    // ignore: unrelated_type_equality_checks
+    if (picked != null && picked != arriveDate) {
+      setState(() {
+        arriveDate = _formatDate(picked).toString();
+      });
+    }
+  }
+
+  Future<void> _selectDepartDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2101),
+    );
+
+    // ignore: unrelated_type_equality_checks
+    if (picked != null && picked != departDate) {
+      setState(() {
+        departDate = _formatDate(picked).toString();
+      });
+    }
+  }
+
+  String _formatDate(DateTime date) {
+    return DateFormat('E, d MMM y').format(date);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +110,8 @@ class _MultiTabViewState extends State<MultiTabView> {
                 value: selectedTraveller,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22.0),
                 items: travellerList.map((String item) {
-                  return DropdownMenuItem(value: item, child: CommonText(text: item));
+                  return DropdownMenuItem(
+                      value: item, child: CommonText(text: item));
                 }).toList(),
                 onChanged: (String? val) {
                   setState(() => selectedTraveller = val!);
@@ -88,7 +131,8 @@ class _MultiTabViewState extends State<MultiTabView> {
                 value: selectedCabin,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22.0),
                 items: cabinList.map((String item) {
-                  return DropdownMenuItem(value: item, child: CommonText(text: item));
+                  return DropdownMenuItem(
+                      value: item, child: CommonText(text: item));
                 }).toList(),
                 onChanged: (String? val) {
                   setState(() => selectedCabin = val!);
@@ -98,9 +142,18 @@ class _MultiTabViewState extends State<MultiTabView> {
           // Search Flight Button -----------------------------------
 
           Spacer(),
-          CustomButton(height: 40, width: w, text: 'Search Flight', onPress: () {
-            Get.to(() => SearchFlightScreen());
-          }),
+          CustomButton(
+              height: 40,
+              width: w,
+              text: 'Search Flight',
+              onPress: () {
+                Get.to(() => SearchFlightScreen(
+                      toCity: widget.toCity.toString(),
+                      fromCity: widget.fromCity.toString(),
+                      arriveDate: arriveDate.toString(),
+                      departDate: departDate.toString(),
+                    ));
+              }),
 
           // OneWayTabView()
         ],

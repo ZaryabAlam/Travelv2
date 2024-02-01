@@ -7,19 +7,46 @@ import 'package:travel_app/app/configs/app_size_config.dart';
 import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_appbar.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_button.dart';
+import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/controller/flight_qoute_controller.dart';
 import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/ticket_view.dart';
 import 'package:travel_app/presentation/home_bottom_nav/views/filter_view.dart';
 import 'package:travel_app/presentation/home_bottom_nav/views/flight_details.dart';
 import 'package:travel_app/presentation/home_bottom_nav/views/sort_view.dart';
 
+// ignore: must_be_immutable
 class SearchFlightScreen extends StatefulWidget {
-  const SearchFlightScreen({super.key});
+  String toCity;
+  String fromCity;
+  String departDate;
+  String arriveDate;
+
+  SearchFlightScreen(
+      {super.key,
+      required this.toCity,
+      required this.fromCity,
+      required this.departDate,
+      required this.arriveDate});
 
   @override
   State<SearchFlightScreen> createState() => _SearchFlightScreenState();
 }
 
 class _SearchFlightScreenState extends State<SearchFlightScreen> {
+  final FlightQuoteController flightQuoteController =
+      Get.put(FlightQuoteController());
+
+  @override
+  void initState() {
+    super.initState();
+    flightQuoteController.fetchFlightQuote(
+        widget.fromCity, widget.toCity, widget.departDate, widget.arriveDate);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     HeightWidth(context);
@@ -32,6 +59,10 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
+            // Text("Tabs: ${widget.toCity}"),
+            // Text("Tabs: ${widget.fromCity}"),
+            // Text("Tabs: ${widget.departDate}"),
+            // Text("Tabs: ${widget.arriveDate}"),
             Row(
               children: [
                 Flexible(

@@ -7,7 +7,9 @@ import 'package:travel_app/presentation/home_bottom_nav/views/search_flights.dar
 import 'package:intl/intl.dart';
 
 class ReturnTabView extends StatefulWidget {
-  const ReturnTabView({super.key});
+  String? toCity;
+  String? fromCity;
+  ReturnTabView({super.key, this.toCity, this.fromCity});
 
   @override
   State<ReturnTabView> createState() => _ReturnTabViewState();
@@ -29,6 +31,7 @@ class _ReturnTabViewState extends State<ReturnTabView> {
 
   var selectedTraveller = '1 Child';
   var selectedCabin = 'Economy';
+
   String? arriveDate = "Select Date";
   String? departDate = "Select Date";
 
@@ -160,7 +163,12 @@ class _ReturnTabViewState extends State<ReturnTabView> {
               width: w,
               text: 'Search Flight',
               onPress: () {
-                Get.to(() => SearchFlightScreen());
+                Get.to(() => SearchFlightScreen(
+                      toCity: widget.toCity.toString(),
+                      fromCity: widget.fromCity.toString(),
+                      arriveDate: arriveDate.toString(),
+                      departDate: departDate.toString(),
+                    ));
               }),
         ],
       ),
