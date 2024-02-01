@@ -9,6 +9,8 @@ import 'package:travel_app/app/configs/app_size_config.dart';
 import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
 import 'package:travel_app/presentation/home_bottom_nav/views/details_view.dart';
 
+import '../../../app/data/data_controller.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -17,6 +19,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final DataController dataController = Get.put(DataController());
+
   var cabinList = [
     'Economy',
     'Business',
@@ -32,6 +36,23 @@ class _HomeScreenState extends State<HomeScreen> {
     CategoriesModel('Cruises', FontAwesomeIcons.ship, () {}),
     CategoriesModel('Packages', Icons.luggage, () {}),
   ];
+
+  Future<void> loadGetxData() async {
+    await dataController.loadMyData();
+    // print("Homepage: ${dataController.myRefToken.value}");
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loadGetxData();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     HeightWidth(context);
@@ -43,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const CommonText(
+                CommonText(
                     text: 'Join Silicon Reservation System and enjoy benefits'),
                 Container(
                   margin: const EdgeInsets.only(top: 10.0),
@@ -73,11 +94,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         text: 'Let\'s Get Started',
                         weight: FontWeight.w500,
                       ),
-                      0.02.ph,
+                      // 0.02.ph,
                       Container(
-                        height: h * 0.4,
+                        height: h * 0.3,
                         margin: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 20.0),
+                            horizontal: 10, vertical: 10.0),
                         child: GridView.builder(
                           physics: NeverScrollableScrollPhysics(),
                           itemCount: categoriesList.length,
@@ -299,7 +320,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           itemBuilder: (context, i) {
                             return GestureDetector(
                               onTap: () {
-                                Get.to(DetailsScreen(title: cabinList[i]));
+                                Get.to(
+                                    () => DetailsScreen(title: cabinList[i]));
                               },
                               child: Container(
                                 alignment: Alignment.bottomCenter,

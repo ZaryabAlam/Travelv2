@@ -4,6 +4,7 @@ import 'package:travel_app/app/configs/app_size_config.dart';
 import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_button.dart';
 import 'package:travel_app/presentation/home_bottom_nav/views/search_flights.dart';
+import 'package:intl/intl.dart';
 
 class ReturnTabView extends StatefulWidget {
   const ReturnTabView({super.key});
@@ -28,6 +29,42 @@ class _ReturnTabViewState extends State<ReturnTabView> {
 
   var selectedTraveller = '1 Child';
   var selectedCabin = 'Economy';
+  String? arriveDate = "Select Date";
+  String? departDate = "Select Date";
+
+  Future<void> _selectArriveDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+    );
+
+    if (picked != null && picked != arriveDate) {
+      setState(() {
+        arriveDate = _formatDate(picked).toString();
+      });
+    }
+  }
+
+  Future<void> _selectDepartDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+    );
+
+    if (picked != null && picked != departDate) {
+      setState(() {
+        departDate = _formatDate(picked).toString();
+      });
+    }
+  }
+
+  String _formatDate(DateTime date) {
+    return DateFormat('E, d MMM y').format(date);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,16 +75,36 @@ class _ReturnTabViewState extends State<ReturnTabView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // flight time widgets --------------------------------
+
+          // ElevatedButton(
+          //   onPressed: () => _selectArriveDate(context),
+          //   child: Text('Select Date'),
+          // ),
+
+          // ElevatedButton(
+          //   onPressed: () => _selectDepartDate(context),
+          //   child: Text('Select Date'),
+          // ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              FlightTimeWidget(
-                type: 'DEPARTURE',
-                date: 'Fri, 28 Jan 2024',
+              InkWell(
+                onTap: () {
+                  _selectDepartDate(context);
+                },
+                child: FlightTimeWidget(
+                  type: 'DEPARTURE',
+                  date: '$departDate',
+                ),
               ),
-              FlightTimeWidget(
-                type: 'RERURN',
-                date: 'Tue, 15 Feb 2024',
+              InkWell(
+                onTap: () {
+                  _selectArriveDate(context);
+                },
+                child: FlightTimeWidget(
+                  type: 'RERURN',
+                  date: '$arriveDate',
+                ),
               ),
             ],
           ),

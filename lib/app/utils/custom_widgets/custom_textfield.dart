@@ -67,15 +67,18 @@ class CustomTextField extends StatelessWidget {
       focusNode: focusNode,
       validator: validator,
       obscureText: obscureText ?? false,
-      cursorColor: theme.onPrimary,
+      cursorColor: Colors.black,
       onChanged: onChanged,
       decoration: InputDecoration(
         // prefixIcon: Icon(Icons.flight_takeoff_rounded),
         prefixText: prefixText,
         suffixText: suffixText,
-        prefixStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.w400, color: theme.onPrimary),
-        suffixStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.w400, color: theme.onPrimary),
-        contentPadding: contentpadding ?? const EdgeInsets.only(left: 15, right: 15, top: 5),
+        prefixStyle: TextStyle(
+            fontSize: 15, fontWeight: FontWeight.w400, color: theme.onPrimary),
+        suffixStyle: TextStyle(
+            fontSize: 15, fontWeight: FontWeight.w400, color: theme.onPrimary),
+        contentPadding: contentpadding ??
+            const EdgeInsets.only(left: 15, right: 15, top: 5),
         isDense: true,
         focusedErrorBorder: OutlineInputBorder(
           borderSide: BorderSide(
@@ -118,11 +121,13 @@ class CustomTextField extends StatelessWidget {
         floatingLabelAlignment: FloatingLabelAlignment.start,
         floatingLabelBehavior: FloatingLabelBehavior.always,
         hintText: hintText,
-        hintStyle: const TextStyle(color: Colors.grey, fontSize: 14.0, fontWeight: FontWeight.bold),
+        hintStyle: const TextStyle(
+            color: Colors.grey, fontSize: 14.0, fontWeight: FontWeight.bold),
         filled: false,
         errorText: errorText,
         label: CommonText(text: labelText!),
-        labelStyle: const TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.bold),
+        labelStyle: const TextStyle(
+            color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.bold),
       ),
     );
   }

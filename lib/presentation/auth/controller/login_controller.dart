@@ -21,10 +21,6 @@ class LoginController extends GetxController {
 
   //////////////////////// Save Remember Me Function ////////////////////////
 ///////////////////////////////////////////////////////////////////////////
-  Future<void> saveRememberMe() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('savedRememberMe', true);
-  }
 
   Future<void> getLogin(String? username, String? password) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -48,7 +44,7 @@ class LoginController extends GetxController {
 
       if (response.statusCode == 200) {
         // print("Login Email: ${jsonData["data"]["email"]}");
-
+        await prefs.setInt('savedID', jsonData["data"]["id"]);
         await prefs.setString('savedName', jsonData["data"]["fullName"]);
         await prefs.setString('savedEmail', jsonData["data"]["email"]);
         await prefs.setString('savedUsername', jsonData["data"]["username"]);
@@ -60,7 +56,7 @@ class LoginController extends GetxController {
         Get.showSnackbar(gradientSnackbar("Success", "${jsonData["message"]}",
             AppColors.green, Icons.check_circle_rounded));
         isLoading.value = false;
-        await saveRememberMe();
+
         await Get.to(() => BottomNavScreen());
       } else {
         print('Error: ${response.statusCode}');

@@ -19,36 +19,41 @@ class _BookingScreenState extends State<BookingScreen> {
     HeightWidth(context);
     return Scaffold(
       backgroundColor: AppColors.appColorAccent,
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            /// Main ----------------------------------
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              /// Main ----------------------------------
 
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.all(0.0),
-                child: SearchBar(),
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(0.0),
+                  child: SearchBar(),
+                ),
               ),
-            ),
 
-            /// Search Bar ----------------------------------
-            0.02.ph,
-            FlightSummaryWidget(),
+              /// Search Bar ----------------------------------
+              0.02.ph,
+              FlightSummaryWidget(),
 
-            // --------------------------------------------------
-            0.02.ph,
-            CommonText(
-              text: 'Your Ticket has been Downloaded',
-              fontSize: 18.0,
-              weight: FontWeight.w700,
-            ),
-            // --------------------------------------------------
-            Spacer(),
-            CustomButton(
-                height: 40.0, width: w, text: 'Download Ticket', onPress: () {})
-          ],
+              // --------------------------------------------------
+              0.02.ph,
+              CommonText(
+                text: 'Your Ticket has been Downloaded',
+                fontSize: 18.0,
+                weight: FontWeight.w700,
+              ),
+              // --------------------------------------------------
+              // Spacer(),
+              CustomButton(
+                  height: 40.0,
+                  width: w,
+                  text: 'Download Ticket',
+                  onPress: () {})
+            ],
+          ),
         ),
       ),
     );
