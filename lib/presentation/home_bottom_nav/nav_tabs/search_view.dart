@@ -253,9 +253,9 @@ class _SearchScreenState extends State<SearchScreen> {
                           height: h * 0.4,
                           child: TabBarView(
                             children: [
-                              ReturnTabView(fromCity: fromCity, toCity: toCity),
-                              OneWayTabView(fromCity: fromCity, toCity: toCity),
-                              MultiTabView(fromCity: fromCity, toCity: toCity),
+                              ReturnTabView(fromCity: fromCode, toCity: toCode),
+                              OneWayTabView(fromCity: fromCode, toCity: toCode),
+                              MultiTabView(fromCity: fromCode, toCity: toCode),
                             ],
                           ),
                         ),

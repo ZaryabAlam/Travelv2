@@ -102,79 +102,186 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
               ],
             ),
             0.03.ph,
-            Expanded(
-              child: ListView.builder(
-                  itemCount: 3,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Column(
+            Obx(() {
+              if (flightQuoteController.isLoading.value) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else {
+                if (flightQuoteController.flightQuoteModel.value.flights!.isEmpty) {
+                  return Center(
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        DottedBorder(
-                            dashPattern: [10, 8],
-                            strokeWidth: 1,
-                            color: AppColors.appColorBlack,
-                            child: Container(
-                              padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
-                              margin: const EdgeInsets.all(20.0),
-                              child: Column(
-                                children: [
-                                  PlaneNameWidget(
-                                      name: "Aerojet Aviation",
-                                      image: "assets/icons/aerojet.png",
-                                      number: 'EK06'),
-                                  0.01.ph,
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                        Icon(
+                          Icons.warning_rounded,
+                          size: 88,
+                          color: Colors.grey,
+                        ),
+                        Text("No flights",
+                            style: const TextStyle(
+                                color: Colors.black54,
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold))
+                      ],
+                    ),
+                  );
+                } else {
+                  var data1 =
+                      flightQuoteController.flightQuoteModel.value.flights;
+                  return Expanded(
+                    child: ListView.builder(
+                      physics: const BouncingScrollPhysics(),
+                      itemCount: data1!.length,
+                      itemBuilder: (context, index) {
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            DottedBorder(
+                                dashPattern: [10, 8],
+                                strokeWidth: 1,
+                                color: AppColors.appColorBlack,
+                                child: Container(
+                                  padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
+                                  margin: const EdgeInsets.all(20.0),
+                                  child: Column(
                                     children: [
-                                      FromToFlightWidget(
-                                        date: 'Fri 29 Dec 23',
-                                        time: '19:30',
-                                        city: 'CAI',
-                                      ),
-                                      Column(
+                                      PlaneNameWidget(
+                                          name: data1[index].outBound!.segments![0].airlineName.toString(),
+                                          image: "https://reservations.siliconsom.com/assets/images/logos/logo_small.png",
+                                          number: data1[index].outBound!.segments![0].flightNumber.toString()),
+                                      0.01.ph,
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Icon(
-                                            FontAwesomeIcons.plane,
-                                            color: AppColors.appColorPrimary,
-                                            size: 20.0,
+                                          FromToFlightWidget(
+                                            date: data1[index].outBound!.departureDate.toString(),
+                                            time: data1[index].outBound!.departureTime.toString(),
+                                            city: data1[index].outBound!.departureAirport.toString(),
                                           ),
-                                          0.01.ph,
-                                          CommonText(
-                                            text: 'NON-STOP',
-                                            fontSize: 12.0,
-                                          )
+                                          Column(
+                                            children: [
+                                              Icon(
+                                                FontAwesomeIcons.plane,
+                                                color:
+                                                    AppColors.appColorPrimary,
+                                                size: 20.0,
+                                              ),
+                                              0.01.ph,
+                                              CommonText(
+                                                text: 'NON-STOP',
+                                                fontSize: 12.0,
+                                              )
+                                            ],
+                                          ),
+                                          FromToFlightWidget(
+                                              date: data1[index].outBound!.arrivalDate.toString(),
+                                            time: data1[index].outBound!.arrivalTime.toString(),
+                                            city: data1[index].outBound!.arrivalAirport.toString(),
+                                          ),
                                         ],
                                       ),
-                                      FromToFlightWidget(
-                                        date: 'Sat 29 Dec 23',
-                                        time: '22:30',
-                                        city: 'DXB',
-                                      ),
+                                      0.03.ph,
+                                      CustomButton(
+                                          onPress: () {
+                                            Get.to(() => FlightDetailsScreen());
+                                          },
+                                          text: "Economy Starts from \$ ${data1[index].totalAmount}"),
+                                      0.01.ph,
+                                      Align(
+                                        alignment: Alignment.centerRight,
+                                        child: IconButton(
+                                            onPressed: () {
+                                              _showAlertDialog(context);
+                                            },
+                                            icon: Icon(
+                                                Icons.shopping_bag_rounded)),
+                                      )
                                     ],
                                   ),
-                                  0.03.ph,
-                                  CustomButton(
-                                      onPress: () {
-                                        Get.to(() => FlightDetailsScreen());
-                                      },
-                                      text: "Economy Starts from \$125"),
-                                  0.01.ph,
-                                  Align(
-                                    alignment: Alignment.centerRight,
-                                    child: IconButton(
-                                        onPressed: () {
-                                          _showAlertDialog(context);
-                                        },
-                                        icon: Icon(Icons.shopping_bag_rounded)),
-                                  )
-                                ],
-                              ),
-                            )),
-                      ],
-                    );
-                  }),
-            ),
+                                )),
+                          ],
+                        );
+                      },
+                    ),
+                  );
+                }
+              }
+            }),
+            // Expanded(
+            //   child: ListView.builder(
+            //       itemCount: 3,
+            //       itemBuilder: (BuildContext context, int index) {
+            //         return Column(
+            //           mainAxisAlignment: MainAxisAlignment.center,
+            //           children: [
+            //             DottedBorder(
+            //                 dashPattern: [10, 8],
+            //                 strokeWidth: 1,
+            //                 color: AppColors.appColorBlack,
+            //                 child: Container(
+            //                   padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
+            //                   margin: const EdgeInsets.all(20.0),
+            //                   child: Column(
+            //                     children: [
+            //                       PlaneNameWidget(
+            //                           name: "Aerojet Aviation",
+            //                           image: "assets/icons/aerojet.png",
+            //                           number: 'EK06'),
+            //                       0.01.ph,
+            //                       Row(
+            //                         mainAxisAlignment:
+            //                             MainAxisAlignment.spaceBetween,
+            //                         children: [
+            //                           FromToFlightWidget(
+            //                             date: 'Fri 29 Dec 23',
+            //                             time: '19:30',
+            //                             city: 'CAI',
+            //                           ),
+            //                           Column(
+            //                             children: [
+            //                               Icon(
+            //                                 FontAwesomeIcons.plane,
+            //                                 color: AppColors.appColorPrimary,
+            //                                 size: 20.0,
+            //                               ),
+            //                               0.01.ph,
+            //                               CommonText(
+            //                                 text: 'NON-STOP',
+            //                                 fontSize: 12.0,
+            //                               )
+            //                             ],
+            //                           ),
+            //                           FromToFlightWidget(
+            //                             date: 'Sat 29 Dec 23',
+            //                             time: '22:30',
+            //                             city: 'DXB',
+            //                           ),
+            //                         ],
+            //                       ),
+            //                       0.03.ph,
+            //                       CustomButton(
+            //                           onPress: () {
+            //                             Get.to(() => FlightDetailsScreen());
+            //                           },
+            //                           text: "Economy Starts from \$125"),
+            //                       0.01.ph,
+            //                       Align(
+            //                         alignment: Alignment.centerRight,
+            //                         child: IconButton(
+            //                             onPressed: () {
+            //                               _showAlertDialog(context);
+            //                             },
+            //                             icon: Icon(Icons.shopping_bag_rounded)),
+            //                       )
+            //                     ],
+            //                   ),
+            //                 )),
+            //           ],
+            //         );
+            //       }),
+            // ),
           ],
         ),
       ),
@@ -248,7 +355,7 @@ class PlaneNameWidget extends StatelessWidget {
         Container(
             height: 30,
             width: 30,
-            child: Image(image: AssetImage(image), fit: BoxFit.contain)),
+            child: Image(image: NetworkImage(image), fit: BoxFit.contain)),
         CommonText(
           text: name,
           fontSize: 12.0,

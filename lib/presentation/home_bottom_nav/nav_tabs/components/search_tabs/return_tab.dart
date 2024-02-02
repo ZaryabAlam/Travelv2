@@ -34,12 +34,14 @@ class _ReturnTabViewState extends State<ReturnTabView> {
 
   String? arriveDate = "Select Date";
   String? departDate = "Select Date";
+  String? departDateForm = "Select Date";
+  String? arriveDateForm = "Select Date";
 
   Future<void> _selectArriveDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
+      firstDate: DateTime.now(),
       lastDate: DateTime(2101),
     );
 
@@ -47,6 +49,7 @@ class _ReturnTabViewState extends State<ReturnTabView> {
     if (picked != null && picked != arriveDate) {
       setState(() {
         arriveDate = _formatDate(picked).toString();
+        arriveDateForm = _formatDateForm(picked).toString();
       });
     }
   }
@@ -62,8 +65,11 @@ class _ReturnTabViewState extends State<ReturnTabView> {
     // ignore: unrelated_type_equality_checks
     if (picked != null && picked != departDate) {
       setState(() {
+       
         departDate = _formatDate(picked).toString();
+        departDateForm = _formatDateForm(picked).toString();
       });
+         
     }
   }
 
@@ -71,8 +77,12 @@ class _ReturnTabViewState extends State<ReturnTabView> {
     return DateFormat('E, d MMM y').format(date);
   }
 
+    String _formatDateForm(DateTime date) {
+    return DateFormat('yyyy-MM-dd').format(date);
+  }
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { 
     HeightWidth(context);
     return Padding(
       padding: const EdgeInsets.all(12.0),
@@ -166,8 +176,8 @@ class _ReturnTabViewState extends State<ReturnTabView> {
                 Get.to(() => SearchFlightScreen(
                       toCity: widget.toCity.toString(),
                       fromCity: widget.fromCity.toString(),
-                      arriveDate: arriveDate.toString(),
-                      departDate: departDate.toString(),
+                      arriveDate: arriveDateForm.toString(),
+                      departDate: departDateForm.toString(),
                     ));
               }),
         ],

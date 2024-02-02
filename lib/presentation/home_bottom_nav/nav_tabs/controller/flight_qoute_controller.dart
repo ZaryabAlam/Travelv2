@@ -29,10 +29,14 @@ class FlightQuoteController extends GetxController {
         'authorization': 'Bearer ${dataController.myToken.value}'
       };
       var body = json.encode({
-        "DepartureCity": "NBO",
-        "ArrivalCity": "MGQ",
-        "DepartureDate": "2024-02-15",
-        "ReturnDate": "2024-09-20",
+        "DepartureCity": departCity,
+        "ArrivalCity": arriveCity,
+        "DepartureDate": departDate,
+        "ReturnDate": arriveDate,
+        // "DepartureCity": "NBO",
+        // "ArrivalCity": "MGQ",
+        // "DepartureDate": "2024-02-05",
+        // "ReturnDate": "2024-02-10",
         "Adults": 1,
         "Children": 0,
         "Infants": 0,
@@ -42,6 +46,7 @@ class FlightQuoteController extends GetxController {
         "TripType": "RoundTrip",
         "MicrositeClientId": 2
       });
+      print(departDate);
       print(departCity);
       var response = await http.post(
         Uri.parse('${baseURL}api/FlightQuote/search'),

@@ -72,7 +72,7 @@ class FlightQuoteModel {
 
 class Flights {
   int? id;
-  int? totalAmount;
+  dynamic? totalAmount;
   int? taxesAmount;
   Null? ticketAmount;
   Null? agencyMarkup;
