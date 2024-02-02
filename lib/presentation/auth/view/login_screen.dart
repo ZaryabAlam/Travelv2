@@ -18,9 +18,11 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final LoginController loginController = Get.put(LoginController());
-  final userController = TextEditingController();
-  final agentController = TextEditingController();
-  final passController = TextEditingController();
+  final userController =
+      TextEditingController(text: "shoaibuldin5@hotmail.com");
+  final agentController =
+      TextEditingController(text: "shoaibuldin5@hotmail.com");
+  final passController = TextEditingController(text: "1234");
   String? username = "shoaibuldin5@hotmail.com";
   String? password = "1234";
   bool isButton1Selected = true;

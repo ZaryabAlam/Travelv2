@@ -108,7 +108,8 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
                   child: CircularProgressIndicator(),
                 );
               } else {
-                if (flightQuoteController.flightQuoteModel.value.flights!.isEmpty) {
+                if (flightQuoteController
+                    .flightQuoteModel.value.flights!.isEmpty) {
                   return Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -143,22 +144,41 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
                                 color: AppColors.appColorBlack,
                                 child: Container(
                                   padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
-                                  margin: const EdgeInsets.all(20.0),
+                                  margin: EdgeInsets.all(10.0),
                                   child: Column(
                                     children: [
                                       PlaneNameWidget(
-                                          name: data1[index].outBound!.segments![0].airlineName.toString(),
-                                          image: "https://reservations.siliconsom.com/assets/images/logos/logo_small.png",
-                                          number: data1[index].outBound!.segments![0].flightNumber.toString()),
+                                          name: data1[index]
+                                              .outBound!
+                                              .segments![0]
+                                              .airlineName
+                                              .toString(),
+                                          image:
+                                              "${data1[index].outBound!.segments![0].airlineLogo}",
+                                          number: data1[index]
+                                              .outBound!
+                                              .segments![0]
+                                              .flightNumber
+                                              .toString()),
                                       0.01.ph,
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           FromToFlightWidget(
-                                            date: data1[index].outBound!.departureDate.toString(),
-                                            time: data1[index].outBound!.departureTime.toString(),
-                                            city: data1[index].outBound!.departureAirport.toString(),
+                                            date: data1[index]
+                                                .outBound!
+                                                .departureDate
+                                                .toString(),
+                                            time: data1[index]
+                                                .outBound!
+                                                .departureTime
+                                                .toString(),
+                                            city: data1[index]
+                                                .outBound!
+                                                .segments![0]
+                                                .departure
+                                                .toString(),
                                           ),
                                           Column(
                                             children: [
@@ -170,15 +190,95 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
                                               ),
                                               0.01.ph,
                                               CommonText(
-                                                text: 'NON-STOP',
+                                                text: 'OUT-BOUND',
                                                 fontSize: 12.0,
                                               )
                                             ],
                                           ),
                                           FromToFlightWidget(
-                                              date: data1[index].outBound!.arrivalDate.toString(),
-                                            time: data1[index].outBound!.arrivalTime.toString(),
-                                            city: data1[index].outBound!.arrivalAirport.toString(),
+                                            date: data1[index]
+                                                .outBound!
+                                                .arrivalDate
+                                                .toString(),
+                                            time: data1[index]
+                                                .outBound!
+                                                .arrivalTime
+                                                .toString(),
+                                            city: data1[index]
+                                                .outBound!
+                                                .segments![0]
+                                                .arrival
+                                                .toString(),
+                                          ),
+                                        ],
+                                      ),
+                                      0.02.ph,
+                                      Divider(),
+                                      PlaneNameWidget(
+                                          name: data1[index]
+                                              .inBound!
+                                              .segments![0]
+                                              .airlineName
+                                              .toString(),
+                                          image:
+                                              "${data1[index].inBound!.segments![0].airlineLogo}",
+                                          number: data1[index]
+                                              .inBound!
+                                              .segments![0]
+                                              .flightNumber
+                                              .toString()),
+                                      0.01.ph,
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          FromToFlightWidget(
+                                            date: data1[index]
+                                                .inBound!
+                                                .departureDate
+                                                .toString(),
+                                            time: data1[index]
+                                                .inBound!
+                                                .departureTime
+                                                .toString(),
+                                            city: data1[index]
+                                                .inBound!
+                                                .segments![0]
+                                                .departure
+                                                .toString(),
+                                          ),
+                                          Column(
+                                            children: [
+                                              RotatedBox(
+                                                quarterTurns: 2,
+                                                child: Icon(
+                                                  FontAwesomeIcons.plane,
+                                                  color:
+                                                      AppColors.appColorPrimary,
+                                                  size: 20.0,
+                                                ),
+                                              ),
+                                              0.01.ph,
+                                              CommonText(
+                                                text: 'IN-BOUND',
+                                                fontSize: 12.0,
+                                              )
+                                            ],
+                                          ),
+                                          FromToFlightWidget(
+                                            date: data1[index]
+                                                .inBound!
+                                                .arrivalDate
+                                                .toString(),
+                                            time: data1[index]
+                                                .inBound!
+                                                .arrivalTime
+                                                .toString(),
+                                            city: data1[index]
+                                                .inBound!
+                                                .segments![0]
+                                                .arrival
+                                                .toString(),
                                           ),
                                         ],
                                       ),
@@ -187,17 +287,18 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
                                           onPress: () {
                                             Get.to(() => FlightDetailsScreen());
                                           },
-                                          text: "Economy Starts from \$ ${data1[index].totalAmount}"),
-                                      0.01.ph,
-                                      Align(
-                                        alignment: Alignment.centerRight,
-                                        child: IconButton(
-                                            onPressed: () {
-                                              _showAlertDialog(context);
-                                            },
-                                            icon: Icon(
-                                                Icons.shopping_bag_rounded)),
-                                      )
+                                          text:
+                                              "Economy Starts from \$ ${data1[index].totalAmount}"),
+                                      // 0.01.ph,
+                                      // Align(
+                                      //   alignment: Alignment.centerRight,
+                                      //   child: IconButton(
+                                      //       onPressed: () {
+                                      //         _showAlertDialog(context);
+                                      //       },
+                                      //       icon: Icon(
+                                      //           Icons.shopping_bag_rounded)),
+                                      // )
                                     ],
                                   ),
                                 )),
