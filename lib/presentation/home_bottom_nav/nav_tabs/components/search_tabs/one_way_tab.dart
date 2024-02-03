@@ -52,6 +52,7 @@ class _OneWayTabViewState extends State<OneWayTabView> {
     }
   }
 
+  // ignore: unused_element
   Future<void> _selectDepartDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,

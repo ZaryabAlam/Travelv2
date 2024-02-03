@@ -7,6 +7,7 @@ import 'package:travel_app/app/utils/custom_widgets/custom_button.dart';
 import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/components/search_tabs/return_tab.dart';
 import 'package:travel_app/presentation/home_bottom_nav/views/search_flights.dart';
 
+// ignore: must_be_immutable
 class MultiTabView extends StatefulWidget {
   String? toCity;
   String? fromCity;
@@ -36,6 +37,7 @@ class _MultiTabViewState extends State<MultiTabView> {
   String? arriveDate = "Select Date";
   String? departDate = "Select Date";
 
+  // ignore: unused_element
   Future<void> _selectArriveDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
