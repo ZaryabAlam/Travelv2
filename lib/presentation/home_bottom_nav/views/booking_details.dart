@@ -9,7 +9,10 @@ import 'package:travel_app/app/utils/custom_widgets/custom_button.dart';
 import 'package:travel_app/presentation/home_bottom_nav/bnb/bottom_nav_view.dart';
 
 class BookingDetailsScreen extends StatefulWidget {
-  const BookingDetailsScreen({super.key});
+  String parentPNR;
+  String status;
+  BookingDetailsScreen(
+      {super.key, required this.parentPNR, required this.status});
 
   @override
   State<BookingDetailsScreen> createState() => _BookingDetailsScreenState();
@@ -27,16 +30,36 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           // mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Center(child: Icon(FontAwesomeIcons.circleCheck, size: 180.0, color: AppColors.appColorPrimary)),
+            Center(
+                child: Icon(FontAwesomeIcons.circleCheck,
+                    size: 180.0, color: AppColors.appColorPrimary)),
             0.02.ph,
-            CommonText(text: 'Thank You for your \nReservation.', textAlign: TextAlign.center, weight: FontWeight.w600, fontSize: 20.0),
+            CommonText(
+                text: 'Thank You for your \nReservation.',
+                textAlign: TextAlign.center,
+                weight: FontWeight.w600,
+                fontSize: 20.0),
             0.04.ph,
-            CommonText(text: 'Your Reservation has been booked', textAlign: TextAlign.center, weight: FontWeight.w600, fontSize: 20.0),
+            CommonText(
+                text: 'Your Reservation Status: \n${widget.status}',
+                textAlign: TextAlign.center,
+                weight: FontWeight.w600,
+                fontSize: 20.0),
+            0.02.ph,
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CommonText(text: 'PNR  Number ', textAlign: TextAlign.center, weight: FontWeight.w600, fontSize: 20.0),
-                CommonText(text: 'AANLO7', textAlign: TextAlign.center, weight: FontWeight.w600, fontSize: 20.0, color: AppColors.appColorPrimary),
+                CommonText(
+                    text: 'PNR  Number ',
+                    textAlign: TextAlign.center,
+                    weight: FontWeight.w600,
+                    fontSize: 20.0),
+                CommonText(
+                    text: widget.parentPNR,
+                    textAlign: TextAlign.center,
+                    weight: FontWeight.w600,
+                    fontSize: 20.0,
+                    color: AppColors.appColorPrimary),
               ],
             ),
             0.04.ph,

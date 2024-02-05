@@ -91,7 +91,7 @@ class _OneWayTabViewState extends State<OneWayTabView> {
                 date: 'Fri, 28 Jan 2024',
               ),
               FlightTimeWidget(
-                type: 'RERURN',
+                type: 'RETURN',
                 date: 'Tue, 15 Feb 2024',
               ),
             ],

@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:travel_app/app/configs/app_border_radius.dart';
 import 'package:travel_app/app/configs/app_size_config.dart';
-import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController textEditingController;
@@ -15,7 +14,7 @@ class CustomTextField extends StatelessWidget {
   final String? errorText;
   final Widget? icon;
   final bool? obscureText;
-  final bool? isRequired;
+  final bool isRequired;
   final Function()? onTap;
   final Function(String? value)? onChanged;
   final FocusNode? focusNode;
@@ -125,9 +124,39 @@ class CustomTextField extends StatelessWidget {
             color: Colors.grey, fontSize: 14.0, fontWeight: FontWeight.bold),
         filled: false,
         errorText: errorText,
-        label: CommonText(text: labelText!),
-        labelStyle: const TextStyle(
-            color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.bold),
+        alignLabelWithHint: false,
+
+        label: RichText(
+          text: TextSpan(
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 14.0,
+            ),
+            children: [
+              TextSpan(
+                text: labelText!,
+                style: TextStyle(
+                  color: Colors.black,
+                ),
+              ),
+              isRequired
+                  ? TextSpan(
+                      text: ' *',
+                      style: TextStyle(color: Colors.red),
+                    )
+                  : TextSpan(
+                      text: '',
+                      style: TextStyle(color: Colors.red),
+                    )
+            ],
+          ),
+        ),
+        // label: CommonText(text: labelText!),
+        // labelStyle: TextStyle(
+        //     overflow: TextOverflow.visible,
+        //     color: Colors.black,
+        //     fontSize: 14.0,
+        //     fontWeight: FontWeight.bold),
       ),
     );
   }

@@ -13,14 +13,17 @@ import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/search_view.dar
 import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/ticket_view.dart';
 
 class BottomNavScreen extends StatefulWidget {
-  BottomNavScreen({this.fromDetails = false, super.key});
-  bool? fromDetails;
+  BottomNavScreen({this.fromDetails = false, super.key, this.cabinClass});
+  final bool? fromDetails;
+  final String? cabinClass;
 
   @override
   State<BottomNavScreen> createState() => _BottomNavScreenState();
 }
 
 class _BottomNavScreenState extends State<BottomNavScreen> {
+  var tabsList = [];
+
   @override
   void initState() {
     setArgs();
@@ -28,6 +31,13 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
   }
 
   setArgs() {
+    // print("Cabin Class: ${widget.cabinClass}");
+    tabsList = [
+      const HomeScreen(),
+      SearchScreen(cabinClass: widget.cabinClass),
+      const BookingScreen(),
+      const CheckInScreen(),
+    ];
     if (widget.fromDetails!) {
       onSelectTab(1);
     }
@@ -36,13 +46,6 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
   int selectedIndex = 0;
 
   onSelectTab(int index) => setState(() => selectedIndex = index);
-
-  var tabsList = <Widget>[
-    const HomeScreen(),
-    const SearchScreen(),
-    const BookingScreen(),
-    const CheckInScreen(),
-  ];
 
   var tabsLables = [
     'Home',
@@ -128,7 +131,8 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
         selectedItemColor: AppColors.appColorPrimary,
         unselectedItemColor: AppColors.appColorSeparator,
         items: List.generate(tabsIcons.length, (ind) {
-          return BottomNavigationBarItem(icon: tabsIcons[ind], label: '' //tabslables[ind]
+          return BottomNavigationBarItem(
+              icon: tabsIcons[ind], label: '' //tabslables[ind]
               );
         }),
       ),

@@ -57,11 +57,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     HeightWidth(context);
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: ListView(
-          children: [
-            Column(
+      body: ListView(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CommonText(
@@ -350,8 +350,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

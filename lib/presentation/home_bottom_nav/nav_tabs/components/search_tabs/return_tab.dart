@@ -3,19 +3,39 @@ import 'package:get/get.dart';
 import 'package:travel_app/app/configs/app_size_config.dart';
 import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_button.dart';
+import 'package:travel_app/app/utils/custom_widgets/gradient_snackbar.dart';
 import 'package:travel_app/presentation/home_bottom_nav/views/search_flights.dart';
 import 'package:intl/intl.dart';
+
+import '../../../../../app/configs/app_colors.dart';
 
 class ReturnTabView extends StatefulWidget {
   String? toCity;
   String? fromCity;
-  ReturnTabView({super.key, this.toCity, this.fromCity});
+  String? cabinClass;
+  ReturnTabView({super.key, this.toCity, this.fromCity, this.cabinClass});
 
   @override
   State<ReturnTabView> createState() => _ReturnTabViewState();
 }
 
 class _ReturnTabViewState extends State<ReturnTabView> {
+  String? _cabinClass;
+  String? selectedCabin;
+  var selectedTraveller = '1 Adult';
+
+  @override
+  void initState() {
+    setArgs();
+    super.initState();
+  }
+
+  setArgs() {
+    _cabinClass = widget.cabinClass;
+    selectedCabin = _cabinClass.toString();
+    print("Return Tabe Cabin: ${widget.cabinClass}");
+  }
+
   var travellerList = [
     '1 Child',
     '1 Adult',
@@ -28,9 +48,6 @@ class _ReturnTabViewState extends State<ReturnTabView> {
     'Premium',
     'First Class',
   ];
-
-  var selectedTraveller = '1 Child';
-  var selectedCabin = 'Economy';
 
   String? arriveDate = "Select Date";
   String? departDate = "Select Date";
@@ -65,11 +82,9 @@ class _ReturnTabViewState extends State<ReturnTabView> {
     // ignore: unrelated_type_equality_checks
     if (picked != null && picked != departDate) {
       setState(() {
-       
         departDate = _formatDate(picked).toString();
         departDateForm = _formatDateForm(picked).toString();
       });
-         
     }
   }
 
@@ -77,12 +92,12 @@ class _ReturnTabViewState extends State<ReturnTabView> {
     return DateFormat('E, d MMM y').format(date);
   }
 
-    String _formatDateForm(DateTime date) {
+  String _formatDateForm(DateTime date) {
     return DateFormat('yyyy-MM-dd').format(date);
   }
 
   @override
-  Widget build(BuildContext context) { 
+  Widget build(BuildContext context) {
     HeightWidth(context);
     return Padding(
       padding: const EdgeInsets.all(12.0),
@@ -100,6 +115,7 @@ class _ReturnTabViewState extends State<ReturnTabView> {
           //   onPressed: () => _selectDepartDate(context),
           //   child: Text('Select Date'),
           // ),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -117,7 +133,7 @@ class _ReturnTabViewState extends State<ReturnTabView> {
                   _selectArriveDate(context);
                 },
                 child: FlightTimeWidget(
-                  type: 'RERURN',
+                  type: 'RETURN',
                   date: '$arriveDate',
                 ),
               ),
@@ -169,17 +185,28 @@ class _ReturnTabViewState extends State<ReturnTabView> {
           // Search Flight Button -----------------------------------
           Spacer(),
           CustomButton(
-              height: 40,
-              width: w,
-              text: 'Search Flight',
-              onPress: () {
+            height: 40,
+            width: w,
+            text: 'Search Flight',
+            onPress: () {
+              if (widget.toCity == "" && widget.fromCity == "") {
+                Get.showSnackbar(gradientSnackbar(
+                    "Incomplete Form",
+                    "Please fill the form correctly",
+                    AppColors.orange,
+                    Icons.warning_rounded));
+              } else {
                 Get.to(() => SearchFlightScreen(
+                      cabinClass: widget.cabinClass.toString(),
+                      traveller: selectedTraveller.toString(),
                       toCity: widget.toCity.toString(),
                       fromCity: widget.fromCity.toString(),
                       arriveDate: arriveDateForm.toString(),
                       departDate: departDateForm.toString(),
                     ));
-              }),
+              }
+            },
+          ),
         ],
       ),
     );

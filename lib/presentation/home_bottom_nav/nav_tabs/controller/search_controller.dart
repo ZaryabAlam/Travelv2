@@ -1,7 +1,10 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import '../../../../app/configs/app_colors.dart';
 import '../../../../app/data/data_controller.dart';
+import '../../../../app/utils/custom_widgets/gradient_snackbar.dart';
 import '../model/search_model.dart';
 
 class SearchController1 extends GetxController {
@@ -59,8 +62,8 @@ class SearchController1 extends GetxController {
       isLoading.value = false;
     }
   }
-  
-    Future<void> fetchSearch2(String search) async {
+
+  Future<void> fetchSearch2(String search) async {
     mySearch2.value = search;
     isLoading.value = true;
     try {
@@ -68,7 +71,7 @@ class SearchController1 extends GetxController {
         'Content-Type': 'application/json',
         'authorization': 'Bearer ${dataController.myToken.value}'
       };
-      var body = json.encode({"search": search });
+      var body = json.encode({"search": search});
 
       var response = await http.post(
         Uri.parse('https://api.taajnetwork.com/api/Airport/search'),
@@ -86,10 +89,16 @@ class SearchController1 extends GetxController {
         isLoading.value = false;
       } else {
         print('Error: ${response.statusCode}');
+        Get.showSnackbar(gradientSnackbar(
+            "Failure",
+            "${jsonData["error"] ?? "Something went wrong"}",
+            AppColors.red,
+            Icons.warning_rounded));
       }
     } catch (e) {
       print('Error: $e');
-
+      Get.showSnackbar(gradientSnackbar("Failure", "Something went wrong",
+          AppColors.orange, Icons.warning_rounded));
       isLoading.value = false;
     } finally {
       isLoading.value = false;

@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:travel_app/app/configs/app_colors.dart';
@@ -11,7 +13,8 @@ import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/components/sear
 import 'controller/search_controller.dart';
 
 class SearchScreen extends StatefulWidget {
-  const SearchScreen({super.key});
+  String? cabinClass;
+  SearchScreen({super.key, this.cabinClass});
 
   @override
   State<SearchScreen> createState() => _SearchScreenState();
@@ -22,6 +25,8 @@ class _SearchScreenState extends State<SearchScreen> {
   final FocusNode _focusNode = FocusNode();
   TextEditingController fromController = TextEditingController();
   TextEditingController toController = TextEditingController();
+  bool isValidForm = false;
+  final _formkey = GlobalKey<FormState>();
   int selectedTabIndex = 0;
   String? toCity = "";
   String? toCode = "";
@@ -41,14 +46,15 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     HeightWidth(context);
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: ListView(
-          children: [
-            Column(
+      body: ListView(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // From Field ------------------------
+                CommonText(text: "Class: ${widget.cabinClass}"),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -60,19 +66,25 @@ class _SearchScreenState extends State<SearchScreen> {
                     SizedBox(
                       width: w * 0.8,
                       child: CustomTextField(
-                        focusNode: _focusNode,
-                        textEditingController: fromController,
-                        hintText: 'Search City',
-                        labelText: 'From',
-                        onChanged: (value) {
-                          searchController
-                              .fetchSearch1(fromController.text.trim());
-                        },
-                        // onTap: () {
-                        // Get.focusScope!.unfocus();
-                        // Get.to(() => SearchDatePickScreen());
-                        // },
-                      ),
+                          focusNode: _focusNode,
+                          textEditingController: fromController,
+                          hintText: 'Search City',
+                          labelText: 'From',
+                          onChanged: (value) {
+                            searchController
+                                .fetchSearch1(fromController.text.trim());
+                          },
+                          validator: (inputValue) {
+                            if (inputValue!.isEmpty) {
+                              return "Search City";
+                            }
+                            return null;
+                          }
+                          // onTap: () {
+                          // Get.focusScope!.unfocus();
+                          // Get.to(() => SearchDatePickScreen());
+                          // },
+                          ),
                     ),
                   ],
                 ),
@@ -138,18 +150,24 @@ class _SearchScreenState extends State<SearchScreen> {
                     SizedBox(
                       width: w * 0.8,
                       child: CustomTextField(
-                        textEditingController: toController,
-                        hintText: 'Search City',
-                        labelText: 'To',
-                        onChanged: (value) {
-                          searchController
-                              .fetchSearch2(toController.text.trim());
-                        },
-                        // onTap: () {
-                        //   Get.focusScope!.unfocus();
-                        //   Get.to(() => SearchDatePickScreen());
-                        // },
-                      ),
+                          textEditingController: toController,
+                          hintText: 'Search City',
+                          labelText: 'To',
+                          onChanged: (value) {
+                            searchController
+                                .fetchSearch2(toController.text.trim());
+                          },
+                          validator: (inputValue) {
+                            if (inputValue!.isEmpty) {
+                              return "Search City";
+                            }
+                            return null;
+                          }
+                          // onTap: () {
+                          //   Get.focusScope!.unfocus();
+                          //   Get.to(() => SearchDatePickScreen());
+                          // },
+                          ),
                     ),
                   ],
                 ),
@@ -209,6 +227,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   color: AppColors.appColorAccent,
                   child: DefaultTabController(
                     // initialIndex: 0,
+                    // length: 1,
                     length: tabsNames.length,
                     child: Column(
                       children: [
@@ -253,7 +272,10 @@ class _SearchScreenState extends State<SearchScreen> {
                           height: h * 0.4,
                           child: TabBarView(
                             children: [
-                              ReturnTabView(fromCity: fromCode, toCity: toCode),
+                              ReturnTabView(
+                                  cabinClass: widget.cabinClass,
+                                  fromCity: fromCode,
+                                  toCity: toCode),
                               OneWayTabView(fromCity: fromCode, toCity: toCode),
                               MultiTabView(fromCity: fromCode, toCity: toCode),
                             ],
@@ -266,8 +288,8 @@ class _SearchScreenState extends State<SearchScreen> {
                 // CommonText(text: 'Search Screen'),
               ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

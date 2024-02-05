@@ -36,7 +36,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
           ),
           // title ------------------------------------
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
             child: CommonText(
               text: '${widget.title} Lounge',
               fontSize: 18.0,
@@ -60,13 +61,15 @@ class _DetailsScreenState extends State<DetailsScreen> {
           // Button ----------------------------
 
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
             child: CustomButton(
                 height: 40,
                 width: w,
                 text: 'Search Flight',
                 onPress: () {
                   Get.to(() => BottomNavScreen(
+                        cabinClass: widget.title,
                         fromDetails: true,
                       ));
                 }),
