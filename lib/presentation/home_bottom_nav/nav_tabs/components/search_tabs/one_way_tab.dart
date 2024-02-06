@@ -7,16 +7,36 @@ import 'package:travel_app/app/utils/custom_widgets/custom_button.dart';
 import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/components/search_tabs/return_tab.dart';
 import 'package:travel_app/presentation/home_bottom_nav/views/search_flights.dart';
 
+import '../../../../../app/configs/app_colors.dart';
+import '../../../../../app/utils/custom_widgets/gradient_snackbar.dart';
+
 class OneWayTabView extends StatefulWidget {
   String? toCity;
   String? fromCity;
-   OneWayTabView({super.key, this.toCity, this.fromCity});
+  String? cabinClass;
+  OneWayTabView({super.key, this.toCity, this.fromCity, this.cabinClass});
 
   @override
   State<OneWayTabView> createState() => _OneWayTabViewState();
 }
 
 class _OneWayTabViewState extends State<OneWayTabView> {
+  String? _cabinClass;
+  String? selectedCabin;
+  var selectedTraveller = '1 Adult';
+
+  @override
+  void initState() {
+    setArgs();
+    super.initState();
+  }
+
+  setArgs() {
+    _cabinClass = widget.cabinClass;
+    selectedCabin = _cabinClass.toString();
+    print("Return Tabe Cabin: ${widget.cabinClass}");
+  }
+
   var travellerList = [
     '1 Child',
     '1 Adult',
@@ -30,29 +50,9 @@ class _OneWayTabViewState extends State<OneWayTabView> {
     'First Class',
   ];
 
-  var selectedTraveller = '1 Child';
-  var selectedCabin = 'Economy';
-  
-  String? arriveDate = "Select Date";
   String? departDate = "Select Date";
+  String? departDateForm = "Select Date";
 
-  Future<void> _selectArriveDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2101),
-    );
-
-    // ignore: unrelated_type_equality_checks
-    if (picked != null && picked != arriveDate) {
-      setState(() {
-        arriveDate = _formatDate(picked).toString();
-      });
-    }
-  }
-
-  // ignore: unused_element
   Future<void> _selectDepartDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -65,6 +65,7 @@ class _OneWayTabViewState extends State<OneWayTabView> {
     if (picked != null && picked != departDate) {
       setState(() {
         departDate = _formatDate(picked).toString();
+        departDateForm = _formatDateForm(picked).toString();
       });
     }
   }
@@ -73,6 +74,9 @@ class _OneWayTabViewState extends State<OneWayTabView> {
     return DateFormat('E, d MMM y').format(date);
   }
 
+  String _formatDateForm(DateTime date) {
+    return DateFormat('yyyy-MM-dd').format(date);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,13 +90,14 @@ class _OneWayTabViewState extends State<OneWayTabView> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              FlightTimeWidget(
-                type: 'DEPARTURE',
-                date: 'Fri, 28 Jan 2024',
-              ),
-              FlightTimeWidget(
-                type: 'RETURN',
-                date: 'Tue, 15 Feb 2024',
+              InkWell(
+                onTap: () {
+                  _selectDepartDate(context);
+                },
+                child: FlightTimeWidget(
+                  type: 'DEPARTURE',
+                  date: '$departDate',
+                ),
               ),
             ],
           ),
@@ -110,7 +115,8 @@ class _OneWayTabViewState extends State<OneWayTabView> {
                 value: selectedTraveller,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22.0),
                 items: travellerList.map((String item) {
-                  return DropdownMenuItem(value: item, child: CommonText(text: item));
+                  return DropdownMenuItem(
+                      value: item, child: CommonText(text: item));
                 }).toList(),
                 onChanged: (String? val) {
                   setState(() => selectedTraveller = val!);
@@ -130,7 +136,8 @@ class _OneWayTabViewState extends State<OneWayTabView> {
                 value: selectedCabin,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22.0),
                 items: cabinList.map((String item) {
-                  return DropdownMenuItem(value: item, child: CommonText(text: item));
+                  return DropdownMenuItem(
+                      value: item, child: CommonText(text: item));
                 }).toList(),
                 onChanged: (String? val) {
                   setState(() => selectedCabin = val!);
@@ -139,14 +146,32 @@ class _OneWayTabViewState extends State<OneWayTabView> {
 
           // Search Flight Button -----------------------------------
           Spacer(),
-          CustomButton(height: 40, width: w, text: 'Search Flight', onPress: () {
-            Get.to(() => SearchFlightScreen(
+          CustomButton(
+            height: 40,
+            width: w,
+            text: 'Search Flight',
+            onPress: () {
+              if (widget.toCity == "" ||
+                  widget.fromCity == "" ||
+                  departDate == "Select Date" ||
+                  departDate == "") {
+                Get.showSnackbar(gradientSnackbar(
+                    "Incomplete Form",
+                    "Please fill the form correctly",
+                    AppColors.orange,
+                    Icons.warning_rounded));
+              } else {
+                Get.to(() => SearchFlightScreen(
+                      cabinClass: widget.cabinClass.toString(),
+                      traveller: selectedTraveller.toString(),
                       toCity: widget.toCity.toString(),
                       fromCity: widget.fromCity.toString(),
-                      arriveDate: arriveDate.toString(),
-                      departDate: departDate.toString(),
+                      arriveDate: null,
+                      departDate: departDateForm.toString(),
                     ));
-          }),
+              }
+            },
+          ),
         ],
       ),
     );

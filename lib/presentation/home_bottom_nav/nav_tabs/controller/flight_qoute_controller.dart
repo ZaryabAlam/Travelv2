@@ -24,7 +24,7 @@ class FlightQuoteController extends GetxController {
   }
 
   Future<void> fetchFlightQuote(String departCity, String arriveCity,
-      String departDate, String arriveDate) async {
+      String departDate, var arriveDate) async {
     isLoading.value = true;
     try {
       var headers = {
@@ -49,8 +49,10 @@ class FlightQuoteController extends GetxController {
         "TripType": "RoundTrip",
         "MicrositeClientId": 2
       });
-      print(departDate);
       print(departCity);
+      print(arriveCity);
+      print(departDate);
+      print(arriveDate);
       var response = await http.post(
         Uri.parse('${baseURL}api/FlightQuote/search'),
         headers: headers,
@@ -66,7 +68,7 @@ class FlightQuoteController extends GetxController {
 
       if (response.statusCode == 200) {
         isLoading.value = false;
-     } else {
+      } else {
         print('Error: ${response.statusCode}');
         Get.showSnackbar(gradientSnackbar(
             "Failure",
@@ -76,7 +78,7 @@ class FlightQuoteController extends GetxController {
       }
     } catch (e) {
       print('Error: $e');
-    Get.showSnackbar(gradientSnackbar("Failure", "Something went wrong",
+      Get.showSnackbar(gradientSnackbar("Failure", "Something went wrong",
           AppColors.orange, Icons.warning_rounded));
       isLoading.value = false;
     } finally {

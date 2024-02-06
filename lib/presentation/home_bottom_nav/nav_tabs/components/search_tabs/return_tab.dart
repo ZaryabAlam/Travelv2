@@ -189,7 +189,12 @@ class _ReturnTabViewState extends State<ReturnTabView> {
             width: w,
             text: 'Search Flight',
             onPress: () {
-              if (widget.toCity == "" && widget.fromCity == "") {
+              if (widget.toCity == "" ||
+                  widget.fromCity == "" ||
+                  departDate == "Select Date" ||
+                  departDate == "" ||
+                  arriveDate == "Select Date" ||
+                  arriveDateForm == "") {
                 Get.showSnackbar(gradientSnackbar(
                     "Incomplete Form",
                     "Please fill the form correctly",

@@ -11,7 +11,8 @@ import 'package:travel_app/presentation/home_bottom_nav/views/search_flights.dar
 class MultiTabView extends StatefulWidget {
   String? toCity;
   String? fromCity;
-  MultiTabView({super.key, this.toCity, this.fromCity});
+  String? cabinClass;
+  MultiTabView({super.key, this.toCity, this.fromCity, this.cabinClass});
 
   @override
   State<MultiTabView> createState() => _MultiTabViewState();

@@ -273,11 +273,17 @@ class _SearchScreenState extends State<SearchScreen> {
                           child: TabBarView(
                             children: [
                               ReturnTabView(
-                                  cabinClass: widget.cabinClass,
+                                  cabinClass: widget.cabinClass ?? "Economy",
                                   fromCity: fromCode,
                                   toCity: toCode),
-                              OneWayTabView(fromCity: fromCode, toCity: toCode),
-                              MultiTabView(fromCity: fromCode, toCity: toCode),
+                              OneWayTabView(
+                                  cabinClass: widget.cabinClass ?? "Economy",
+                                  fromCity: fromCode,
+                                  toCity: toCode),
+                              MultiTabView(
+                                  cabinClass: widget.cabinClass ?? "Economy",
+                                  fromCity: fromCode,
+                                  toCity: toCode),
                             ],
                           ),
                         ),
