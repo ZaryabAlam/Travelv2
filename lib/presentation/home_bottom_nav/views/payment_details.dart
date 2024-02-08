@@ -220,7 +220,8 @@ class _PaymentDetailsScreenState extends State<PaymentDetailsScreen> {
                       widget.email,
                       widget.phone,
                       widget.phoneCode,
-                      widget.countryCode);
+                      widget.countryCode
+                      );
                 })
           ],
         ),

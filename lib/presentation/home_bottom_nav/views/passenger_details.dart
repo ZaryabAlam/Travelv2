@@ -14,6 +14,7 @@ import 'package:travel_app/app/utils/custom_widgets/custom_textfield.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_textfield_required.dart';
 import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/ticket_view.dart';
 import 'package:travel_app/presentation/home_bottom_nav/views/payment_details.dart';
+import 'package:travel_app/presentation/home_bottom_nav/views/payment_method.dart';
 
 import '../../../app/configs/app_colors.dart';
 import '../../../app/data/data_controller.dart';
@@ -98,6 +99,13 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
   PhoneNumber number = PhoneNumber(isoCode: 'US');
   bool isValidForm = false;
   final _formkey = GlobalKey<FormState>();
+  String selectedTitle = 'Mr';
+  var titleList = [
+    'Mr',
+    'Mrs',
+    'Sir',
+    'Miss',
+  ];
 
   Future<void> _selectDate(
       BuildContext context,
@@ -182,17 +190,61 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
                       weight: FontWeight.w600,
                       fontSize: 18.0),
                   0.03.ph,
-                  Custom_textfield_required(
-                      controller: titleController,
-                      requiredLabel: 'Title',
-                      hint: 'Mr',
-                      validator: (inputValue) {
-                        if (inputValue!.isEmpty) {
-                          return "Enter Title";
-                        }
-                        return null;
-                      }),
+                  // Custom_textfield_required(
+                  //     controller: titleController,
+                  //     requiredLabel: 'Title',
+                  //     hint: 'Mr',
+                  //     validator: (inputValue) {
+                  //       if (inputValue!.isEmpty) {
+                  //         return "Enter Title";
+                  //       }
+                  //       return null;
+                  //     }),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: "Title",
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                          TextSpan(
+                            text: ' *',
+                            style: TextStyle(color: Colors.red),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: w,
+                    height: 35,
+                    child: DropdownButton(
+                        isDense: true,
+                        isExpanded: true,
+                        icon: Icon(Icons.arrow_drop_down),
+                        value: selectedTitle,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 44.0),
+                        underline: Container(
+                          height: 0.7, // Specify the underline height
+                          color: Colors.black26, // Specify the underline color
+                        ),
+                        items: titleList.map((String item) {
+                          return DropdownMenuItem(
+                              value: item,
+                              child: CommonText(
+                                  text: item, weight: FontWeight.w500));
+                        }).toList(),
+                        onChanged: (String? val) {
+                          setState(() => selectedTitle = val!);
+                        }),
+                  ),
                   0.03.ph,
+                  CommonText(text: "$selectedTitle"),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -470,8 +522,9 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
                     if (_formkey.currentState!.validate()) {
                       setState(() {
                         isValidForm = true;
-                        Get.to(() => PaymentDetailsScreen(
-                              title: titleController.text,
+                        // Get.to(() => PaymentDetailsScreen(
+                        Get.to(() => PaymentMethodScreen(
+                              title: selectedTitle,
                               firstName: firstNameController.text,
                               lastName: lastNameController.text,
                               dob:
@@ -490,7 +543,6 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
                               cabinClass: widget.cabinClass,
                               searchID: widget.searchID,
                               flightID: widget.flightID,
-                              paymentID: widget.paymentID,
                               departFlight: widget.departFlight,
                               arriveFlight: widget.arriveFlight,
                               departFromDate1: widget.departFromDate1,

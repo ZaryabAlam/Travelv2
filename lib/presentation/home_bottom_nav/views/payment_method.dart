@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:travel_app/app/configs/app_colors.dart';
 import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/controller/payment_method_controller.dart';
 import 'package:travel_app/presentation/home_bottom_nav/views/passenger_details.dart';
+import 'package:travel_app/presentation/home_bottom_nav/views/payment_details.dart';
 
 import '../../../app/utils/custom_widgets/custom_appbar.dart';
 import '../../../app/utils/custom_widgets/custom_button.dart';
@@ -14,6 +15,18 @@ import '../nav_tabs/model/payment_method_model.dart';
 class PaymentMethodScreen extends StatefulWidget {
   String searchID;
   String flightID;
+  //
+  String title;
+  String firstName;
+  String lastName;
+  String dob;
+  String nationality;
+  String passNumber;
+  String passExp;
+  String email;
+  String phone;
+  String phoneCode;
+  String countryCode;
   //
   String departFromDate1;
   String departFromTime1;
@@ -40,6 +53,18 @@ class PaymentMethodScreen extends StatefulWidget {
       {super.key,
       required this.searchID,
       required this.flightID,
+      //
+      required this.title,
+      required this.firstName,
+      required this.lastName,
+      required this.dob,
+      required this.nationality,
+      required this.passNumber,
+      required this.passExp,
+      required this.email,
+      required this.phone,
+      required this.phoneCode,
+      required this.countryCode,
       //
       required this.departFlight,
       required this.departFromDate1,
@@ -76,7 +101,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
   final RxBool isLoading = false.obs;
   String selectedOption = '';
   String selectedID = '';
-  
+
   @override
   void initState() {
     super.initState();
@@ -92,6 +117,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print("${widget.title}");
     return Scaffold(
       appBar: CustomAppBar(
         title: 'Payment Method',
@@ -157,7 +183,19 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                             AppColors.orange,
                             Icons.warning_rounded));
                       } else {
-                        Get.to(() => PassengerDetailsScreen(
+                        // Get.to(() => PassengerDetailsScreen(
+                        Get.to(() => PaymentDetailsScreen(
+                              countryCode: widget.countryCode,
+                              dob: widget.dob,
+                              email: widget.email,
+                              firstName: widget.firstName,
+                              lastName: widget.lastName,
+                              nationality: widget.nationality,
+                              passExp: widget.passExp,
+                              passNumber: widget.passNumber,
+                              phone: widget.phone,
+                              phoneCode: widget.phoneCode,
+                              title: widget.title,
                               fare: widget.fare.toString(),
                               tax: widget.tax.toString(),
                               total: widget.total.toString(),

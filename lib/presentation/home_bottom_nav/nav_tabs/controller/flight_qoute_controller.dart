@@ -24,7 +24,7 @@ class FlightQuoteController extends GetxController {
   }
 
   Future<void> fetchFlightQuote(String departCity, String arriveCity,
-      String departDate, var arriveDate) async {
+      String departDate, String arriveDate) async {
     isLoading.value = true;
     try {
       var headers = {
@@ -32,14 +32,14 @@ class FlightQuoteController extends GetxController {
         'authorization': 'Bearer ${dataController.myToken.value}'
       };
       var body = json.encode({
-        "DepartureCity": departCity,
-        "ArrivalCity": arriveCity,
-        "DepartureDate": departDate,
-        "ReturnDate": arriveDate,
-        // "DepartureCity": "NBO",
-        // "ArrivalCity": "MGQ",
-        // "DepartureDate": "2024-02-05",
-        // "ReturnDate": "2024-02-10",
+        // "DepartureCity": departCity,
+        // "ArrivalCity": arriveCity,
+        // "DepartureDate": departDate,
+        // "ReturnDate": arriveDate,
+        "DepartureCity": "NBO",
+        "ArrivalCity": "MGQ",
+        "DepartureDate": "2024-02-10",
+        "ReturnDate": "2024-02-15",
         "Adults": 1,
         "Children": 0,
         "Infants": 0,

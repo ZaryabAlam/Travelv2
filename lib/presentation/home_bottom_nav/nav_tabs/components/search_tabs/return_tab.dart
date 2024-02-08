@@ -9,6 +9,7 @@ import 'package:intl/intl.dart';
 
 import '../../../../../app/configs/app_colors.dart';
 
+// ignore: must_be_immutable
 class ReturnTabView extends StatefulWidget {
   String? toCity;
   String? fromCity;

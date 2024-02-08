@@ -166,7 +166,7 @@ class _OneWayTabViewState extends State<OneWayTabView> {
                       traveller: selectedTraveller.toString(),
                       toCity: widget.toCity.toString(),
                       fromCity: widget.fromCity.toString(),
-                      arriveDate: null,
+                      arriveDate: "",
                       departDate: departDateForm.toString(),
                     ));
               }

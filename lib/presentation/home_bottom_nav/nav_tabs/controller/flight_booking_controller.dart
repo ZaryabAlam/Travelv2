@@ -43,7 +43,7 @@ class FlightBookingController extends GetxController {
     int mySearchID = int.parse(searchID);
     int myflightID = int.parse(flightID);
     int mypaymentID = int.parse(paymentID);
-    // print("Booking: $mySearchID, $myflightID, $mypaymentID");
+    print("Booking: $mySearchID, $myflightID, $mypaymentID, $countryCode");
 
     try {
       var headers = {
@@ -107,7 +107,7 @@ class FlightBookingController extends GetxController {
       }
     } catch (e) {
       print('Error: $e');
-    Get.showSnackbar(gradientSnackbar("Failure", "Something went wrong",
+      Get.showSnackbar(gradientSnackbar("Failure", "Something went wrong",
           AppColors.orange, Icons.warning_rounded));
       isLoading.value = false;
     } finally {

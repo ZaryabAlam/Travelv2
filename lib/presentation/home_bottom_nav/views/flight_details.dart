@@ -71,8 +71,9 @@ class _FlightDetailsScreenState extends State<FlightDetailsScreen> {
   @override
   void initState() {
     super.initState();
-     WidgetsBinding.instance.addPostFrameCallback((_) {flightFareRuleController.fetchFareRule(widget.searchID, widget.flightID);});
-   
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      flightFareRuleController.fetchFareRule(widget.searchID, widget.flightID);
+    });
   }
 
   @override
@@ -276,10 +277,10 @@ class _FlightPackageWidgetState extends State<FlightPackageWidget> {
                   fontSize: 11,
                   weight: FontWeight.w600,
                 ),
-                Icon(
-                  Icons.info,
-                  size: 20,
-                ),
+                // Icon(
+                //   Icons.info,
+                //   size: 20,
+                // ),
               ],
             ),
             0.02.ph,
@@ -297,10 +298,10 @@ class _FlightPackageWidgetState extends State<FlightPackageWidget> {
                   fontSize: 11,
                   weight: FontWeight.w600,
                 ),
-                Icon(
-                  Icons.info,
-                  size: 20,
-                ),
+                // Icon(
+                //   Icons.info,
+                //   size: 20,
+                // ),
               ],
             ),
             0.02.ph,
@@ -318,10 +319,10 @@ class _FlightPackageWidgetState extends State<FlightPackageWidget> {
                   fontSize: 11,
                   weight: FontWeight.w600,
                 ),
-                Icon(
-                  Icons.info,
-                  size: 20,
-                ),
+                // Icon(
+                //   Icons.info,
+                //   size: 20,
+                // ),
               ],
             ),
             0.02.ph,
@@ -338,10 +339,10 @@ class _FlightPackageWidgetState extends State<FlightPackageWidget> {
                   fontSize: 11,
                   weight: FontWeight.w600,
                 ),
-                Icon(
-                  Icons.info,
-                  size: 20,
-                ),
+                // Icon(
+                //   Icons.info,
+                //   size: 20,
+                // ),
               ],
             ),
             0.02.ph,
@@ -358,10 +359,10 @@ class _FlightPackageWidgetState extends State<FlightPackageWidget> {
                   fontSize: 11,
                   weight: FontWeight.w600,
                 ),
-                Icon(
-                  Icons.info,
-                  size: 20,
-                ),
+                // Icon(
+                //   Icons.info,
+                //   size: 20,
+                // ),
               ],
             ),
             0.02.ph,
@@ -434,10 +435,10 @@ class _FlightPackageWidgetState extends State<FlightPackageWidget> {
                   fontSize: 11,
                   weight: FontWeight.w600,
                 ),
-                Icon(
-                  Icons.info,
-                  size: 20,
-                ),
+                // Icon(
+                //   Icons.info,
+                //   size: 20,
+                // ),
               ],
             ),
             Divider(),
@@ -449,7 +450,8 @@ class _FlightPackageWidgetState extends State<FlightPackageWidget> {
                 width: w,
                 text: 'Avail this Flight for \$${total.toStringAsFixed(2)}',
                 onPress: () {
-                  Get.to(() => PaymentMethodScreen(
+                  // Get.to(() => PaymentMethodScreen(
+                  Get.to(() => PassengerDetailsScreen(
                         fare: widget.charges.toString(),
                         tax: widget.tax.toString(),
                         total: total.toStringAsFixed(2),
@@ -471,6 +473,7 @@ class _FlightPackageWidgetState extends State<FlightPackageWidget> {
                         arriveToDate2: widget.arriveToDate2,
                         arriveToCode2: widget.arriveToCode2,
                         arriveToTime2: widget.arriveToTime2,
+                        paymentID: '',
                       ));
                   // Get.to(() => PassengerDetailsScreen(
                   //       fare: widget.charges.toString(),

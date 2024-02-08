@@ -18,7 +18,7 @@ class SearchFlightScreen extends StatefulWidget {
   String toCity;
   String fromCity;
   String departDate;
-  var arriveDate;
+  String arriveDate;
   String? traveller;
   String? cabinClass;
   bool? isOneWay = false;
@@ -47,8 +47,8 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      flightQuoteController.fetchFlightQuote(widget.fromCity, widget.toCity,
-          widget.departDate, widget.arriveDate ?? null);
+      flightQuoteController.fetchFlightQuote(
+          widget.fromCity, widget.toCity, widget.departDate, widget.arriveDate);
     });
   }
 
