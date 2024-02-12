@@ -8,6 +8,7 @@ import 'package:travel_app/app/utils/custom_widgets/custom_appbar.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_button.dart';
 import 'package:travel_app/presentation/home_bottom_nav/bnb/bottom_nav_view.dart';
 
+// ignore: must_be_immutable
 class BookingDetailsScreen extends StatefulWidget {
   String parentPNR;
   String status;

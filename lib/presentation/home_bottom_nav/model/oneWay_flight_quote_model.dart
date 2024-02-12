@@ -1,45 +1,46 @@
-// ignore_for_file: unnecessary_question_mark
-
-class FlightBookingModel {
-  String? type;
-  String? redirectUrl;
-  dynamic? ticketAmount;
-  dynamic? taxAmount;
-  dynamic? agencyMarkup;
-  dynamic? microSiteMarkup;
-  dynamic? afroMarkup;
-  dynamic? totalAmount;
-  String? currency;
-  String? parentPnr;
-  String? status;
+class OneWayFlightQuoteModel {
+  int? id;
+  String? tripType;
+  String? departureCity;
+  String? arrivalCity;
+  String? departureDate;
+  Null? returnDate;
+  int? adults;
+  int? children;
+  int? infants;
+  String? cabinClass;
+  bool? isFlexibleDates;
+  bool? isDirectFlight;
   List<Flights>? flights;
 
-  FlightBookingModel(
-      {this.type,
-      this.redirectUrl,
-      this.ticketAmount,
-      this.taxAmount,
-      this.agencyMarkup,
-      this.microSiteMarkup,
-      this.afroMarkup,
-      this.totalAmount,
-      this.currency,
-      this.parentPnr,
-      this.status,
+  OneWayFlightQuoteModel(
+      {this.id,
+      this.tripType,
+      this.departureCity,
+      this.arrivalCity,
+      this.departureDate,
+      this.returnDate,
+      this.adults,
+      this.children,
+      this.infants,
+      this.cabinClass,
+      this.isFlexibleDates,
+      this.isDirectFlight,
       this.flights});
 
-  FlightBookingModel.fromJson(Map<String, dynamic> json) {
-    type = json['type'];
-    redirectUrl = json['redirectUrl'];
-    ticketAmount = json['ticketAmount'];
-    taxAmount = json['taxAmount'];
-    agencyMarkup = json['agencyMarkup'];
-    microSiteMarkup = json['microSiteMarkup'];
-    afroMarkup = json['afroMarkup'];
-    totalAmount = json['totalAmount'];
-    currency = json['currency'];
-    parentPnr = json['parentPnr'];
-    status = json['status'];
+  OneWayFlightQuoteModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    tripType = json['tripType'];
+    departureCity = json['departureCity'];
+    arrivalCity = json['arrivalCity'];
+    departureDate = json['departureDate'];
+    returnDate = json['returnDate'];
+    adults = json['adults'];
+    children = json['children'];
+    infants = json['infants'];
+    cabinClass = json['cabinClass'];
+    isFlexibleDates = json['isFlexibleDates'];
+    isDirectFlight = json['isDirectFlight'];
     if (json['flights'] != null) {
       flights = <Flights>[];
       json['flights'].forEach((v) {
@@ -50,17 +51,18 @@ class FlightBookingModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['type'] = this.type;
-    data['redirectUrl'] = this.redirectUrl;
-    data['ticketAmount'] = this.ticketAmount;
-    data['taxAmount'] = this.taxAmount;
-    data['agencyMarkup'] = this.agencyMarkup;
-    data['microSiteMarkup'] = this.microSiteMarkup;
-    data['afroMarkup'] = this.afroMarkup;
-    data['totalAmount'] = this.totalAmount;
-    data['currency'] = this.currency;
-    data['parentPnr'] = this.parentPnr;
-    data['status'] = this.status;
+    data['id'] = this.id;
+    data['tripType'] = this.tripType;
+    data['departureCity'] = this.departureCity;
+    data['arrivalCity'] = this.arrivalCity;
+    data['departureDate'] = this.departureDate;
+    data['returnDate'] = this.returnDate;
+    data['adults'] = this.adults;
+    data['children'] = this.children;
+    data['infants'] = this.infants;
+    data['cabinClass'] = this.cabinClass;
+    data['isFlexibleDates'] = this.isFlexibleDates;
+    data['isDirectFlight'] = this.isDirectFlight;
     if (this.flights != null) {
       data['flights'] = this.flights!.map((v) => v.toJson()).toList();
     }
@@ -69,75 +71,68 @@ class FlightBookingModel {
 }
 
 class Flights {
-  dynamic? ticketAmount;
-  dynamic? taxAmount;
-  dynamic? agencyMarkup;
-  dynamic? microSiteMarkup;
-  dynamic? afroMarkup;
-  dynamic? totalAmount;
+  int? id;
+  int? totalAmount;
+  int? taxesAmount;
+  Null? ticketAmount;
+  Null? agencyMarkup;
+  Null? microSiteMarkup;
+  Null? afroMarkup;
   String? currency;
-  String? pnr;
-  String? bookingReference;
+  String? provider;
+  String? fareType;
   OutBound? outBound;
   OutBound? inBound;
-  List<Passengers>? passengers;
 
   Flights(
-      {this.ticketAmount,
-      this.taxAmount,
+      {this.id,
+      this.totalAmount,
+      this.taxesAmount,
+      this.ticketAmount,
       this.agencyMarkup,
       this.microSiteMarkup,
       this.afroMarkup,
-      this.totalAmount,
       this.currency,
-      this.pnr,
-      this.bookingReference,
+      this.provider,
+      this.fareType,
       this.outBound,
-      this.inBound,
-      this.passengers});
+      this.inBound});
 
   Flights.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    totalAmount = json['totalAmount'];
+    taxesAmount = json['taxesAmount'];
     ticketAmount = json['ticketAmount'];
-    taxAmount = json['taxAmount'];
     agencyMarkup = json['agencyMarkup'];
     microSiteMarkup = json['microSiteMarkup'];
     afroMarkup = json['afroMarkup'];
-    totalAmount = json['totalAmount'];
     currency = json['currency'];
-    pnr = json['pnr'];
-    bookingReference = json['bookingReference'];
+    provider = json['provider'];
+    fareType = json['fareType'];
     outBound = json['outBound'] != null
         ? new OutBound.fromJson(json['outBound'])
         : null;
     inBound =
         json['inBound'] != null ? new OutBound.fromJson(json['inBound']) : null;
-    if (json['passengers'] != null) {
-      passengers = <Passengers>[];
-      json['passengers'].forEach((v) {
-        passengers!.add(new Passengers.fromJson(v));
-      });
-    }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['totalAmount'] = this.totalAmount;
+    data['taxesAmount'] = this.taxesAmount;
     data['ticketAmount'] = this.ticketAmount;
-    data['taxAmount'] = this.taxAmount;
     data['agencyMarkup'] = this.agencyMarkup;
     data['microSiteMarkup'] = this.microSiteMarkup;
     data['afroMarkup'] = this.afroMarkup;
-    data['totalAmount'] = this.totalAmount;
     data['currency'] = this.currency;
-    data['pnr'] = this.pnr;
-    data['bookingReference'] = this.bookingReference;
+    data['provider'] = this.provider;
+    data['fareType'] = this.fareType;
     if (this.outBound != null) {
       data['outBound'] = this.outBound!.toJson();
     }
     if (this.inBound != null) {
       data['inBound'] = this.inBound!.toJson();
-    }
-    if (this.passengers != null) {
-      data['passengers'] = this.passengers!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -160,7 +155,7 @@ class OutBound {
   int? flightScheduleId;
   String? companyCode;
   List<Segments>? segments;
-  List<FareRules>? fareRules;
+  Null? fareRules;
 
   OutBound(
       {this.departure,
@@ -203,12 +198,7 @@ class OutBound {
         segments!.add(new Segments.fromJson(v));
       });
     }
-    if (json['fareRules'] != null) {
-      fareRules = <FareRules>[];
-      json['fareRules'].forEach((v) {
-        fareRules!.add(new FareRules.fromJson(v));
-      });
-    }
+    fareRules = json['fareRules'];
   }
 
   Map<String, dynamic> toJson() {
@@ -231,9 +221,7 @@ class OutBound {
     if (this.segments != null) {
       data['segments'] = this.segments!.map((v) => v.toJson()).toList();
     }
-    if (this.fareRules != null) {
-      data['fareRules'] = this.fareRules!.map((v) => v.toJson()).toList();
-    }
+    data['fareRules'] = this.fareRules;
     return data;
   }
 }
@@ -299,94 +287,6 @@ class Segments {
     data['flightNumber'] = this.flightNumber;
     data['cabinType'] = this.cabinType;
     data['fareType'] = this.fareType;
-    return data;
-  }
-}
-
-class FareRules {
-  String? category;
-  String? description;
-
-  FareRules({this.category, this.description});
-
-  FareRules.fromJson(Map<String, dynamic> json) {
-    category = json['category'];
-    description = json['description'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['category'] = this.category;
-    data['description'] = this.description;
-    return data;
-  }
-}
-
-class Passengers {
-  String? bookingReference;
-  String? type;
-  String? title;
-  String? firstName;
-  String? lastName;
-  int? requestedAge;
-  String? birthDate;
-  String? courtesyTitle;
-  String? documentType;
-  String? documentNumber;
-  String? email;
-  String? phoneCountryCode;
-  String? phone;
-  String? country;
-
-  Passengers(
-      {this.bookingReference,
-      this.type,
-      this.title,
-      this.firstName,
-      this.lastName,
-      this.requestedAge,
-      this.birthDate,
-      this.courtesyTitle,
-      this.documentType,
-      this.documentNumber,
-      this.email,
-      this.phoneCountryCode,
-      this.phone,
-      this.country});
-
-  Passengers.fromJson(Map<String, dynamic> json) {
-    bookingReference = json['bookingReference'];
-    type = json['type'];
-    title = json['title'];
-    firstName = json['firstName'];
-    lastName = json['lastName'];
-    requestedAge = json['requestedAge'];
-    birthDate = json['birthDate'];
-    courtesyTitle = json['courtesyTitle'];
-    documentType = json['documentType'];
-    documentNumber = json['documentNumber'];
-    email = json['email'];
-    phoneCountryCode = json['phoneCountryCode'];
-    phone = json['phone'];
-    country = json['country'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['bookingReference'] = this.bookingReference;
-    data['type'] = this.type;
-    data['title'] = this.title;
-    data['firstName'] = this.firstName;
-    data['lastName'] = this.lastName;
-    data['requestedAge'] = this.requestedAge;
-    data['birthDate'] = this.birthDate;
-    data['courtesyTitle'] = this.courtesyTitle;
-    data['documentType'] = this.documentType;
-    data['documentNumber'] = this.documentNumber;
-    data['email'] = this.email;
-    data['phoneCountryCode'] = this.phoneCountryCode;
-    data['phone'] = this.phone;
-    data['country'] = this.country;
     return data;
   }
 }

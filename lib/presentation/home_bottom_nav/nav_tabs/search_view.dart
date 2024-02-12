@@ -10,7 +10,7 @@ import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/components/sear
 import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/components/search_tabs/one_way_tab.dart';
 import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/components/search_tabs/return_tab.dart';
 
-import 'controller/search_controller.dart';
+import '../controller/search_controller.dart';
 
 class SearchScreen extends StatefulWidget {
   String? cabinClass;
@@ -54,7 +54,7 @@ class _SearchScreenState extends State<SearchScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // From Field ------------------------
-                CommonText(text: "Class: ${widget.cabinClass}"),
+                // CommonText(text: "Class: ${widget.cabinClass}"),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [

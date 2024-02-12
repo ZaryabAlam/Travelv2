@@ -9,6 +9,7 @@ import 'package:travel_app/presentation/home_bottom_nav/views/search_flights.dar
 
 import '../../../../../app/configs/app_colors.dart';
 import '../../../../../app/utils/custom_widgets/gradient_snackbar.dart';
+import '../../../views/oneWay_flights.dart';
 
 class OneWayTabView extends StatefulWidget {
   String? toCity;
@@ -23,7 +24,7 @@ class OneWayTabView extends StatefulWidget {
 class _OneWayTabViewState extends State<OneWayTabView> {
   String? _cabinClass;
   String? selectedCabin;
-  var selectedTraveller = '1 Adult';
+  var selectedTraveller = 'Adult';
 
   @override
   void initState() {
@@ -38,10 +39,8 @@ class _OneWayTabViewState extends State<OneWayTabView> {
   }
 
   var travellerList = [
-    '1 Child',
-    '1 Adult',
-    '1 Teenager',
-    '1 Aged',
+    'Adult',
+    'Child',
   ];
   var cabinList = [
     'Economy',
@@ -52,6 +51,7 @@ class _OneWayTabViewState extends State<OneWayTabView> {
 
   String? departDate = "Select Date";
   String? departDateForm = "Select Date";
+  String? tripType = "OneWay";
 
   Future<void> _selectDepartDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -161,13 +161,14 @@ class _OneWayTabViewState extends State<OneWayTabView> {
                     AppColors.orange,
                     Icons.warning_rounded));
               } else {
-                Get.to(() => SearchFlightScreen(
+                Get.to(() => OneWaySearchFlightScreen(
                       cabinClass: widget.cabinClass.toString(),
                       traveller: selectedTraveller.toString(),
                       toCity: widget.toCity.toString(),
                       fromCity: widget.fromCity.toString(),
-                      arriveDate: "",
+                      arriveDate: null,
                       departDate: departDateForm.toString(),
+                      tripType: tripType.toString(),
                     ));
               }
             },

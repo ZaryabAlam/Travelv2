@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:travel_app/app/configs/app_colors.dart';
-import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/controller/payment_method_controller.dart';
+import 'package:travel_app/presentation/home_bottom_nav/controller/payment_method_controller.dart';
 import 'package:travel_app/presentation/home_bottom_nav/views/passenger_details.dart';
 import 'package:travel_app/presentation/home_bottom_nav/views/payment_details.dart';
 
@@ -9,7 +9,7 @@ import '../../../app/utils/custom_widgets/custom_appbar.dart';
 import '../../../app/utils/custom_widgets/custom_button.dart';
 import '../../../app/utils/custom_widgets/custom_outline_button.dart';
 import '../../../app/utils/custom_widgets/gradient_snackbar.dart';
-import '../nav_tabs/model/payment_method_model.dart';
+import '../model/payment_method_model.dart';
 
 // ignore: must_be_immutable
 class PaymentMethodScreen extends StatefulWidget {

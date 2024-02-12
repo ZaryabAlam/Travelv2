@@ -2,11 +2,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import '../../../../app/configs/app_colors.dart';
-import '../../../../app/data/data_controller.dart';
-import '../../../../app/utils/api_utility/api_url.dart';
-import '../../../../app/utils/custom_widgets/gradient_snackbar.dart';
-import '../../views/booking_details.dart';
+import '../../../app/configs/app_colors.dart';
+import '../../../app/data/data_controller.dart';
+import '../../../app/utils/api_utility/api_url.dart';
+import '../../../app/utils/custom_widgets/gradient_snackbar.dart';
+import '../views/booking_details.dart';
 import '../model/flight_booking_model.dart';
 
 class FlightBookingController extends GetxController {
@@ -43,7 +43,8 @@ class FlightBookingController extends GetxController {
     int mySearchID = int.parse(searchID);
     int myflightID = int.parse(flightID);
     int mypaymentID = int.parse(paymentID);
-    print("Booking: $mySearchID, $myflightID, $mypaymentID, $countryCode");
+    print(
+        "Booking: 1 $mySearchID,2 $myflightID,3 $mypaymentID,4 $countryCode,5 $title,6 $firstName, 7 $lastName,8 $traveller, 9 $dob,10 $passNumber,11 $passExp, 12 $email ,13 $phoneNum, 14 $phoneCode, 15 $countryCode");
 
     try {
       var headers = {
@@ -58,22 +59,45 @@ class FlightBookingController extends GetxController {
         "microSiteClientId": 1,
         "passengers": [
           {
-            "type": traveller,
+            "type": "Adult",
             "firstName": firstName,
             "lastName": lastName,
             "requestedAge": 29,
-            "birthDate": "1994-03-25",
-            "Title": title,
+            "birthDate": dob,
+            "Title": "MISTER",
             "documentType": "PASSPORT",
-            "documentNumber": passNumber,
+            "documentNumber": "BD0123456",
             "documentExpiration": "2028-03-25",
-            "email": email,
+            "email": "shoaibuldin123@hotmail.com",
             "phoneCountryCode": phoneCode,
             "phone": phoneNum,
             "country": countryCode,
             "countryId": 12
           }
         ]
+        // "flightSelection": [
+        //   {"flightId": myflightID, "searchId": mySearchID}
+        // ],
+        // "paymentTypeId": mypaymentID,
+        // "microSiteClientId": 1,
+        // "passengers": [
+        //   {
+        //     "type": traveller,
+        //     "firstName": firstName,
+        //     "lastName": lastName,
+        //     "requestedAge": 29,
+        //     "birthDate": "1994-03-25",
+        //     "Title": title,
+        //     "documentType": "PASSPORT",
+        //     "documentNumber": passNumber,
+        //     "documentExpiration": "2028-03-25",
+        //     "email": email,
+        //     "phoneCountryCode": phoneCode,
+        //     "phone": phoneNum,
+        //     "country": countryCode,
+        //     "countryId": 12
+        //   }
+        // ]
       });
 
       var response = await http.post(

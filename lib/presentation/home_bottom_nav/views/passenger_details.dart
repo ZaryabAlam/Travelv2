@@ -99,9 +99,9 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
   PhoneNumber number = PhoneNumber(isoCode: 'US');
   bool isValidForm = false;
   final _formkey = GlobalKey<FormState>();
-  String selectedTitle = 'Mr';
+  String selectedTitle = 'MISTER';
   var titleList = [
-    'Mr',
+    'MISTER',
     'Mrs',
     'Sir',
     'Miss',
@@ -244,7 +244,7 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
                         }),
                   ),
                   0.03.ph,
-                  CommonText(text: "$selectedTitle"),
+                  // CommonText(text: "$selectedTitle"),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -680,43 +680,45 @@ class _FlightSummaryState extends State<FlightSummary> {
             0.02.ph,
             Divider(),
             0.02.ph,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                FromToFlightWidget(
-                  date: widget.arriveToDate2,
-                  time: widget.arriveToTime2,
-                  city: widget.arriveToCode2,
-                ),
-                Column(
-                  children: [
-                    CommonText(
-                      text: widget.arriveFlight,
-                      fontSize: 12.0,
-                    ),
-                    0.01.ph,
-                    RotatedBox(
-                      quarterTurns: 2,
-                      child: Icon(
-                        FontAwesomeIcons.plane,
-                        color: AppColors.appColorPrimary,
-                        size: 20.0,
+            widget.arriveFlight != ""
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      FromToFlightWidget(
+                        date: widget.arriveToDate2,
+                        time: widget.arriveToTime2,
+                        city: widget.arriveToCode2,
                       ),
-                    ),
-                    0.01.ph,
-                    CommonText(
-                      text: 'IN-BOUND',
-                      fontSize: 8.0,
-                    )
-                  ],
-                ),
-                FromToFlightWidget(
-                  date: widget.departFromDate2,
-                  time: widget.departFromTime2,
-                  city: widget.departFromCode2,
-                ),
-              ],
-            ),
+                      Column(
+                        children: [
+                          CommonText(
+                            text: widget.arriveFlight,
+                            fontSize: 12.0,
+                          ),
+                          0.01.ph,
+                          RotatedBox(
+                            quarterTurns: 2,
+                            child: Icon(
+                              FontAwesomeIcons.plane,
+                              color: AppColors.appColorPrimary,
+                              size: 20.0,
+                            ),
+                          ),
+                          0.01.ph,
+                          CommonText(
+                            text: 'IN-BOUND',
+                            fontSize: 8.0,
+                          )
+                        ],
+                      ),
+                      FromToFlightWidget(
+                        date: widget.departFromDate2,
+                        time: widget.departFromTime2,
+                        city: widget.departFromCode2,
+                      ),
+                    ],
+                  )
+                : Container(),
             0.04.ph,
             CommonText(
               text: 'Fare Information',

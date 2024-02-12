@@ -7,14 +7,15 @@ import 'package:travel_app/app/configs/app_size_config.dart';
 import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_appbar.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_button.dart';
-import 'package:travel_app/presentation/home_bottom_nav/controller/flight_qoute_controller.dart';
 import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/ticket_view.dart';
 import 'package:travel_app/presentation/home_bottom_nav/views/filter_view.dart';
 import 'package:travel_app/presentation/home_bottom_nav/views/flight_details.dart';
 import 'package:travel_app/presentation/home_bottom_nav/views/sort_view.dart';
 
+import '../controller/oneWay_flight_quote_controller.dart';
+
 // ignore: must_be_immutable
-class SearchFlightScreen extends StatefulWidget {
+class OneWaySearchFlightScreen extends StatefulWidget {
   String toCity;
   String fromCity;
   String departDate;
@@ -24,7 +25,7 @@ class SearchFlightScreen extends StatefulWidget {
   bool? isOneWay = false;
   String tripType;
 
-  SearchFlightScreen({
+  OneWaySearchFlightScreen({
     super.key,
     required this.toCity,
     required this.fromCity,
@@ -37,20 +38,21 @@ class SearchFlightScreen extends StatefulWidget {
   });
 
   @override
-  State<SearchFlightScreen> createState() => _SearchFlightScreenState();
+  State<OneWaySearchFlightScreen> createState() =>
+      _OneWaySearchFlightScreenState();
 }
 
-class _SearchFlightScreenState extends State<SearchFlightScreen> {
-  final FlightQuoteController flightQuoteController =
-      Get.put(FlightQuoteController());
+class _OneWaySearchFlightScreenState extends State<OneWaySearchFlightScreen> {
+  final OneWayFlightQuoteController oneWayFlightQuoteController =
+      Get.put(OneWayFlightQuoteController());
 
   @override
   void initState() {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      flightQuoteController.fetchFlightQuote(widget.fromCity, widget.toCity,
-          widget.departDate, widget.arriveDate, widget.tripType);
+      oneWayFlightQuoteController.fetchOneWayFlightQuote(widget.fromCity,
+          widget.toCity, widget.departDate, widget.arriveDate, widget.tripType);
     });
   }
 
@@ -113,13 +115,13 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
           ),
           0.03.ph,
           Obx(() {
-            if (flightQuoteController.isLoading.value) {
+            if (oneWayFlightQuoteController.isLoading.value) {
               return Center(
                 child: CircularProgressIndicator(),
               );
             } else {
-              if (flightQuoteController
-                  .flightQuoteModel.value.flights!.isEmpty) {
+              if (oneWayFlightQuoteController
+                  .oneWayflightQuoteModel.value.flights!.isEmpty) {
                 return Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -138,9 +140,10 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
                   ),
                 );
               } else {
-                var data1 =
-                    flightQuoteController.flightQuoteModel.value.flights;
-                var searchData = flightQuoteController.flightQuoteModel.value;
+                var data1 = oneWayFlightQuoteController
+                    .oneWayflightQuoteModel.value.flights;
+                var searchData =
+                    oneWayFlightQuoteController.oneWayflightQuoteModel.value;
                 return Expanded(
                   child: ListView.builder(
                     padding: EdgeInsets.all(10),
@@ -172,7 +175,7 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
                                             .segments![0]
                                             .flightNumber
                                             .toString()),
-                                    0.01.ph,
+                                    0.03.ph,
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
@@ -223,78 +226,96 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
                                         ),
                                       ],
                                     ),
-                                    0.02.ph,
-                                    Divider(),
-                                    PlaneNameWidget(
-                                        image:
-                                            "${data1[index].inBound!.segments![0].airlineLogo ?? "https://reservations.siliconsom.com/assets/images/logos/logo_small.png"}",
-                                        name: data1[index]
-                                            .inBound!
-                                            .segments![0]
-                                            .airlineName
-                                            .toString(),
-                                        number: data1[index]
-                                            .inBound!
-                                            .segments![0]
-                                            .flightNumber
-                                            .toString()),
-                                    0.01.ph,
-                                    data1[index].inBound != null
-                                        ? Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              FromToFlightWidget(
-                                                date: data1[index].inBound != null ? data1[index]
-                                                    .inBound!
-                                                    .departureDate
-                                                    .toString() : "",
-                                                time: data1[index].inBound != null ? data1[index]
-                                                    .inBound!
-                                                    .departureTime
-                                                    .toString(): "",
-                                                city: data1[index].inBound != null ? data1[index]
-                                                    .inBound!
-                                                    .segments![0]
-                                                    .departure
-                                                    .toString(): "",
-                                              ),
-                                              Column(
-                                                children: [
-                                                  RotatedBox(
-                                                    quarterTurns: 2,
-                                                    child: Icon(
-                                                      FontAwesomeIcons.plane,
-                                                      color: AppColors
-                                                          .appColorPrimary,
-                                                      size: 20.0,
-                                                    ),
-                                                  ),
-                                                  0.01.ph,
-                                                  CommonText(
-                                                    text: 'IN-BOUND',
-                                                    fontSize: 12.0,
-                                                  )
-                                                ],
-                                              ),
-                                              FromToFlightWidget(
-                                                date: data1[index].inBound != null ? data1[index]
-                                                    .inBound!
-                                                    .arrivalDate
-                                                    .toString() : "",
-                                                time: data1[index].inBound != null ? data1[index]
-                                                    .inBound!
-                                                    .arrivalTime
-                                                    .toString() : "",
-                                                city: data1[index].inBound != null ?data1[index]
-                                                    .inBound!
-                                                    .segments![0]
-                                                    .arrival
-                                                    .toString() : "",
-                                              ),
-                                            ],
-                                          )
-                                        : Container(),
+                                    // 0.02.ph,
+                                    // Divider(),
+                                    // PlaneNameWidget(
+                                    //     image:
+                                    //         "${data1[index].inBound!.segments![0].airlineLogo ?? "https://reservations.siliconsom.com/assets/images/logos/logo_small.png"}",
+                                    //     name: data1[index]
+                                    //         .inBound!
+                                    //         .segments![0]
+                                    //         .airlineName
+                                    //         .toString(),
+                                    //     number: data1[index]
+                                    //         .inBound!
+                                    //         .segments![0]
+                                    //         .flightNumber
+                                    //         .toString()),
+                                    // 0.01.ph,
+                                    // data1[index].inBound != null
+                                    //     ? Row(
+                                    //         mainAxisAlignment:
+                                    //             MainAxisAlignment.spaceBetween,
+                                    //         children: [
+                                    //           FromToFlightWidget(
+                                    //             date:
+                                    //                 data1[index].inBound != null
+                                    //                     ? data1[index]
+                                    //                         .inBound!
+                                    //                         .departureDate
+                                    //                         .toString()
+                                    //                     : "",
+                                    //             time:
+                                    //                 data1[index].inBound != null
+                                    //                     ? data1[index]
+                                    //                         .inBound!
+                                    //                         .departureTime
+                                    //                         .toString()
+                                    //                     : "",
+                                    //             city:
+                                    //                 data1[index].inBound != null
+                                    //                     ? data1[index]
+                                    //                         .inBound!
+                                    //                         .segments![0]
+                                    //                         .departure
+                                    //                         .toString()
+                                    //                     : "",
+                                    //           ),
+                                    //           Column(
+                                    //             children: [
+                                    //               RotatedBox(
+                                    //                 quarterTurns: 2,
+                                    //                 child: Icon(
+                                    //                   FontAwesomeIcons.plane,
+                                    //                   color: AppColors
+                                    //                       .appColorPrimary,
+                                    //                   size: 20.0,
+                                    //                 ),
+                                    //               ),
+                                    //               0.01.ph,
+                                    //               CommonText(
+                                    //                 text: 'IN-BOUND',
+                                    //                 fontSize: 12.0,
+                                    //               )
+                                    //             ],
+                                    //           ),
+                                    //           FromToFlightWidget(
+                                    //             date:
+                                    //                 data1[index].inBound != null
+                                    //                     ? data1[index]
+                                    //                         .inBound!
+                                    //                         .arrivalDate
+                                    //                         .toString()
+                                    //                     : "",
+                                    //             time:
+                                    //                 data1[index].inBound != null
+                                    //                     ? data1[index]
+                                    //                         .inBound!
+                                    //                         .arrivalTime
+                                    //                         .toString()
+                                    //                     : "",
+                                    //             city:
+                                    //                 data1[index].inBound != null
+                                    //                     ? data1[index]
+                                    //                         .inBound!
+                                    //                         .segments![0]
+                                    //                         .arrival
+                                    //                         .toString()
+                                    //                     : "",
+                                    //           ),
+                                    //         ],
+                                    //       )
+                                    //     : Container(),
                                     0.03.ph,
                                     CustomButton(
                                         onPress: () {
@@ -334,42 +355,18 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
                                                     .segments![0]
                                                     .arrival
                                                     .toString(),
-                                                arriveFlight: data1[index]
-                                                    .inBound!
-                                                    .segments![0]
-                                                    .flightNumber
-                                                    .toString(),
+                                                arriveFlight: "",
                                                 departFlight: data1[index]
                                                     .outBound!
                                                     .segments![0]
                                                     .flightNumber
                                                     .toString(),
-                                                departFromDate2: data1[index]
-                                                    .inBound!
-                                                    .departureDate
-                                                    .toString(),
-                                                departFromTime2: data1[index]
-                                                    .inBound!
-                                                    .departureTime
-                                                    .toString(),
-                                                departFromCode2: data1[index]
-                                                    .inBound!
-                                                    .segments![0]
-                                                    .departure
-                                                    .toString(),
-                                                arriveToDate2: data1[index]
-                                                    .inBound!
-                                                    .arrivalDate
-                                                    .toString(),
-                                                arriveToTime2: data1[index]
-                                                    .inBound!
-                                                    .arrivalTime
-                                                    .toString(),
-                                                arriveToCode2: data1[index]
-                                                    .inBound!
-                                                    .segments![0]
-                                                    .arrival
-                                                    .toString(),
+                                                departFromDate2: "",
+                                                departFromTime2: "",
+                                                departFromCode2: "",
+                                                arriveToDate2: "",
+                                                arriveToTime2: "",
+                                                arriveToCode2: "",
                                               ));
                                         },
                                         text:
@@ -387,7 +384,7 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
                                   ],
                                 ),
                               )),
-                          SizedBox(height: 5),
+                          SizedBox(height: 20),
                         ],
                       );
                     },

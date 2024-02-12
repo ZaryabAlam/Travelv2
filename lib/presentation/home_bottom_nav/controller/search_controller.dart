@@ -2,10 +2,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import '../../../../app/configs/app_colors.dart';
-import '../../../../app/data/data_controller.dart';
-import '../../../../app/utils/custom_widgets/gradient_snackbar.dart';
+import '../../../app/configs/app_colors.dart';
+import '../../../app/data/data_controller.dart';
+import '../../../app/utils/custom_widgets/gradient_snackbar.dart';
 import '../model/search_model.dart';
+import '../../../app/utils/api_utility/api_url.dart';
 
 class SearchController1 extends GetxController {
   final DataController dataController = Get.put(DataController());
@@ -38,7 +39,7 @@ class SearchController1 extends GetxController {
       var body = json.encode({"search": search});
 
       var response = await http.post(
-        Uri.parse('https://api.taajnetwork.com/api/Airport/search'),
+        Uri.parse('${baseURL}api/Airport/search'),
         headers: headers,
         body: body,
       );
@@ -74,7 +75,7 @@ class SearchController1 extends GetxController {
       var body = json.encode({"search": search});
 
       var response = await http.post(
-        Uri.parse('https://api.taajnetwork.com/api/Airport/search'),
+        Uri.parse('${baseURL}api/Airport/search'),
         headers: headers,
         body: body,
       );

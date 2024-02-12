@@ -23,7 +23,7 @@ class ReturnTabView extends StatefulWidget {
 class _ReturnTabViewState extends State<ReturnTabView> {
   String? _cabinClass;
   String? selectedCabin;
-  var selectedTraveller = '1 Adult';
+  var selectedTraveller = 'Adult';
 
   @override
   void initState() {
@@ -38,10 +38,8 @@ class _ReturnTabViewState extends State<ReturnTabView> {
   }
 
   var travellerList = [
-    '1 Child',
-    '1 Adult',
-    '1 Teenager',
-    '1 Aged',
+    'Adult',
+    'Child',
   ];
   var cabinList = [
     'Economy',
@@ -54,6 +52,7 @@ class _ReturnTabViewState extends State<ReturnTabView> {
   String? departDate = "Select Date";
   String? departDateForm = "Select Date";
   String? arriveDateForm = "Select Date";
+  String? tripType = "RoundTrip";
 
   Future<void> _selectArriveDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -209,6 +208,7 @@ class _ReturnTabViewState extends State<ReturnTabView> {
                       fromCity: widget.fromCity.toString(),
                       arriveDate: arriveDateForm.toString(),
                       departDate: departDateForm.toString(),
+                       tripType: tripType.toString(),
                     ));
               }
             },

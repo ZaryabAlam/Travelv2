@@ -20,10 +20,8 @@ class MultiTabView extends StatefulWidget {
 
 class _MultiTabViewState extends State<MultiTabView> {
   var travellerList = [
-    '1 Child',
-    '1 Adult',
-    '1 Teenager',
-    '1 Aged',
+    'Adult',
+    'Child',
   ];
   var cabinList = [
     'Economy',
@@ -32,11 +30,12 @@ class _MultiTabViewState extends State<MultiTabView> {
     'First Class',
   ];
 
-  var selectedTraveller = '1 Child';
+  var selectedTraveller = 'Adult';
   var selectedCabin = 'Economy';
 
   String? arriveDate = "Select Date";
   String? departDate = "Select Date";
+  String? tripType = "RoundTrip";
 
   // ignore: unused_element
   Future<void> _selectArriveDate(BuildContext context) async {
@@ -91,11 +90,11 @@ class _MultiTabViewState extends State<MultiTabView> {
             children: [
               FlightTimeWidget(
                 type: 'DEPARTURE',
-                date: 'Fri, 28 Jan 2024',
+                date: 'Fri, 28 Nov 2024',
               ),
               FlightTimeWidget(
                 type: 'RETURN',
-                date: 'Tue, 15 Feb 2024',
+                date: 'Tue, 15 Dec 2024',
               ),
             ],
           ),
@@ -155,6 +154,7 @@ class _MultiTabViewState extends State<MultiTabView> {
                       fromCity: widget.fromCity.toString(),
                       arriveDate: arriveDate.toString(),
                       departDate: departDate.toString(),
+                      tripType: tripType.toString(),
                     ));
               }),
 

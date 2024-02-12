@@ -7,7 +7,7 @@ import 'package:travel_app/app/utils/custom_widgets/custom_button.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_outline_button.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_textfield.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_textfield_required.dart';
-import '../nav_tabs/controller/flight_booking_controller.dart';
+import '../controller/flight_booking_controller.dart';
 
 class PaymentDetailsScreen extends StatefulWidget {
   String searchID;
