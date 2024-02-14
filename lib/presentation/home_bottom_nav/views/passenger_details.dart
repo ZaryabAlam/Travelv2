@@ -13,7 +13,7 @@ import 'package:travel_app/app/utils/custom_widgets/custom_outline_button.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_textfield.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_textfield_required.dart';
 import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/ticket_view.dart';
-import 'package:travel_app/presentation/home_bottom_nav/views/payment_details.dart';
+import 'package:country_picker/country_picker.dart';
 import 'package:travel_app/presentation/home_bottom_nav/views/payment_method.dart';
 
 import '../../../app/configs/app_colors.dart';
@@ -99,18 +99,21 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
   PhoneNumber number = PhoneNumber(isoCode: 'US');
   bool isValidForm = false;
   final _formkey = GlobalKey<FormState>();
-  String selectedTitle = 'MISTER';
-  var titleList = [
-    'MISTER',
-    'Mrs',
-    'Sir',
-    'Miss',
-  ];
+
+  String? _selectedTitle = "Mr";
+  String? _selectedCountry;
+  final Map<String, String> titleMap = {
+    'Mr': 'MISTER',
+    'Mrs': 'MISTER',
+    'Ms': 'MISTER',
+    'Sir': 'MISTER',
+  };
 
   Future<void> _selectDate(
       BuildContext context,
       TextEditingController controller,
-      DatePickerMode initialDatePickerMode) async {
+      DatePickerMode initialDatePickerMode,
+      bool isPass) async {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -127,7 +130,11 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
             : initialDatePickerMode == DatePickerEntryMode.calendar
                 ? "${picked.month}"
                 : "${picked.day}";
-        _updateTextControllers();
+        if (isPass == false) {
+          _updateTextControllers();
+        } else {
+          _updatePassExpTextControllers();
+        }
       });
     }
   }
@@ -160,6 +167,11 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
     monthController.text = getMonthAbbreviation(_selectedDate.month);
     // monthController.text = "${_selectedDate.month.toString().padLeft(2, '0')}";
     dayController.text = "${_selectedDate.day.toString().padLeft(2, '0')}";
+  }
+
+  void _updatePassExpTextControllers() {
+    passportExpiryController.text =
+        "${_selectedDate.year}-${_selectedDate.month.toString().padLeft(2, '0')}-${_selectedDate.day.toString().padLeft(2, '0')}";
   }
 
   void init() {
@@ -223,28 +235,33 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
                     width: w,
                     height: 35,
                     child: DropdownButton(
-                        isDense: true,
-                        isExpanded: true,
-                        icon: Icon(Icons.arrow_drop_down),
-                        value: selectedTitle,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 44.0),
-                        underline: Container(
-                          height: 0.7, // Specify the underline height
-                          color: Colors.black26, // Specify the underline color
-                        ),
-                        items: titleList.map((String item) {
-                          return DropdownMenuItem(
-                              value: item,
-                              child: CommonText(
-                                  text: item, weight: FontWeight.w500));
-                        }).toList(),
-                        onChanged: (String? val) {
-                          setState(() => selectedTitle = val!);
-                        }),
+                      isDense: true,
+                      isExpanded: true,
+                      icon: Icon(Icons.arrow_drop_down),
+                      value: _selectedTitle,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 44.0),
+                      underline: Container(
+                        height: 0.7, // Specify the underline height
+                        color: Colors.black26, // Specify the underline color
+                      ),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          _selectedTitle = newValue;
+                        });
+                      },
+                      items: titleMap.keys
+                          .map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                            value: value,
+                            child: CommonText(
+                                text: value, weight: FontWeight.w500));
+                      }).toList(),
+                    ),
                   ),
+
+                  // CommonText(text: "Title: ${titleMap[_selectedTitle!]}"),
                   0.03.ph,
-                  // CommonText(text: "$selectedTitle"),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -300,7 +317,7 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
                           child: CustomTextField(
                               onTap: () {
                                 _selectDate(context, yearController,
-                                    DatePickerMode.year);
+                                    DatePickerMode.year, false);
                               },
                               labelText: "Year",
                               textEditingController: yearController,
@@ -339,10 +356,45 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
                     ],
                   ),
                   0.03.ph,
-                  Custom_textfield_required(
-                      controller: nationalityController,
-                      requiredLabel: 'Nationality',
-                      hint: 'Enter Nationality Here',
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: "Nationality",
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                          TextSpan(
+                            text: ' *',
+                            style: TextStyle(color: Colors.red),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  CustomTextField(
+                      textEditingController: nationalityController,
+                      hintText: 'Enter Nationality Here',
+                      readOnly: true,
+                      onTap: () {
+                        showCountryPicker(
+                          context: context,
+                          showPhoneCode: false,
+                          onSelect: (Country country) {
+                            setState(() {
+                              _selectedCountry =
+                                  "${country.flagEmoji}   ${country.name}";
+                              nationalityController.text =
+                                  _selectedCountry.toString();
+                              number =
+                                  PhoneNumber(isoCode: country.countryCode);
+                            });
+                          },
+                        );
+                      },
                       validator: (inputValue) {
                         if (inputValue!.isEmpty) {
                           return "Enter Nationality";
@@ -352,6 +404,7 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
                   0.03.ph,
                   Custom_textfield_required(
                       controller: passportController,
+                      // keyboardType: TextInputType.number,
                       requiredLabel: 'Passport Number',
                       hint: 'Enter Passport Here',
                       validator: (inputValue) {
@@ -361,10 +414,34 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
                         return null;
                       }),
                   0.03.ph,
-                  Custom_textfield_required(
-                      controller: passportExpiryController,
-                      requiredLabel: 'Passport Expiry',
-                      hint: 'Enter Expiry Here',
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: "Passport Expiry",
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                          TextSpan(
+                            text: ' *',
+                            style: TextStyle(color: Colors.red),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  CustomTextField(
+                      onTap: () {
+                        _selectDate(context, passportExpiryController,
+                            DatePickerMode.year, true);
+                      },
+                      readOnly: true,
+                      textEditingController: passportExpiryController,
+                      // labelText: 'Passport Expiry',
+                      hintText: 'Enter Expiry Here',
                       validator: (inputValue) {
                         if (inputValue!.isEmpty) {
                           return "Enter Passport Expiry";
@@ -378,11 +455,16 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
                       fontSize: 18.0),
                   0.03.ph,
                   Custom_textfield_required(
-                    readOnly: true,
-                    controller: emailController,
-                    requiredLabel: 'Email',
-                    hint: dataController.myEmail.value,
-                  ),
+                      // readOnly: true,
+                      controller: emailController,
+                      requiredLabel: 'Email',
+                      hint: dataController.myEmail.value,
+                      validator: (inputValue) {
+                        if (inputValue!.isEmpty) {
+                          return "Enter Email";
+                        }
+                        return null;
+                      }),
                   0.03.ph,
                   Align(
                     alignment: Alignment.centerLeft,
@@ -524,7 +606,7 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
                         isValidForm = true;
                         // Get.to(() => PaymentDetailsScreen(
                         Get.to(() => PaymentMethodScreen(
-                              title: selectedTitle,
+                              title: "${titleMap[_selectedTitle!]}",
                               firstName: firstNameController.text,
                               lastName: lastNameController.text,
                               dob:

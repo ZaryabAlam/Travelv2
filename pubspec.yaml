@@ -53,6 +53,7 @@ dependencies:
   dotted_border: ^2.1.0
   device_preview: ^1.1.0
   intl_phone_number_input: ^0.7.3+1
+  country_picker: ^2.0.23
 
 dev_dependencies:
   flutter_test:
