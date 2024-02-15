@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:travel_app/app/configs/app_colors.dart';
 import 'package:travel_app/app/configs/app_size_config.dart';
 import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
@@ -25,15 +26,19 @@ class _SortScreenState extends State<SortScreen> {
           padding: const EdgeInsets.all(15.0),
           child: Column(
             children: [
-              Buildbutton(buttonText: "Recommended"),
-              Buildbutton(buttonText: "Price (Low to High)"),
-              Buildbutton(buttonText: "Price (High to Low)"),
-              Buildbutton(buttonText: "Duration (Shortest)"),
-              Buildbutton(buttonText: "Duration (Longest)"),
-              Buildbutton(buttonText: "Departure (Earliest)"),
-              Buildbutton(buttonText: "Departure (Latest)"),
-              Buildbutton(buttonText: "Arrival (Earliest)"),
-              Buildbutton(buttonText: "Arrival (Latest)"),
+              Buildbutton(
+                  buttonText: "Recommended",
+                  onPress: () {
+                    Get.back();
+                  }),
+              Buildbutton(buttonText: "Price (Low to High)", onPress: () {}),
+              Buildbutton(buttonText: "Price (High to Low)", onPress: () {}),
+              Buildbutton(buttonText: "Duration (Shortest)", onPress: () {}),
+              Buildbutton(buttonText: "Duration (Longest)", onPress: () {}),
+              Buildbutton(buttonText: "Departure (Earliest)", onPress: () {}),
+              Buildbutton(buttonText: "Departure (Latest)", onPress: () {}),
+              Buildbutton(buttonText: "Arrival (Earliest)", onPress: () {}),
+              Buildbutton(buttonText: "Arrival (Latest)", onPress: () {}),
               0.03.ph,
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -54,8 +59,10 @@ class _SortScreenState extends State<SortScreen> {
 // ignore: must_be_immutable
 class Buildbutton extends StatelessWidget {
   String buttonText;
+  final Function() onPress;
   Buildbutton({
     required this.buttonText,
+    required this.onPress,
     super.key,
   });
 
@@ -63,7 +70,7 @@ class Buildbutton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       dense: true,
-      onTap: () {},
+      onTap: onPress,
       title: CommonText(
         text: buttonText,
         weight: FontWeight.w400,
