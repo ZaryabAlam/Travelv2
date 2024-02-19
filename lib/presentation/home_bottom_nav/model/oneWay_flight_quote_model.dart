@@ -1,10 +1,12 @@
+// ignore_for_file: unnecessary_question_mark
+
 class OneWayFlightQuoteModel {
   int? id;
   String? tripType;
   String? departureCity;
   String? arrivalCity;
   String? departureDate;
-  Null? returnDate;
+  dynamic? returnDate;
   int? adults;
   int? children;
   int? infants;
@@ -74,10 +76,10 @@ class Flights {
   int? id;
   int? totalAmount;
   int? taxesAmount;
-  Null? ticketAmount;
-  Null? agencyMarkup;
-  Null? microSiteMarkup;
-  Null? afroMarkup;
+  dynamic? ticketAmount;
+  dynamic? agencyMarkup;
+  dynamic? microSiteMarkup;
+  dynamic? afroMarkup;
   String? currency;
   String? provider;
   String? fareType;
@@ -155,7 +157,7 @@ class OutBound {
   int? flightScheduleId;
   String? companyCode;
   List<Segments>? segments;
-  Null? fareRules;
+  dynamic? fareRules;
 
   OutBound(
       {this.departure,

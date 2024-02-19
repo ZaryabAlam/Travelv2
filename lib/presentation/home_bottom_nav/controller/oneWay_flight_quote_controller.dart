@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:travel_app/presentation/home_bottom_nav/model/flight_quote_model.dart';
 import 'package:travel_app/presentation/home_bottom_nav/model/oneWay_flight_quote_model.dart';
 import '../../../app/configs/app_colors.dart';
 import '../../../app/data/data_controller.dart';

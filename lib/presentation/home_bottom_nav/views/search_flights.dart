@@ -8,7 +8,7 @@ import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_appbar.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_button.dart';
 import 'package:travel_app/presentation/home_bottom_nav/controller/flight_qoute_controller.dart';
-import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/ticket_view.dart';
+import 'package:travel_app/presentation/booking_history/view/my_bookings_screen.dart';
 import 'package:travel_app/presentation/home_bottom_nav/views/filter_view.dart';
 import 'package:travel_app/presentation/home_bottom_nav/views/flight_details.dart';
 import 'package:travel_app/presentation/home_bottom_nav/views/sort_view.dart';
@@ -129,6 +129,22 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
                   });
                 }
 
+                // Function to sort flights by total amount in descending order
+                void sortDurationLess() {
+                  setState(() {
+                    data1!.sort((a, b) =>
+                        a.outBound!.duration!.compareTo(b.outBound!.duration));
+                  });
+                }
+
+                // Function to sort flights by total amount in descending order
+                void sortDurationHigh() {
+                  setState(() {
+                    data1!.sort((a, b) =>
+                        b.outBound!.duration!.compareTo(a.outBound!.duration!));
+                  });
+                }
+
                 void _showSortOptions() {
                   showModalBottomSheet(
                     context: context,
@@ -166,6 +182,22 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
                                 Navigator.pop(context);
                               },
                             ),
+                            ListTile(
+                              leading: Icon(Icons.av_timer_rounded),
+                              title: Text('Duration (Low to High)'),
+                              onTap: () {
+                                sortDurationLess();
+                                Navigator.pop(context);
+                              },
+                            ),
+                            ListTile(
+                              leading: Icon(Icons.more_time_rounded),
+                              title: Text('Duration (High to Low)'),
+                              onTap: () {
+                                sortDurationHigh();
+                                Navigator.pop(context);
+                              },
+                            ),
                           ],
                         ),
                       );
@@ -196,6 +228,19 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
                                             },
                                             text: "Sort by",
                                             icon: Icons.sort),
+                                        buildButton(
+                                            text: 'Recommanded',
+                                            onPress: () {}),
+                                        buildButton(
+                                            text: 'Low to High',
+                                            onPress: () {
+                                              sortAscending();
+                                            }),
+                                        buildButton(
+                                            text: 'High to Low',
+                                            onPress: () {
+                                              sortDescending();
+                                            }),
                                       ],
                                     ),
                                   ),
@@ -209,15 +254,13 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
                                   //         icon: Icons.filter_list),
                                   //   ],
                                   // ),
-                                  // buildButton('Recommanded'),
-                                  // buildButton('Low to High'),
-                                  // buildButton('High to Low'),
                                 ],
                               ),
                             ),
                           ),
                         ],
                       ),
+                      SizedBox(height: 10),
                       Expanded(
                         child: ListView.builder(
                           padding: EdgeInsets.all(10),
@@ -608,16 +651,27 @@ class PlaneNameWidget extends StatelessWidget {
   }
 }
 
-Widget buildButton(String buttonText) {
-  return Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: OutlinedButton(
-      onPressed: () {},
-      style: OutlinedButton.styleFrom(
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+class buildButton extends StatelessWidget {
+  final String text;
+  final Function() onPress;
+  const buildButton({
+    super.key,
+    required this.text,
+    required this.onPress,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: OutlinedButton(
+        onPressed: onPress,
+        style: OutlinedButton.styleFrom(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+        ),
+        child: Text(text),
       ),
-      child: Text(buttonText),
-    ),
-  );
+    );
+  }
 }

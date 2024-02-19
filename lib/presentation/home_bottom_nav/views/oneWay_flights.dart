@@ -7,7 +7,7 @@ import 'package:travel_app/app/configs/app_size_config.dart';
 import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_appbar.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_button.dart';
-import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/ticket_view.dart';
+import 'package:travel_app/presentation/booking_history/view/my_bookings_screen.dart';
 import 'package:travel_app/presentation/home_bottom_nav/views/filter_view.dart';
 import 'package:travel_app/presentation/home_bottom_nav/views/flight_details.dart';
 import 'package:travel_app/presentation/home_bottom_nav/views/sort_view.dart';

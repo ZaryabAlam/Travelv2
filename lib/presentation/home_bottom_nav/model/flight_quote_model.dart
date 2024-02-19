@@ -151,7 +151,7 @@ class OutBound {
   String? arrivalDate;
   String? departureTime;
   String? arrivalTime;
-  int? duration;
+  dynamic? duration;
   String? baggageAllowance;
   int? flightRouteId;
   int? flightScheduleId;

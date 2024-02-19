@@ -12,7 +12,7 @@ import 'package:travel_app/app/utils/custom_widgets/custom_button.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_outline_button.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_textfield.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_textfield_required.dart';
-import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/ticket_view.dart';
+import 'package:travel_app/presentation/booking_history/view/my_bookings_screen.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:travel_app/presentation/home_bottom_nav/views/payment_method.dart';
 

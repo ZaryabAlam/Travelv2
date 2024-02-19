@@ -22,6 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final agentController = TextEditingController();
   final passController = TextEditingController();
   String? username = "shoaibuldin5@hotmail.com";
+  String? username2 = "shoaibuldin@hotmail.com";
   String? password = "1234";
   bool isButton1Selected = true;
   var isLoading = true.obs;

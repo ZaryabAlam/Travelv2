@@ -10,7 +10,7 @@ import 'package:travel_app/app/utils/custom_widgets/custom_appbar.dart';
 import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/check_in_view.dart';
 import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/home_view.dart';
 import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/search_view.dart';
-import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/ticket_view.dart';
+import 'package:travel_app/presentation/booking_history/view/my_bookings_screen.dart';
 
 class BottomNavScreen extends StatefulWidget {
   BottomNavScreen({this.fromDetails = false, super.key, this.cabinClass});
