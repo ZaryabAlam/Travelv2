@@ -2,10 +2,10 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:travel_app/app/configs/app_colors.dart';
 import 'package:travel_app/app/configs/app_size_config.dart';
 import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
-import 'package:travel_app/app/utils/custom_widgets/custom_button.dart';
 
 import '../controller/booking_history_controller.dart';
 import '../model/booking_history_model.dart';
@@ -18,28 +18,35 @@ class BookingScreen extends StatefulWidget {
 }
 
 class _BookingScreenState extends State<BookingScreen> {
-    final BookingHistoryController bookingHistoryController =
+  final BookingHistoryController bookingHistoryController =
       Get.put(BookingHistoryController());
   final Rx<BookingHistoryModel> bookingHistoryModel = BookingHistoryModel().obs;
   final RxList<BookingHistoryModel> bookingHistoryList =
       <BookingHistoryModel>[].obs;
   final RxBool isLoading = false.obs;
-  String? formattedDate= "";
-  String? formattedTime= "";
+  String? formattedDate = "";
+  String? formattedTime = "";
 
-  Future<void> dateTime(String nDataTime)async{
- DateTime dateTime = DateTime.parse(nDataTime);
+  String formatDate(String dateString) {
+    DateTime dateTime = DateTime.parse(dateString);
+    String formattedDate =
+        "${dateTime.year}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}";
 
-  // Extract date and time components
-  String date = "${dateTime.year}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}";
-  String time = "${dateTime.hour.toString().padLeft(2, '0')}:${dateTime.minute.toString().padLeft(2, '0')}:${dateTime.second.toString().padLeft(2, '0')}";
-
-  // Output the separated date and time
-  print("Date: $date");
-  print("Time: $time");
+    return formattedDate;
   }
 
-    @override
+  String formatTime(String dateTimeString) {
+    // Parse the input date and time string
+    DateTime dateTime = DateTime.parse(dateTimeString);
+
+    // Format the time
+    String formattedTime =
+        "${dateTime.hour.toString().padLeft(2, '0')}:${dateTime.minute.toString().padLeft(2, '0')}";
+
+    return formattedTime;
+  }
+
+  @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -52,172 +59,237 @@ class _BookingScreenState extends State<BookingScreen> {
     super.dispose();
   }
 
-  
   @override
   Widget build(BuildContext context) {
     HeightWidth(context);
     return Scaffold(
       backgroundColor: AppColors.appColorAccent,
-      body: Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        Expanded(
-          child: Obx(() {
-            if (bookingHistoryController.isLoading.value) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            } else {
-              return bookingHistoryController.bookingHistoryList.isEmpty
-                  ? Center(
-                      child: Text('No Bookings Available'),
-                    )
-                  : ListView.builder(
-                      itemCount:
-                          bookingHistoryController.bookingHistoryList.length,
-                      itemBuilder: (context, index) {
-                        var bookings =
-                            bookingHistoryController.bookingHistoryList[index];
-                        return DottedBorder(
-      dashPattern: [10, 8],
-      strokeWidth: 1,
-      color: AppColors.appColorPrimary,
-      child: Container(
-        padding: EdgeInsets.fromLTRB(15.0, 15, 15, 30),
-        margin: const EdgeInsets.all(20.0),
-        // height: h * 0.43,
-        decoration: BoxDecoration(color: Colors.white),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // 1st  FROM TO ------------------------------------------------
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                FromToFlightWidget(
-                  date: '${bookings.departureDateTime}',
-                  time: '19:30',
-                  city: '${bookings.departure}',
-                ),
-                Column(
-                  children: [
-                    Icon(
-                      FontAwesomeIcons.plane,
-                      color: AppColors.appColorPrimary,
-                      size: 20.0,
-                    ),
-                    0.01.ph,
-                    CommonText(
-                      text: 'EK06',
-                      fontSize: 12.0,
-                    )
-                  ],
-                ),
-                FromToFlightWidget(
-                  date: '${bookings.arrivalDateTime}',
-                  time: '22:30',
-                  city: '${bookings.arrival}',
-                ),
-              ],
-            ),
-            0.04.ph,
-            CommonText(
-              text: 'Fare Information',
-              weight: FontWeight.w600,
-            ),
-            0.02.ph,
-            CommonText(
-              text: 'Adult x 01',
-              fontSize: 11,
-            ),
-            0.02.ph,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                CommonText(
-                  text: 'Fare',
-                  fontSize: 11,
-                ),
-                CommonText(
-                  text: '\$ 125',
-                  fontSize: 11,
-                ),
-              ],
-            ),
-            0.02.ph,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                CommonText(
-                  text: 'Taxes and Fees',
-                  fontSize: 11,
-                ),
-                CommonText(
-                  text: '\$ 2',
-                  fontSize: 11,
-                ),
-              ],
-            ),
-            0.02.ph,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                CommonText(
-                  text: 'Extra Baggage',
-                  fontSize: 11,
-                ),
-                CommonText(
-                  text: '\$ 20',
-                  fontSize: 11,
-                ),
-              ],
-            ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Expanded(
+            child: Obx(() {
+              if (bookingHistoryController.isLoading.value) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else {
+                return bookingHistoryController.bookingHistoryList.isEmpty
+                    ? Center(
+                        child: Text('No Bookings Available'),
+                      )
+                    : ListView.builder(
+                        itemCount:
+                            bookingHistoryController.bookingHistoryList.length,
+                        itemBuilder: (context, index) {
+                          var bookings = bookingHistoryController
+                              .bookingHistoryList[index];
+                          return Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: DottedBorder(
+                              dashPattern: [10, 8],
+                              strokeWidth: 1,
+                              color: AppColors.appColorPrimary,
+                              child: Container(
+                                padding: EdgeInsets.fromLTRB(15.0, 15, 15, 30),
+                                margin: const EdgeInsets.all(20.0),
+                                // height: h * 0.43,
+                                decoration: BoxDecoration(color: Colors.white),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    // 1st  FROM TO ------------------------------------------------
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            CommonText(text: "ID "),
+                                            CommonText(
+                                              text: " ${bookings.bookingId}",
+                                              weight: FontWeight.bold,
+                                            )
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            CommonText(text: " "),
+                                            CommonText(
+                                              text: " ${bookings.parentPnr}",
+                                              weight: FontWeight.bold,
+                                            )
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    0.02.ph,
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        FromToFlightWidget(
+                                          date: formatDate(bookings
+                                              .departureDateTime
+                                              .toString()),
+                                          time: formatTime(bookings
+                                              .departureDateTime
+                                              .toString()),
+                                          city: '${bookings.departure}',
+                                        ),
+                                        Column(
+                                          children: [
+                                            Icon(
+                                              FontAwesomeIcons.plane,
+                                              color: AppColors.appColorPrimary,
+                                              size: 20.0,
+                                            ),
+                                            0.01.ph,
+                                            CommonText(
+                                              text:
+                                                  bookings.tripType.toString(),
+                                              fontSize: 10.0,
+                                            )
+                                          ],
+                                        ),
+                                        FromToFlightWidget(
+                                          date: formatDate(bookings
+                                              .arrivalDateTime
+                                              .toString()),
+                                          time: formatTime(bookings
+                                              .arrivalDateTime
+                                              .toString()),
+                                          city: '${bookings.arrival}',
+                                        ),
+                                      ],
+                                    ),
+                                    0.08.ph,
+                                    CommonText(
+                                      text: 'Fare Information',
+                                      weight: FontWeight.w600,
+                                    ),
+                                    0.02.ph,
+                                    // CommonText(
+                                    //   text: 'Adult x 01',
+                                    //   fontSize: 11,
+                                    // ),
+                                    // 0.02.ph,
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        CommonText(
+                                          text: 'Fare',
+                                          fontSize: 11,
+                                        ),
+                                        CommonText(
+                                          text: '\$ ${bookings.ticketAmount}',
+                                          fontSize: 11,
+                                        ),
+                                      ],
+                                    ),
+                                    0.02.ph,
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        CommonText(
+                                          text: 'Taxes and Fees',
+                                          fontSize: 11,
+                                        ),
+                                        CommonText(
+                                          text: '\$ ${bookings.taxAmount}',
+                                          fontSize: 11,
+                                        ),
+                                      ],
+                                    ),
+                                    0.02.ph,
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        CommonText(
+                                          text: 'Agency Charges',
+                                          fontSize: 11,
+                                        ),
+                                        CommonText(
+                                          text: '\$ ${bookings.agencyMarkup}',
+                                          fontSize: 11,
+                                        ),
+                                      ],
+                                    ),
+                                    0.02.ph,
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        CommonText(
+                                          text: 'Other Charges',
+                                          fontSize: 11,
+                                        ),
+                                        CommonText(
+                                          text: '\$ 20',
+                                          fontSize: 11,
+                                        ),
+                                      ],
+                                    ),
 
-            0.02.ph,
-            Divider(color: Colors.black),
+                                    // 0.02.ph,
+                                    Divider(color: Colors.black),
 
-            0.02.ph,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                CommonText(
-                  text: 'Total Charges',
-                  fontSize: 11,
-                  weight: FontWeight.w700,
-                ),
-                CommonText(
-                  text: '\$ 147',
-                  fontSize: 11,
-                  weight: FontWeight.w700,
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-                      },
-                    );
-            }
-          }),
-        ),
-      ],
-      ),
+                                    0.02.ph,
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        CommonText(
+                                          text: 'Total Charges',
+                                          fontSize: 11,
+                                          weight: FontWeight.w700,
+                                        ),
+                                        CommonText(
+                                          text: '\$ ${bookings.totalAmount}',
+                                          fontSize: 11,
+                                          weight: FontWeight.w700,
+                                        ),
+                                      ],
+                                    ),
+                                    0.02.ph,
+                                    Divider(),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        CommonText(text: "Status"),
+                                        CommonText(
+                                            text: "${bookings.status}",
+                                            weight: FontWeight.w500),
+                                      ],
+                                    ),
+                                    Divider(),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      );
+              }
+            }),
+          ),
+        ],
       ),
       // body: Column(
       //   crossAxisAlignment: CrossAxisAlignment.center,
       //   children: [
       //     /// Main ----------------------------------
 
-          // Center(
-          //   child: Padding(
-          //     padding: const EdgeInsets.all(0.0),
-          //     child: SearchBar(),
-          //   ),
-          // ),
-          
+      // Center(
+      //   child: Padding(
+      //     padding: const EdgeInsets.all(0.0),
+      //     child: SearchBar(),
+      //   ),
+      // ),
 
       //     /// Search Bar ----------------------------------
       //     0.02.ph,
