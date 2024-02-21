@@ -10,7 +10,6 @@ import 'package:travel_app/app/utils/custom_widgets/custom_appbar.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_button.dart';
 import 'package:travel_app/presentation/home_bottom_nav/controller/flight_fare_rule_controller.dart';
 import 'package:travel_app/presentation/home_bottom_nav/views/passenger_details.dart';
-import 'package:travel_app/presentation/home_bottom_nav/views/payment_method.dart';
 
 // ignore: must_be_immutable
 class FlightDetailsScreen extends StatefulWidget {

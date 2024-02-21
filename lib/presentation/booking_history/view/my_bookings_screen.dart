@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:travel_app/app/configs/app_colors.dart';
 import 'package:travel_app/app/configs/app_size_config.dart';
 import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
+import 'package:travel_app/presentation/booking_history/view/search_PNR_screen.dart';
 
 import '../controller/booking_history_controller.dart';
 import '../model/booking_history_model.dart';
@@ -67,6 +68,12 @@ class _BookingScreenState extends State<BookingScreen> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: SearchBar(),
+            ),
+          ),
           Expanded(
             child: Obx(() {
               if (bookingHistoryController.isLoading.value) {
@@ -114,7 +121,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                         ),
                                         Row(
                                           children: [
-                                            CommonText(text: " "),
+                                            CommonText(text: "PNR"),
                                             CommonText(
                                               text: " ${bookings.parentPnr}",
                                               weight: FontWeight.bold,
@@ -493,6 +500,10 @@ class _SearchBarState extends State<SearchBar> {
         color: AppColors.appColorPrimary.withOpacity(0.1),
       ),
       child: TextField(
+        onTap: () {
+          Get.to(() => SearchPNRScreen());
+        },
+        readOnly: true,
         decoration: InputDecoration(
           hintText: 'Search PNR',
           prefixIcon: Icon(Icons.search),

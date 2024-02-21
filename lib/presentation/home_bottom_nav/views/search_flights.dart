@@ -41,18 +41,7 @@ class SearchFlightScreen extends StatefulWidget {
 class _SearchFlightScreenState extends State<SearchFlightScreen> {
   final FlightQuoteController flightQuoteController =
       Get.put(FlightQuoteController());
-  String? filterName = "Silicon Reservation System";
-  // void sortAscending() {
-  //   setState(() {
-  //     doubleValues.sort();
-  //   });
-  // }
-
-  // void sortDescending() {
-  //   setState(() {
-  //     doubleValues.sort((a, b) => b.compareTo(a));
-  //   });
-  // }
+  String? filterName = " ";
 
   @override
   void initState() {
@@ -76,6 +65,7 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
       backgroundColor: AppColors.appColorAccent,
       appBar: CustomAppBar(
         title: "Search Flights",
+      
       ),
       body: Column(
         children: [
@@ -246,8 +236,7 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
                               trailing: InkWell(
                                   onTap: () {
                                     Navigator.pop(context);
-                                    _showFilterAirline(
-                                        "Silicon Reservation System");
+                                    _showFilterAirline(" ");
                                   },
                                   child: CommonText(text: "Reset")),
                               onTap: () {},
@@ -331,7 +320,9 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
                                             icon: Icons.filter_alt_outlined),
                                         buildButton(
                                             text: 'Recommanded',
-                                            onPress: () {}),
+                                            onPress: () {
+                                              _showFilterAirline(" ");
+                                            }),
                                         buildButton(
                                             text: 'Low to High',
                                             onPress: () {
@@ -366,14 +357,19 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
                         child: ListView.builder(
                           padding: EdgeInsets.all(10),
                           physics: const BouncingScrollPhysics(),
-                          itemCount: data1![0].outBound?.segments?[0].airline ==
-                                  filterName
-                              ? data1!.length
+                          itemCount: data1![0]
+                                  .outBound!
+                                  .segments![0]
+                                  .airline!
+                                  .contains("$filterName")
+                              ? data1.length
                               : 1,
                           itemBuilder: (context, index) {
-                            bool isFiltered =
-                                data1[index].outBound?.segments?[0].airline ==
-                                    filterName;
+                            bool isFiltered = data1[index]
+                                .outBound!
+                                .segments![0]
+                                .airline!
+                                .contains("$filterName");
                             return isFiltered
                                 ? Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
