@@ -45,6 +45,7 @@ class OneWaySearchFlightScreen extends StatefulWidget {
 class _OneWaySearchFlightScreenState extends State<OneWaySearchFlightScreen> {
   final OneWayFlightQuoteController oneWayFlightQuoteController =
       Get.put(OneWayFlightQuoteController());
+  String? filterName = " ";
 
   @override
   void initState() {
@@ -67,53 +68,10 @@ class _OneWaySearchFlightScreenState extends State<OneWaySearchFlightScreen> {
     return Scaffold(
       backgroundColor: AppColors.appColorAccent,
       appBar: CustomAppBar(
-        title: "Search Flights",
+        title: "One Way Flights",
       ),
       body: Column(
         children: [
-          // Text("Tabs: ${widget.toCity}"),
-          // Text("Tabs: ${widget.fromCity}"),
-          // Text("Tabs: ${widget.departDate}"),
-          // Text("Tabs: ${widget.arriveDate}"),
-          Row(
-            children: [
-              Flexible(
-                child: Container(
-                  height: 50.0,
-                  // Adjust the height as needed
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: [
-                      Row(
-                        children: [
-                          IconTextButton(
-                              onPress: () {
-                                Get.to(() => SortScreen());
-                              },
-                              text: "Sort by",
-                              icon: Icons.sort),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          IconTextButton(
-                              onPress: () {
-                                Get.to(() => FilterScreen());
-                              },
-                              text: "Filter by",
-                              icon: Icons.filter_list),
-                        ],
-                      ),
-                      buildButton('Recommanded'),
-                      buildButton('Low to High'),
-                      buildButton('High to Low'),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-          0.03.ph,
           Obx(() {
             if (oneWayFlightQuoteController.isLoading.value) {
               return Center(
@@ -144,250 +102,543 @@ class _OneWaySearchFlightScreenState extends State<OneWaySearchFlightScreen> {
                     .oneWayflightQuoteModel.value.flights;
                 var searchData =
                     oneWayFlightQuoteController.oneWayflightQuoteModel.value;
-                return Expanded(
-                  child: ListView.builder(
-                    padding: EdgeInsets.all(10),
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: data1!.length,
-                    itemBuilder: (context, index) {
-                      return Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          DottedBorder(
-                              dashPattern: [10, 8],
-                              strokeWidth: 1,
-                              color: AppColors.appColorBlack,
-                              child: Container(
-                                padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
-                                margin: EdgeInsets.all(10.0),
-                                child: Column(
-                                  children: [
-                                    PlaneNameWidget(
-                                        image:
-                                            "${data1[index].outBound!.segments![0].airlineLogo ?? "https://reservations.siliconsom.com/assets/images/logos/logo_small.png"}",
-                                        name: data1[index]
-                                            .outBound!
-                                            .segments![0]
-                                            .airlineName
-                                            .toString(),
-                                        number: data1[index]
-                                            .outBound!
-                                            .segments![0]
-                                            .flightNumber
-                                            .toString()),
-                                    0.03.ph,
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        FromToFlightWidget(
-                                          date: data1[index]
-                                              .outBound!
-                                              .departureDate
-                                              .toString(),
-                                          time: data1[index]
-                                              .outBound!
-                                              .departureTime
-                                              .toString(),
-                                          city: data1[index]
-                                              .outBound!
-                                              .segments![0]
-                                              .departure
-                                              .toString(),
-                                        ),
-                                        Column(
-                                          children: [
-                                            Icon(
-                                              FontAwesomeIcons.plane,
-                                              color: AppColors.appColorPrimary,
-                                              size: 20.0,
-                                            ),
-                                            0.01.ph,
-                                            CommonText(
-                                              text: 'OUT-BOUND',
-                                              fontSize: 12.0,
-                                            )
-                                          ],
-                                        ),
-                                        FromToFlightWidget(
-                                          date: data1[index]
-                                              .outBound!
-                                              .arrivalDate
-                                              .toString(),
-                                          time: data1[index]
-                                              .outBound!
-                                              .arrivalTime
-                                              .toString(),
-                                          city: data1[index]
-                                              .outBound!
-                                              .segments![0]
-                                              .arrival
-                                              .toString(),
-                                        ),
-                                      ],
-                                    ),
-                                    // 0.02.ph,
-                                    // Divider(),
-                                    // PlaneNameWidget(
-                                    //     image:
-                                    //         "${data1[index].inBound!.segments![0].airlineLogo ?? "https://reservations.siliconsom.com/assets/images/logos/logo_small.png"}",
-                                    //     name: data1[index]
-                                    //         .inBound!
-                                    //         .segments![0]
-                                    //         .airlineName
-                                    //         .toString(),
-                                    //     number: data1[index]
-                                    //         .inBound!
-                                    //         .segments![0]
-                                    //         .flightNumber
-                                    //         .toString()),
-                                    // 0.01.ph,
-                                    // data1[index].inBound != null
-                                    //     ? Row(
-                                    //         mainAxisAlignment:
-                                    //             MainAxisAlignment.spaceBetween,
-                                    //         children: [
-                                    //           FromToFlightWidget(
-                                    //             date:
-                                    //                 data1[index].inBound != null
-                                    //                     ? data1[index]
-                                    //                         .inBound!
-                                    //                         .departureDate
-                                    //                         .toString()
-                                    //                     : "",
-                                    //             time:
-                                    //                 data1[index].inBound != null
-                                    //                     ? data1[index]
-                                    //                         .inBound!
-                                    //                         .departureTime
-                                    //                         .toString()
-                                    //                     : "",
-                                    //             city:
-                                    //                 data1[index].inBound != null
-                                    //                     ? data1[index]
-                                    //                         .inBound!
-                                    //                         .segments![0]
-                                    //                         .departure
-                                    //                         .toString()
-                                    //                     : "",
-                                    //           ),
-                                    //           Column(
-                                    //             children: [
-                                    //               RotatedBox(
-                                    //                 quarterTurns: 2,
-                                    //                 child: Icon(
-                                    //                   FontAwesomeIcons.plane,
-                                    //                   color: AppColors
-                                    //                       .appColorPrimary,
-                                    //                   size: 20.0,
-                                    //                 ),
-                                    //               ),
-                                    //               0.01.ph,
-                                    //               CommonText(
-                                    //                 text: 'IN-BOUND',
-                                    //                 fontSize: 12.0,
-                                    //               )
-                                    //             ],
-                                    //           ),
-                                    //           FromToFlightWidget(
-                                    //             date:
-                                    //                 data1[index].inBound != null
-                                    //                     ? data1[index]
-                                    //                         .inBound!
-                                    //                         .arrivalDate
-                                    //                         .toString()
-                                    //                     : "",
-                                    //             time:
-                                    //                 data1[index].inBound != null
-                                    //                     ? data1[index]
-                                    //                         .inBound!
-                                    //                         .arrivalTime
-                                    //                         .toString()
-                                    //                     : "",
-                                    //             city:
-                                    //                 data1[index].inBound != null
-                                    //                     ? data1[index]
-                                    //                         .inBound!
-                                    //                         .segments![0]
-                                    //                         .arrival
-                                    //                         .toString()
-                                    //                     : "",
-                                    //           ),
-                                    //         ],
-                                    //       )
-                                    //     : Container(),
-                                    0.03.ph,
-                                    CustomButton(
-                                        onPress: () {
-                                          Get.to(() => FlightDetailsScreen(
-                                                cabinClass: widget.cabinClass
-                                                    .toString(),
-                                                traveller:
-                                                    widget.traveller.toString(),
-                                                searchID:
-                                                    searchData.id.toString(),
-                                                flightID: searchData
-                                                    .flights![index].id!
-                                                    .toString(),
-                                                departFromDate1: data1[index]
-                                                    .outBound!
-                                                    .departureDate
-                                                    .toString(),
-                                                departFromTime1: data1[index]
-                                                    .outBound!
-                                                    .departureTime
-                                                    .toString(),
-                                                departFromCode1: data1[index]
-                                                    .outBound!
-                                                    .segments![0]
-                                                    .departure
-                                                    .toString(),
-                                                arriveToDate1: data1[index]
-                                                    .outBound!
-                                                    .arrivalDate
-                                                    .toString(),
-                                                arriveToTime1: data1[index]
-                                                    .outBound!
-                                                    .arrivalTime
-                                                    .toString(),
-                                                arriveToCode1: data1[index]
-                                                    .outBound!
-                                                    .segments![0]
-                                                    .arrival
-                                                    .toString(),
-                                                arriveFlight: "",
-                                                departFlight: data1[index]
-                                                    .outBound!
-                                                    .segments![0]
-                                                    .flightNumber
-                                                    .toString(),
-                                                departFromDate2: "",
-                                                departFromTime2: "",
-                                                departFromCode2: "",
-                                                arriveToDate2: "",
-                                                arriveToTime2: "",
-                                                arriveToCode2: "",
-                                              ));
-                                        },
-                                        text:
-                                            "Flights starts from \$ ${data1[index].totalAmount}"),
-                                    // 0.01.ph,
-                                    // Align(
-                                    //   alignment: Alignment.centerRight,
-                                    //   child: IconButton(
-                                    //       onPressed: () {
-                                    //         _showAlertDialog(context);
-                                    //       },
-                                    //       icon: Icon(
-                                    //           Icons.shopping_bag_rounded)),
-                                    // )
-                                  ],
-                                ),
-                              )),
-                          SizedBox(height: 20),
-                        ],
+                // Function to sort flights by total amount in ascending order
+                void sortAscending() {
+                  setState(() {
+                    data1!.sort((a, b) =>
+                        a.totalAmount!.compareTo(b.totalAmount as num));
+                  });
+                }
+
+                // Function to sort flights by total amount in descending order
+                void sortDescending() {
+                  setState(() {
+                    data1!.sort((a, b) =>
+                        b.totalAmount!.compareTo(a.totalAmount as num));
+                  });
+                }
+
+                // Function to sort flights by total amount in descending order
+                void sortDurationLess() {
+                  setState(() {
+                    data1!.sort((a, b) => a.outBound!.duration!
+                        .compareTo(b.outBound!.duration as num));
+                  });
+                }
+
+                // Function to sort flights by total amount in descending order
+                void sortDurationHigh() {
+                  setState(() {
+                    data1!.sort((a, b) =>
+                        b.outBound!.duration!.compareTo(a.outBound!.duration!));
+                  });
+                }
+
+                void _showSortOptions() {
+                  showModalBottomSheet(
+                    context: context,
+                    enableDrag: true,
+                    isScrollControlled: true,
+                    showDragHandle: true,
+                    useSafeArea: true,
+                    builder: (BuildContext context) {
+                      return Container(
+                        child: Wrap(
+                          children: <Widget>[
+                            ListTile(
+                              enabled: false,
+                              leading: Icon(Icons.sort),
+                              title: Text('Sort by'),
+                              onTap: () {},
+                            ),
+                            Divider(),
+                            ListTile(
+                              leading: Icon(Icons.stars),
+                              title: Text('Recommanded'),
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                            ListTile(
+                              leading: Icon(Icons.arrow_upward),
+                              title: Text('Price (Low to High)'),
+                              onTap: () {
+                                sortAscending();
+                                Navigator.pop(context);
+                              },
+                            ),
+                            ListTile(
+                              leading: Icon(Icons.arrow_downward),
+                              title: Text('Price (High to Low)'),
+                              onTap: () {
+                                sortDescending();
+                                Navigator.pop(context);
+                              },
+                            ),
+                            ListTile(
+                              leading: Icon(Icons.av_timer_rounded),
+                              title: Text('Duration (Low to High)'),
+                              onTap: () {
+                                sortDurationLess();
+                                Navigator.pop(context);
+                              },
+                            ),
+                            ListTile(
+                              leading: Icon(Icons.more_time_rounded),
+                              title: Text('Duration (High to Low)'),
+                              onTap: () {
+                                sortDurationHigh();
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ],
+                        ),
                       );
                     },
+                  );
+                }
+
+                void _showFilterAirline(name) {
+                  setState(() {
+                    filterName = name;
+                  });
+                  oneWayFlightQuoteController.fetchOneWayFlightQuote(
+                      widget.fromCity,
+                      widget.toCity,
+                      widget.departDate,
+                      widget.arriveDate,
+                      widget.tripType);
+                }
+
+                void _showFilterOptions() {
+                  showModalBottomSheet(
+                    context: context,
+                    enableDrag: true,
+                    isScrollControlled: true,
+                    showDragHandle: true,
+                    useSafeArea: true,
+                    builder: (BuildContext context) {
+                      return Container(
+                        child: Wrap(
+                          children: <Widget>[
+                            ListTile(
+                              enabled: false,
+                              leading: Icon(Icons.sort),
+                              title: Text('Filter by'),
+                              onTap: () {},
+                            ),
+                            Divider(),
+                            ListTile(
+                              enabled: false,
+                              leading: Icon(Icons.airplane_ticket),
+                              title: Text('Airlines:'),
+                              trailing: InkWell(
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                    _showFilterAirline(" ");
+                                  },
+                                  child: CommonText(text: "Reset")),
+                              onTap: () {},
+                            ),
+                            ListTile(
+                              // leading: Icon(Icons.stars),
+                              title: Text('Silicon Reservation System'),
+                              onTap: () {
+                                Navigator.pop(context);
+                                _showFilterAirline(
+                                    "Silicon Reservation System");
+                              },
+                            ),
+                            ListTile(
+                              // leading: Icon(Icons.stars),
+                              title: Text('Salaam Air'),
+                              onTap: () {
+                                Navigator.pop(context);
+                                _showFilterAirline("Salaam Air");
+                              },
+                            ),
+                            ListTile(
+                              // leading: Icon(Icons.arrow_upward),
+                              title: Text('Aerojet Aviation'),
+                              onTap: () {
+                                Navigator.pop(context);
+                                _showFilterAirline("Aerojet Aviation");
+                              },
+                            ),
+                            ListTile(
+                              // leading: Icon(Icons.arrow_downward),
+                              title: Text('Afro Atlas'),
+                              onTap: () {
+                                Navigator.pop(context);
+                                _showFilterAirline("Afro Atlas");
+                              },
+                            ),
+                            ListTile(
+                              // leading: Icon(Icons.av_timer_rounded),
+                              title: Text('Blue Air Express'),
+                              onTap: () {
+                                Navigator.pop(context);
+                                _showFilterAirline("Blue Air Expressr");
+                              },
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  );
+                }
+
+                return Expanded(
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Flexible(
+                            child: Container(
+                              height: 50.0,
+                              // Adjust the height as needed
+                              child: ListView(
+                                scrollDirection: Axis.horizontal,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 10),
+                                    child: Row(
+                                      children: [
+                                        IconTextButton(
+                                            onPress: () {
+                                              // Get.to(() => SortScreen());
+                                              _showSortOptions();
+                                            },
+                                            text: "Sort by",
+                                            icon: Icons.sort),
+                                        IconTextButton(
+                                            onPress: () {
+                                              _showFilterOptions();
+                                            },
+                                            text: "Filter by",
+                                            icon: Icons.filter_alt_outlined),
+                                        buildButton(
+                                            text: 'Recommanded',
+                                            onPress: () {
+                                              _showFilterAirline(" ");
+                                            }),
+                                        buildButton(
+                                            text: 'Low to High',
+                                            onPress: () {
+                                              sortAscending();
+                                            }),
+                                        buildButton(
+                                            text: 'High to Low',
+                                            onPress: () {
+                                              sortDescending();
+                                            }),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      Expanded(
+                        child: ListView.builder(
+                          padding: EdgeInsets.all(10),
+                          physics: const BouncingScrollPhysics(),
+                          itemCount: data1![0]
+                                  .outBound!
+                                  .segments![0]
+                                  .airline!
+                                  .contains("$filterName")
+                              ? data1.length
+                              : 1,
+                          itemBuilder: (context, index) {
+                            bool isFiltered = data1[index]
+                                .outBound!
+                                .segments![0]
+                                .airline!
+                                .contains("$filterName");
+                            return isFiltered
+                                ? Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      DottedBorder(
+                                          dashPattern: [10, 8],
+                                          strokeWidth: 1,
+                                          color: AppColors.appColorBlack,
+                                          child: Container(
+                                            padding: EdgeInsets.fromLTRB(
+                                                15, 15, 15, 15),
+                                            margin: EdgeInsets.all(10.0),
+                                            child: Column(
+                                              children: [
+                                                PlaneNameWidget(
+                                                    image:
+                                                        "${data1[index].outBound!.segments![0].airlineLogo ?? "https://reservations.siliconsom.com/assets/images/logos/logo_small.png"}",
+                                                    name: data1[index]
+                                                        .outBound!
+                                                        .segments![0]
+                                                        .airlineName
+                                                        .toString(),
+                                                    number: data1[index]
+                                                        .outBound!
+                                                        .segments![0]
+                                                        .flightNumber
+                                                        .toString()),
+                                                0.03.ph,
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    FromToFlightWidget(
+                                                      date: data1[index]
+                                                          .outBound!
+                                                          .departureDate
+                                                          .toString(),
+                                                      time: data1[index]
+                                                          .outBound!
+                                                          .departureTime
+                                                          .toString(),
+                                                      city: data1[index]
+                                                          .outBound!
+                                                          .segments![0]
+                                                          .departure
+                                                          .toString(),
+                                                    ),
+                                                    Column(
+                                                      children: [
+                                                        Icon(
+                                                          FontAwesomeIcons
+                                                              .plane,
+                                                          color: AppColors
+                                                              .appColorPrimary,
+                                                          size: 20.0,
+                                                        ),
+                                                        0.01.ph,
+                                                        CommonText(
+                                                          text: 'OUT-BOUND',
+                                                          fontSize: 12.0,
+                                                        )
+                                                      ],
+                                                    ),
+                                                    FromToFlightWidget(
+                                                      date: data1[index]
+                                                          .outBound!
+                                                          .arrivalDate
+                                                          .toString(),
+                                                      time: data1[index]
+                                                          .outBound!
+                                                          .arrivalTime
+                                                          .toString(),
+                                                      city: data1[index]
+                                                          .outBound!
+                                                          .segments![0]
+                                                          .arrival
+                                                          .toString(),
+                                                    ),
+                                                  ],
+                                                ),
+                                                // 0.02.ph,
+                                                // Divider(),
+                                                // PlaneNameWidget(
+                                                //     image:
+                                                //         "${data1[index].inBound!.segments![0].airlineLogo ?? "https://reservations.siliconsom.com/assets/images/logos/logo_small.png"}",
+                                                //     name: data1[index]
+                                                //         .inBound!
+                                                //         .segments![0]
+                                                //         .airlineName
+                                                //         .toString(),
+                                                //     number: data1[index]
+                                                //         .inBound!
+                                                //         .segments![0]
+                                                //         .flightNumber
+                                                //         .toString()),
+                                                // 0.01.ph,
+                                                // data1[index].inBound != null
+                                                //     ? Row(
+                                                //         mainAxisAlignment:
+                                                //             MainAxisAlignment.spaceBetween,
+                                                //         children: [
+                                                //           FromToFlightWidget(
+                                                //             date:
+                                                //                 data1[index].inBound != null
+                                                //                     ? data1[index]
+                                                //                         .inBound!
+                                                //                         .departureDate
+                                                //                         .toString()
+                                                //                     : "",
+                                                //             time:
+                                                //                 data1[index].inBound != null
+                                                //                     ? data1[index]
+                                                //                         .inBound!
+                                                //                         .departureTime
+                                                //                         .toString()
+                                                //                     : "",
+                                                //             city:
+                                                //                 data1[index].inBound != null
+                                                //                     ? data1[index]
+                                                //                         .inBound!
+                                                //                         .segments![0]
+                                                //                         .departure
+                                                //                         .toString()
+                                                //                     : "",
+                                                //           ),
+                                                //           Column(
+                                                //             children: [
+                                                //               RotatedBox(
+                                                //                 quarterTurns: 2,
+                                                //                 child: Icon(
+                                                //                   FontAwesomeIcons.plane,
+                                                //                   color: AppColors
+                                                //                       .appColorPrimary,
+                                                //                   size: 20.0,
+                                                //                 ),
+                                                //               ),
+                                                //               0.01.ph,
+                                                //               CommonText(
+                                                //                 text: 'IN-BOUND',
+                                                //                 fontSize: 12.0,
+                                                //               )
+                                                //             ],
+                                                //           ),
+                                                //           FromToFlightWidget(
+                                                //             date:
+                                                //                 data1[index].inBound != null
+                                                //                     ? data1[index]
+                                                //                         .inBound!
+                                                //                         .arrivalDate
+                                                //                         .toString()
+                                                //                     : "",
+                                                //             time:
+                                                //                 data1[index].inBound != null
+                                                //                     ? data1[index]
+                                                //                         .inBound!
+                                                //                         .arrivalTime
+                                                //                         .toString()
+                                                //                     : "",
+                                                //             city:
+                                                //                 data1[index].inBound != null
+                                                //                     ? data1[index]
+                                                //                         .inBound!
+                                                //                         .segments![0]
+                                                //                         .arrival
+                                                //                         .toString()
+                                                //                     : "",
+                                                //           ),
+                                                //         ],
+                                                //       )
+                                                //     : Container(),
+                                                0.03.ph,
+                                                CustomButton(
+                                                    onPress: () {
+                                                      Get.to(() =>
+                                                          FlightDetailsScreen(
+                                                            cabinClass: widget
+                                                                .cabinClass
+                                                                .toString(),
+                                                            traveller: widget
+                                                                .traveller
+                                                                .toString(),
+                                                            searchID: searchData
+                                                                .id
+                                                                .toString(),
+                                                            flightID: searchData
+                                                                .flights![index]
+                                                                .id!
+                                                                .toString(),
+                                                            departFromDate1:
+                                                                data1[index]
+                                                                    .outBound!
+                                                                    .departureDate
+                                                                    .toString(),
+                                                            departFromTime1:
+                                                                data1[index]
+                                                                    .outBound!
+                                                                    .departureTime
+                                                                    .toString(),
+                                                            departFromCode1:
+                                                                data1[index]
+                                                                    .outBound!
+                                                                    .segments![
+                                                                        0]
+                                                                    .departure
+                                                                    .toString(),
+                                                            arriveToDate1:
+                                                                data1[index]
+                                                                    .outBound!
+                                                                    .arrivalDate
+                                                                    .toString(),
+                                                            arriveToTime1:
+                                                                data1[index]
+                                                                    .outBound!
+                                                                    .arrivalTime
+                                                                    .toString(),
+                                                            arriveToCode1:
+                                                                data1[index]
+                                                                    .outBound!
+                                                                    .segments![
+                                                                        0]
+                                                                    .arrival
+                                                                    .toString(),
+                                                            arriveFlight: "",
+                                                            departFlight: data1[
+                                                                    index]
+                                                                .outBound!
+                                                                .segments![0]
+                                                                .flightNumber
+                                                                .toString(),
+                                                            departFromDate2: "",
+                                                            departFromTime2: "",
+                                                            departFromCode2: "",
+                                                            arriveToDate2: "",
+                                                            arriveToTime2: "",
+                                                            arriveToCode2: "",
+                                                          ));
+                                                    },
+                                                    text:
+                                                        "Flights starts from \$ ${data1[index].totalAmount}"),
+                                                // 0.01.ph,
+                                                // Align(
+                                                //   alignment: Alignment.centerRight,
+                                                //   child: IconButton(
+                                                //       onPressed: () {
+                                                //         _showAlertDialog(context);
+                                                //       },
+                                                //       icon: Icon(
+                                                //           Icons.shopping_bag_rounded)),
+                                                // )
+                                              ],
+                                            ),
+                                          )),
+                                      SizedBox(height: 20),
+                                    ],
+                                  )
+                                : Center(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.warning_rounded,
+                                          size: 88,
+                                          color: Colors.grey,
+                                        ),
+                                        Text(
+                                            "No flights available with \n $filterName",
+                                            textAlign: TextAlign.center,
+                                            style: const TextStyle(
+                                                color: Colors.black54,
+                                                fontSize: 24,
+                                                fontWeight: FontWeight.bold))
+                                      ],
+                                    ),
+                                  );
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                 );
               }
@@ -482,16 +733,27 @@ class PlaneNameWidget extends StatelessWidget {
   }
 }
 
-Widget buildButton(String buttonText) {
-  return Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: OutlinedButton(
-      onPressed: () {},
-      style: OutlinedButton.styleFrom(
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+class buildButton extends StatelessWidget {
+  final String text;
+  final Function() onPress;
+  const buildButton({
+    super.key,
+    required this.text,
+    required this.onPress,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: OutlinedButton(
+        onPressed: onPress,
+        style: OutlinedButton.styleFrom(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+        ),
+        child: Text(text),
       ),
-      child: Text(buttonText),
-    ),
-  );
+    );
+  }
 }

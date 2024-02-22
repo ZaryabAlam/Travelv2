@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types
+
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -65,15 +67,9 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
       backgroundColor: AppColors.appColorAccent,
       appBar: CustomAppBar(
         title: "Search Flights",
-      
       ),
       body: Column(
         children: [
-          // Text("Tabs: ${widget.toCity}"),
-          // Text("Tabs: ${widget.fromCity}"),
-          // Text("Tabs: ${widget.departDate}"),
-          // Text("Tabs: ${widget.arriveDate}"),
-          // 0.03.ph,
           Obx(() {
             if (flightQuoteController.isLoading.value) {
               return Center(
