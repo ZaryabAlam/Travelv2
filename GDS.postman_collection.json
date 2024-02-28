@@ -143,7 +143,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"shoaibuldin5@hotmail.com\",\r\n    \"password\": \"1234\"\r\n}",
+							"raw": "{\r\n    \"username\": \"shoaibuldin@hotmail.com\",\r\n    \"password\": \"1234\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -300,10 +300,61 @@
 									"listen": "test",
 									"script": {
 										"exec": [
-											"var jsonData = JSON.parse(responseBody);\r",
-											"postman.setEnvironmentVariable(\"searchId\", jsonData.id);\r",
-											"postman.setEnvironmentVariable(\"flightId\", jsonData.flights[0].id);\r",
-											""
+											"pm.test(\"Response status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response is an object with id property\", function () {\r",
+											"    pm.expect(pm.response.json()).to.be.an('object').that.has.property('id');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response is an object with tripType property\", function () {\r",
+											"    pm.expect(pm.response.json()).to.be.an('object').that.has.property('tripType');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response is an object with departureCity property\", function () {\r",
+											"    pm.expect(pm.response.json()).to.be.an('object').that.has.property('departureCity');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response is an object with arrivalCity property\", function () {\r",
+											"    pm.expect(pm.response.json()).to.be.an('object').that.has.property('arrivalCity');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response is an object with departureDate property\", function () {\r",
+											"    pm.expect(pm.response.json()).to.be.an('object').that.has.property('departureDate');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response is an object with returnDate property\", function () {\r",
+											"    pm.expect(pm.response.json()).to.be.an('object').that.has.property('returnDate');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response is an object with adults property\", function () {\r",
+											"    pm.expect(pm.response.json()).to.be.an('object').that.has.property('adults');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response is an object with children property\", function () {\r",
+											"    pm.expect(pm.response.json()).to.be.an('object').that.has.property('children');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response is an object with infants property\", function () {\r",
+											"    pm.expect(pm.response.json()).to.be.an('object').that.has.property('infants');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response is an object with cabinClass property\", function () {\r",
+											"    pm.expect(pm.response.json()).to.be.an('object').that.has.property('cabinClass');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response is an object with isFlexibleDates property\", function () {\r",
+											"    pm.expect(pm.response.json()).to.be.an('object').that.has.property('isFlexibleDates');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response is an object with isDirectFlight property\", function () {\r",
+											"    pm.expect(pm.response.json()).to.be.an('object').that.has.property('isDirectFlight');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response is an object with flights property\", function () {\r",
+											"    pm.expect(pm.response.json()).to.be.an('object').that.has.property('flights');\r",
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -320,7 +371,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"DepartureCity\": \"{{DepartureCity}}\",\r\n  \"ArrivalCity\": \"{{ArrivalCity}}\",\r\n  \"DepartureDate\": \"{{DepartureDate}}\",\r\n  \"ReturnDate\": \"{{ReturnDate}}\",\r\n  \"Adults\": 1,\r\n  \"Children\": 0,\r\n  \"Infants\": 0,\r\n  \"CabinClass\": \"Economy\",\r\n  \"IsFlexibleDates\": true,\r\n  \"IsDirectFlight\": false,\r\n  \"TripType\": \"RoundTrip\",\r\n  \"MicrositeClientId\": 2\r\n}\r\n",
+									"raw": "{\r\n        \"DepartureCity\": \"NBO\",\r\n        \"ArrivalCity\": \"MGQ\",\r\n        \"DepartureDate\": \"2024-02-20\",\r\n        \"ReturnDate\": \"2024-02-25\",\r\n  \"Adults\": 1,\r\n  \"Children\": 0,\r\n  \"Infants\": 0,\r\n  \"CabinClass\": \"Economy\",\r\n  \"IsFlexibleDates\": true,\r\n  \"IsDirectFlight\": false,\r\n  \"TripType\": \"RoundTrip\",\r\n  \"MicrositeClientId\": 2\r\n}\r\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -385,7 +436,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"flightSelection\": [\n        {\n            \"flightId\":{{flightId}},\n            \"searchId\":{{searchId}}\n        }\n    ]\n}",
+									"raw": "{\n    \"flightSelection\": [\n        {\n            \"flightId\":34452,\n            \"searchId\":553\n        }\n    ]\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -435,9 +486,8 @@
 									"listen": "test",
 									"script": {
 										"exec": [
-											"var jsonData = JSON.parse(responseBody);\r",
-											"postman.setEnvironmentVariable(\"paymentTypeId\", jsonData[0].id);\r",
-											""
+											"var jsonData = pm.response.json();\r",
+											"postman.setEnvironmentVariable(\"paymentTypeId\", jsonData.id);"
 										],
 										"type": "text/javascript"
 									}
@@ -447,7 +497,7 @@
 								"auth": {
 									"type": "bearer",
 									"bearer": {
-										"token": "{{accessKey}}"
+										"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9zaWQiOiIzIiwibmFtZWlkIjoic2hvYWlidWxkaW5AaG90bWFpbC5jb20iLCJuYmYiOjE3MDgzMjk3MTcsImV4cCI6MTcwODQ0OTcxNywiaWF0IjoxNzA4MzI5NzE3LCJpc3MiOiJBZnJvIEF0bGFzIFB2dCBMdGQiLCJhdWQiOiJBZnJvIEF0bGFzIEdEUyJ9.oddlCM9QpBbR3ezeUPQLr0vLA-Pf4x6wO5IB67xxptU"
 									}
 								},
 								"method": "GET",
@@ -494,14 +544,14 @@
 								"auth": {
 									"type": "bearer",
 									"bearer": {
-										"token": "{{accessKey}}"
+										"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9zaWQiOiIyMyIsIm5hbWVpZCI6InNob2FpYnVsZGluNUBob3RtYWlsLmNvbSIsIm5iZiI6MTcwNzc2NDAzMywiZXhwIjoxNzA3ODg0MDMzLCJpYXQiOjE3MDc3NjQwMzMsImlzcyI6IkFmcm8gQXRsYXMgUHZ0IEx0ZCIsImF1ZCI6IkFmcm8gQXRsYXMgR0RTIn0.JRECidvtTThXrPv_gxnR9534bsCQDe2tZePC5oFSTJA"
 									}
 								},
 								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"flightSelection\": [\r\n        {\r\n            \"flightId\":{{flightId}},\r\n            \"searchId\":{{searchId}}\r\n        }\r\n    ],\r\n    \"paymentTypeId\":{{paymentTypeId}},\r\n    \"microSiteClientId\":1,\r\n    \"passengers\": [\r\n        {\r\n            \"type\":\"Adult\",\r\n            \"firstName\": \"Shoaib\",\r\n            \"lastName\": \"Memon\",\r\n            \"requestedAge\": 29,\r\n            \"birthDate\": \"1994-03-25\",\r\n            \"Title\": \"MISTER\",\r\n            \"documentType\": \"PASSPORT\",\r\n            \"documentNumber\": \"BD0123456\",\r\n            \"documentExpiration\": \"2028-03-25\",\r\n            \"email\": \"shoaibuldin@hotmail.com\",\r\n            \"phoneCountryCode\": \"+92\",\r\n            \"phone\": \"3223222188\",\r\n            \"country\": \"PK\",\r\n            \"countryId\":12\r\n        }\r\n    ]\r\n}",
+									"raw": "{\r\n    \"flightSelection\": [\r\n        {\r\n                \"flightId\":210678,\r\n            \"searchId\":781\r\n        }\r\n    ],\r\n    \"paymentTypeId\":2,\r\n    \"microSiteClientId\":1,\r\n    \"passengers\": [\r\n        {\r\n            \"type\":\"Adult\",\r\n            \"firstName\": \"Shoaib\",\r\n            \"lastName\": \"Memon\",\r\n            \"requestedAge\": 29,\r\n            \"birthDate\": \"1994-03-25\",\r\n            \"Title\": \"MISTER\",\r\n            \"documentType\": \"PASSPORT\",\r\n            \"documentNumber\": \"BD0123456\",\r\n            \"documentExpiration\": \"2028-03-25\",\r\n            \"email\": \"shoaibuldin123@hotmail.com\",\r\n            \"phoneCountryCode\": \"+92\",\r\n            \"phone\": \"3223222188\",\r\n            \"country\": \"PK\",\r\n            \"countryId\":12\r\n        }\r\n    ]\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -615,14 +665,14 @@
 								"auth": {
 									"type": "bearer",
 									"bearer": {
-										"token": "{{accessKey}}"
+										"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9zaWQiOiIyMyIsIm5hbWVpZCI6InNob2FpYnVsZGluNUBob3RtYWlsLmNvbSIsIm5iZiI6MTcwNzA4MTM3OSwiZXhwIjoxNzA3MjAxMzc5LCJpYXQiOjE3MDcwODEzNzksImlzcyI6IkFmcm8gQXRsYXMgUHZ0IEx0ZCIsImF1ZCI6IkFmcm8gQXRsYXMgR0RTIn0.nL5cVoNa2WJ5AZ8IcQjhNpo5V8lDqRnelDbXUO5bTZY"
 									}
 								},
 								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"parentPnr\": \"5IOZ6D\",\r\n    \"transactionId\":\"8673bbb8-392d-4500-a349-414b0a6b0330\",\r\n    \"module\":\"FLIGHT\",\r\n    \"status\":\"SUCCESS\"\r\n}",
+									"raw": "{   \r\n    \"parentPnr\": \"ISUZUR\",\r\n    \"transactionId\":\"8673bbb8-392d-4500-a349-414b0a6b0330\",\r\n    \"module\":\"FLIGHT\",\r\n    \"status\":\"SUCCESS\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -673,6 +723,30 @@
 									"body": "{\n    \"id\": 1,\n    \"tripType\": \"RoundTrip\",\n    \"departureCity\": \"DXB\",\n    \"arrivalCity\": \"AMS\",\n    \"departureDate\": \"2023-06-15T00:00:00\",\n    \"returnDate\": null,\n    \"adults\": 1,\n    \"children\": 0,\n    \"infants\": 0,\n    \"cabinClass\": \"Economy\",\n    \"isFlexibleDates\": true,\n    \"isDirectFlight\": false,\n    \"flights\": [\n        {\n            \"id\": 1,\n            \"totalAmount\": 142.92,\n            \"taxesAmount\": 2,\n            \"currency\": \"EUR\",\n            \"provider\": \"FakeFlight\",\n            \"fareType\": \"PUBLIC\",\n            \"outBound\": {\n                \"departure\": \"DXB\",\n                \"arrival\": \"AMS\",\n                \"departureDateTime\": \"2023-06-15T12:05:00\",\n                \"arrivalDateTime\": \"2023-06-16T01:20:00\",\n                \"duration\": \"795\",\n                \"baggageAllowance\": \"30 KG\",\n                \"segments\": [\n                    {\n                        \"departure\": \"DXB\",\n                        \"arrival\": \"AMS\",\n                        \"departureDateTime\": \"2023-06-15T12:05:00\",\n                        \"arrivalDateTime\": \"2023-06-16T01:20:00\",\n                        \"duration\": \"\",\n                        \"airline\": \"IB\",\n                        \"flightNumber\": \"FAKE-11111\",\n                        \"cabinType\": \"ECONOMY\",\n                        \"fareType\": \"\"\n                    }\n                ],\n                \"fareRules\": []\n            },\n            \"inBound\": {\n                \"departure\": \"DXB\",\n                \"arrival\": \"AMS\",\n                \"departureDateTime\": \"2023-06-15T12:05:00\",\n                \"arrivalDateTime\": \"2023-06-16T01:20:00\",\n                \"duration\": \"795\",\n                \"baggageAllowance\": \"30 KG\",\n                \"segments\": [\n                    {\n                        \"departure\": \"DXB\",\n                        \"arrival\": \"AMS\",\n                        \"departureDateTime\": \"2023-06-15T12:05:00\",\n                        \"arrivalDateTime\": \"2023-06-16T01:20:00\",\n                        \"duration\": \"\",\n                        \"airline\": \"IB\",\n                        \"flightNumber\": \"FAKE-11111\",\n                        \"cabinType\": \"ECONOMY\",\n                        \"fareType\": \"\"\n                    }\n                ],\n                \"fareRules\": []\n            }\n        },\n        {\n            \"id\": 2,\n            \"totalAmount\": 161.27,\n            \"taxesAmount\": 2,\n            \"currency\": \"EUR\",\n            \"provider\": \"FakeFlight\",\n            \"fareType\": \"PUBLIC\",\n            \"outBound\": {\n                \"departure\": \"DXB\",\n                \"arrival\": \"AMS\",\n                \"departureDateTime\": \"2023-06-15T12:05:00\",\n                \"arrivalDateTime\": \"2023-06-16T01:20:00\",\n                \"duration\": \"795\",\n                \"baggageAllowance\": \"30 KG\",\n                \"segments\": [\n                    {\n                        \"departure\": \"DXB\",\n                        \"arrival\": \"AMS\",\n                        \"departureDateTime\": \"2023-06-15T12:05:00\",\n                        \"arrivalDateTime\": \"2023-06-16T01:20:00\",\n                        \"duration\": \"\",\n                        \"airline\": \"IB\",\n                        \"flightNumber\": \"FAKE-11111\",\n                        \"cabinType\": \"ECONOMY\",\n                        \"fareType\": \"\"\n                    }\n                ],\n                \"fareRules\": []\n            },\n            \"inBound\": {\n                \"departure\": \"DXB\",\n                \"arrival\": \"AMS\",\n                \"departureDateTime\": \"2023-06-15T12:05:00\",\n                \"arrivalDateTime\": \"2023-06-16T01:20:00\",\n                \"duration\": \"795\",\n                \"baggageAllowance\": \"30 KG\",\n                \"segments\": [\n                    {\n                        \"departure\": \"DXB\",\n                        \"arrival\": \"AMS\",\n                        \"departureDateTime\": \"2023-06-15T12:05:00\",\n                        \"arrivalDateTime\": \"2023-06-16T01:20:00\",\n                        \"duration\": \"\",\n                        \"airline\": \"IB\",\n                        \"flightNumber\": \"FAKE-11111\",\n                        \"cabinType\": \"ECONOMY\",\n                        \"fareType\": \"\"\n                    }\n                ],\n                \"fareRules\": []\n            }\n        },\n        {\n            \"id\": 3,\n            \"totalAmount\": 112.71,\n            \"taxesAmount\": 2,\n            \"currency\": \"EUR\",\n            \"provider\": \"FakeFlight\",\n            \"fareType\": \"PUBLIC\",\n            \"outBound\": {\n                \"departure\": \"DXB\",\n                \"arrival\": \"AMS\",\n                \"departureDateTime\": \"2023-06-15T12:05:00\",\n                \"arrivalDateTime\": \"2023-06-16T01:20:00\",\n                \"duration\": \"795\",\n                \"baggageAllowance\": \"30 KG\",\n                \"segments\": [\n                    {\n                        \"departure\": \"DXB\",\n                        \"arrival\": \"AMS\",\n                        \"departureDateTime\": \"2023-06-15T12:05:00\",\n                        \"arrivalDateTime\": \"2023-06-16T01:20:00\",\n                        \"duration\": \"\",\n                        \"airline\": \"IB\",\n                        \"flightNumber\": \"FAKE-11111\",\n                        \"cabinType\": \"ECONOMY\",\n                        \"fareType\": \"\"\n                    }\n                ],\n                \"fareRules\": []\n            },\n            \"inBound\": {\n                \"departure\": \"DXB\",\n                \"arrival\": \"AMS\",\n                \"departureDateTime\": \"2023-06-15T12:05:00\",\n                \"arrivalDateTime\": \"2023-06-16T01:20:00\",\n                \"duration\": \"795\",\n                \"baggageAllowance\": \"30 KG\",\n                \"segments\": [\n                    {\n                        \"departure\": \"DXB\",\n                        \"arrival\": \"AMS\",\n                        \"departureDateTime\": \"2023-06-15T12:05:00\",\n                        \"arrivalDateTime\": \"2023-06-16T01:20:00\",\n                        \"duration\": \"\",\n                        \"airline\": \"IB\",\n                        \"flightNumber\": \"FAKE-11111\",\n                        \"cabinType\": \"ECONOMY\",\n                        \"fareType\": \"\"\n                    }\n                ],\n                \"fareRules\": []\n            }\n        },\n        {\n            \"id\": 4,\n            \"totalAmount\": 152.27,\n            \"taxesAmount\": 2,\n            \"currency\": \"EUR\",\n            \"provider\": \"FakeFlight\",\n            \"fareType\": \"PUBLIC\",\n            \"outBound\": {\n                \"departure\": \"DXB\",\n                \"arrival\": \"AMS\",\n                \"departureDateTime\": \"2023-06-15T12:05:00\",\n                \"arrivalDateTime\": \"2023-06-16T01:20:00\",\n                \"duration\": \"795\",\n                \"baggageAllowance\": \"30 KG\",\n                \"segments\": [\n                    {\n                        \"departure\": \"DXB\",\n                        \"arrival\": \"AMS\",\n                        \"departureDateTime\": \"2023-06-15T12:05:00\",\n                        \"arrivalDateTime\": \"2023-06-16T01:20:00\",\n                        \"duration\": \"\",\n                        \"airline\": \"IB\",\n                        \"flightNumber\": \"FAKE-11111\",\n                        \"cabinType\": \"ECONOMY\",\n                        \"fareType\": \"\"\n                    }\n                ],\n                \"fareRules\": []\n            },\n            \"inBound\": {\n                \"departure\": \"DXB\",\n                \"arrival\": \"AMS\",\n                \"departureDateTime\": \"2023-06-15T12:05:00\",\n                \"arrivalDateTime\": \"2023-06-16T01:20:00\",\n                \"duration\": \"795\",\n                \"baggageAllowance\": \"30 KG\",\n                \"segments\": [\n                    {\n                        \"departure\": \"DXB\",\n                        \"arrival\": \"AMS\",\n                        \"departureDateTime\": \"2023-06-15T12:05:00\",\n                        \"arrivalDateTime\": \"2023-06-16T01:20:00\",\n                        \"duration\": \"\",\n                        \"airline\": \"IB\",\n                        \"flightNumber\": \"FAKE-11111\",\n                        \"cabinType\": \"ECONOMY\",\n                        \"fareType\": \"\"\n                    }\n                ],\n                \"fareRules\": []\n            }\n        },\n        {\n            \"id\": 5,\n            \"totalAmount\": 169.25,\n            \"taxesAmount\": 2,\n            \"currency\": \"EUR\",\n            \"provider\": \"FakeFlight\",\n            \"fareType\": \"PUBLIC\",\n            \"outBound\": {\n                \"departure\": \"DXB\",\n                \"arrival\": \"AMS\",\n                \"departureDateTime\": \"2023-06-15T12:15:00\",\n                \"arrivalDateTime\": \"2023-06-16T01:40:00\",\n                \"duration\": \"805\",\n                \"baggageAllowance\": \"30 KG\",\n                \"segments\": [\n                    {\n                        \"departure\": \"DXB\",\n                        \"arrival\": \"AMS\",\n                        \"departureDateTime\": \"2023-06-15T12:15:00\",\n                        \"arrivalDateTime\": \"2023-06-16T01:40:00\",\n                        \"duration\": \"\",\n                        \"airline\": \"IB\",\n                        \"flightNumber\": \"FAKE-11113\",\n                        \"cabinType\": \"ECONOMY\",\n                        \"fareType\": \"\"\n                    }\n                ],\n                \"fareRules\": []\n            },\n            \"inBound\": {\n                \"departure\": \"DXB\",\n                \"arrival\": \"AMS\",\n                \"departureDateTime\": \"2023-06-15T12:15:00\",\n                \"arrivalDateTime\": \"2023-06-16T01:40:00\",\n                \"duration\": \"805\",\n                \"baggageAllowance\": \"30 KG\",\n                \"segments\": [\n                    {\n                        \"departure\": \"DXB\",\n                        \"arrival\": \"AMS\",\n                        \"departureDateTime\": \"2023-06-15T12:15:00\",\n                        \"arrivalDateTime\": \"2023-06-16T01:40:00\",\n                        \"duration\": \"\",\n                        \"airline\": \"IB\",\n                        \"flightNumber\": \"FAKE-11113\",\n                        \"cabinType\": \"ECONOMY\",\n                        \"fareType\": \"\"\n                    }\n                ],\n                \"fareRules\": []\n            }\n        },\n        {\n            \"id\": 6,\n            \"totalAmount\": 170.75,\n            \"taxesAmount\": 2,\n            \"currency\": \"EUR\",\n            \"provider\": \"FakeFlight\",\n            \"fareType\": \"PUBLIC\",\n            \"outBound\": {\n                \"departure\": \"DXB\",\n                \"arrival\": \"AMS\",\n                \"departureDateTime\": \"2023-06-15T12:15:00\",\n                \"arrivalDateTime\": \"2023-06-16T01:40:00\",\n                \"duration\": \"805\",\n                \"baggageAllowance\": \"30 KG\",\n                \"segments\": [\n                    {\n                        \"departure\": \"DXB\",\n                        \"arrival\": \"AMS\",\n                        \"departureDateTime\": \"2023-06-15T12:15:00\",\n                        \"arrivalDateTime\": \"2023-06-16T01:40:00\",\n                        \"duration\": \"\",\n                        \"airline\": \"IB\",\n                        \"flightNumber\": \"FAKE-11113\",\n                        \"cabinType\": \"ECONOMY\",\n                        \"fareType\": \"\"\n                    }\n                ],\n                \"fareRules\": []\n            },\n            \"inBound\": {\n                \"departure\": \"DXB\",\n                \"arrival\": \"AMS\",\n                \"departureDateTime\": \"2023-06-15T12:15:00\",\n                \"arrivalDateTime\": \"2023-06-16T01:40:00\",\n                \"duration\": \"805\",\n                \"baggageAllowance\": \"30 KG\",\n                \"segments\": [\n                    {\n                        \"departure\": \"DXB\",\n                        \"arrival\": \"AMS\",\n                        \"departureDateTime\": \"2023-06-15T12:15:00\",\n                        \"arrivalDateTime\": \"2023-06-16T01:40:00\",\n                        \"duration\": \"\",\n                        \"airline\": \"IB\",\n                        \"flightNumber\": \"FAKE-11113\",\n                        \"cabinType\": \"ECONOMY\",\n                        \"fareType\": \"\"\n                    }\n                ],\n                \"fareRules\": []\n            }\n        },\n        {\n            \"id\": 7,\n            \"totalAmount\": 226.55,\n            \"taxesAmount\": 2,\n            \"currency\": \"EUR\",\n            \"provider\": \"FakeFlight\",\n            \"fareType\": \"PUBLIC\",\n            \"outBound\": {\n                \"departure\": \"DXB\",\n                \"arrival\": \"AMS\",\n                \"departureDateTime\": \"2023-06-15T12:15:00\",\n                \"arrivalDateTime\": \"2023-06-16T01:40:00\",\n                \"duration\": \"805\",\n                \"baggageAllowance\": \"30 KG\",\n                \"segments\": [\n                    {\n                        \"departure\": \"DXB\",\n                        \"arrival\": \"AMS\",\n                        \"departureDateTime\": \"2023-06-15T12:15:00\",\n                        \"arrivalDateTime\": \"2023-06-16T01:40:00\",\n                        \"duration\": \"\",\n                        \"airline\": \"IB\",\n                        \"flightNumber\": \"FAKE-11113\",\n                        \"cabinType\": \"ECONOMY\",\n                        \"fareType\": \"\"\n                    }\n                ],\n                \"fareRules\": []\n            },\n            \"inBound\": {\n                \"departure\": \"DXB\",\n                \"arrival\": \"AMS\",\n                \"departureDateTime\": \"2023-06-15T12:15:00\",\n                \"arrivalDateTime\": \"2023-06-16T01:40:00\",\n                \"duration\": \"805\",\n                \"baggageAllowance\": \"30 KG\",\n                \"segments\": [\n                    {\n                        \"departure\": \"DXB\",\n                        \"arrival\": \"AMS\",\n                        \"departureDateTime\": \"2023-06-15T12:15:00\",\n                        \"arrivalDateTime\": \"2023-06-16T01:40:00\",\n                        \"duration\": \"\",\n                        \"airline\": \"IB\",\n                        \"flightNumber\": \"FAKE-11113\",\n                        \"cabinType\": \"ECONOMY\",\n                        \"fareType\": \"\"\n                    }\n                ],\n                \"fareRules\": []\n            }\n        },\n        {\n            \"id\": 8,\n            \"totalAmount\": 117.62,\n            \"taxesAmount\": 2,\n            \"currency\": \"EUR\",\n            \"provider\": \"FakeFlight\",\n            \"fareType\": \"PUBLIC\",\n            \"outBound\": {\n                \"departure\": \"DXB\",\n                \"arrival\": \"AMS\",\n                \"departureDateTime\": \"2023-06-15T12:15:00\",\n                \"arrivalDateTime\": \"2023-06-16T01:40:00\",\n                \"duration\": \"805\",\n                \"baggageAllowance\": \"30 KG\",\n                \"segments\": [\n                    {\n                        \"departure\": \"DXB\",\n                        \"arrival\": \"AMS\",\n                        \"departureDateTime\": \"2023-06-15T12:15:00\",\n                        \"arrivalDateTime\": \"2023-06-16T01:40:00\",\n                        \"duration\": \"\",\n                        \"airline\": \"IB\",\n                        \"flightNumber\": \"FAKE-11113\",\n                        \"cabinType\": \"ECONOMY\",\n                        \"fareType\": \"\"\n                    }\n                ],\n                \"fareRules\": []\n            },\n            \"inBound\": {\n                \"departure\": \"DXB\",\n                \"arrival\": \"AMS\",\n                \"departureDateTime\": \"2023-06-15T12:15:00\",\n                \"arrivalDateTime\": \"2023-06-16T01:40:00\",\n                \"duration\": \"805\",\n                \"baggageAllowance\": \"30 KG\",\n                \"segments\": [\n                    {\n                        \"departure\": \"DXB\",\n                        \"arrival\": \"AMS\",\n                        \"departureDateTime\": \"2023-06-15T12:15:00\",\n                        \"arrivalDateTime\": \"2023-06-16T01:40:00\",\n                        \"duration\": \"\",\n                        \"airline\": \"IB\",\n                        \"flightNumber\": \"FAKE-11113\",\n                        \"cabinType\": \"ECONOMY\",\n                        \"fareType\": \"\"\n                    }\n                ],\n                \"fareRules\": []\n            }\n        },\n        {\n            \"id\": 9,\n            \"totalAmount\": 200.68,\n            \"taxesAmount\": 2,\n            \"currency\": \"EUR\",\n            \"provider\": \"FakeFlight\",\n            \"fareType\": \"PUBLIC\",\n            \"outBound\": {\n                \"departure\": \"DXB\",\n                \"arrival\": \"AMS\",\n                \"departureDateTime\": \"2023-06-15T12:00:00\",\n                \"arrivalDateTime\": \"2023-06-16T01:10:00\",\n                \"duration\": \"790\",\n                \"baggageAllowance\": \"30 KG\",\n                \"segments\": [\n                    {\n                        \"departure\": \"DXB\",\n                        \"arrival\": \"AMS\",\n                        \"departureDateTime\": \"2023-06-15T12:00:00\",\n                        \"arrivalDateTime\": \"2023-06-16T01:10:00\",\n                        \"duration\": \"\",\n                        \"airline\": \"IB\",\n                        \"flightNumber\": \"FAKE-11110\",\n                        \"cabinType\": \"ECONOMY\",\n                        \"fareType\": \"\"\n                    }\n                ],\n                \"fareRules\": []\n            },\n            \"inBound\": {\n                \"departure\": \"DXB\",\n                \"arrival\": \"AMS\",\n                \"departureDateTime\": \"2023-06-15T12:00:00\",\n                \"arrivalDateTime\": \"2023-06-16T01:10:00\",\n                \"duration\": \"790\",\n                \"baggageAllowance\": \"30 KG\",\n                \"segments\": [\n                    {\n                        \"departure\": \"DXB\",\n                        \"arrival\": \"AMS\",\n                        \"departureDateTime\": \"2023-06-15T12:00:00\",\n                        \"arrivalDateTime\": \"2023-06-16T01:10:00\",\n                        \"duration\": \"\",\n                        \"airline\": \"IB\",\n                        \"flightNumber\": \"FAKE-11110\",\n                        \"cabinType\": \"ECONOMY\",\n                        \"fareType\": \"\"\n                    }\n                ],\n                \"fareRules\": []\n            }\n        },\n        {\n            \"id\": 10,\n            \"totalAmount\": 58.19,\n            \"taxesAmount\": 2,\n            \"currency\": \"EUR\",\n            \"provider\": \"FakeFlight\",\n            \"fareType\": \"PUBLIC\",\n            \"outBound\": {\n                \"departure\": \"DXB\",\n                \"arrival\": \"AMS\",\n                \"departureDateTime\": \"2023-06-15T12:20:00\",\n                \"arrivalDateTime\": \"2023-06-16T01:50:00\",\n                \"duration\": \"810\",\n                \"baggageAllowance\": \"30 KG\",\n                \"segments\": [\n                    {\n                        \"departure\": \"DXB\",\n                        \"arrival\": \"AMS\",\n                        \"departureDateTime\": \"2023-06-15T12:20:00\",\n                        \"arrivalDateTime\": \"2023-06-16T01:50:00\",\n                        \"duration\": \"\",\n                        \"airline\": \"IB\",\n                        \"flightNumber\": \"FAKE-11114\",\n                        \"cabinType\": \"ECONOMY\",\n                        \"fareType\": \"\"\n                    }\n                ],\n                \"fareRules\": []\n            },\n            \"inBound\": {\n                \"departure\": \"DXB\",\n                \"arrival\": \"AMS\",\n                \"departureDateTime\": \"2023-06-15T12:20:00\",\n                \"arrivalDateTime\": \"2023-06-16T01:50:00\",\n                \"duration\": \"810\",\n                \"baggageAllowance\": \"30 KG\",\n                \"segments\": [\n                    {\n                        \"departure\": \"DXB\",\n                        \"arrival\": \"AMS\",\n                        \"departureDateTime\": \"2023-06-15T12:20:00\",\n                        \"arrivalDateTime\": \"2023-06-16T01:50:00\",\n                        \"duration\": \"\",\n                        \"airline\": \"IB\",\n                        \"flightNumber\": \"FAKE-11114\",\n                        \"cabinType\": \"ECONOMY\",\n                        \"fareType\": \"\"\n                    }\n                ],\n                \"fareRules\": []\n            }\n        },\n        {\n            \"id\": 11,\n            \"totalAmount\": 71.33,\n            \"taxesAmount\": 2,\n            \"currency\": \"EUR\",\n            \"provider\": \"FakeFlight\",\n            \"fareType\": \"PUBLIC\",\n            \"outBound\": {\n                \"departure\": \"DXB\",\n                \"arrival\": \"AMS\",\n                \"departureDateTime\": \"2023-06-15T12:10:00\",\n                \"arrivalDateTime\": \"2023-06-16T01:30:00\",\n                \"duration\": \"800\",\n                \"baggageAllowance\": \"30 KG\",\n                \"segments\": [\n                    {\n                        \"departure\": \"DXB\",\n                        \"arrival\": \"AMS\",\n                        \"departureDateTime\": \"2023-06-15T12:10:00\",\n                        \"arrivalDateTime\": \"2023-06-16T01:30:00\",\n                        \"duration\": \"\",\n                        \"airline\": \"IB\",\n                        \"flightNumber\": \"FAKE-11112\",\n                        \"cabinType\": \"ECONOMY\",\n                        \"fareType\": \"\"\n                    }\n                ],\n                \"fareRules\": []\n            },\n            \"inBound\": {\n                \"departure\": \"DXB\",\n                \"arrival\": \"AMS\",\n                \"departureDateTime\": \"2023-06-15T12:10:00\",\n                \"arrivalDateTime\": \"2023-06-16T01:30:00\",\n                \"duration\": \"800\",\n                \"baggageAllowance\": \"30 KG\",\n                \"segments\": [\n                    {\n                        \"departure\": \"DXB\",\n                        \"arrival\": \"AMS\",\n                        \"departureDateTime\": \"2023-06-15T12:10:00\",\n                        \"arrivalDateTime\": \"2023-06-16T01:30:00\",\n                        \"duration\": \"\",\n                        \"airline\": \"IB\",\n                        \"flightNumber\": \"FAKE-11112\",\n                        \"cabinType\": \"ECONOMY\",\n                        \"fareType\": \"\"\n                    }\n                ],\n                \"fareRules\": []\n            }\n        }\n    ]\n}"
 								}
 							]
+						},
+						{
+							"name": "Search",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9zaWQiOiIyMyIsIm5hbWVpZCI6InNob2FpYnVsZGluNUBob3RtYWlsLmNvbSIsIm5iZiI6MTcwNjczMTQ4NSwiZXhwIjoxNzA2ODUxNDg1LCJpYXQiOjE3MDY3MzE0ODUsImlzcyI6IkFmcm8gQXRsYXMgUHZ0IEx0ZCIsImF1ZCI6IkFmcm8gQXRsYXMgR0RTIn0.T40ZFjdrqGH4wyyCh3BtLhObZodI_IFNnydvEQf9yPY",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"search\": \"Karachi\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://api.taajnetwork.com/api/Airport/search"
+							},
+							"response": []
 						}
 					]
 				},
@@ -1092,7 +1166,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"DepartureCity\": \"{{DepartureCity}}\",\r\n  \"ArrivalCity\": \"{{ArrivalCity}}\",\r\n  \"DepartureDate\": \"{{DepartureDate}}\",\r\n  \"Adults\": 1,\r\n  \"Children\": 0,\r\n  \"Infants\": 0,\r\n  \"CabinClass\": \"Economy\",\r\n  \"IsFlexibleDates\": true,\r\n  \"IsDirectFlight\": false,\r\n  \"TripType\": \"OneWay\"\r\n}\r\n",
+									"raw": "{\r\n  \"DepartureCity\": \"NBO\",\r\n  \"ArrivalCity\": \"MGQ\",\r\n  \"DepartureDate\": \"2024-02-02\",\r\n  \"Adults\": 1,\r\n  \"Children\": 0,\r\n  \"Infants\": 0,\r\n  \"CabinClass\": \"Economy\",\r\n  \"IsFlexibleDates\": true,\r\n  \"IsDirectFlight\": false,\r\n  \"TripType\": \"OneWay\"\r\n}\r\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1116,14 +1190,14 @@
 						"auth": {
 							"type": "bearer",
 							"bearer": {
-								"token": "{{accessKey}}"
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9zaWQiOiIzIiwibmFtZWlkIjoic2hvYWlidWxkaW5AaG90bWFpbC5jb20iLCJuYmYiOjE3MDg1NDMyMDYsImV4cCI6MTcwODY2MzIwNiwiaWF0IjoxNzA4NTQzMjA2LCJpc3MiOiJBZnJvIEF0bGFzIFB2dCBMdGQiLCJhdWQiOiJBZnJvIEF0bGFzIEdEUyJ9.R66y5xsz_1lBS4rfJ5G-TTCKJ4EOaA1J5-a2N4_cWi4"
 							}
 						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"startDate\": \"2023-01-15\",\r\n    \"endDate\": \"2023-12-15\"\r\n}",
+							"raw": "{\r\n    \"startDate\": \"2023-01-01\",\r\n    \"endDate\": \"2024-12-01\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1160,12 +1234,12 @@
 						"auth": {
 							"type": "bearer",
 							"bearer": {
-								"token": "{{accessKey}}"
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9zaWQiOiIzIiwibmFtZWlkIjoic2hvYWlidWxkaW5AaG90bWFpbC5jb20iLCJuYmYiOjE3MDg1NDMyMDYsImV4cCI6MTcwODY2MzIwNiwiaWF0IjoxNzA4NTQzMjA2LCJpc3MiOiJBZnJvIEF0bGFzIFB2dCBMdGQiLCJhdWQiOiJBZnJvIEF0bGFzIEdEUyJ9.R66y5xsz_1lBS4rfJ5G-TTCKJ4EOaA1J5-a2N4_cWi4"
 							}
 						},
 						"method": "GET",
 						"header": [],
-						"url": "{{baseUrl}}/api/FlightBooking/parentPnr/WNJU1G"
+						"url": "{{baseUrl}}/api/FlightBooking/parentPnr/xwug3t"
 					},
 					"response": []
 				},

@@ -5,11 +5,13 @@ class CustomOutlineButton extends StatelessWidget {
   final double? height;
   final double? width;
   final String text;
+  final Color? color;
   final Function() onPress;
   CustomOutlineButton(
       {super.key,
       required this.text,
       required this.onPress,
+      this.color,
       this.height,
       this.width});
 
@@ -19,6 +21,7 @@ class CustomOutlineButton extends StatelessWidget {
       height: height ?? 50.0,
       width: width ?? 250.0,
       decoration: BoxDecoration(
+        color: color ?? Colors.transparent,
         border: Border.all(color: Colors.black), // Add black outline
         borderRadius: BorderRadius.circular(2.0),
       ),
