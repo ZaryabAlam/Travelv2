@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -5,9 +7,9 @@ import 'package:travel_app/app/configs/app_size_config.dart';
 import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_button.dart';
 import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/components/search_tabs/return_tab.dart';
-import 'package:travel_app/presentation/home_bottom_nav/views/search_flights.dart';
 
 import '../../../../../app/configs/app_colors.dart';
+import '../../../../../app/utils/custom_widgets/custom_toast.dart';
 import '../../../../../app/utils/custom_widgets/gradient_snackbar.dart';
 import '../../../views/oneWay_flights.dart';
 
@@ -25,6 +27,9 @@ class _OneWayTabViewState extends State<OneWayTabView> {
   String? _cabinClass;
   String? selectedCabin;
   var selectedTraveller = 'Adult';
+  TextEditingController adultController = TextEditingController(text: "1");
+  TextEditingController childController = TextEditingController(text: "0");
+  TextEditingController infantController = TextEditingController(text: "0");
 
   @override
   void initState() {
@@ -41,12 +46,13 @@ class _OneWayTabViewState extends State<OneWayTabView> {
   var travellerList = [
     'Adult',
     'Child',
+    'Infant',
   ];
   var cabinList = [
     'Economy',
     'Business',
-    'Premium',
-    'First Class',
+    // 'Premium',
+    // 'First Class',
   ];
 
   String? departDate = "Select Date";
@@ -106,22 +112,87 @@ class _OneWayTabViewState extends State<OneWayTabView> {
           0.04.ph,
           CommonText(text: 'TRAVELLER', fontSize: 12.0),
 
-          SizedBox(
-            width: w,
-            child: DropdownButton(
-                isDense: true,
-                isExpanded: true,
-                icon: Icon(Icons.arrow_drop_down),
-                value: selectedTraveller,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22.0),
-                items: travellerList.map((String item) {
-                  return DropdownMenuItem(
-                      value: item, child: CommonText(text: item));
-                }).toList(),
-                onChanged: (String? val) {
-                  setState(() => selectedTraveller = val!);
-                }),
+          Container(
+            height: 80,
+            // color: Colors.red,
+            child: Center(
+                child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Column(
+                  children: [
+                    CommonText(
+                        text: "Adult ", weight: FontWeight.bold, fontSize: 10),
+                    Container(
+                      height: 60,
+                      width: 60,
+                      child: TextField(
+                        controller: adultController,
+                        keyboardType: TextInputType.number,
+                        textAlign: TextAlign.center,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    CommonText(
+                        text: "Child ", weight: FontWeight.bold, fontSize: 10),
+                    Container(
+                      height: 60,
+                      width: 60,
+                      child: TextField(
+                        controller: childController,
+                        keyboardType: TextInputType.number,
+                        textAlign: TextAlign.center,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    CommonText(
+                        text: "Infant ", weight: FontWeight.bold, fontSize: 10),
+                    Container(
+                      height: 60,
+                      width: 60,
+                      child: TextField(
+                        controller: infantController,
+                        keyboardType: TextInputType.number,
+                        textAlign: TextAlign.center,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            )),
           ),
+
+          // SizedBox(
+          //   width: w,
+          //   child: DropdownButton(
+          //       isDense: true,
+          //       isExpanded: true,
+          //       icon: Icon(Icons.arrow_drop_down),
+          //       value: selectedTraveller,
+          //       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22.0),
+          //       items: travellerList.map((String item) {
+          //         return DropdownMenuItem(
+          //             value: item, child: CommonText(text: item));
+          //       }).toList(),
+          //       onChanged: (String? val) {
+          //         setState(() => selectedTraveller = val!);
+          //       }),
+          // ),
 
           // Cabin Class  ---------------------------------
           0.04.ph,
@@ -160,6 +231,11 @@ class _OneWayTabViewState extends State<OneWayTabView> {
                     "Please fill the form correctly",
                     AppColors.orange,
                     Icons.warning_rounded));
+              }  else if (int.parse(childController.text) >
+                      int.parse(adultController.text) ||
+                  int.parse(infantController.text) >
+                      int.parse(adultController.text)) {
+                MyToast.snackToast("Number of Adult must be greater", 0);
               } else {
                 Get.to(() => OneWaySearchFlightScreen(
                       cabinClass: widget.cabinClass.toString(),
@@ -169,6 +245,9 @@ class _OneWayTabViewState extends State<OneWayTabView> {
                       arriveDate: null,
                       departDate: departDateForm.toString(),
                       tripType: tripType.toString(),
+                      adultCount: int.parse(adultController.text),
+                      childCount: int.parse(childController.text),
+                      infantCount: int.parse(infantController.text),
                     ));
               }
             },

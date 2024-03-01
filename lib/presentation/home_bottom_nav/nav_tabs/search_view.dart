@@ -10,6 +10,7 @@ import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/components/sear
 import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/components/search_tabs/one_way_tab.dart';
 import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/components/search_tabs/return_tab.dart';
 
+import '../../../app/utils/custom_widgets/custom_toast.dart';
 import '../controller/search_controller.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -269,7 +270,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         ),
                         Container(
                           // padding: const EdgeInsets.symmetric(vertical: 20.0),
-                          height: h * 0.4,
+                          height: h * 0.5,
                           child: TabBarView(
                             children: [
                               ReturnTabView(
@@ -280,10 +281,14 @@ class _SearchScreenState extends State<SearchScreen> {
                                   cabinClass: widget.cabinClass ?? "Economy",
                                   fromCity: fromCode,
                                   toCity: toCode),
-                              MultiTabView(
+                              ReturnTabView(
                                   cabinClass: widget.cabinClass ?? "Economy",
                                   fromCity: fromCode,
                                   toCity: toCode),
+                              // MultiTabView(
+                              //     cabinClass: widget.cabinClass ?? "Economy",
+                              //     fromCity: fromCode,
+                              //     toCity: toCode),
                             ],
                           ),
                         ),

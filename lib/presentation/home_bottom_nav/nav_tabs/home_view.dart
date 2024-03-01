@@ -24,8 +24,8 @@ class _HomeScreenState extends State<HomeScreen> {
   var cabinList = [
     'Economy',
     'Business',
-    'Premium',
-    'First Class',
+    // 'Premium',
+    // 'First Class',
   ];
 
   var categoriesList = [
@@ -316,7 +316,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           scrollDirection: Axis.horizontal,
                           shrinkWrap: true,
                           physics: AlwaysScrollableScrollPhysics(),
-                          itemCount: 4,
+                          itemCount: 2,
                           itemBuilder: (context, i) {
                             return GestureDetector(
                               onTap: () {

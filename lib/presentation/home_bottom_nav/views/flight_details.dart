@@ -17,6 +17,9 @@ class FlightDetailsScreen extends StatefulWidget {
   String flightID;
   String cabinClass;
   String traveller;
+  int? adultCount;
+  int? childCount;
+  int? infantCount;
   //
   String departFromDate1;
   String departFromTime1;
@@ -40,6 +43,9 @@ class FlightDetailsScreen extends StatefulWidget {
     required this.flightID,
     required this.cabinClass,
     required this.traveller,
+    required this.adultCount,
+    required this.childCount,
+    required this.infantCount,
     //
     required this.departFlight,
     required this.departFromDate1,
@@ -152,6 +158,9 @@ class _FlightDetailsScreenState extends State<FlightDetailsScreen> {
                                     arriveToDate2: widget.arriveToDate2,
                                     arriveToCode2: widget.arriveToCode2,
                                     arriveToTime2: widget.arriveToTime2,
+                                    adultCount: widget.adultCount,
+                                    childCount: widget.childCount,
+                                    infantCount: widget.infantCount,
                                   ),
                                 ]);
                           }));
@@ -175,6 +184,9 @@ class FlightPackageWidget extends StatefulWidget {
   String searchID;
   String flightID;
   String traveller;
+  int? adultCount;
+  int? childCount;
+  int? infantCount;
   String cabinClass;
 //
   String departFromDate1;
@@ -198,6 +210,9 @@ class FlightPackageWidget extends StatefulWidget {
     this.charges,
     this.tax,
     required this.traveller,
+    required this.adultCount,
+    required this.childCount,
+    required this.infantCount,
     required this.cabinClass,
     required this.searchID,
     required this.flightID,
@@ -473,6 +488,9 @@ class _FlightPackageWidgetState extends State<FlightPackageWidget> {
                         arriveToCode2: widget.arriveToCode2,
                         arriveToTime2: widget.arriveToTime2,
                         paymentID: '',
+                        adultCount: widget.adultCount,
+                        childCount: widget.childCount,
+                        infantCount: widget.infantCount,
                       ));
                   // Get.to(() => PassengerDetailsScreen(
                   //       fare: widget.charges.toString(),

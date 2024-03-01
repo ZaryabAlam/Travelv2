@@ -24,6 +24,9 @@ class OneWaySearchFlightScreen extends StatefulWidget {
   String? cabinClass;
   bool? isOneWay = false;
   String tripType;
+  int? adultCount;
+  int? childCount;
+  int? infantCount;
 
   OneWaySearchFlightScreen({
     super.key,
@@ -32,6 +35,9 @@ class OneWaySearchFlightScreen extends StatefulWidget {
     required this.departDate,
     required this.arriveDate,
     required this.tripType,
+    required this.adultCount,
+    required this.childCount,
+    required this.infantCount,
     this.isOneWay,
     this.traveller,
     this.cabinClass,
@@ -595,6 +601,12 @@ class _OneWaySearchFlightScreenState extends State<OneWaySearchFlightScreen> {
                                                             arriveToDate2: "",
                                                             arriveToTime2: "",
                                                             arriveToCode2: "",
+                                                            adultCount: widget
+                                                                .adultCount,
+                                                            childCount: widget
+                                                                .childCount,
+                                                            infantCount: widget
+                                                                .infantCount,
                                                           ));
                                                     },
                                                     text:

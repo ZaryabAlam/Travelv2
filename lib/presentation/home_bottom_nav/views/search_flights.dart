@@ -22,6 +22,9 @@ class SearchFlightScreen extends StatefulWidget {
   String departDate;
   var arriveDate;
   String? traveller;
+  int? adultCount;
+  int? childCount;
+  int? infantCount;
   String? cabinClass;
   bool? isOneWay = false;
   String tripType;
@@ -33,6 +36,9 @@ class SearchFlightScreen extends StatefulWidget {
     required this.departDate,
     required this.arriveDate,
     required this.tripType,
+    required this.adultCount,
+    required this.childCount,
+    required this.infantCount,
     this.isOneWay,
     this.traveller,
     this.cabinClass,
@@ -46,6 +52,7 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
   final FlightQuoteController flightQuoteController =
       Get.put(FlightQuoteController());
   String? filterName = " ";
+  List<String> airlineNames = [];
   int? _selectedOutbound;
   int? _selectedInbound;
 
@@ -54,8 +61,15 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      flightQuoteController.fetchFlightQuote(widget.fromCity, widget.toCity,
-          widget.departDate, widget.arriveDate, widget.tripType);
+      flightQuoteController.fetchFlightQuote(
+          widget.fromCity,
+          widget.toCity,
+          widget.departDate,
+          widget.arriveDate,
+          widget.tripType,
+          widget.adultCount,
+          widget.childCount,
+          widget.infantCount);
     });
   }
 
@@ -103,6 +117,7 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
                 var data1 =
                     flightQuoteController.flightQuoteModel.value.flights;
                 var searchData = flightQuoteController.flightQuoteModel.value;
+
                 // Function to sort flights by total amount in ascending order
                 void sortAscending() {
                   setState(() {
@@ -208,7 +223,10 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
                       widget.toCity,
                       widget.departDate,
                       widget.arriveDate,
-                      widget.tripType);
+                      widget.tripType,
+                      widget.adultCount,
+                      widget.childCount,
+                      widget.infantCount);
                 }
 
                 void _showFilterOptions() {
@@ -241,47 +259,35 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
                                   child: CommonText(text: "Reset")),
                               onTap: () {},
                             ),
-                            ListTile(
-                              // leading: Icon(Icons.stars),
-                              title: Text('Silicon Reservation System'),
-                              onTap: () {
-                                Navigator.pop(context);
-                                _showFilterAirline(
-                                    "Silicon Reservation System");
-                              },
-                            ),
-                            ListTile(
-                              // leading: Icon(Icons.stars),
-                              title: Text('Salaam Air'),
-                              onTap: () {
-                                Navigator.pop(context);
-                                _showFilterAirline("Salaam Air");
-                              },
-                            ),
-                            ListTile(
-                              // leading: Icon(Icons.arrow_upward),
-                              title: Text('Aerojet Aviation'),
-                              onTap: () {
-                                Navigator.pop(context);
-                                _showFilterAirline("Aerojet Aviation");
-                              },
-                            ),
-                            ListTile(
-                              // leading: Icon(Icons.arrow_downward),
-                              title: Text('Afro Atlas'),
-                              onTap: () {
-                                Navigator.pop(context);
-                                _showFilterAirline("Afro Atlas");
-                              },
-                            ),
-                            ListTile(
-                              // leading: Icon(Icons.av_timer_rounded),
-                              title: Text('Blue Air Express'),
-                              onTap: () {
-                                Navigator.pop(context);
-                                _showFilterAirline("Blue Air Expressr");
-                              },
-                            ),
+                            Container(
+                              height: 200,
+                              child: ListView.builder(
+                                itemCount: airlineNames.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Column(
+                                    children: [
+                                      ListTile(
+                                        title: Text(airlineNames[index]),
+                                        onTap: () {
+                                          Navigator.pop(context);
+                                          _showFilterAirline(
+                                              "${airlineNames[index]}");
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ),
+                            )
+                            // ListTile(
+                            //   // leading: Icon(Icons.stars),
+                            //   title: Text('Silicon Reservation System'),
+                            //   onTap: () {
+                            //     Navigator.pop(context);
+                            //     _showFilterAirline(
+                            //         "Silicon Reservation System");
+                            //   },
+                            // ),
                           ],
                         ),
                       );
@@ -372,6 +378,29 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
                                     .segments![0]
                                     .airline!
                                     .contains("$filterName");
+                                // for (var item in data1) {
+                                //   if (item.outBound != null &&
+                                //       item.outBound!.segments != null &&
+                                //       item.outBound!.segments!.isNotEmpty) {
+                                //     // Check if outBound and segments are not null and not empty
+                                //     airlineNames.add(item
+                                //         .outBound!.segments![0].airlineName
+                                //         .toString());
+                                //   }
+                                // }
+                                for (var item in data1) {
+                                  if (item.outBound != null &&
+                                      item.outBound!.segments != null &&
+                                      item.outBound!.segments!.isNotEmpty) {
+                                    String airlineName = item
+                                        .outBound!.segments![0].airlineName
+                                        .toString();
+                                    if (!airlineNames.contains(airlineName)) {
+                                      airlineNames.add(airlineName);
+                                    }
+                                  }
+                                }
+                                print("Airline List: $airlineNames");
                                 return isFiltered
                                     ? Column(
                                         mainAxisAlignment:
@@ -714,6 +743,15 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
                                                                             0]
                                                                         .arrival
                                                                         .toString(),
+                                                                    adultCount:
+                                                                        widget
+                                                                            .adultCount,
+                                                                    childCount:
+                                                                        widget
+                                                                            .childCount,
+                                                                    infantCount:
+                                                                        widget
+                                                                            .infantCount,
                                                                   ));
                                                             },
                                                             text:
@@ -774,7 +812,9 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
                                               color: Colors.white,
                                               width: 150,
                                               text: "Cancel",
-                                              onPress: () {}),
+                                              onPress: () {
+                                                Get.back();
+                                              }),
                                           SizedBox(width: 15),
                                           _selectedOutbound == null ||
                                                   _selectedInbound == null
@@ -875,6 +915,12 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
                                                                   .segments![0]
                                                                   .arrival
                                                                   .toString(),
+                                                          adultCount:
+                                                              widget.adultCount,
+                                                          childCount:
+                                                              widget.childCount,
+                                                          infantCount: widget
+                                                              .infantCount,
                                                         ));
                                                   },
                                                 )

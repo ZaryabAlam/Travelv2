@@ -24,7 +24,7 @@ class FlightQuoteController extends GetxController {
   }
 
   Future<void> fetchFlightQuote(String departCity, String arriveCity,
-      String departDate, var arriveDate, String tripType) async {
+      String departDate, var arriveDate, String tripType, int? adult, int? child, int? infant) async {
     isLoading.value = true;
     try {
       var headers = {
@@ -40,9 +40,9 @@ class FlightQuoteController extends GetxController {
         // "ArrivalCity": "MGQ",
         // "DepartureDate": "2024-02-15",
         // "ReturnDate": "2024-02-20",
-        "Adults": 1,
-        "Children": 0,
-        "Infants": 0,
+        "Adults": adult,
+        "Children": child,
+        "Infants": infant,
         "CabinClass": "Economy",
         "IsFlexibleDates": true,
         "IsDirectFlight": false,

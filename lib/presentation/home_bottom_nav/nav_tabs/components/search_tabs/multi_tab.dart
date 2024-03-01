@@ -155,6 +155,9 @@ class _MultiTabViewState extends State<MultiTabView> {
                       arriveDate: arriveDate.toString(),
                       departDate: departDate.toString(),
                       tripType: tripType.toString(),
+                      adultCount:1,
+                      childCount: 0,
+                      infantCount:0,
                     ));
               }),
 

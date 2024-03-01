@@ -41,6 +41,9 @@ class PassengerDetailsScreen extends StatefulWidget {
   String arriveToCode2;
   //
   String traveller;
+  int? adultCount;
+  int? childCount;
+  int? infantCount;
   String cabinClass;
   String fare;
   String tax;
@@ -69,6 +72,9 @@ class PassengerDetailsScreen extends StatefulWidget {
       required this.arriveToCode2,
       //
       required this.traveller,
+      required this.adultCount,
+      required this.childCount,
+      required this.infantCount,
       required this.cabinClass,
       required this.fare,
       required this.tax,
@@ -586,6 +592,9 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
             arriveToDate2: widget.arriveToDate2,
             arriveToCode2: widget.arriveToCode2,
             arriveToTime2: widget.arriveToTime2,
+            adultCount: widget.adultCount,
+            childCount: widget.childCount,
+            infantCount: widget.infantCount,
           ),
           0.03.ph,
           Row(
@@ -681,29 +690,37 @@ class FlightSummary extends StatefulWidget {
   String fare;
   String tax;
   String total;
-  FlightSummary(
-      {super.key,
-      required this.flightID,
-      required this.searchID,
-      required this.departFlight,
-      required this.departFromDate1,
-      required this.departFromTime1,
-      required this.departFromCode1,
-      required this.arriveToDate1,
-      required this.arriveToTime1,
-      required this.arriveToCode1,
-      required this.arriveFlight,
-      required this.departFromDate2,
-      required this.departFromTime2,
-      required this.departFromCode2,
-      required this.arriveToDate2,
-      required this.arriveToTime2,
-      required this.arriveToCode2,
-      required this.traveller,
-      required this.cabinClass,
-      required this.fare,
-      required this.tax,
-      required this.total});
+  int? adultCount;
+  int? childCount;
+  int? infantCount;
+
+  FlightSummary({
+    super.key,
+    required this.flightID,
+    required this.searchID,
+    required this.departFlight,
+    required this.departFromDate1,
+    required this.departFromTime1,
+    required this.departFromCode1,
+    required this.arriveToDate1,
+    required this.arriveToTime1,
+    required this.arriveToCode1,
+    required this.arriveFlight,
+    required this.departFromDate2,
+    required this.departFromTime2,
+    required this.departFromCode2,
+    required this.arriveToDate2,
+    required this.arriveToTime2,
+    required this.arriveToCode2,
+    required this.traveller,
+    required this.cabinClass,
+    required this.fare,
+    required this.tax,
+    required this.total,
+    required this.adultCount,
+    required this.childCount,
+    required this.infantCount,
+  });
 
   @override
   State<FlightSummary> createState() => _FlightSummaryState();
@@ -808,7 +825,17 @@ class _FlightSummaryState extends State<FlightSummary> {
             ),
             0.02.ph,
             CommonText(
-              text: widget.traveller,
+              text: "Adult x${widget.adultCount}",
+              fontSize: 11,
+            ),
+            0.02.ph,
+            CommonText(
+              text: "Child x${widget.childCount}",
+              fontSize: 11,
+            ),
+            0.02.ph,
+            CommonText(
+              text: "Infant x${widget.infantCount}",
               fontSize: 11,
             ),
             0.02.ph,
