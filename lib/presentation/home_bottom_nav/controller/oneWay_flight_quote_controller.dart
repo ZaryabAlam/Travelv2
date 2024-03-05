@@ -23,8 +23,15 @@ class OneWayFlightQuoteController extends GetxController {
     loadGetxData();
   }
 
-  Future<void> fetchOneWayFlightQuote(String departCity, String arriveCity,
-      String departDate, var arriveDate, String tripType) async {
+  Future<void> fetchOneWayFlightQuote(
+      String departCity,
+      String arriveCity,
+      String departDate,
+      var arriveDate,
+      String tripType,
+      int? adult,
+      int? child,
+      int? infant) async {
     isLoading.value = true;
     try {
       var headers = {
@@ -40,9 +47,9 @@ class OneWayFlightQuoteController extends GetxController {
         // "ArrivalCity": "MGQ",
         // "DepartureDate": "2024-02-15",
         // "ReturnDate": "2024-02-20",
-        "Adults": 1,
-        "Children": 0,
-        "Infants": 0,
+        "Adults": adult,
+        "Children": child,
+        "Infants": infant,
         "CabinClass": "Economy",
         "IsFlexibleDates": true,
         "IsDirectFlight": false,

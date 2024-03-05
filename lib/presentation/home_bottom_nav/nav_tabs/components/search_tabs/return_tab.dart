@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, camel_case_types
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,10 +25,14 @@ class _ReturnTabViewState extends State<ReturnTabView> {
   String? _cabinClass;
   String? selectedCabin;
   var selectedTraveller = 'Adult';
-  String? selectedChildAge1 = '3-6';
-  String? selectedChildAge2 = '3-6';
-  String? selectedChildAge3 = '3-6';
-  String? selectedChildAge4 = '3-6';
+  int selectedChildAge1 = 2;
+  int selectedChildAge2 = 2;
+  int selectedChildAge3 = 2;
+  int selectedChildAge4 = 2;
+  int selectedCIntantAge1 = 0;
+  int selectedCIntantAge2 = 0;
+  int selectedCIntantAge3 = 0;
+  int selectedCIntantAge4 = 0;
   var selectedInfantAge = '0-1';
   // TextEditingController adultController = TextEditingController(text: "1");
   // TextEditingController childController = TextEditingController(text: "0");
@@ -211,51 +215,204 @@ class _ReturnTabViewState extends State<ReturnTabView> {
                 });
               },
               count: childCount),
+
           childCount == 1
-              // ? ageDropdown("Child 1 Age", selectedChildAge1)
-              ?Row(
-      children: [
-        CommonText(text: "Child 1 Age:   "),
-        SizedBox(
-          width: 80,
-          child: DropdownButton(
-              isDense: true,
-              isExpanded: true,
-              icon: Icon(Icons.arrow_drop_down),
-              value: selectedChildAge1.toString(),
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22.0),
-              items: childAgeList.map((String item) {
-                return DropdownMenuItem(
-                    value: item, child: CommonText(text: item));
-              }).toList(),
-              onChanged: (String? val) {
-                setState(() => selectedChildAge1 = val!);
-              }),
-        ),
-      ],
-    )
+              ? Column(
+                  children: [
+                    0.01.ph,
+                    ageCounter(
+                        title: "Chile 1 age:",
+                        onInc: () {
+                          setState(() {
+                            if (selectedChildAge1 < 12) {
+                              selectedChildAge1++;
+                            }
+                          });
+                        },
+                        onDec: () {
+                          setState(() {
+                            if (selectedChildAge1 > 2) {
+                              selectedChildAge1--;
+                            }
+                          });
+                        },
+                        age: selectedChildAge1),
+                  ],
+                )
               : Container(),
+
           childCount == 2
               ? Column(children: [
-                  ageDropdown("Child 1 Age", selectedChildAge1),
-                  ageDropdown("Child 2 Age", selectedChildAge2),
+                  0.01.ph,
+                  ageCounter(
+                      title: "Chile 1 age:",
+                      onInc: () {
+                        setState(() {
+                          if (selectedChildAge1 < 12) {
+                            selectedChildAge1++;
+                          }
+                        });
+                      },
+                      onDec: () {
+                        setState(() {
+                          if (selectedChildAge1 > 2) {
+                            selectedChildAge1--;
+                          }
+                        });
+                      },
+                      age: selectedChildAge1),
+                  0.01.ph,
+                  ageCounter(
+                      title: "Chile 2 age:",
+                      onInc: () {
+                        setState(() {
+                          if (selectedChildAge2 < 12) {
+                            selectedChildAge2++;
+                          }
+                        });
+                      },
+                      onDec: () {
+                        setState(() {
+                          if (selectedChildAge2 > 2) {
+                            selectedChildAge2--;
+                          }
+                        });
+                      },
+                      age: selectedChildAge2)
                 ])
               : Container(),
           childCount == 3
               ? Column(children: [
-                  ageDropdown("Child 1 Age", selectedChildAge1),
-                  ageDropdown("Child 2 Age", selectedChildAge2),
-                  ageDropdown("Child 3 Age", selectedChildAge3),
+                  0.01.ph,
+                  ageCounter(
+                      title: "Chile 1 age:",
+                      onInc: () {
+                        setState(() {
+                          if (selectedChildAge1 < 12) {
+                            selectedChildAge1++;
+                          }
+                        });
+                      },
+                      onDec: () {
+                        setState(() {
+                          if (selectedChildAge1 > 2) {
+                            selectedChildAge1--;
+                          }
+                        });
+                      },
+                      age: selectedChildAge1),
+                  0.01.ph,
+                  ageCounter(
+                      title: "Chile 2 age:",
+                      onInc: () {
+                        setState(() {
+                          if (selectedChildAge2 < 12) {
+                            selectedChildAge2++;
+                          }
+                        });
+                      },
+                      onDec: () {
+                        setState(() {
+                          if (selectedChildAge2 > 2) {
+                            selectedChildAge2--;
+                          }
+                        });
+                      },
+                      age: selectedChildAge2),
+                  0.01.ph,
+                  ageCounter(
+                      title: "Chile 3 age:",
+                      onInc: () {
+                        setState(() {
+                          if (selectedChildAge3 < 12) {
+                            selectedChildAge3++;
+                          }
+                        });
+                      },
+                      onDec: () {
+                        setState(() {
+                          if (selectedChildAge3 > 2) {
+                            selectedChildAge3--;
+                          }
+                        });
+                      },
+                      age: selectedChildAge3)
                 ])
               : Container(),
           childCount == 4
               ? Column(children: [
-                  Column(children: [
-                    ageDropdown("Child 1 Age", selectedChildAge1),
-                    ageDropdown("Child 2 Age", selectedChildAge2),
-                    ageDropdown("Child 3 Age", selectedChildAge3),
-                    ageDropdown("Child 4 Age", selectedChildAge4),
-                  ])
+                  0.01.ph,
+                  ageCounter(
+                      title: "Chile 1 age:",
+                      onInc: () {
+                        setState(() {
+                          if (selectedChildAge1 < 12) {
+                            selectedChildAge1++;
+                          }
+                        });
+                      },
+                      onDec: () {
+                        setState(() {
+                          if (selectedChildAge1 > 2) {
+                            selectedChildAge1--;
+                          }
+                        });
+                      },
+                      age: selectedChildAge1),
+                  0.01.ph,
+                  ageCounter(
+                      title: "Chile 2 age:",
+                      onInc: () {
+                        setState(() {
+                          if (selectedChildAge2 < 12) {
+                            selectedChildAge2++;
+                          }
+                        });
+                      },
+                      onDec: () {
+                        setState(() {
+                          if (selectedChildAge2 > 2) {
+                            selectedChildAge2--;
+                          }
+                        });
+                      },
+                      age: selectedChildAge2),
+                  0.01.ph,
+                  ageCounter(
+                      title: "Chile 3 age:",
+                      onInc: () {
+                        setState(() {
+                          if (selectedChildAge3 < 12) {
+                            selectedChildAge3++;
+                          }
+                        });
+                      },
+                      onDec: () {
+                        setState(() {
+                          if (selectedChildAge3 > 2) {
+                            selectedChildAge3--;
+                          }
+                        });
+                      },
+                      age: selectedChildAge3),
+                  0.01.ph,
+                  ageCounter(
+                      title: "Chile 4 age:",
+                      onInc: () {
+                        setState(() {
+                          if (selectedChildAge4 < 12) {
+                            selectedChildAge4++;
+                          }
+                        });
+                      },
+                      onDec: () {
+                        setState(() {
+                          if (selectedChildAge4 > 2) {
+                            selectedChildAge4--;
+                          }
+                        });
+                      },
+                      age: selectedChildAge4)
                 ])
               : Container(),
           //
@@ -279,6 +436,205 @@ class _ReturnTabViewState extends State<ReturnTabView> {
                 });
               },
               count: infantCount),
+          infantCount == 1
+              ? Column(
+                  children: [
+                    0.01.ph,
+                    ageCounter(
+                        title: "Infant 1 age:",
+                        onInc: () {
+                          setState(() {
+                            if (selectedCIntantAge1 < 2) {
+                              selectedCIntantAge1++;
+                            }
+                          });
+                        },
+                        onDec: () {
+                          setState(() {
+                            if (selectedCIntantAge1 > 0) {
+                              selectedCIntantAge1--;
+                            }
+                          });
+                        },
+                        age: selectedCIntantAge1),
+                  ],
+                )
+              : Container(),
+
+          infantCount == 2
+              ? Column(children: [
+                  0.01.ph,
+                  ageCounter(
+                      title: "Infant 1 age:",
+                      onInc: () {
+                        setState(() {
+                          if (selectedCIntantAge1 < 2) {
+                            selectedCIntantAge1++;
+                          }
+                        });
+                      },
+                      onDec: () {
+                        setState(() {
+                          if (selectedCIntantAge1 > 0) {
+                            selectedCIntantAge1--;
+                          }
+                        });
+                      },
+                      age: selectedCIntantAge1),
+                  0.01.ph,
+                  ageCounter(
+                      title: "Infant 2 age:",
+                      onInc: () {
+                        setState(() {
+                          if (selectedCIntantAge2 < 2) {
+                            selectedCIntantAge2++;
+                          }
+                        });
+                      },
+                      onDec: () {
+                        setState(() {
+                          if (selectedCIntantAge2 > 0) {
+                            selectedCIntantAge2--;
+                          }
+                        });
+                      },
+                      age: selectedCIntantAge2)
+                ])
+              : Container(),
+          infantCount == 3
+              ? Column(children: [
+                  0.01.ph,
+                  ageCounter(
+                      title: "Infant 1 age:",
+                      onInc: () {
+                        setState(() {
+                          if (selectedCIntantAge1 < 2) {
+                            selectedCIntantAge1++;
+                          }
+                        });
+                      },
+                      onDec: () {
+                        setState(() {
+                          if (selectedCIntantAge1 > 0) {
+                            selectedCIntantAge1--;
+                          }
+                        });
+                      },
+                      age: selectedCIntantAge1),
+                  0.01.ph,
+                  ageCounter(
+                      title: "Infant 2 age:",
+                      onInc: () {
+                        setState(() {
+                          if (selectedCIntantAge2 < 2) {
+                            selectedCIntantAge2++;
+                          }
+                        });
+                      },
+                      onDec: () {
+                        setState(() {
+                          if (selectedCIntantAge2 > 0) {
+                            selectedCIntantAge2--;
+                          }
+                        });
+                      },
+                      age: selectedCIntantAge2),
+                  0.01.ph,
+                  ageCounter(
+                      title: "Infant 3 age:",
+                      onInc: () {
+                        setState(() {
+                          if (selectedCIntantAge3 < 2) {
+                            selectedCIntantAge3++;
+                          }
+                        });
+                      },
+                      onDec: () {
+                        setState(() {
+                          if (selectedCIntantAge3 > 0) {
+                            selectedCIntantAge3--;
+                          }
+                        });
+                      },
+                      age: selectedCIntantAge3)
+                ])
+              : Container(),
+          infantCount == 4
+              ? Column(children: [
+                  0.01.ph,
+                  ageCounter(
+                      title: "Infant 1 age:",
+                      onInc: () {
+                        setState(() {
+                          if (selectedCIntantAge1 < 2) {
+                            selectedCIntantAge1++;
+                          }
+                        });
+                      },
+                      onDec: () {
+                        setState(() {
+                          if (selectedCIntantAge1 > 0) {
+                            selectedCIntantAge1--;
+                          }
+                        });
+                      },
+                      age: selectedCIntantAge1),
+                  0.01.ph,
+                  ageCounter(
+                      title: "Infant 2 age:",
+                      onInc: () {
+                        setState(() {
+                          if (selectedCIntantAge2 < 2) {
+                            selectedCIntantAge2++;
+                          }
+                        });
+                      },
+                      onDec: () {
+                        setState(() {
+                          if (selectedCIntantAge2 > 0) {
+                            selectedCIntantAge2--;
+                          }
+                        });
+                      },
+                      age: selectedCIntantAge2),
+                  0.01.ph,
+                  ageCounter(
+                      title: "Infant 3 age:",
+                      onInc: () {
+                        setState(() {
+                          if (selectedCIntantAge3 < 2) {
+                            selectedCIntantAge3++;
+                          }
+                        });
+                      },
+                      onDec: () {
+                        setState(() {
+                          if (selectedCIntantAge3 > 0) {
+                            selectedCIntantAge3--;
+                          }
+                        });
+                      },
+                      age: selectedCIntantAge3),
+                  0.01.ph,
+                  ageCounter(
+                      title: "Infant 4 age:",
+                      onInc: () {
+                        setState(() {
+                          if (selectedCIntantAge4 < 2) {
+                            selectedCIntantAge4++;
+                          }
+                        });
+                      },
+                      onDec: () {
+                        setState(() {
+                          if (selectedCIntantAge4 > 0) {
+                            selectedCIntantAge4--;
+                          }
+                        });
+                      },
+                      age: selectedCIntantAge4)
+                ])
+              : Container(),
 
           // SizedBox(
           //   width: w,
@@ -319,7 +675,8 @@ class _ReturnTabViewState extends State<ReturnTabView> {
           ),
 
           // Search Flight Button -----------------------------------
-          Spacer(),
+          // Spacer(),
+          0.04.ph,
           CustomButton(
             height: 40,
             width: w,
@@ -357,25 +714,78 @@ class _ReturnTabViewState extends State<ReturnTabView> {
     );
   }
 
-  Row ageDropdown(text, child) {
+  // Row ageDropdown(text, child) {
+  //   return Row(
+  //     children: [
+  //       CommonText(text: "$text:   "),
+  //       SizedBox(
+  //         width: 80,
+  //         child: DropdownButton(
+  //             isDense: true,
+  //             isExpanded: true,
+  //             icon: Icon(Icons.arrow_drop_down),
+  //             value: child.toString(),
+  //             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22.0),
+  //             items: childAgeList.map((String item) {
+  //               return DropdownMenuItem(
+  //                   value: item, child: CommonText(text: item));
+  //             }).toList(),
+  //             onChanged: (String? val) {
+  //               setState(() => child = val!);
+  //             }),
+  //       ),
+  //     ],
+  //   );
+  // }
+}
+
+class ageCounter extends StatelessWidget {
+  String title;
+  final Function() onInc;
+  final Function() onDec;
+  ageCounter({
+    super.key,
+    required this.title,
+    required this.onInc,
+    required this.onDec,
+    required this.age,
+  });
+
+  final int age;
+
+  @override
+  Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        CommonText(text: "$text:   "),
-        SizedBox(
-          width: 80,
-          child: DropdownButton(
-              isDense: true,
-              isExpanded: true,
-              icon: Icon(Icons.arrow_drop_down),
-              value: child.toString(),
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22.0),
-              items: childAgeList.map((String item) {
-                return DropdownMenuItem(
-                    value: item, child: CommonText(text: item));
-              }).toList(),
-              onChanged: (String? val) {
-                setState(() => child = val!);
-              }),
+        CommonText(text: "$title  "),
+        Container(
+          height: 25,
+          decoration: BoxDecoration(
+            color: AppColors.appColorPrimary.withOpacity(0.7),
+            borderRadius: BorderRadius.circular(25.0),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              IconButton(
+                  iconSize: 10,
+                  color: Colors.white,
+                  onPressed: onDec,
+                  icon: Icon(Icons.remove)),
+              CommonText(
+                text: "$age",
+                color: Colors.white,
+                fontSize: 15,
+                weight: FontWeight.bold,
+              ),
+              IconButton(
+                  iconSize: 10,
+                  color: Colors.white,
+                  onPressed: onInc,
+                  icon: Icon(Icons.add)),
+            ],
+          ),
         ),
       ],
     );

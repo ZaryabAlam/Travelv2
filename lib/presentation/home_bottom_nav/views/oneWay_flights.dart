@@ -59,7 +59,9 @@ class _OneWaySearchFlightScreenState extends State<OneWaySearchFlightScreen> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       oneWayFlightQuoteController.fetchOneWayFlightQuote(widget.fromCity,
-          widget.toCity, widget.departDate, widget.arriveDate, widget.tripType);
+          widget.toCity, widget.departDate, widget.arriveDate, widget.tripType,widget.adultCount,
+          widget.childCount,
+          widget.infantCount);
     });
   }
 
@@ -213,7 +215,9 @@ class _OneWaySearchFlightScreenState extends State<OneWaySearchFlightScreen> {
                       widget.toCity,
                       widget.departDate,
                       widget.arriveDate,
-                      widget.tripType);
+                      widget.tripType,widget.adultCount,
+          widget.childCount,
+          widget.infantCount);
                 }
 
                 void _showFilterOptions() {

@@ -270,7 +270,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         ),
                         Container(
                           // padding: const EdgeInsets.symmetric(vertical: 20.0),
-                          height: h * 0.6,
+                          height: h * 1,
                           child: TabBarView(
                             children: [
                               ReturnTabView(
