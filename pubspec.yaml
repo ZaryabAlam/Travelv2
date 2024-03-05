@@ -54,6 +54,7 @@ dependencies:
   device_preview: ^1.1.0
   intl_phone_number_input: ^0.7.3+1
   country_picker: ^2.0.23
+  customizable_counter: ^1.0.4
 
 dev_dependencies:
   flutter_test:

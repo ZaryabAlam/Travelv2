@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:travel_app/app/configs/app_size_config.dart';
@@ -7,10 +9,8 @@ import 'package:travel_app/app/utils/custom_widgets/custom_toast.dart';
 import 'package:travel_app/app/utils/custom_widgets/gradient_snackbar.dart';
 import 'package:travel_app/presentation/home_bottom_nav/views/search_flights.dart';
 import 'package:intl/intl.dart';
-
 import '../../../../../app/configs/app_colors.dart';
 
-// ignore: must_be_immutable
 class ReturnTabView extends StatefulWidget {
   String? toCity;
   String? fromCity;
@@ -25,9 +25,17 @@ class _ReturnTabViewState extends State<ReturnTabView> {
   String? _cabinClass;
   String? selectedCabin;
   var selectedTraveller = 'Adult';
-  TextEditingController adultController = TextEditingController(text: "1");
-  TextEditingController childController = TextEditingController(text: "0");
-  TextEditingController infantController = TextEditingController(text: "0");
+  String? selectedChildAge1 = '3-6';
+  String? selectedChildAge2 = '3-6';
+  String? selectedChildAge3 = '3-6';
+  String? selectedChildAge4 = '3-6';
+  var selectedInfantAge = '0-1';
+  // TextEditingController adultController = TextEditingController(text: "1");
+  // TextEditingController childController = TextEditingController(text: "0");
+  // TextEditingController infantController = TextEditingController(text: "0");
+  int adultCount = 1;
+  int childCount = 0;
+  int infantCount = 0;
 
   @override
   void initState() {
@@ -51,6 +59,16 @@ class _ReturnTabViewState extends State<ReturnTabView> {
     'Business',
     // 'Premium',
     // 'First Class',
+  ];
+  var childAgeList = [
+    '3-6',
+    '6-9',
+    '9-12',
+  ];
+  var infantAgeList = [
+    '0-1',
+    '1-2',
+    '2-3',
   ];
 
   String? arriveDate = "Select Date";
@@ -152,71 +170,115 @@ class _ReturnTabViewState extends State<ReturnTabView> {
           // Traveller ------------------------------------
           0.04.ph,
           CommonText(text: 'TRAVELLER', fontSize: 12.0),
+          Counter(
+              title: "Adult",
+              onInc: () {
+                setState(() {
+                  if (adultCount < 4) {
+                    adultCount++;
+                  }
+                  childCount = 0;
+                  infantCount = 0;
+                });
+              },
+              onDec: () {
+                setState(() {
+                  if (adultCount > 1) {
+                    adultCount--;
+                  }
+                  childCount = 0;
+                  infantCount = 0;
+                });
+              },
+              count: adultCount),
+          //
+          0.01.ph,
+          //
+          Counter(
+              title: "Child",
+              onInc: () {
+                setState(() {
+                  if (childCount < adultCount) {
+                    childCount++;
+                  }
+                });
+              },
+              onDec: () {
+                setState(() {
+                  if (childCount > 0) {
+                    childCount--;
+                  }
+                });
+              },
+              count: childCount),
+          childCount == 1
+              // ? ageDropdown("Child 1 Age", selectedChildAge1)
+              ?Row(
+      children: [
+        CommonText(text: "Child 1 Age:   "),
+        SizedBox(
+          width: 80,
+          child: DropdownButton(
+              isDense: true,
+              isExpanded: true,
+              icon: Icon(Icons.arrow_drop_down),
+              value: selectedChildAge1.toString(),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22.0),
+              items: childAgeList.map((String item) {
+                return DropdownMenuItem(
+                    value: item, child: CommonText(text: item));
+              }).toList(),
+              onChanged: (String? val) {
+                setState(() => selectedChildAge1 = val!);
+              }),
+        ),
+      ],
+    )
+              : Container(),
+          childCount == 2
+              ? Column(children: [
+                  ageDropdown("Child 1 Age", selectedChildAge1),
+                  ageDropdown("Child 2 Age", selectedChildAge2),
+                ])
+              : Container(),
+          childCount == 3
+              ? Column(children: [
+                  ageDropdown("Child 1 Age", selectedChildAge1),
+                  ageDropdown("Child 2 Age", selectedChildAge2),
+                  ageDropdown("Child 3 Age", selectedChildAge3),
+                ])
+              : Container(),
+          childCount == 4
+              ? Column(children: [
+                  Column(children: [
+                    ageDropdown("Child 1 Age", selectedChildAge1),
+                    ageDropdown("Child 2 Age", selectedChildAge2),
+                    ageDropdown("Child 3 Age", selectedChildAge3),
+                    ageDropdown("Child 4 Age", selectedChildAge4),
+                  ])
+                ])
+              : Container(),
+          //
 
-          Container(
-            height: 80,
-            // color: Colors.red,
-            child: Center(
-                child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Column(
-                  children: [
-                    CommonText(
-                        text: "Adult ", weight: FontWeight.bold, fontSize: 10),
-                    Container(
-                      height: 60,
-                      width: 60,
-                      child: TextField(
-                        controller: adultController,
-                        keyboardType: TextInputType.number,
-                        textAlign: TextAlign.center,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    CommonText(
-                        text: "Child ", weight: FontWeight.bold, fontSize: 10),
-                    Container(
-                      height: 60,
-                      width: 60,
-                      child: TextField(
-                        controller: childController,
-                        keyboardType: TextInputType.number,
-                        textAlign: TextAlign.center,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    CommonText(
-                        text: "Infant ", weight: FontWeight.bold, fontSize: 10),
-                    Container(
-                      height: 60,
-                      width: 60,
-                      child: TextField(
-                        controller: infantController,
-                        keyboardType: TextInputType.number,
-                        textAlign: TextAlign.center,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            )),
-          ),
+          0.01.ph,
+          //
+          Counter(
+              title: "Infant",
+              onInc: () {
+                setState(() {
+                  if (infantCount < adultCount) {
+                    infantCount++;
+                  }
+                });
+              },
+              onDec: () {
+                setState(() {
+                  if (infantCount > 0) {
+                    infantCount--;
+                  }
+                });
+              },
+              count: infantCount),
 
           // SizedBox(
           //   width: w,
@@ -268,25 +330,19 @@ class _ReturnTabViewState extends State<ReturnTabView> {
                   departDate == "Select Date" ||
                   departDate == "" ||
                   arriveDate == "Select Date" ||
-                  arriveDateForm == "" ||
-                  adultController.text == "0") {
+                  arriveDateForm == "") {
                 Get.showSnackbar(gradientSnackbar(
                     "Incomplete Form",
                     "Please fill the form correctly",
                     AppColors.orange,
                     Icons.warning_rounded));
-              } else if (int.parse(childController.text) >
-                      int.parse(adultController.text) ||
-                  int.parse(infantController.text) >
-                      int.parse(adultController.text)) {
-                MyToast.snackToast("Number of Adult must be greater", 0);
               } else {
                 Get.to(() => SearchFlightScreen(
                       cabinClass: widget.cabinClass.toString(),
                       traveller: selectedTraveller.toString(),
-                      adultCount: int.parse(adultController.text),
-                      childCount: int.parse(childController.text),
-                      infantCount: int.parse(infantController.text),
+                      adultCount: adultCount,
+                      childCount: childCount,
+                      infantCount: infantCount,
                       toCity: widget.toCity.toString(),
                       fromCity: widget.fromCity.toString(),
                       arriveDate: arriveDateForm.toString(),
@@ -298,6 +354,78 @@ class _ReturnTabViewState extends State<ReturnTabView> {
           ),
         ],
       ),
+    );
+  }
+
+  Row ageDropdown(text, child) {
+    return Row(
+      children: [
+        CommonText(text: "$text:   "),
+        SizedBox(
+          width: 80,
+          child: DropdownButton(
+              isDense: true,
+              isExpanded: true,
+              icon: Icon(Icons.arrow_drop_down),
+              value: child.toString(),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22.0),
+              items: childAgeList.map((String item) {
+                return DropdownMenuItem(
+                    value: item, child: CommonText(text: item));
+              }).toList(),
+              onChanged: (String? val) {
+                setState(() => child = val!);
+              }),
+        ),
+      ],
+    );
+  }
+}
+
+class Counter extends StatelessWidget {
+  String? title;
+  final Function() onInc;
+  final Function() onDec;
+  Counter({
+    super.key,
+    required this.title,
+    required this.count,
+    required this.onInc,
+    required this.onDec,
+  });
+
+  final int count;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        CommonText(text: "$title", weight: FontWeight.bold),
+        Container(
+          height: 35,
+          decoration: BoxDecoration(
+            color: AppColors.appColorPrimary,
+            borderRadius: BorderRadius.circular(25.0),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              IconButton(
+                  onPressed: onDec,
+                  icon: Icon(Icons.remove, color: Colors.white, size: 20)),
+              CommonText(
+                text: "$count",
+                color: Colors.white,
+                weight: FontWeight.bold,
+              ),
+              IconButton(
+                  onPressed: onInc,
+                  icon: Icon(Icons.add, color: Colors.white, size: 20)),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
