@@ -63,13 +63,13 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-                height: 120,
-                width: 120,
+                height: 150,
+                width: 150,
                 // decoration: BoxDecoration(
                 //     shape: BoxShape.circle, color: Colors.white),
                 child: Image(
                     image: AssetImage("assets/icons/logo.png"),
-                    fit: BoxFit.cover)),
+                    fit: BoxFit.contain)),
           ],
         ),
       ),
