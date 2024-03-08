@@ -179,7 +179,7 @@ class _OneWayTabViewState extends State<OneWayTabView> {
                   children: [
                     0.01.ph,
                     ageCounter(
-                        title: "Chile 1 age:",
+                        title: "Child 1 age:",
                         onInc: () {
                           setState(() {
                             if (selectedChildAge1 < 12) {
@@ -203,7 +203,7 @@ class _OneWayTabViewState extends State<OneWayTabView> {
               ? Column(children: [
                   0.01.ph,
                   ageCounter(
-                      title: "Chile 1 age:",
+                      title: "Child 1 age:",
                       onInc: () {
                         setState(() {
                           if (selectedChildAge1 < 12) {
@@ -221,7 +221,7 @@ class _OneWayTabViewState extends State<OneWayTabView> {
                       age: selectedChildAge1),
                   0.01.ph,
                   ageCounter(
-                      title: "Chile 2 age:",
+                      title: "Child 2 age:",
                       onInc: () {
                         setState(() {
                           if (selectedChildAge2 < 12) {
@@ -243,7 +243,7 @@ class _OneWayTabViewState extends State<OneWayTabView> {
               ? Column(children: [
                   0.01.ph,
                   ageCounter(
-                      title: "Chile 1 age:",
+                      title: "Child 1 age:",
                       onInc: () {
                         setState(() {
                           if (selectedChildAge1 < 12) {
@@ -261,7 +261,7 @@ class _OneWayTabViewState extends State<OneWayTabView> {
                       age: selectedChildAge1),
                   0.01.ph,
                   ageCounter(
-                      title: "Chile 2 age:",
+                      title: "Child 2 age:",
                       onInc: () {
                         setState(() {
                           if (selectedChildAge2 < 12) {
@@ -279,7 +279,7 @@ class _OneWayTabViewState extends State<OneWayTabView> {
                       age: selectedChildAge2),
                   0.01.ph,
                   ageCounter(
-                      title: "Chile 3 age:",
+                      title: "Child 3 age:",
                       onInc: () {
                         setState(() {
                           if (selectedChildAge3 < 12) {
@@ -301,7 +301,7 @@ class _OneWayTabViewState extends State<OneWayTabView> {
               ? Column(children: [
                   0.01.ph,
                   ageCounter(
-                      title: "Chile 1 age:",
+                      title: "Child 1 age:",
                       onInc: () {
                         setState(() {
                           if (selectedChildAge1 < 12) {
@@ -319,7 +319,7 @@ class _OneWayTabViewState extends State<OneWayTabView> {
                       age: selectedChildAge1),
                   0.01.ph,
                   ageCounter(
-                      title: "Chile 2 age:",
+                      title: "Child 2 age:",
                       onInc: () {
                         setState(() {
                           if (selectedChildAge2 < 12) {
@@ -337,7 +337,7 @@ class _OneWayTabViewState extends State<OneWayTabView> {
                       age: selectedChildAge2),
                   0.01.ph,
                   ageCounter(
-                      title: "Chile 3 age:",
+                      title: "Child 3 age:",
                       onInc: () {
                         setState(() {
                           if (selectedChildAge3 < 12) {
@@ -355,7 +355,7 @@ class _OneWayTabViewState extends State<OneWayTabView> {
                       age: selectedChildAge3),
                   0.01.ph,
                   ageCounter(
-                      title: "Chile 4 age:",
+                      title: "Child 4 age:",
                       onInc: () {
                         setState(() {
                           if (selectedChildAge4 < 12) {

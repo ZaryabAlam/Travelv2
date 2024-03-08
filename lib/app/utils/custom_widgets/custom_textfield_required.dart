@@ -101,7 +101,7 @@ class Custom_textfield_required extends StatelessWidget {
                 fontWeight: FontWeight.w400,
                 color: theme.onPrimary),
             contentPadding: contentpadding ??
-                const EdgeInsets.only(left: 15, right: 15, top: 5),
+                const EdgeInsets.only(left: 15, right: 0, top: 15),
             isDense: true,
             focusedErrorBorder: OutlineInputBorder(
               borderSide: BorderSide(

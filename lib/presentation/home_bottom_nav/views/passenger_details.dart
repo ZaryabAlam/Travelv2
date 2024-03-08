@@ -96,6 +96,10 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
   TextEditingController passportExpiryController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController numberController = TextEditingController();
+  TextEditingController child1Controller = TextEditingController();
+  TextEditingController child1yearController = TextEditingController();
+  TextEditingController child1passController = TextEditingController();
+  TextEditingController child1passExpController = TextEditingController();
   final DataController dataController = Get.put(DataController());
   DateTime _selectedDate = DateTime.now();
   String? requestedAge = "";
@@ -140,6 +144,64 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
           _updateTextControllers();
         } else {
           _updatePassExpTextControllers();
+        }
+      });
+    }
+  }
+
+  Future<void> _selectDOB(
+      BuildContext context,
+      TextEditingController controller,
+      DatePickerMode initialDatePickerMode,
+      String type) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime(2101),
+      initialDatePickerMode: initialDatePickerMode,
+    );
+
+    if (picked != null && picked != _selectedDate) {
+      setState(() {
+        _selectedDate = picked;
+        controller.text = DatePickerMode == DatePickerMode.year
+            ? "${picked.year}"
+            : initialDatePickerMode == DatePickerEntryMode.calendar
+                ? "${picked.month}"
+                : "${picked.day}";
+        if (type == "child1") {
+          child1yearController.text =
+              "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+        }
+      });
+    }
+  }
+
+  Future<void> _selectExp(
+      BuildContext context,
+      TextEditingController controller,
+      DatePickerMode initialDatePickerMode,
+      String type) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime(2101),
+      initialDatePickerMode: initialDatePickerMode,
+    );
+
+    if (picked != null && picked != _selectedDate) {
+      setState(() {
+        _selectedDate = picked;
+        controller.text = DatePickerMode == DatePickerMode.year
+            ? "${picked.year}"
+            : initialDatePickerMode == DatePickerEntryMode.calendar
+                ? "${picked.month}"
+                : "${picked.day}";
+        if (type == "child1") {
+          child1passExpController.text =
+              "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
         }
       });
     }
@@ -204,9 +266,9 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CommonText(
-                      text: 'Passenger',
+                      text: 'Primary Passenger',
                       weight: FontWeight.w600,
-                      fontSize: 18.0),
+                      fontSize: 15.0),
                   0.03.ph,
                   // Custom_textfield_required(
                   //     controller: titleController,
@@ -297,25 +359,7 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
                     ],
                   ),
                   0.03.ph,
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: RichText(
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: "Date of Birth",
-                            style: TextStyle(
-                              color: Colors.black,
-                            ),
-                          ),
-                          TextSpan(
-                            text: ' *',
-                            style: TextStyle(color: Colors.red),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  LeftAignHeading(title: "Date of Birth"),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -454,11 +498,12 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
                         }
                         return null;
                       }),
+
                   0.05.ph,
                   CommonText(
                       text: 'Contact Information',
                       weight: FontWeight.w600,
-                      fontSize: 18.0),
+                      fontSize: 15.0),
                   0.03.ph,
                   Custom_textfield_required(
                       // readOnly: true,
@@ -557,44 +602,137 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
                         }
                         return null;
                       }),
-                  // CommonText(text: "$phoneNumber"),
-                  // CommonText(text: "$phoneCode"),
-                  // CommonText(text: "$countryCode"),
+                  Divider(
+                    thickness: 2,
+                  ),
+                  widget.childCount != 0 ||
+                          widget.infantCount != 0 ||
+                          widget.adultCount! > 1
+                      ? Column(
+                          children: [
+                            0.05.ph,
+                            CommonText(
+                                text: 'Other Passengers',
+                                weight: FontWeight.w600,
+                                fontSize: 15.0),
+                            0.03.ph,
+                          ],
+                        )
+                      : Container(),
+                  widget.childCount == 1
+                      ? Container(
+                          padding: EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: AppColors.appColorPrimary
+                                      .withOpacity(0.5),
+                                  width: 1)),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CommonText(
+                                  text: 'Child #1',
+                                  weight: FontWeight.w600,
+                                  fontSize: 13.0),
+                              0.03.ph,
+                              Custom_textfield_required(
+                                  controller: child1Controller,
+                                  requiredLabel: 'Full Name',
+                                  hint: 'Full Name',
+                                  validator: (inputValue) {
+                                    if (inputValue!.isEmpty) {
+                                      return "Enter Name";
+                                    }
+                                    return null;
+                                  }),
+                              0.03.ph,
+                              LeftAignHeading(title: "Date of Birth"),
+                              CustomTextField(
+                                  onTap: () {
+                                    _selectDOB(context, child1yearController,
+                                        DatePickerMode.year, "child1");
+                                  },
+                                  labelText: "",
+                                  textEditingController: child1yearController,
+                                  readOnly: true,
+                                  hintText: 'Year-Month-Day',
+                                  validator: (inputValue) {
+                                    if (inputValue!.isEmpty) {
+                                      return "Enter Year";
+                                    }
+                                    return null;
+                                  }),
+                              0.03.ph,
+                              Custom_textfield_required(
+                                  controller: child1passController,
+                                  requiredLabel: 'Passport Number',
+                                  hint: 'Enter Passport Here',
+                                  validator: (inputValue) {
+                                    if (inputValue!.isEmpty) {
+                                      return "Enter Passport Number";
+                                    }
+                                    return null;
+                                  }),
+                              0.03.ph,
+                              LeftAignHeading(title: "Passport Expiry"),
+                              CustomTextField(
+                                  onTap: () {
+                                    _selectExp(context, child1passExpController,
+                                        DatePickerMode.year, "child1");
+                                  },
+                                  readOnly: true,
+                                  textEditingController:
+                                      child1passExpController,
+                                  hintText: 'Enter Expiry Here',
+                                  validator: (inputValue) {
+                                    if (inputValue!.isEmpty) {
+                                      return "Enter Passport Expiry";
+                                    }
+                                    return null;
+                                  }),
+                            ],
+                          ),
+                        )
+                      : Container(),
                   0.05.ph,
                   CommonText(
                       text: 'Flight Summary',
                       weight: FontWeight.w600,
-                      fontSize: 18.0),
+                      fontSize: 15.0),
                   0.03.ph,
                 ],
               ),
             ),
           ),
-          FlightSummary(
-            fare: widget.fare,
-            tax: widget.tax,
-            total: widget.total,
-            traveller: widget.traveller,
-            cabinClass: widget.cabinClass,
-            searchID: widget.searchID,
-            flightID: widget.flightID,
-            departFlight: widget.departFlight,
-            arriveFlight: widget.arriveFlight,
-            departFromDate1: widget.departFromDate1,
-            departFromTime1: widget.departFromTime1,
-            departFromCode1: widget.departFromCode1,
-            departFromDate2: widget.departFromDate2,
-            departFromTime2: widget.departFromTime2,
-            departFromCode2: widget.departFromCode2,
-            arriveToDate1: widget.arriveToDate1,
-            arriveToTime1: widget.arriveToTime1,
-            arriveToCode1: widget.arriveToCode1,
-            arriveToDate2: widget.arriveToDate2,
-            arriveToCode2: widget.arriveToCode2,
-            arriveToTime2: widget.arriveToTime2,
-            adultCount: widget.adultCount,
-            childCount: widget.childCount,
-            infantCount: widget.infantCount,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: FlightSummary(
+              fare: widget.fare,
+              tax: widget.tax,
+              total: widget.total,
+              traveller: widget.traveller,
+              cabinClass: widget.cabinClass,
+              searchID: widget.searchID,
+              flightID: widget.flightID,
+              departFlight: widget.departFlight,
+              arriveFlight: widget.arriveFlight,
+              departFromDate1: widget.departFromDate1,
+              departFromTime1: widget.departFromTime1,
+              departFromCode1: widget.departFromCode1,
+              departFromDate2: widget.departFromDate2,
+              departFromTime2: widget.departFromTime2,
+              departFromCode2: widget.departFromCode2,
+              arriveToDate1: widget.arriveToDate1,
+              arriveToTime1: widget.arriveToTime1,
+              arriveToCode1: widget.arriveToCode1,
+              arriveToDate2: widget.arriveToDate2,
+              arriveToCode2: widget.arriveToCode2,
+              arriveToTime2: widget.arriveToTime2,
+              adultCount: widget.adultCount,
+              childCount: widget.childCount,
+              infantCount: widget.infantCount,
+            ),
           ),
           0.03.ph,
           Row(
@@ -660,6 +798,37 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
           ),
           0.03.ph,
         ],
+      ),
+    );
+  }
+}
+
+class LeftAignHeading extends StatelessWidget {
+  String? title;
+  LeftAignHeading({
+    required this.title,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: RichText(
+        text: TextSpan(
+          children: [
+            TextSpan(
+              text: title,
+              style: TextStyle(
+                color: Colors.black,
+              ),
+            ),
+            TextSpan(
+              text: ' *',
+              style: TextStyle(color: Colors.red),
+            ),
+          ],
+        ),
       ),
     );
   }

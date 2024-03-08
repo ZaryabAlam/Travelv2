@@ -215,13 +215,12 @@ class _ReturnTabViewState extends State<ReturnTabView> {
                 });
               },
               count: childCount),
-
           childCount == 1
               ? Column(
                   children: [
                     0.01.ph,
                     ageCounter(
-                        title: "Chile 1 age:",
+                        title: "Child 1 age:",
                         onInc: () {
                           setState(() {
                             if (selectedChildAge1 < 12) {
@@ -240,12 +239,11 @@ class _ReturnTabViewState extends State<ReturnTabView> {
                   ],
                 )
               : Container(),
-
           childCount == 2
               ? Column(children: [
                   0.01.ph,
                   ageCounter(
-                      title: "Chile 1 age:",
+                      title: "Child 1 age:",
                       onInc: () {
                         setState(() {
                           if (selectedChildAge1 < 12) {
@@ -263,7 +261,7 @@ class _ReturnTabViewState extends State<ReturnTabView> {
                       age: selectedChildAge1),
                   0.01.ph,
                   ageCounter(
-                      title: "Chile 2 age:",
+                      title: "Child 2 age:",
                       onInc: () {
                         setState(() {
                           if (selectedChildAge2 < 12) {
@@ -285,7 +283,7 @@ class _ReturnTabViewState extends State<ReturnTabView> {
               ? Column(children: [
                   0.01.ph,
                   ageCounter(
-                      title: "Chile 1 age:",
+                      title: "Child 1 age:",
                       onInc: () {
                         setState(() {
                           if (selectedChildAge1 < 12) {
@@ -303,7 +301,7 @@ class _ReturnTabViewState extends State<ReturnTabView> {
                       age: selectedChildAge1),
                   0.01.ph,
                   ageCounter(
-                      title: "Chile 2 age:",
+                      title: "Child 2 age:",
                       onInc: () {
                         setState(() {
                           if (selectedChildAge2 < 12) {
@@ -321,7 +319,7 @@ class _ReturnTabViewState extends State<ReturnTabView> {
                       age: selectedChildAge2),
                   0.01.ph,
                   ageCounter(
-                      title: "Chile 3 age:",
+                      title: "Child 3 age:",
                       onInc: () {
                         setState(() {
                           if (selectedChildAge3 < 12) {
@@ -343,7 +341,7 @@ class _ReturnTabViewState extends State<ReturnTabView> {
               ? Column(children: [
                   0.01.ph,
                   ageCounter(
-                      title: "Chile 1 age:",
+                      title: "Child 1 age:",
                       onInc: () {
                         setState(() {
                           if (selectedChildAge1 < 12) {
@@ -361,7 +359,7 @@ class _ReturnTabViewState extends State<ReturnTabView> {
                       age: selectedChildAge1),
                   0.01.ph,
                   ageCounter(
-                      title: "Chile 2 age:",
+                      title: "Child 2 age:",
                       onInc: () {
                         setState(() {
                           if (selectedChildAge2 < 12) {
@@ -379,7 +377,7 @@ class _ReturnTabViewState extends State<ReturnTabView> {
                       age: selectedChildAge2),
                   0.01.ph,
                   ageCounter(
-                      title: "Chile 3 age:",
+                      title: "Child 3 age:",
                       onInc: () {
                         setState(() {
                           if (selectedChildAge3 < 12) {
@@ -397,7 +395,7 @@ class _ReturnTabViewState extends State<ReturnTabView> {
                       age: selectedChildAge3),
                   0.01.ph,
                   ageCounter(
-                      title: "Chile 4 age:",
+                      title: "Child 4 age:",
                       onInc: () {
                         setState(() {
                           if (selectedChildAge4 < 12) {
@@ -416,7 +414,6 @@ class _ReturnTabViewState extends State<ReturnTabView> {
                 ])
               : Container(),
           //
-
           0.01.ph,
           //
           Counter(
@@ -460,7 +457,6 @@ class _ReturnTabViewState extends State<ReturnTabView> {
                   ],
                 )
               : Container(),
-
           infantCount == 2
               ? Column(children: [
                   0.01.ph,
