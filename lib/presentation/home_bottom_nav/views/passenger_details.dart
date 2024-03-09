@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, non_constant_identifier_names
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
@@ -96,10 +96,53 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
   TextEditingController passportExpiryController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController numberController = TextEditingController();
+  //
+  TextEditingController adult2Controller = TextEditingController();
+  TextEditingController adult2yearController = TextEditingController();
+  TextEditingController adult2passController = TextEditingController();
+  TextEditingController adult2passExpController = TextEditingController();
+  TextEditingController adult3Controller = TextEditingController();
+  TextEditingController adult3yearController = TextEditingController();
+  TextEditingController adult3passController = TextEditingController();
+  TextEditingController adult3passExpController = TextEditingController();
+  TextEditingController adult4Controller = TextEditingController();
+  TextEditingController adult4yearController = TextEditingController();
+  TextEditingController adult4passController = TextEditingController();
+  TextEditingController adult4passExpController = TextEditingController();
+  //
   TextEditingController child1Controller = TextEditingController();
   TextEditingController child1yearController = TextEditingController();
   TextEditingController child1passController = TextEditingController();
   TextEditingController child1passExpController = TextEditingController();
+  TextEditingController child2Controller = TextEditingController();
+  TextEditingController child2yearController = TextEditingController();
+  TextEditingController child2passController = TextEditingController();
+  TextEditingController child2passExpController = TextEditingController();
+  TextEditingController child3Controller = TextEditingController();
+  TextEditingController child3yearController = TextEditingController();
+  TextEditingController child3passController = TextEditingController();
+  TextEditingController child3passExpController = TextEditingController();
+  TextEditingController child4Controller = TextEditingController();
+  TextEditingController child4yearController = TextEditingController();
+  TextEditingController child4passController = TextEditingController();
+  TextEditingController child4passExpController = TextEditingController();
+  //
+  TextEditingController infant1Controller = TextEditingController();
+  TextEditingController infant1yearController = TextEditingController();
+  TextEditingController infant1passController = TextEditingController();
+  TextEditingController infant1passExpController = TextEditingController();
+  TextEditingController infant2Controller = TextEditingController();
+  TextEditingController infant2yearController = TextEditingController();
+  TextEditingController infant2passController = TextEditingController();
+  TextEditingController infant2passExpController = TextEditingController();
+  TextEditingController infant3Controller = TextEditingController();
+  TextEditingController infant3yearController = TextEditingController();
+  TextEditingController infant3passController = TextEditingController();
+  TextEditingController infant3passExpController = TextEditingController();
+  TextEditingController infant4Controller = TextEditingController();
+  TextEditingController infant4yearController = TextEditingController();
+  TextEditingController infant4passController = TextEditingController();
+  TextEditingController infant4passExpController = TextEditingController();
   final DataController dataController = Get.put(DataController());
   DateTime _selectedDate = DateTime.now();
   String? requestedAge = "";
@@ -170,9 +213,53 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
             : initialDatePickerMode == DatePickerEntryMode.calendar
                 ? "${picked.month}"
                 : "${picked.day}";
-        if (type == "child1") {
-          child1yearController.text =
-              "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+        switch (type) {
+          case "child1":
+            child1yearController.text =
+                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+            break;
+          case "child2":
+            child2yearController.text =
+                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+            break;
+          case "child3":
+            child3yearController.text =
+                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+            break;
+          case "child4":
+            child4yearController.text =
+                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+            break;
+          case "infant1":
+            infant1yearController.text =
+                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+            break;
+          case "infant2":
+            infant2yearController.text =
+                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+            break;
+          case "infant3":
+            infant3yearController.text =
+                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+            break;
+          case "infant4":
+            infant4yearController.text =
+                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+            break;
+          case "adult2":
+            adult2yearController.text =
+                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+            break;
+          case "adult3":
+            adult3yearController.text =
+                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+            break;
+          case "adult4":
+            adult4yearController.text =
+                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+            break;
+          default:
+            print("Unexpected type value: $type");
         }
       });
     }
@@ -199,9 +286,53 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
             : initialDatePickerMode == DatePickerEntryMode.calendar
                 ? "${picked.month}"
                 : "${picked.day}";
-        if (type == "child1") {
-          child1passExpController.text =
-              "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+        switch (type) {
+          case "child1":
+            child1passExpController.text =
+                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+            break;
+          case "child2":
+            child2passExpController.text =
+                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+            break;
+          case "child3":
+            child3passExpController.text =
+                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+            break;
+          case "child4":
+            child4passExpController.text =
+                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+            break;
+          case "infant1":
+            infant1passExpController.text =
+                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+            break;
+          case "infant2":
+            infant2passExpController.text =
+                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+            break;
+          case "infant3":
+            infant3passExpController.text =
+                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+            break;
+          case "infant4":
+            infant4passExpController.text =
+                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+            break;
+          case "adult2":
+            adult2passExpController.text =
+                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+            break;
+          case "adult3":
+            adult3passExpController.text =
+                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+            break;
+          case "adult4":
+            adult4passExpController.text =
+                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+            break;
+          default:
+            print("Unexpected type value: $type");
         }
       });
     }
@@ -619,80 +750,139 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
                           ],
                         )
                       : Container(),
-                  widget.childCount == 1
-                      ? Container(
-                          padding: EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                  color: AppColors.appColorPrimary
-                                      .withOpacity(0.5),
-                                  width: 1)),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CommonText(
-                                  text: 'Child #1',
-                                  weight: FontWeight.w600,
-                                  fontSize: 13.0),
-                              0.03.ph,
-                              Custom_textfield_required(
-                                  controller: child1Controller,
-                                  requiredLabel: 'Full Name',
-                                  hint: 'Full Name',
-                                  validator: (inputValue) {
-                                    if (inputValue!.isEmpty) {
-                                      return "Enter Name";
-                                    }
-                                    return null;
-                                  }),
-                              0.03.ph,
-                              LeftAignHeading(title: "Date of Birth"),
-                              CustomTextField(
-                                  onTap: () {
-                                    _selectDOB(context, child1yearController,
-                                        DatePickerMode.year, "child1");
-                                  },
-                                  labelText: "",
-                                  textEditingController: child1yearController,
-                                  readOnly: true,
-                                  hintText: 'Year-Month-Day',
-                                  validator: (inputValue) {
-                                    if (inputValue!.isEmpty) {
-                                      return "Enter Year";
-                                    }
-                                    return null;
-                                  }),
-                              0.03.ph,
-                              Custom_textfield_required(
-                                  controller: child1passController,
-                                  requiredLabel: 'Passport Number',
-                                  hint: 'Enter Passport Here',
-                                  validator: (inputValue) {
-                                    if (inputValue!.isEmpty) {
-                                      return "Enter Passport Number";
-                                    }
-                                    return null;
-                                  }),
-                              0.03.ph,
-                              LeftAignHeading(title: "Passport Expiry"),
-                              CustomTextField(
-                                  onTap: () {
-                                    _selectExp(context, child1passExpController,
-                                        DatePickerMode.year, "child1");
-                                  },
-                                  readOnly: true,
-                                  textEditingController:
-                                      child1passExpController,
-                                  hintText: 'Enter Expiry Here',
-                                  validator: (inputValue) {
-                                    if (inputValue!.isEmpty) {
-                                      return "Enter Passport Expiry";
-                                    }
-                                    return null;
-                                  }),
-                            ],
-                          ),
+
+                  widget.adultCount == 2 || widget.adultCount! > 2
+                      ? Column(
+                          children: [
+                            widget.adultCount == 2 || widget.adultCount! > 2
+                                ? passengerForm(
+                                    context,
+                                    "Adult #2",
+                                    "adult2",
+                                    adult2Controller,
+                                    adult2yearController,
+                                    adult2passController,
+                                    adult2passExpController)
+                                : Container(),
+                            widget.adultCount == 3 || widget.adultCount! > 3
+                                ? passengerForm(
+                                    context,
+                                    "Adult #3",
+                                    "adult3",
+                                    adult3Controller,
+                                    adult3yearController,
+                                    adult3passController,
+                                    adult3passExpController)
+                                : Container(),
+                            widget.childCount == 4
+                                ? passengerForm(
+                                    context,
+                                    "Adult #4",
+                                    "adult4",
+                                    adult4Controller,
+                                    adult4yearController,
+                                    adult4passController,
+                                    adult4passExpController)
+                                : Container()
+                          ],
+                        )
+                      : Container(),
+                  widget.childCount == 1 || widget.childCount! > 1
+                      ? Column(
+                          children: [
+                            0.02.ph,
+                            Divider(
+                              thickness: 2,
+                            ),
+                            0.02.ph,
+                            passengerForm(
+                                context,
+                                "Child #1",
+                                "child1",
+                                child1Controller,
+                                child1yearController,
+                                child1passController,
+                                child1passExpController),
+                            widget.childCount == 2 || widget.childCount! > 2
+                                ? passengerForm(
+                                    context,
+                                    "Child #2",
+                                    "child2",
+                                    child2Controller,
+                                    child2yearController,
+                                    child2passController,
+                                    child2passExpController)
+                                : Container(),
+                            widget.childCount == 3 || widget.childCount! > 3
+                                ? passengerForm(
+                                    context,
+                                    "Child #3",
+                                    "child3",
+                                    child3Controller,
+                                    child3yearController,
+                                    child3passController,
+                                    child3passExpController)
+                                : Container(),
+                            widget.childCount == 4
+                                ? passengerForm(
+                                    context,
+                                    "Child #4",
+                                    "child4",
+                                    child4Controller,
+                                    child4yearController,
+                                    child4passController,
+                                    child4passExpController)
+                                : Container()
+                          ],
+                        )
+                      : Container(),
+                  widget.infantCount == 1 || widget.infantCount! > 1
+                      ? Column(
+                          children: [
+                            0.02.ph,
+                            Divider(
+                              thickness: 2,
+                            ),
+                            0.02.ph,
+                            passengerForm(
+                                context,
+                                "Infant #1",
+                                "infant1",
+                                infant1Controller,
+                                infant1yearController,
+                                infant1passController,
+                                infant1passExpController),
+                            widget.infantCount == 2 || widget.infantCount! > 2
+                                ? passengerForm(
+                                    context,
+                                    "Infant #2",
+                                    "infant2",
+                                    infant2Controller,
+                                    infant2yearController,
+                                    infant2passController,
+                                    infant2passExpController)
+                                : Container(),
+                            widget.infantCount == 3 || widget.infantCount! > 3
+                                ? passengerForm(
+                                    context,
+                                    "Infant #3",
+                                    "infant3",
+                                    infant3Controller,
+                                    infant3yearController,
+                                    infant3passController,
+                                    infant3passExpController)
+                                : Container(),
+                            widget.infantCount == 4
+                                ? passengerForm(
+                                    context,
+                                    "Infant #4",
+                                    "infant4",
+                                    infant4Controller,
+                                    infant4yearController,
+                                    infant4passController,
+                                    infant4passExpController)
+                                : Container()
+                          ],
                         )
                       : Container(),
                   0.05.ph,
@@ -797,6 +987,84 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
             ],
           ),
           0.03.ph,
+        ],
+      ),
+    );
+  }
+
+  Container passengerForm(
+      BuildContext context,
+      String title,
+      String type,
+      TextEditingController ncontroller,
+      TextEditingController DOBcontroller,
+      TextEditingController passController,
+      TextEditingController passExpController) {
+    return Container(
+      padding: EdgeInsets.all(20),
+      decoration: BoxDecoration(
+          border: Border.all(
+              color: AppColors.appColorPrimary.withOpacity(0.5), width: 1)),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CommonText(text: '$title', weight: FontWeight.w600, fontSize: 13.0),
+          0.03.ph,
+          Custom_textfield_required(
+              controller: ncontroller,
+              requiredLabel: 'Full Name',
+              hint: 'Full Name',
+              validator: (inputValue) {
+                if (inputValue!.isEmpty) {
+                  return "Enter Name";
+                }
+                return null;
+              }),
+          0.03.ph,
+          LeftAignHeading(title: "Date of Birth"),
+          CustomTextField(
+              onTap: () {
+                _selectDOB(
+                    context, DOBcontroller, DatePickerMode.year, "$type");
+              },
+              labelText: "",
+              textEditingController: DOBcontroller,
+              readOnly: true,
+              hintText: 'Year-Month-Day',
+              validator: (inputValue) {
+                if (inputValue!.isEmpty) {
+                  return "Enter Year";
+                }
+                return null;
+              }),
+          0.03.ph,
+          Custom_textfield_required(
+              controller: passController,
+              requiredLabel: 'Passport Number',
+              hint: 'Enter Passport Here',
+              validator: (inputValue) {
+                if (inputValue!.isEmpty) {
+                  return "Enter Passport Number";
+                }
+                return null;
+              }),
+          0.03.ph,
+          LeftAignHeading(title: "Passport Expiry"),
+          CustomTextField(
+              onTap: () {
+                _selectExp(
+                    context, passExpController, DatePickerMode.year, "$type");
+              },
+              readOnly: true,
+              textEditingController: passExpController,
+              hintText: 'Enter Expiry Here',
+              validator: (inputValue) {
+                if (inputValue!.isEmpty) {
+                  return "Enter Passport Expiry";
+                }
+                return null;
+              }),
         ],
       ),
     );

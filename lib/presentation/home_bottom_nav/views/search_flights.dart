@@ -87,6 +87,8 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
         title: "Search Flights",
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Obx(() {
             if (flightQuoteController.isLoading.value) {

@@ -96,6 +96,8 @@ class _FlightDetailsScreenState extends State<FlightDetailsScreen> {
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // ---------------------------
             // Text(widget.flightID.toString()),
