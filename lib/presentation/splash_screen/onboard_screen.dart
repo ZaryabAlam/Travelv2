@@ -41,14 +41,14 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 title: "Search Flight",
                 colort: Colors.white,
                 subtitle:
-                    'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'),
+                    'Embark on your next adventure or business trip with ease using our Search Flight feature.'),
             buildPage(
                 color: Color(0xFFd7fada),
                 urlImage: 'assets/images/onboard_background.png',
                 title: "Book Tickets",
                 colort: Colors.white,
                 subtitle:
-                    'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'),
+                    'Start your journey here and let us take the hassle out of flight booking.'),
           ],
         ),
       ),
