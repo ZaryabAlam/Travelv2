@@ -10,6 +10,7 @@ import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
 import 'package:travel_app/presentation/home_bottom_nav/views/details_view.dart';
 
 import '../../../app/data/data_controller.dart';
+import '../../../app/utils/custom_widgets/custom_toast.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -79,7 +80,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           const CommonText(text: 'FEATURED FARES FOR YOU'),
                           TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                MyToast.snackToast("Coming Soon", 1);
+                              },
                               child: const CommonText(
                                 text: 'See All',
                                 weight: AppFontWeights.appTextFontWeightBold,

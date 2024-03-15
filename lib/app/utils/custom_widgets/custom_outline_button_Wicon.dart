@@ -23,7 +23,7 @@ class Outline_button_icon extends StatelessWidget {
       height: height ?? 50.0,
       width: width ?? 250.0,
       child: OutlinedButton(
-        onPressed: () {},
+        onPressed: onPress,
         style: OutlinedButton.styleFrom(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(4.0),

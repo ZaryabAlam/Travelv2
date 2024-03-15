@@ -9,7 +9,6 @@ import 'package:travel_app/app/utils/custom_widgets/custom_button.dart';
 import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/components/search_tabs/return_tab.dart';
 
 import '../../../../../app/configs/app_colors.dart';
-import '../../../../../app/utils/custom_widgets/custom_toast.dart';
 import '../../../../../app/utils/custom_widgets/gradient_snackbar.dart';
 import '../../../views/oneWay_flights.dart';
 

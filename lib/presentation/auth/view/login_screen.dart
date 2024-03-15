@@ -7,6 +7,7 @@ import 'package:travel_app/app/utils/custom_widgets/custom_textfield_required.da
 import 'package:travel_app/presentation/auth/view/register_screen.dart';
 
 import '../../../app/utils/custom_widgets/custom_outline_button_Wicon.dart';
+import '../../../app/utils/custom_widgets/custom_toast.dart';
 import '../controller/login_controller.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -187,7 +188,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               Align(
                                 alignment: Alignment.centerRight,
                                 child: TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      MyToast.snackToast("Coming Soon", 1);
+                                    },
                                     child: CommonText(
                                         text: "Forgot Password?",
                                         color: AppColors.appColorPrimary)),
@@ -245,13 +248,17 @@ class _LoginScreenState extends State<LoginScreen> {
                               SizedBox(height: 20),
                               Outline_button_icon(
                                 text: "Sign in with Google",
-                                onPress: () {},
+                                onPress: () {
+                                  MyToast.snackToast("Coming Soon", 1);
+                                },
                                 iconPath: "assets/icons/google_logo.png",
                               ),
                               SizedBox(height: 10),
                               Outline_button_icon(
                                 text: "Sign in with Microsoft",
-                                onPress: () {},
+                                onPress: () {
+                                  MyToast.snackToast("Coming Soon", 1);
+                                },
                                 iconPath: "assets/icons/ms_logo.png",
                               ),
                               SizedBox(height: 20),

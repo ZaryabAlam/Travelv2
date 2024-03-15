@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel_app/app/configs/app_colors.dart';
 import 'package:travel_app/app/configs/app_size_config.dart';
 import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
@@ -11,6 +12,8 @@ import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/check_in_view.d
 import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/home_view.dart';
 import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/search_view.dart';
 import 'package:travel_app/presentation/booking_history/view/my_bookings_screen.dart';
+
+import '../../auth/view/login_screen.dart';
 
 class BottomNavScreen extends StatefulWidget {
   BottomNavScreen({this.fromDetails = false, super.key, this.cabinClass});
@@ -66,7 +69,6 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
     {'Icon': Icons.arrow_back_sharp, 'Name': 'My Bookings'},
     {'Icon': Icons.arrow_back_sharp, 'Name': 'Check-Ins'},
     {'Icon': Icons.settings, 'Name': 'Settings'},
-    {'Icon': Icons.logout, 'Name': 'Logout'},
   ];
 
   @override
@@ -112,6 +114,20 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
                   );
                 }),
               ),
+              ListTile(
+                dense: true,
+                onTap: () async {
+                  SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+                  await prefs.setBool('loggedInStatus', false);
+                  Get.offAll(() => LoginScreen());
+                },
+                leading: Icon(
+                  Icons.logout,
+                ),
+                title: CommonText(text: "Logout"),
+                subtitle: const Divider(),
+              )
             ],
           ),
         ),
