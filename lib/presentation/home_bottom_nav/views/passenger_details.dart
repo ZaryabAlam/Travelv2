@@ -98,48 +98,70 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
   TextEditingController numberController = TextEditingController();
   //
   TextEditingController adult2Controller = TextEditingController();
+  TextEditingController adult2surnameController = TextEditingController();
+  TextEditingController adult2natController = TextEditingController();
   TextEditingController adult2yearController = TextEditingController();
   TextEditingController adult2passController = TextEditingController();
   TextEditingController adult2passExpController = TextEditingController();
   TextEditingController adult3Controller = TextEditingController();
+  TextEditingController adult3surnameController = TextEditingController();
+  TextEditingController adult3natController = TextEditingController();
   TextEditingController adult3yearController = TextEditingController();
   TextEditingController adult3passController = TextEditingController();
   TextEditingController adult3passExpController = TextEditingController();
   TextEditingController adult4Controller = TextEditingController();
+  TextEditingController adult4surnameController = TextEditingController();
+  TextEditingController adult4natController = TextEditingController();
   TextEditingController adult4yearController = TextEditingController();
   TextEditingController adult4passController = TextEditingController();
   TextEditingController adult4passExpController = TextEditingController();
   //
   TextEditingController child1Controller = TextEditingController();
+  TextEditingController child1surnameController = TextEditingController();
   TextEditingController child1yearController = TextEditingController();
+  TextEditingController child1natController = TextEditingController();
   TextEditingController child1passController = TextEditingController();
   TextEditingController child1passExpController = TextEditingController();
   TextEditingController child2Controller = TextEditingController();
+  TextEditingController child2surnameController = TextEditingController();
+  TextEditingController child2natController = TextEditingController();
   TextEditingController child2yearController = TextEditingController();
   TextEditingController child2passController = TextEditingController();
   TextEditingController child2passExpController = TextEditingController();
   TextEditingController child3Controller = TextEditingController();
+  TextEditingController child3surnameController = TextEditingController();
+  TextEditingController child3natController = TextEditingController();
   TextEditingController child3yearController = TextEditingController();
   TextEditingController child3passController = TextEditingController();
   TextEditingController child3passExpController = TextEditingController();
   TextEditingController child4Controller = TextEditingController();
+  TextEditingController child4surnameController = TextEditingController();
+  TextEditingController child4natController = TextEditingController();
   TextEditingController child4yearController = TextEditingController();
   TextEditingController child4passController = TextEditingController();
   TextEditingController child4passExpController = TextEditingController();
   //
   TextEditingController infant1Controller = TextEditingController();
+  TextEditingController infant1surnameController = TextEditingController();
+  TextEditingController infant1natController = TextEditingController();
   TextEditingController infant1yearController = TextEditingController();
   TextEditingController infant1passController = TextEditingController();
   TextEditingController infant1passExpController = TextEditingController();
   TextEditingController infant2Controller = TextEditingController();
+  TextEditingController infant2surnameController = TextEditingController();
+  TextEditingController infant2natController = TextEditingController();
   TextEditingController infant2yearController = TextEditingController();
   TextEditingController infant2passController = TextEditingController();
   TextEditingController infant2passExpController = TextEditingController();
   TextEditingController infant3Controller = TextEditingController();
+  TextEditingController infant3surnameController = TextEditingController();
+  TextEditingController infant3natController = TextEditingController();
   TextEditingController infant3yearController = TextEditingController();
   TextEditingController infant3passController = TextEditingController();
   TextEditingController infant3passExpController = TextEditingController();
   TextEditingController infant4Controller = TextEditingController();
+  TextEditingController infant4surnameController = TextEditingController();
+  TextEditingController infant4natController = TextEditingController();
   TextEditingController infant4yearController = TextEditingController();
   TextEditingController infant4passController = TextEditingController();
   TextEditingController infant4passExpController = TextEditingController();
@@ -760,7 +782,9 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
                                     "Adult #2",
                                     "adult2",
                                     adult2Controller,
+                                    adult2surnameController,
                                     adult2yearController,
+                                    adult2natController,
                                     adult2passController,
                                     adult2passExpController)
                                 : Container(),
@@ -770,7 +794,9 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
                                     "Adult #3",
                                     "adult3",
                                     adult3Controller,
+                                    adult3surnameController,
                                     adult3yearController,
+                                    adult3natController,
                                     adult3passController,
                                     adult3passExpController)
                                 : Container(),
@@ -780,7 +806,9 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
                                     "Adult #4",
                                     "adult4",
                                     adult4Controller,
+                                    adult4surnameController,
                                     adult4yearController,
+                                    adult4natController,
                                     adult4passController,
                                     adult4passExpController)
                                 : Container()
@@ -800,7 +828,9 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
                                 "Child #1",
                                 "child1",
                                 child1Controller,
+                                child1surnameController,
                                 child1yearController,
+                                child1natController,
                                 child1passController,
                                 child1passExpController),
                             widget.childCount == 2 || widget.childCount! > 2
@@ -809,7 +839,9 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
                                     "Child #2",
                                     "child2",
                                     child2Controller,
+                                    child2surnameController,
                                     child2yearController,
+                                    child2natController,
                                     child2passController,
                                     child2passExpController)
                                 : Container(),
@@ -819,7 +851,9 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
                                     "Child #3",
                                     "child3",
                                     child3Controller,
+                                    child3surnameController,
                                     child3yearController,
+                                    child3natController,
                                     child3passController,
                                     child3passExpController)
                                 : Container(),
@@ -829,7 +863,9 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
                                     "Child #4",
                                     "child4",
                                     child4Controller,
+                                    child4surnameController,
                                     child4yearController,
+                                    child4natController,
                                     child4passController,
                                     child4passExpController)
                                 : Container()
@@ -849,7 +885,9 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
                                 "Infant #1",
                                 "infant1",
                                 infant1Controller,
+                                infant1surnameController,
                                 infant1yearController,
+                                infant1natController,
                                 infant1passController,
                                 infant1passExpController),
                             widget.infantCount == 2 || widget.infantCount! > 2
@@ -858,7 +896,9 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
                                     "Infant #2",
                                     "infant2",
                                     infant2Controller,
+                                    infant2surnameController,
                                     infant2yearController,
+                                    infant2natController,
                                     infant2passController,
                                     infant2passExpController)
                                 : Container(),
@@ -868,7 +908,9 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
                                     "Infant #3",
                                     "infant3",
                                     infant3Controller,
+                                    infant3surnameController,
                                     infant3yearController,
+                                    infant3natController,
                                     infant3passController,
                                     infant3passExpController)
                                 : Container(),
@@ -878,7 +920,9 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
                                     "Infant #4",
                                     "infant4",
                                     infant4Controller,
+                                    infant4surnameController,
                                     infant4yearController,
+                                    infant4natController,
                                     infant4passController,
                                     infant4passExpController)
                                 : Container()
@@ -1047,7 +1091,9 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
       String title,
       String type,
       TextEditingController ncontroller,
+      TextEditingController scontroller,
       TextEditingController DOBcontroller,
+      TextEditingController Natcontroller,
       TextEditingController passController,
       TextEditingController passExpController) {
     return Container(
@@ -1063,11 +1109,22 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
           0.03.ph,
           Custom_textfield_required(
               controller: ncontroller,
-              requiredLabel: 'Full Name',
-              hint: 'Full Name',
+              requiredLabel: 'First Name',
+              hint: 'First Name',
               validator: (inputValue) {
                 if (inputValue!.isEmpty) {
-                  return "Enter Name";
+                  return "Enter First Name";
+                }
+                return null;
+              }),
+          0.03.ph,
+          Custom_textfield_required(
+              controller: scontroller,
+              requiredLabel: 'Last Name',
+              hint: 'Last Name',
+              validator: (inputValue) {
+                if (inputValue!.isEmpty) {
+                  return "Enter Last Name";
                 }
                 return null;
               }),
@@ -1085,6 +1142,50 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
               validator: (inputValue) {
                 if (inputValue!.isEmpty) {
                   return "Enter Year";
+                }
+                return null;
+              }),
+          0.03.ph,
+          Align(
+            alignment: Alignment.centerLeft,
+            child: RichText(
+              text: TextSpan(
+                children: [
+                  TextSpan(
+                    text: "Nationality",
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                  TextSpan(
+                    text: ' *',
+                    style: TextStyle(color: Colors.red),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          CustomTextField(
+              textEditingController: Natcontroller,
+              hintText: 'Enter Nationality Here',
+              readOnly: true,
+              onTap: () {
+                showCountryPicker(
+                  context: context,
+                  showPhoneCode: false,
+                  onSelect: (Country country) {
+                    setState(() {
+                      _selectedCountry =
+                          "${country.flagEmoji}   ${country.name}";
+                      Natcontroller.text = _selectedCountry.toString();
+                      number = PhoneNumber(isoCode: country.countryCode);
+                    });
+                  },
+                );
+              },
+              validator: (inputValue) {
+                if (inputValue!.isEmpty) {
+                  return "Enter Nationality";
                 }
                 return null;
               }),

@@ -273,7 +273,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                   TextButton(
                                       onPressed: () {
-                                        Get.to(() => RegisterScreen());
+                                        // Get.to(() => RegisterScreen());
+                                        MyToast.snackToast("Coming Soon", 1);
                                       },
                                       child: CommonText(
                                         text: "Register",
