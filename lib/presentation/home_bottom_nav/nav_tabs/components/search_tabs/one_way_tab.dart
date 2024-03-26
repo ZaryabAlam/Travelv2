@@ -614,7 +614,8 @@ class _OneWayTabViewState extends State<OneWayTabView> {
           ),
 
           // Search Flight Button -----------------------------------
-          Spacer(),
+          // Spacer(),
+          0.04.ph,
           CustomButton(
             height: 40,
             width: w,

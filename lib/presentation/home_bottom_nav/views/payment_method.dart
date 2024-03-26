@@ -55,48 +55,59 @@ class PaymentMethodScreen extends StatefulWidget {
   String total;
   //
   String adult2name;
+  String adult2Lname;
   String adult2dob;
   String adult2pass;
   String adult2passExp;
   String adult3name;
+  String adult3Lname;
   String adult3dob;
   String adult3pass;
   String adult3passExp;
   String adult4name;
+  String adult4Lname;
   String adult4dob;
   String adult4pass;
   String adult4passExp;
   //
   String child1name;
+  String child1Lname;
   String child1dob;
   String child1pass;
   String child1passExp;
   String child2name;
+  String child2Lname;
   String child2dob;
   String child2pass;
   String child2passExp;
   String child3name;
+  String child3Lname;
   String child3dob;
   String child3pass;
   String child3passExp;
   String child4name;
+  String child4Lname;
   String child4dob;
   String child4pass;
   String child4passExp;
   //
   String infant1name;
+  String infant1Lname;
   String infant1dob;
   String infant1pass;
   String infant1passExp;
   String infant2name;
+  String infant2Lname;
   String infant2dob;
   String infant2pass;
   String infant2passExp;
   String infant3name;
+  String infant3Lname;
   String infant3dob;
   String infant3pass;
   String infant3passExp;
   String infant4name;
+  String infant4Lname;
   String infant4dob;
   String infant4pass;
   String infant4passExp;
@@ -144,48 +155,59 @@ class PaymentMethodScreen extends StatefulWidget {
     required this.total,
     //
     required this.adult2name,
+    required this.adult2Lname,
     required this.adult2dob,
     required this.adult2pass,
     required this.adult2passExp,
     required this.adult3name,
+    required this.adult3Lname,
     required this.adult3dob,
     required this.adult3pass,
     required this.adult3passExp,
     required this.adult4name,
+    required this.adult4Lname,
     required this.adult4dob,
     required this.adult4pass,
     required this.adult4passExp,
     //
     required this.child1name,
+    required this.child1Lname,
     required this.child1dob,
     required this.child1pass,
     required this.child1passExp,
     required this.child2name,
+    required this.child2Lname,
     required this.child2dob,
     required this.child2pass,
     required this.child2passExp,
     required this.child3name,
+    required this.child3Lname,
     required this.child3dob,
     required this.child3pass,
     required this.child3passExp,
     required this.child4name,
+    required this.child4Lname,
     required this.child4dob,
     required this.child4pass,
     required this.child4passExp,
     //
     required this.infant1name,
+    required this.infant1Lname,
     required this.infant1dob,
     required this.infant1pass,
     required this.infant1passExp,
     required this.infant2name,
+    required this.infant2Lname,
     required this.infant2dob,
     required this.infant2pass,
     required this.infant2passExp,
     required this.infant3name,
+    required this.infant3Lname,
     required this.infant3dob,
     required this.infant3pass,
     required this.infant3passExp,
     required this.infant4name,
+    required this.infant4Lname,
     required this.infant4dob,
     required this.infant4pass,
     required this.infant4passExp,
@@ -309,48 +331,59 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                           widget.infantCount!,
                           //
                           widget.adult2name,
+                          widget.adult2Lname,
                           widget.adult2dob,
                           widget.adult2pass,
                           widget.adult2passExp,
                           widget.adult3name,
+                          widget.adult3Lname,
                           widget.adult3dob,
                           widget.adult3pass,
                           widget.adult3passExp,
                           widget.adult4name,
+                          widget.adult4Lname,
                           widget.adult4dob,
                           widget.adult4pass,
                           widget.adult4passExp,
                           //
                           widget.child1name,
+                          widget.child1Lname,
                           widget.child1dob,
                           widget.child1pass,
                           widget.child1passExp,
                           widget.child2name,
+                          widget.child2Lname,
                           widget.child2dob,
                           widget.child2pass,
                           widget.child2passExp,
                           widget.child3name,
+                          widget.child3Lname,
                           widget.child3dob,
                           widget.child3pass,
                           widget.child3passExp,
                           widget.child4name,
+                          widget.child4Lname,
                           widget.child4dob,
                           widget.child4pass,
                           widget.child4passExp,
                           //
                           widget.infant1name,
+                          widget.infant1Lname,
                           widget.infant1dob,
                           widget.infant1pass,
                           widget.infant1passExp,
                           widget.infant2name,
+                          widget.infant2Lname,
                           widget.infant2dob,
                           widget.infant2pass,
                           widget.infant2passExp,
                           widget.infant3name,
+                          widget.infant3Lname,
                           widget.infant3dob,
                           widget.infant3pass,
                           widget.infant3passExp,
                           widget.infant4name,
+                          widget.infant4Lname,
                           widget.infant4dob,
                           widget.infant4pass,
                           widget.infant4passExp,
