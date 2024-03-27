@@ -64,16 +64,16 @@ class _ReturnTabViewState extends State<ReturnTabView> {
     // 'Premium',
     // 'First Class',
   ];
-  var childAgeList = [
-    '3-6',
-    '6-9',
-    '9-12',
-  ];
-  var infantAgeList = [
-    '0-1',
-    '1-2',
-    '2-3',
-  ];
+  // var childAgeList = [
+  //   '3-6',
+  //   '6-9',
+  //   '9-12',
+  // ];
+  // var infantAgeList = [
+  //   '0-1',
+  //   '1-2',
+  //   '2-3',
+  // ];
 
   String? arriveDate = "Select Date";
   String? departDate = "Select Date";
@@ -701,6 +701,17 @@ class _ReturnTabViewState extends State<ReturnTabView> {
                       arriveDate: arriveDateForm.toString(),
                       departDate: departDateForm.toString(),
                       tripType: tripType.toString(),
+                      //
+                      child1age: selectedChildAge1,
+                      child2age: selectedChildAge2,
+                      child3age: selectedChildAge3,
+                      child4age: selectedChildAge4,
+                      //
+                      infant1age: selectedCIntantAge1,
+                      infant2age: selectedCIntantAge2,
+                      infant3age: selectedCIntantAge3,
+                      infant4age: selectedCIntantAge4,
+                      //
                     ));
               }
             },

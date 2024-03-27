@@ -158,6 +158,17 @@ class _MultiTabViewState extends State<MultiTabView> {
                       adultCount:1,
                       childCount: 0,
                       infantCount:0,
+                      //
+                      child1age: 1,
+                      child2age: 1,
+                      child3age: 1,
+                      child4age: 1,
+                      //
+                      infant1age: 1,
+                      infant2age: 1,
+                      infant3age: 1,
+                      infant4age: 1,
+                      //
                     ));
               }),
 

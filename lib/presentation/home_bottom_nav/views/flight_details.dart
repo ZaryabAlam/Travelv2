@@ -36,6 +36,17 @@ class FlightDetailsScreen extends StatefulWidget {
   String arriveToDate2;
   String arriveToTime2;
   String arriveToCode2;
+  //
+  int? child1age;
+  int? child2age;
+  int? child3age;
+  int? child4age;
+  //
+  int? infant1age;
+  int? infant2age;
+  int? infant3age;
+  int? infant4age;
+  //
 
   FlightDetailsScreen({
     super.key,
@@ -62,6 +73,16 @@ class FlightDetailsScreen extends StatefulWidget {
     required this.arriveToDate2,
     required this.arriveToTime2,
     required this.arriveToCode2,
+    //
+    required this.child1age,
+    required this.child2age,
+    required this.child3age,
+    required this.child4age,
+    //
+    required this.infant1age,
+    required this.infant2age,
+    required this.infant3age,
+    required this.infant4age,
     //
   });
 
@@ -163,6 +184,17 @@ class _FlightDetailsScreenState extends State<FlightDetailsScreen> {
                                     adultCount: widget.adultCount,
                                     childCount: widget.childCount,
                                     infantCount: widget.infantCount,
+                                    //
+                                    child1age: widget.child1age,
+                                    child2age: widget.child2age,
+                                    child3age: widget.child3age,
+                                    child4age: widget.child4age,
+                                    //
+                                    infant1age: widget.infant1age,
+                                    infant2age: widget.infant2age,
+                                    infant3age: widget.infant3age,
+                                    infant4age: widget.infant4age,
+                                    //
                                   ),
                                 ]);
                           }));
@@ -206,6 +238,17 @@ class FlightPackageWidget extends StatefulWidget {
   String arriveToDate2;
   String arriveToTime2;
   String arriveToCode2;
+  //
+  int? child1age;
+  int? child2age;
+  int? child3age;
+  int? child4age;
+  //
+  int? infant1age;
+  int? infant2age;
+  int? infant3age;
+  int? infant4age;
+  //
 
   FlightPackageWidget({
     required this.name,
@@ -232,6 +275,17 @@ class FlightPackageWidget extends StatefulWidget {
     required this.arriveToDate2,
     required this.arriveToTime2,
     required this.arriveToCode2,
+    //
+    required this.child1age,
+    required this.child2age,
+    required this.child3age,
+    required this.child4age,
+    //
+    required this.infant1age,
+    required this.infant2age,
+    required this.infant3age,
+    required this.infant4age,
+    //
     super.key,
   });
 
@@ -493,6 +547,17 @@ class _FlightPackageWidgetState extends State<FlightPackageWidget> {
                         adultCount: widget.adultCount,
                         childCount: widget.childCount,
                         infantCount: widget.infantCount,
+                        //
+                        child1age: widget.child1age,
+                        child2age: widget.child2age,
+                        child3age: widget.child3age,
+                        child4age: widget.child4age,
+                        //
+                        infant1age: widget.infant1age,
+                        infant2age: widget.infant2age,
+                        infant3age: widget.infant3age,
+                        infant4age: widget.infant4age,
+                        //
                       ));
                   // Get.to(() => PassengerDetailsScreen(
                   //       fare: widget.charges.toString(),

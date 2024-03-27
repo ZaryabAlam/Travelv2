@@ -48,37 +48,60 @@ class PassengerDetailsScreen extends StatefulWidget {
   String fare;
   String tax;
   String total;
+  //
+  int? child1age;
+  int? child2age;
+  int? child3age;
+  int? child4age;
+  //
+  int? infant1age;
+  int? infant2age;
+  int? infant3age;
+  int? infant4age;
+  //
 
-  PassengerDetailsScreen(
-      {super.key,
-      required this.searchID,
-      required this.flightID,
-      required this.paymentID,
-      //
-      required this.departFlight,
-      required this.departFromDate1,
-      required this.departFromTime1,
-      required this.departFromCode1,
-      required this.arriveToDate1,
-      required this.arriveToTime1,
-      required this.arriveToCode1,
-      //
-      required this.arriveFlight,
-      required this.departFromDate2,
-      required this.departFromTime2,
-      required this.departFromCode2,
-      required this.arriveToDate2,
-      required this.arriveToTime2,
-      required this.arriveToCode2,
-      //
-      required this.traveller,
-      required this.adultCount,
-      required this.childCount,
-      required this.infantCount,
-      required this.cabinClass,
-      required this.fare,
-      required this.tax,
-      required this.total});
+  PassengerDetailsScreen({
+    super.key,
+    required this.searchID,
+    required this.flightID,
+    required this.paymentID,
+    //
+    required this.departFlight,
+    required this.departFromDate1,
+    required this.departFromTime1,
+    required this.departFromCode1,
+    required this.arriveToDate1,
+    required this.arriveToTime1,
+    required this.arriveToCode1,
+    //
+    required this.arriveFlight,
+    required this.departFromDate2,
+    required this.departFromTime2,
+    required this.departFromCode2,
+    required this.arriveToDate2,
+    required this.arriveToTime2,
+    required this.arriveToCode2,
+    //
+    required this.traveller,
+    required this.adultCount,
+    required this.childCount,
+    required this.infantCount,
+    required this.cabinClass,
+    required this.fare,
+    required this.tax,
+    required this.total,
+    //
+    required this.child1age,
+    required this.child2age,
+    required this.child3age,
+    required this.child4age,
+    //
+    required this.infant1age,
+    required this.infant2age,
+    required this.infant3age,
+    required this.infant4age,
+    //
+  });
 
   @override
   State<PassengerDetailsScreen> createState() => _PassengerDetailsScreenState();
@@ -214,76 +237,97 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
     }
   }
 
+//Other Passengers Date of Birth
   Future<void> _selectDOB(
-      BuildContext context,
-      TextEditingController controller,
-      DatePickerMode initialDatePickerMode,
-      String type) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(1900),
-      lastDate: DateTime(2101),
-      initialDatePickerMode: initialDatePickerMode,
-    );
+    BuildContext context,
+    TextEditingController controller,
+    DatePickerMode initialDatePickerMode,
+    String type,
+    int? requiredAge,
+  ) async {
+    try {
+      print('************************');
+      DateTime age =
+          DateTime.now().subtract(Duration(days: requiredAge! * 365));
+      int ageInitial = age.year - 1;
+      int ageFinal = age.year + 1;
 
-    if (picked != null && picked != _selectedDate) {
-      setState(() {
-        _selectedDate = picked;
-        controller.text = DatePickerMode == DatePickerMode.year
-            ? "${picked.year}"
-            : initialDatePickerMode == DatePickerEntryMode.calendar
-                ? "${picked.month}"
-                : "${picked.day}";
-        switch (type) {
-          case "child1":
-            child1yearController.text =
-                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
-            break;
-          case "child2":
-            child2yearController.text =
-                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
-            break;
-          case "child3":
-            child3yearController.text =
-                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
-            break;
-          case "child4":
-            child4yearController.text =
-                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
-            break;
-          case "infant1":
-            infant1yearController.text =
-                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
-            break;
-          case "infant2":
-            infant2yearController.text =
-                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
-            break;
-          case "infant3":
-            infant3yearController.text =
-                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
-            break;
-          case "infant4":
-            infant4yearController.text =
-                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
-            break;
-          case "adult2":
-            adult2yearController.text =
-                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
-            break;
-          case "adult3":
-            adult3yearController.text =
-                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
-            break;
-          case "adult4":
-            adult4yearController.text =
-                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
-            break;
-          default:
-            print("Unexpected type value: $type");
-        }
-      });
+      // var b = DateTimeRange(start: start, end: end)
+      // DateTime() 2022-03-29 01:39:59.409476
+
+      print(DateTime.parse('$ageInitial-01-01 01:39:59.409476').toString() +
+          "Initial Date");
+      final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: age,
+        firstDate: DateTime.parse('$ageInitial-01-01 01:39:59.409476'),
+        lastDate: DateTime.parse('$ageFinal-01-01 01:39:59.409476'),
+        // initialDate: DateTime.now(),
+        // firstDate: DateTime(1900),
+        // lastDate: DateTime(2101),
+        initialDatePickerMode: initialDatePickerMode,
+      );
+
+      if (picked != null && picked != _selectedDate) {
+        setState(() {
+          _selectedDate = picked;
+          controller.text = DatePickerMode == DatePickerMode.year
+              ? "${picked.year}"
+              : initialDatePickerMode == DatePickerEntryMode.calendar
+                  ? "${picked.month}"
+                  : "${picked.day}";
+          switch (type) {
+            case "child1":
+              child1yearController.text =
+                  "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+              break;
+            case "child2":
+              child2yearController.text =
+                  "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+              break;
+            case "child3":
+              child3yearController.text =
+                  "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+              break;
+            case "child4":
+              child4yearController.text =
+                  "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+              break;
+            case "infant1":
+              infant1yearController.text =
+                  "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+              break;
+            case "infant2":
+              infant2yearController.text =
+                  "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+              break;
+            case "infant3":
+              infant3yearController.text =
+                  "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+              break;
+            case "infant4":
+              infant4yearController.text =
+                  "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+              break;
+            case "adult2":
+              adult2yearController.text =
+                  "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+              break;
+            case "adult3":
+              adult3yearController.text =
+                  "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+              break;
+            case "adult4":
+              adult4yearController.text =
+                  "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+              break;
+            default:
+              print("Unexpected type value: $type");
+          }
+        });
+      }
+    } catch (e) {
+      print(e);
     }
   }
 
@@ -786,7 +830,8 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
                                     adult2yearController,
                                     adult2natController,
                                     adult2passController,
-                                    adult2passExpController)
+                                    adult2passExpController,
+                                    DateTime.now().year)
                                 : Container(),
                             widget.adultCount == 3 || widget.adultCount! > 3
                                 ? passengerForm(
@@ -798,7 +843,8 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
                                     adult3yearController,
                                     adult3natController,
                                     adult3passController,
-                                    adult3passExpController)
+                                    adult3passExpController,
+                                    DateTime.now().year)
                                 : Container(),
                             widget.adultCount == 4
                                 ? passengerForm(
@@ -810,7 +856,8 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
                                     adult4yearController,
                                     adult4natController,
                                     adult4passController,
-                                    adult4passExpController)
+                                    adult4passExpController,
+                                    DateTime.now().year)
                                 : Container()
                           ],
                         )
@@ -824,15 +871,17 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
                             ),
                             0.02.ph,
                             passengerForm(
-                                context,
-                                "Child #1",
-                                "child1",
-                                child1Controller,
-                                child1surnameController,
-                                child1yearController,
-                                child1natController,
-                                child1passController,
-                                child1passExpController),
+                              context,
+                              "Child #1",
+                              "child1",
+                              child1Controller,
+                              child1surnameController,
+                              child1yearController,
+                              child1natController,
+                              child1passController,
+                              child1passExpController,
+                              widget.child1age,
+                            ),
                             widget.childCount == 2 || widget.childCount! > 2
                                 ? passengerForm(
                                     context,
@@ -843,7 +892,9 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
                                     child2yearController,
                                     child2natController,
                                     child2passController,
-                                    child2passExpController)
+                                    child2passExpController,
+                                    widget.child2age,
+                                  )
                                 : Container(),
                             widget.childCount == 3 || widget.childCount! > 3
                                 ? passengerForm(
@@ -855,7 +906,9 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
                                     child3yearController,
                                     child3natController,
                                     child3passController,
-                                    child3passExpController)
+                                    child3passExpController,
+                                    widget.child3age,
+                                  )
                                 : Container(),
                             widget.childCount == 4
                                 ? passengerForm(
@@ -867,7 +920,9 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
                                     child4yearController,
                                     child4natController,
                                     child4passController,
-                                    child4passExpController)
+                                    child4passExpController,
+                                    widget.child4age,
+                                  )
                                 : Container()
                           ],
                         )
@@ -881,15 +936,17 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
                             ),
                             0.02.ph,
                             passengerForm(
-                                context,
-                                "Infant #1",
-                                "infant1",
-                                infant1Controller,
-                                infant1surnameController,
-                                infant1yearController,
-                                infant1natController,
-                                infant1passController,
-                                infant1passExpController),
+                              context,
+                              "Infant #1",
+                              "infant1",
+                              infant1Controller,
+                              infant1surnameController,
+                              infant1yearController,
+                              infant1natController,
+                              infant1passController,
+                              infant1passExpController,
+                              widget.infant1age,
+                            ),
                             widget.infantCount == 2 || widget.infantCount! > 2
                                 ? passengerForm(
                                     context,
@@ -900,7 +957,9 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
                                     infant2yearController,
                                     infant2natController,
                                     infant2passController,
-                                    infant2passExpController)
+                                    infant2passExpController,
+                                    widget.infant2age,
+                                  )
                                 : Container(),
                             widget.infantCount == 3 || widget.infantCount! > 3
                                 ? passengerForm(
@@ -912,7 +971,9 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
                                     infant3yearController,
                                     infant3natController,
                                     infant3passController,
-                                    infant3passExpController)
+                                    infant3passExpController,
+                                    widget.infant3age,
+                                  )
                                 : Container(),
                             widget.infantCount == 4
                                 ? passengerForm(
@@ -924,7 +985,9 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
                                     infant4yearController,
                                     infant4natController,
                                     infant4passController,
-                                    infant4passExpController)
+                                    infant4passExpController,
+                                    widget.infant4age,
+                                  )
                                 : Container()
                           ],
                         )
@@ -1098,15 +1161,17 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
   }
 
   Container passengerForm(
-      BuildContext context,
-      String title,
-      String type,
-      TextEditingController ncontroller,
-      TextEditingController scontroller,
-      TextEditingController DOBcontroller,
-      TextEditingController Natcontroller,
-      TextEditingController passController,
-      TextEditingController passExpController) {
+    BuildContext context,
+    String title,
+    String type,
+    TextEditingController ncontroller,
+    TextEditingController scontroller,
+    TextEditingController DOBcontroller,
+    TextEditingController Natcontroller,
+    TextEditingController passController,
+    TextEditingController passExpController,
+    int? age,
+  ) {
     return Container(
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -1144,7 +1209,7 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
           CustomTextField(
               onTap: () {
                 _selectDOB(
-                    context, DOBcontroller, DatePickerMode.year, "$type");
+                    context, DOBcontroller, DatePickerMode.year, "$type", age);
               },
               labelText: "",
               textEditingController: DOBcontroller,

@@ -642,6 +642,17 @@ class _OneWayTabViewState extends State<OneWayTabView> {
                       adultCount: adultCount,
                       childCount: childCount,
                       infantCount: infantCount,
+                           //
+                      child1age: selectedChildAge1,
+                      child2age: selectedChildAge2,
+                      child3age: selectedChildAge3,
+                      child4age: selectedChildAge4,
+                      //
+                      infant1age: selectedCIntantAge1,
+                      infant2age: selectedCIntantAge2,
+                      infant3age: selectedCIntantAge3,
+                      infant4age: selectedCIntantAge4,
+                      //
                     ));
               }
             },

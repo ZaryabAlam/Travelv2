@@ -27,6 +27,17 @@ class OneWaySearchFlightScreen extends StatefulWidget {
   int? adultCount;
   int? childCount;
   int? infantCount;
+  //
+  int? child1age;
+  int? child2age;
+  int? child3age;
+  int? child4age;
+  //
+  int? infant1age;
+  int? infant2age;
+  int? infant3age;
+  int? infant4age;
+  //
 
   OneWaySearchFlightScreen({
     super.key,
@@ -41,6 +52,17 @@ class OneWaySearchFlightScreen extends StatefulWidget {
     this.isOneWay,
     this.traveller,
     this.cabinClass,
+    //
+    required this.child1age,
+    required this.child2age,
+    required this.child3age,
+    required this.child4age,
+    //
+    required this.infant1age,
+    required this.infant2age,
+    required this.infant3age,
+    required this.infant4age,
+    //
   });
 
   @override
@@ -58,8 +80,13 @@ class _OneWaySearchFlightScreenState extends State<OneWaySearchFlightScreen> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      oneWayFlightQuoteController.fetchOneWayFlightQuote(widget.fromCity,
-          widget.toCity, widget.departDate, widget.arriveDate, widget.tripType,widget.adultCount,
+      oneWayFlightQuoteController.fetchOneWayFlightQuote(
+          widget.fromCity,
+          widget.toCity,
+          widget.departDate,
+          widget.arriveDate,
+          widget.tripType,
+          widget.adultCount,
           widget.childCount,
           widget.infantCount);
     });
@@ -215,9 +242,10 @@ class _OneWaySearchFlightScreenState extends State<OneWaySearchFlightScreen> {
                       widget.toCity,
                       widget.departDate,
                       widget.arriveDate,
-                      widget.tripType,widget.adultCount,
-          widget.childCount,
-          widget.infantCount);
+                      widget.tripType,
+                      widget.adultCount,
+                      widget.childCount,
+                      widget.infantCount);
                 }
 
                 void _showFilterOptions() {
@@ -611,6 +639,25 @@ class _OneWaySearchFlightScreenState extends State<OneWaySearchFlightScreen> {
                                                                 .childCount,
                                                             infantCount: widget
                                                                 .infantCount,
+                                                            //
+                                                            child1age: widget
+                                                                .child1age,
+                                                            child2age: widget
+                                                                .child2age,
+                                                            child3age: widget
+                                                                .child3age,
+                                                            child4age: widget
+                                                                .child4age,
+                                                            //
+                                                            infant1age: widget
+                                                                .infant1age,
+                                                            infant2age: widget
+                                                                .infant2age,
+                                                            infant3age: widget
+                                                                .infant3age,
+                                                            infant4age: widget
+                                                                .infant4age,
+                                                            //
                                                           ));
                                                     },
                                                     text:

@@ -28,6 +28,17 @@ class SearchFlightScreen extends StatefulWidget {
   String? cabinClass;
   bool? isOneWay = false;
   String tripType;
+  //
+  int? child1age;
+  int? child2age;
+  int? child3age;
+  int? child4age;
+  //
+  int? infant1age;
+  int? infant2age;
+  int? infant3age;
+  int? infant4age;
+  //
 
   SearchFlightScreen({
     super.key,
@@ -42,6 +53,17 @@ class SearchFlightScreen extends StatefulWidget {
     this.isOneWay,
     this.traveller,
     this.cabinClass,
+    //
+    required this.child1age,
+    required this.child2age,
+    required this.child3age,
+    required this.child4age,
+    //
+    required this.infant1age,
+    required this.infant2age,
+    required this.infant3age,
+    required this.infant4age,
+    //
   });
 
   @override
@@ -754,6 +776,33 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
                                                                     infantCount:
                                                                         widget
                                                                             .infantCount,
+                                                                    //
+                                                                    child1age:
+                                                                        widget
+                                                                            .child1age,
+                                                                    child2age:
+                                                                        widget
+                                                                            .child2age,
+                                                                    child3age:
+                                                                        widget
+                                                                            .child3age,
+                                                                    child4age:
+                                                                        widget
+                                                                            .child4age,
+                                                                    //
+                                                                    infant1age:
+                                                                        widget
+                                                                            .infant1age,
+                                                                    infant2age:
+                                                                        widget
+                                                                            .infant2age,
+                                                                    infant3age:
+                                                                        widget
+                                                                            .infant3age,
+                                                                    infant4age:
+                                                                        widget
+                                                                            .infant4age,
+                                                                    //
                                                                   ));
                                                             },
                                                             text:
@@ -923,6 +972,25 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
                                                               widget.childCount,
                                                           infantCount: widget
                                                               .infantCount,
+                                                          //
+                                                          child1age:
+                                                              widget.child1age,
+                                                          child2age:
+                                                              widget.child2age,
+                                                          child3age:
+                                                              widget.child3age,
+                                                          child4age:
+                                                              widget.child4age,
+                                                          //
+                                                          infant1age:
+                                                              widget.infant1age,
+                                                          infant2age:
+                                                              widget.infant2age,
+                                                          infant3age:
+                                                              widget.infant3age,
+                                                          infant4age:
+                                                              widget.infant4age,
+                                                          //
                                                         ));
                                                   },
                                                 )
