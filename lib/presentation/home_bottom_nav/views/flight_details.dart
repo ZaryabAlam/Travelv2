@@ -134,6 +134,7 @@ class _FlightDetailsScreenState extends State<FlightDetailsScreen> {
                   return Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Icon(
                           Icons.warning_rounded,
@@ -158,6 +159,7 @@ class _FlightDetailsScreenState extends State<FlightDetailsScreen> {
                           itemBuilder: (context, index) {
                             return Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   FlightPackageWidget(
                                     name: 'Saver',
@@ -377,83 +379,83 @@ class _FlightPackageWidgetState extends State<FlightPackageWidget> {
             0.02.ph,
 // -----------------------------------------------------
 
-            CommonText(
-              text: 'Change Fee',
-              fontSize: 11,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                CommonText(
-                  text: 'Not Available',
-                  fontSize: 11,
-                  weight: FontWeight.w600,
-                ),
-                // Icon(
-                //   Icons.info,
-                //   size: 20,
-                // ),
-              ],
-            ),
-            0.02.ph,
+            // CommonText(
+            //   text: 'Change Fee',
+            //   fontSize: 11,
+            // ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     CommonText(
+            //       text: 'Not Available',
+            //       fontSize: 11,
+            //       weight: FontWeight.w600,
+            //     ),
+            //     // Icon(
+            //     //   Icons.info,
+            //     //   size: 20,
+            //     // ),
+            //   ],
+            // ),
+            // 0.02.ph,
 // -----------------------------------------------------
-            CommonText(
-              text: 'Refund Fee',
-              fontSize: 11,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                CommonText(
-                  text: '\$ Not Available',
-                  fontSize: 11,
-                  weight: FontWeight.w600,
-                ),
-                // Icon(
-                //   Icons.info,
-                //   size: 20,
-                // ),
-              ],
-            ),
-            0.02.ph,
+            // CommonText(
+            //   text: 'Refund Fee',
+            //   fontSize: 11,
+            // ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     CommonText(
+            //       text: '\$ Not Available',
+            //       fontSize: 11,
+            //       weight: FontWeight.w600,
+            //     ),
+            //     // Icon(
+            //     //   Icons.info,
+            //     //   size: 20,
+            //     // ),
+            //   ],
+            // ),
+            // 0.02.ph,
             //---------------------------------------
-            CommonText(
-              text: 'Seat Selection',
-              fontSize: 11,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                CommonText(
-                  text: 'Not Available',
-                  fontSize: 11,
-                  weight: FontWeight.w600,
-                ),
-                // Icon(
-                //   Icons.info,
-                //   size: 20,
-                // ),
-              ],
-            ),
-            0.02.ph,
+            // CommonText(
+            //   text: 'Seat Selection',
+            //   fontSize: 11,
+            // ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     CommonText(
+            //       text: 'Not Available',
+            //       fontSize: 11,
+            //       weight: FontWeight.w600,
+            //     ),
+            //     // Icon(
+            //     //   Icons.info,
+            //     //   size: 20,
+            //     // ),
+            //   ],
+            // ),
+            // 0.02.ph,
 // -----------------------------------------------------
             // -----------------------------------------------------
-            CommonText(
-              text: 'Upgrade to Business',
-              fontSize: 11,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                CommonText(
-                  text: 'Not Available',
-                  fontSize: 11,
-                  weight: FontWeight.w600,
-                ),
-              ],
-            ),
+            // CommonText(
+            //   text: 'Upgrade to Business',
+            //   fontSize: 11,
+            // ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     CommonText(
+            //       text: 'Not Available',
+            //       fontSize: 11,
+            //       weight: FontWeight.w600,
+            //     ),
+            //   ],
+            // ),
 
-            0.04.ph,
+            // 0.04.ph,
 // -----------------------------------------------------
             // -----------------------------------------------------
             Divider(),
@@ -518,7 +520,8 @@ class _FlightPackageWidgetState extends State<FlightPackageWidget> {
             CustomButton(
                 height: 35,
                 width: w,
-                text: 'Avail this Flight for \$${total.toStringAsFixed(2)}',
+                // text: 'Avail this Flight for \$${total.toStringAsFixed(2)}',
+                text: "Book",
                 onPress: () {
                   // Get.to(() => PaymentMethodScreen(
                   Get.to(() => PassengerDetailsScreen(

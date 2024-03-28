@@ -204,7 +204,7 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
     'Mr': 'MISTER',
     'Mrs': 'MISTER',
     'Ms': 'MISTER',
-    'Sir': 'MISTER',
+    // 'Sir': 'MISTER',
   };
 
   Future<void> _selectDate(
@@ -246,25 +246,16 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
     int? requiredAge,
   ) async {
     try {
-      print('************************');
       DateTime age =
           DateTime.now().subtract(Duration(days: requiredAge! * 365));
       int ageInitial = age.year - 1;
       int ageFinal = age.year + 1;
 
-      // var b = DateTimeRange(start: start, end: end)
-      // DateTime() 2022-03-29 01:39:59.409476
-
-      print(DateTime.parse('$ageInitial-01-01 01:39:59.409476').toString() +
-          "Initial Date");
       final DateTime? picked = await showDatePicker(
         context: context,
         initialDate: age,
         firstDate: DateTime.parse('$ageInitial-01-01 01:39:59.409476'),
         lastDate: DateTime.parse('$ageFinal-01-01 01:39:59.409476'),
-        // initialDate: DateTime.now(),
-        // firstDate: DateTime(1900),
-        // lastDate: DateTime(2101),
         initialDatePickerMode: initialDatePickerMode,
       );
 
@@ -278,48 +269,50 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
                   : "${picked.day}";
           switch (type) {
             case "child1":
+              // child1yearController.text =
+              //     "${picked.year}-${getMonthAbbreviation(picked.montha)}-${picked.day.toString().padLeft(2, '0')}";
               child1yearController.text =
-                  "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+                  "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
               break;
             case "child2":
               child2yearController.text =
-                  "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+                  "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
               break;
             case "child3":
               child3yearController.text =
-                  "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+                  "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
               break;
             case "child4":
               child4yearController.text =
-                  "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+                  "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
               break;
             case "infant1":
               infant1yearController.text =
-                  "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+                  "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
               break;
             case "infant2":
               infant2yearController.text =
-                  "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+                  "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
               break;
             case "infant3":
               infant3yearController.text =
-                  "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+                  "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
               break;
             case "infant4":
               infant4yearController.text =
-                  "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+                  "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
               break;
             case "adult2":
               adult2yearController.text =
-                  "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+                  "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
               break;
             case "adult3":
               adult3yearController.text =
-                  "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+                  "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
               break;
             case "adult4":
               adult4yearController.text =
-                  "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+                  "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
               break;
             default:
               print("Unexpected type value: $type");
@@ -355,47 +348,47 @@ class _PassengerDetailsScreenState extends State<PassengerDetailsScreen> {
         switch (type) {
           case "child1":
             child1passExpController.text =
-                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+                "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
             break;
           case "child2":
             child2passExpController.text =
-                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+                "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
             break;
           case "child3":
             child3passExpController.text =
-                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+                "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
             break;
           case "child4":
             child4passExpController.text =
-                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+                "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
             break;
           case "infant1":
             infant1passExpController.text =
-                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+                "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
             break;
           case "infant2":
             infant2passExpController.text =
-                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+                "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
             break;
           case "infant3":
             infant3passExpController.text =
-                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+                "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
             break;
           case "infant4":
             infant4passExpController.text =
-                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+                "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
             break;
           case "adult2":
             adult2passExpController.text =
-                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+                "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
             break;
           case "adult3":
             adult3passExpController.text =
-                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+                "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
             break;
           case "adult4":
             adult4passExpController.text =
-                "${picked.year}-${getMonthAbbreviation(picked.month)}-${picked.day.toString().padLeft(2, '0')}";
+                "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
             break;
           default:
             print("Unexpected type value: $type");

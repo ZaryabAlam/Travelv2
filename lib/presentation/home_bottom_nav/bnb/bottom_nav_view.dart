@@ -36,7 +36,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
   setArgs() {
     // print("Cabin Class: ${widget.cabinClass}");
     tabsList = [
-      const HomeScreen(),
+      // const HomeScreen(),
       SearchScreen(cabinClass: widget.cabinClass),
       const BookingScreen(),
       const CheckInScreen(),
@@ -51,20 +51,20 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
   onSelectTab(int index) => setState(() => selectedIndex = index);
 
   var tabsLables = [
-    'Home',
+    // 'Home',
     'Search',
     'My Bookings',
     'Check-Ins',
   ];
   var tabsIcons = <Widget>[
-    const Icon(Icons.home),
+    // const Icon(Icons.home),
     const Icon(FontAwesomeIcons.plane),
     const Icon(Icons.calendar_month_rounded),
     const Icon(Icons.location_on),
   ];
 
   List<Map<String, dynamic>> appDrawerData = [
-    {'Icon': Icons.home, 'Name': 'Home'},
+    // {'Icon': Icons.home, 'Name': 'Home'},
     {'Icon': Icons.arrow_back_sharp, 'Name': 'Book a flight'},
     {'Icon': Icons.arrow_back_sharp, 'Name': 'My Bookings'},
     {'Icon': Icons.arrow_back_sharp, 'Name': 'Check-Ins'},

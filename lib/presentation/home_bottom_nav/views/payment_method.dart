@@ -246,242 +246,251 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
   Widget build(BuildContext context) {
     print("${widget.title}");
     return Scaffold(
-      appBar: CustomAppBar(
-        title: 'Payment Method',
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Expanded(
-              child: Obx(() {
-                if (paymentMethodController.isLoading.value) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else {
-                  return paymentMethodController.paymentMethods.isEmpty
-                      ? Center(
-                          child: Text('No payment methods available.'),
-                        )
-                      : ListView.builder(
-                          itemCount:
-                              paymentMethodController.paymentMethods.length,
-                          itemBuilder: (context, index) {
-                            var method =
-                                paymentMethodController.paymentMethods[index];
-                            return PaymentOptionBox(
-                              optionName: method.name.toString(),
-                              icon: Icons.payments_outlined,
-                              color: AppColors.appColorPrimary.withOpacity(0.4),
-                              isSelected:
-                                  selectedOption == method.name.toString(),
-                              onSelect: () {
-                                setState(() {
-                                  selectedOption = method.name.toString();
-                                  selectedID = method.id.toString();
-                                });
-                              },
-                            );
-                          },
-                        );
-                }
-              }),
-            ),
-            Spacer(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                CustomOutlineButton(
-                    width: 150,
-                    text: "Back",
-                    onPress: () {
-                      Get.back();
-                    }),
-                CustomButton(
-                    width: 150,
-                    text: "Confirm",
-                    onPress: () {
-                      if (selectedID == "") {
-                        Get.showSnackbar(gradientSnackbar(
-                            "Payment Method",
-                            "Please select any payment method",
-                            AppColors.orange,
-                            Icons.warning_rounded));
-                      } else {
-                        flightBookingController.fetchBooking(
-                          widget.searchID,
-                          widget.flightID,
-                          // paymentID,
-                          selectedID,
-                          widget.title,
-                          widget.firstName,
-                          widget.lastName,
-                          widget.traveller,
-                          widget.dob,
-                          widget.passNumber,
-                          widget.passExp,
-                          widget.email,
-                          widget.phone,
-                          widget.phoneCode,
-                          widget.countryCode,
-                          widget.adultCount!,
-                          widget.childCount!,
-                          widget.infantCount!,
-                          //
-                          widget.adult2name,
-                          widget.adult2Lname,
-                          widget.adult2dob,
-                          widget.adult2pass,
-                          widget.adult2passExp,
-                          widget.adult3name,
-                          widget.adult3Lname,
-                          widget.adult3dob,
-                          widget.adult3pass,
-                          widget.adult3passExp,
-                          widget.adult4name,
-                          widget.adult4Lname,
-                          widget.adult4dob,
-                          widget.adult4pass,
-                          widget.adult4passExp,
-                          //
-                          widget.child1name,
-                          widget.child1Lname,
-                          widget.child1dob,
-                          widget.child1pass,
-                          widget.child1passExp,
-                          widget.child2name,
-                          widget.child2Lname,
-                          widget.child2dob,
-                          widget.child2pass,
-                          widget.child2passExp,
-                          widget.child3name,
-                          widget.child3Lname,
-                          widget.child3dob,
-                          widget.child3pass,
-                          widget.child3passExp,
-                          widget.child4name,
-                          widget.child4Lname,
-                          widget.child4dob,
-                          widget.child4pass,
-                          widget.child4passExp,
-                          //
-                          widget.infant1name,
-                          widget.infant1Lname,
-                          widget.infant1dob,
-                          widget.infant1pass,
-                          widget.infant1passExp,
-                          widget.infant2name,
-                          widget.infant2Lname,
-                          widget.infant2dob,
-                          widget.infant2pass,
-                          widget.infant2passExp,
-                          widget.infant3name,
-                          widget.infant3Lname,
-                          widget.infant3dob,
-                          widget.infant3pass,
-                          widget.infant3passExp,
-                          widget.infant4name,
-                          widget.infant4Lname,
-                          widget.infant4dob,
-                          widget.infant4pass,
-                          widget.infant4passExp,
-                          //
-                        );
-                        // Get.to(() => PaymentDetailsScreen(
-                        //       countryCode: widget.countryCode,
-                        //       dob: widget.dob,
-                        //       email: widget.email,
-                        //       firstName: widget.firstName,
-                        //       lastName: widget.lastName,
-                        //       nationality: widget.nationality,
-                        //       passExp: widget.passExp,
-                        //       passNumber: widget.passNumber,
-                        //       phone: widget.phone,
-                        //       phoneCode: widget.phoneCode,
-                        //       title: widget.title,
-                        //       fare: widget.fare.toString(),
-                        //       tax: widget.tax.toString(),
-                        //       total: widget.total.toString(),
-                        //       traveller: widget.traveller,
-                        //       cabinClass: widget.cabinClass,
-                        //       searchID: widget.searchID,
-                        //       flightID: widget.flightID,
-                        //       paymentID: selectedID,
-                        //       departFlight: widget.departFlight,
-                        //       arriveFlight: widget.arriveFlight,
-                        //       departFromDate1: widget.departFromDate1,
-                        //       departFromTime1: widget.departFromTime1,
-                        //       departFromCode1: widget.departFromCode1,
-                        //       departFromDate2: widget.departFromDate2,
-                        //       departFromTime2: widget.departFromTime2,
-                        //       departFromCode2: widget.departFromCode2,
-                        //       arriveToDate1: widget.arriveToDate1,
-                        //       arriveToTime1: widget.arriveToTime1,
-                        //       arriveToCode1: widget.arriveToCode1,
-                        //       arriveToDate2: widget.arriveToDate2,
-                        //       arriveToCode2: widget.arriveToCode2,
-                        //       arriveToTime2: widget.arriveToTime2,
-                        //       adultCount: widget.adultCount,
-                        //       childCount: widget.childCount,
-                        //       infantCount: widget.infantCount,
-                        //       //
-                        //       adult2name: widget.adult2name,
-                        //       adult2dob: widget.adult2dob,
-                        //       adult2pass: widget.adult2pass,
-                        //       adult2passExp: widget.adult2passExp,
-                        //       adult3name: widget.adult3name,
-                        //       adult3dob: widget.adult3dob,
-                        //       adult3pass: widget.adult3pass,
-                        //       adult3passExp: widget.adult3passExp,
-                        //       adult4name: widget.adult4name,
-                        //       adult4dob: widget.adult4dob,
-                        //       adult4pass: widget.adult4pass,
-                        //       adult4passExp: widget.adult4passExp,
-                        //       //
-                        //       child1name: widget.child1name,
-                        //       child1dob: widget.child1dob,
-                        //       child1pass: widget.child1pass,
-                        //       child1passExp: widget.child1passExp,
-                        //       child2name: widget.child2name,
-                        //       child2dob: widget.child2dob,
-                        //       child2pass: widget.child2pass,
-                        //       child2passExp: widget.child2passExp,
-                        //       child3name: widget.child3name,
-                        //       child3dob: widget.child3dob,
-                        //       child3pass: widget.child3pass,
-                        //       child3passExp: widget.child3passExp,
-                        //       child4name: widget.child4name,
-                        //       child4dob: widget.child4dob,
-                        //       child4pass: widget.child4pass,
-                        //       child4passExp: widget.child4passExp,
-                        //       //
-                        //       infant1name: widget.infant1name,
-                        //       infant1dob: widget.infant1dob,
-                        //       infant1pass: widget.infant1pass,
-                        //       infant1passExp: widget.infant1passExp,
-                        //       infant2name: widget.infant2name,
-                        //       infant2dob: widget.infant2dob,
-                        //       infant2pass: widget.infant2pass,
-                        //       infant2passExp: widget.infant2passExp,
-                        //       infant3name: widget.infant3name,
-                        //       infant3dob: widget.infant3dob,
-                        //       infant3pass: widget.infant3pass,
-                        //       infant3passExp: widget.infant3passExp,
-                        //       infant4name: widget.infant4name,
-                        //       infant4dob: widget.infant4dob,
-                        //       infant4pass: widget.infant4pass,
-                        //       infant4passExp: widget.infant4passExp,
-                        //     ));
-                      }
-                    }),
-              ],
-            ),
-          ],
+        appBar: CustomAppBar(
+          title: 'Payment Method',
         ),
-      ),
-    );
+        body: Obx(() {
+          return flightBookingController.isLoading.value
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Expanded(
+                        child: Obx(() {
+                          if (paymentMethodController.isLoading.value) {
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          } else {
+                            return paymentMethodController
+                                    .paymentMethods.isEmpty
+                                ? Center(
+                                    child:
+                                        Text('No payment methods available.'),
+                                  )
+                                : ListView.builder(
+                                    itemCount: paymentMethodController
+                                        .paymentMethods.length,
+                                    itemBuilder: (context, index) {
+                                      var method = paymentMethodController
+                                          .paymentMethods[index];
+                                      return PaymentOptionBox(
+                                        optionName: method.name.toString(),
+                                        icon: Icons.payments_outlined,
+                                        color: AppColors.appColorPrimary
+                                            .withOpacity(0.4),
+                                        isSelected: selectedOption ==
+                                            method.name.toString(),
+                                        onSelect: () {
+                                          setState(() {
+                                            selectedOption =
+                                                method.name.toString();
+                                            selectedID = method.id.toString();
+                                          });
+                                        },
+                                      );
+                                    },
+                                  );
+                          }
+                        }),
+                      ),
+                      Spacer(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          CustomOutlineButton(
+                              width: 150,
+                              text: "Back",
+                              onPress: () {
+                                Get.back();
+                              }),
+                          CustomButton(
+                              width: 150,
+                              text: "Confirm",
+                              onPress: () {
+                                if (selectedID == "") {
+                                  Get.showSnackbar(gradientSnackbar(
+                                      "Payment Method",
+                                      "Please select any payment method",
+                                      AppColors.orange,
+                                      Icons.warning_rounded));
+                                } else {
+                                  flightBookingController.fetchBooking(
+                                    widget.searchID,
+                                    widget.flightID,
+                                    // paymentID,
+                                    selectedID,
+                                    widget.title,
+                                    widget.firstName,
+                                    widget.lastName,
+                                    widget.traveller,
+                                    widget.dob,
+                                    widget.passNumber,
+                                    widget.passExp,
+                                    widget.email,
+                                    widget.phone,
+                                    widget.phoneCode,
+                                    widget.countryCode,
+                                    widget.adultCount!,
+                                    widget.childCount!,
+                                    widget.infantCount!,
+                                    //
+                                    widget.adult2name,
+                                    widget.adult2Lname,
+                                    widget.adult2dob,
+                                    widget.adult2pass,
+                                    widget.adult2passExp,
+                                    widget.adult3name,
+                                    widget.adult3Lname,
+                                    widget.adult3dob,
+                                    widget.adult3pass,
+                                    widget.adult3passExp,
+                                    widget.adult4name,
+                                    widget.adult4Lname,
+                                    widget.adult4dob,
+                                    widget.adult4pass,
+                                    widget.adult4passExp,
+                                    //
+                                    widget.child1name,
+                                    widget.child1Lname,
+                                    widget.child1dob,
+                                    widget.child1pass,
+                                    widget.child1passExp,
+                                    widget.child2name,
+                                    widget.child2Lname,
+                                    widget.child2dob,
+                                    widget.child2pass,
+                                    widget.child2passExp,
+                                    widget.child3name,
+                                    widget.child3Lname,
+                                    widget.child3dob,
+                                    widget.child3pass,
+                                    widget.child3passExp,
+                                    widget.child4name,
+                                    widget.child4Lname,
+                                    widget.child4dob,
+                                    widget.child4pass,
+                                    widget.child4passExp,
+                                    //
+                                    widget.infant1name,
+                                    widget.infant1Lname,
+                                    widget.infant1dob,
+                                    widget.infant1pass,
+                                    widget.infant1passExp,
+                                    widget.infant2name,
+                                    widget.infant2Lname,
+                                    widget.infant2dob,
+                                    widget.infant2pass,
+                                    widget.infant2passExp,
+                                    widget.infant3name,
+                                    widget.infant3Lname,
+                                    widget.infant3dob,
+                                    widget.infant3pass,
+                                    widget.infant3passExp,
+                                    widget.infant4name,
+                                    widget.infant4Lname,
+                                    widget.infant4dob,
+                                    widget.infant4pass,
+                                    widget.infant4passExp,
+                                    //
+                                  );
+                                  // Get.to(() => PaymentDetailsScreen(
+                                  //       countryCode: widget.countryCode,
+                                  //       dob: widget.dob,
+                                  //       email: widget.email,
+                                  //       firstName: widget.firstName,
+                                  //       lastName: widget.lastName,
+                                  //       nationality: widget.nationality,
+                                  //       passExp: widget.passExp,
+                                  //       passNumber: widget.passNumber,
+                                  //       phone: widget.phone,
+                                  //       phoneCode: widget.phoneCode,
+                                  //       title: widget.title,
+                                  //       fare: widget.fare.toString(),
+                                  //       tax: widget.tax.toString(),
+                                  //       total: widget.total.toString(),
+                                  //       traveller: widget.traveller,
+                                  //       cabinClass: widget.cabinClass,
+                                  //       searchID: widget.searchID,
+                                  //       flightID: widget.flightID,
+                                  //       paymentID: selectedID,
+                                  //       departFlight: widget.departFlight,
+                                  //       arriveFlight: widget.arriveFlight,
+                                  //       departFromDate1: widget.departFromDate1,
+                                  //       departFromTime1: widget.departFromTime1,
+                                  //       departFromCode1: widget.departFromCode1,
+                                  //       departFromDate2: widget.departFromDate2,
+                                  //       departFromTime2: widget.departFromTime2,
+                                  //       departFromCode2: widget.departFromCode2,
+                                  //       arriveToDate1: widget.arriveToDate1,
+                                  //       arriveToTime1: widget.arriveToTime1,
+                                  //       arriveToCode1: widget.arriveToCode1,
+                                  //       arriveToDate2: widget.arriveToDate2,
+                                  //       arriveToCode2: widget.arriveToCode2,
+                                  //       arriveToTime2: widget.arriveToTime2,
+                                  //       adultCount: widget.adultCount,
+                                  //       childCount: widget.childCount,
+                                  //       infantCount: widget.infantCount,
+                                  //       //
+                                  //       adult2name: widget.adult2name,
+                                  //       adult2dob: widget.adult2dob,
+                                  //       adult2pass: widget.adult2pass,
+                                  //       adult2passExp: widget.adult2passExp,
+                                  //       adult3name: widget.adult3name,
+                                  //       adult3dob: widget.adult3dob,
+                                  //       adult3pass: widget.adult3pass,
+                                  //       adult3passExp: widget.adult3passExp,
+                                  //       adult4name: widget.adult4name,
+                                  //       adult4dob: widget.adult4dob,
+                                  //       adult4pass: widget.adult4pass,
+                                  //       adult4passExp: widget.adult4passExp,
+                                  //       //
+                                  //       child1name: widget.child1name,
+                                  //       child1dob: widget.child1dob,
+                                  //       child1pass: widget.child1pass,
+                                  //       child1passExp: widget.child1passExp,
+                                  //       child2name: widget.child2name,
+                                  //       child2dob: widget.child2dob,
+                                  //       child2pass: widget.child2pass,
+                                  //       child2passExp: widget.child2passExp,
+                                  //       child3name: widget.child3name,
+                                  //       child3dob: widget.child3dob,
+                                  //       child3pass: widget.child3pass,
+                                  //       child3passExp: widget.child3passExp,
+                                  //       child4name: widget.child4name,
+                                  //       child4dob: widget.child4dob,
+                                  //       child4pass: widget.child4pass,
+                                  //       child4passExp: widget.child4passExp,
+                                  //       //
+                                  //       infant1name: widget.infant1name,
+                                  //       infant1dob: widget.infant1dob,
+                                  //       infant1pass: widget.infant1pass,
+                                  //       infant1passExp: widget.infant1passExp,
+                                  //       infant2name: widget.infant2name,
+                                  //       infant2dob: widget.infant2dob,
+                                  //       infant2pass: widget.infant2pass,
+                                  //       infant2passExp: widget.infant2passExp,
+                                  //       infant3name: widget.infant3name,
+                                  //       infant3dob: widget.infant3dob,
+                                  //       infant3pass: widget.infant3pass,
+                                  //       infant3passExp: widget.infant3passExp,
+                                  //       infant4name: widget.infant4name,
+                                  //       infant4dob: widget.infant4dob,
+                                  //       infant4pass: widget.infant4pass,
+                                  //       infant4passExp: widget.infant4passExp,
+                                  //     ));
+                                }
+                              }),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+        }));
   }
 }
 
