@@ -9,9 +9,9 @@ import 'package:travel_app/app/configs/app_size_config.dart';
 import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_appbar.dart';
 import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/check_in_view.dart';
-import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/home_view.dart';
 import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/search_view.dart';
 import 'package:travel_app/presentation/booking_history/view/my_bookings_screen.dart';
+import 'package:travel_app/presentation/profile/view/user_profile_screen.dart';
 
 import '../../auth/view/login_screen.dart';
 
@@ -40,6 +40,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
       SearchScreen(cabinClass: widget.cabinClass),
       const BookingScreen(),
       const CheckInScreen(),
+      const UserProfileScreen(),
     ];
     if (widget.fromDetails!) {
       onSelectTab(1);
@@ -55,12 +56,14 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
     'Search',
     'My Bookings',
     'Check-Ins',
+    'User Profile',
   ];
   var tabsIcons = <Widget>[
     // const Icon(Icons.home),
     const Icon(FontAwesomeIcons.plane),
     const Icon(Icons.calendar_month_rounded),
     const Icon(Icons.location_on),
+    const Icon(Icons.person_rounded),
   ];
 
   List<Map<String, dynamic>> appDrawerData = [
@@ -68,6 +71,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
     {'Icon': Icons.arrow_back_sharp, 'Name': 'Book a flight'},
     {'Icon': Icons.arrow_back_sharp, 'Name': 'My Bookings'},
     {'Icon': Icons.arrow_back_sharp, 'Name': 'Check-Ins'},
+    {'Icon': Icons.arrow_back_sharp, 'Name': 'User Profile'},
     {'Icon': Icons.settings, 'Name': 'Settings'},
   ];
 

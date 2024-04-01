@@ -49,6 +49,7 @@ class LoginController extends GetxController {
         await prefs.setString('savedEmail', jsonData["data"]["email"]);
         await prefs.setString('savedUsername', jsonData["data"]["username"]);
         await prefs.setString('savedToken', jsonData["data"]["accessToken"]);
+        await prefs.setInt('roleID', jsonData["data"]["roleSupportId"]);
         await prefs.setString(
             'savedRefToken', jsonData["data"]["refreshToken"]);
 

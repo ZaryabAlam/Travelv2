@@ -23,8 +23,15 @@ class FlightQuoteController extends GetxController {
     loadGetxData();
   }
 
-  Future<void> fetchFlightQuote(String departCity, String arriveCity,
-      String departDate, var arriveDate, String tripType, int? adult, int? child, int? infant) async {
+  Future<void> fetchFlightQuote(
+      String departCity,
+      String arriveCity,
+      String departDate,
+      var arriveDate,
+      String tripType,
+      int? adult,
+      int? child,
+      int? infant) async {
     isLoading.value = true;
     try {
       var headers = {
@@ -48,6 +55,7 @@ class FlightQuoteController extends GetxController {
         "IsDirectFlight": false,
         "TripType": tripType,
         "MicrositeClientId": 2
+        // dataController.myToken.value
       });
       print(departCity);
       print(arriveCity);
