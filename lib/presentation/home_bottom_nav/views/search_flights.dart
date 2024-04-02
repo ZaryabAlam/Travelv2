@@ -73,7 +73,7 @@ class SearchFlightScreen extends StatefulWidget {
 class _SearchFlightScreenState extends State<SearchFlightScreen> {
   final FlightQuoteController flightQuoteController =
       Get.put(FlightQuoteController());
-  String? filterName = " ";
+  String? filterName = "a";
   List<String> airlineNames = [];
   int? _selectedOutbound;
   int? _selectedInbound;
@@ -89,6 +89,7 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
           widget.departDate,
           widget.arriveDate,
           widget.tripType,
+          widget.cabinClass.toString(),
           widget.adultCount,
           widget.childCount,
           widget.infantCount);
@@ -248,6 +249,7 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
                       widget.departDate,
                       widget.arriveDate,
                       widget.tripType,
+                      widget.cabinClass.toString(),
                       widget.adultCount,
                       widget.childCount,
                       widget.infantCount);
@@ -278,7 +280,7 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
                               trailing: InkWell(
                                   onTap: () {
                                     Navigator.pop(context);
-                                    _showFilterAirline(" ");
+                                    _showFilterAirline("a");
                                   },
                                   child: CommonText(text: "Reset")),
                               onTap: () {},
@@ -351,7 +353,7 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
                                         buildButton(
                                             text: 'Recommanded',
                                             onPress: () {
-                                              _showFilterAirline(" ");
+                                              _showFilterAirline("a");
                                             }),
                                         buildButton(
                                             text: 'Low to High',
@@ -392,7 +394,7 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
                               itemCount: data1![0]
                                       .outBound!
                                       .segments![0]
-                                      .airline!
+                                      .airlineName!
                                       .contains("$filterName")
                                   ? data1.length
                                   : 1,
@@ -400,7 +402,7 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
                                 bool isFiltered = data1[index]
                                     .outBound!
                                     .segments![0]
-                                    .airline!
+                                    .airlineName!
                                     .contains("$filterName");
                                 // for (var item in data1) {
                                 //   if (item.outBound != null &&
@@ -806,7 +808,7 @@ class _SearchFlightScreenState extends State<SearchFlightScreen> {
                                                                   ));
                                                             },
                                                             text:
-                                                                "Flights starts from \$ ${data1[index].totalAmount}")
+                                                                "Flights starts from \$ ${data1[index].totalAmount.toStringAsFixed(2)}")
                                                         : Container(),
 
                                                     // 0.01.ph,

@@ -29,6 +29,7 @@ class OneWayFlightQuoteController extends GetxController {
       String departDate,
       var arriveDate,
       String tripType,
+      String cabinClass,
       int? adult,
       int? child,
       int? infant) async {
@@ -50,11 +51,11 @@ class OneWayFlightQuoteController extends GetxController {
         "Adults": adult,
         "Children": child,
         "Infants": infant,
-        "CabinClass": "Economy",
+        "CabinClass": cabinClass,
         "IsFlexibleDates": true,
         "IsDirectFlight": false,
         "TripType": tripType,
-        "MicrositeClientId": 2
+        "MicrositeClientId": dataController.mySupportId.value
       });
       print(departCity);
       print(arriveCity);

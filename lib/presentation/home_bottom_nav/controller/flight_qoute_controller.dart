@@ -29,6 +29,7 @@ class FlightQuoteController extends GetxController {
       String departDate,
       var arriveDate,
       String tripType,
+      String cabinClass,
       int? adult,
       int? child,
       int? infant) async {
@@ -50,17 +51,18 @@ class FlightQuoteController extends GetxController {
         "Adults": adult,
         "Children": child,
         "Infants": infant,
-        "CabinClass": "Economy",
+        "CabinClass": cabinClass,
         "IsFlexibleDates": true,
         "IsDirectFlight": false,
         "TripType": tripType,
-        "MicrositeClientId": 2
-        // dataController.myToken.value
+        "MicrositeClientId": dataController.mySupportId.value
+        // dataController.mySupportId.value
       });
       print(departCity);
       print(arriveCity);
       print(departDate);
       print(arriveDate);
+
       var response = await http.post(
         Uri.parse('${baseURL}api/FlightQuote/search'),
         headers: headers,

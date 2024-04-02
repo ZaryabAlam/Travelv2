@@ -73,7 +73,8 @@ class OneWaySearchFlightScreen extends StatefulWidget {
 class _OneWaySearchFlightScreenState extends State<OneWaySearchFlightScreen> {
   final OneWayFlightQuoteController oneWayFlightQuoteController =
       Get.put(OneWayFlightQuoteController());
-  String? filterName = " ";
+  String? filterName = "a";
+  List<String> airlineNames = [];
 
   @override
   void initState() {
@@ -86,6 +87,7 @@ class _OneWaySearchFlightScreenState extends State<OneWaySearchFlightScreen> {
           widget.departDate,
           widget.arriveDate,
           widget.tripType,
+          widget.cabinClass.toString(),
           widget.adultCount,
           widget.childCount,
           widget.infantCount);
@@ -106,6 +108,8 @@ class _OneWaySearchFlightScreenState extends State<OneWaySearchFlightScreen> {
         title: "One Way Flights",
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Obx(() {
             if (oneWayFlightQuoteController.isLoading.value) {
@@ -243,6 +247,7 @@ class _OneWaySearchFlightScreenState extends State<OneWaySearchFlightScreen> {
                       widget.departDate,
                       widget.arriveDate,
                       widget.tripType,
+                      widget.cabinClass.toString(),
                       widget.adultCount,
                       widget.childCount,
                       widget.infantCount);
@@ -273,52 +278,40 @@ class _OneWaySearchFlightScreenState extends State<OneWaySearchFlightScreen> {
                               trailing: InkWell(
                                   onTap: () {
                                     Navigator.pop(context);
-                                    _showFilterAirline(" ");
+                                    _showFilterAirline("a");
                                   },
                                   child: CommonText(text: "Reset")),
                               onTap: () {},
                             ),
-                            ListTile(
-                              // leading: Icon(Icons.stars),
-                              title: Text('Silicon Reservation System'),
-                              onTap: () {
-                                Navigator.pop(context);
-                                _showFilterAirline(
-                                    "Silicon Reservation System");
-                              },
-                            ),
-                            ListTile(
-                              // leading: Icon(Icons.stars),
-                              title: Text('Salaam Air'),
-                              onTap: () {
-                                Navigator.pop(context);
-                                _showFilterAirline("Salaam Air");
-                              },
-                            ),
-                            ListTile(
-                              // leading: Icon(Icons.arrow_upward),
-                              title: Text('Aerojet Aviation'),
-                              onTap: () {
-                                Navigator.pop(context);
-                                _showFilterAirline("Aerojet Aviation");
-                              },
-                            ),
-                            ListTile(
-                              // leading: Icon(Icons.arrow_downward),
-                              title: Text('Afro Atlas'),
-                              onTap: () {
-                                Navigator.pop(context);
-                                _showFilterAirline("Afro Atlas");
-                              },
-                            ),
-                            ListTile(
-                              // leading: Icon(Icons.av_timer_rounded),
-                              title: Text('Blue Air Express'),
-                              onTap: () {
-                                Navigator.pop(context);
-                                _showFilterAirline("Blue Air Expressr");
-                              },
-                            ),
+                            Container(
+                              height: 200,
+                              child: ListView.builder(
+                                itemCount: airlineNames.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Column(
+                                    children: [
+                                      ListTile(
+                                        title: Text(airlineNames[index]),
+                                        onTap: () {
+                                          Navigator.pop(context);
+                                          _showFilterAirline(
+                                              "${airlineNames[index]}");
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ),
+                            )
+                            // ListTile(
+                            //   // leading: Icon(Icons.stars),
+                            //   title: Text('Silicon Reservation System'),
+                            //   onTap: () {
+                            //     Navigator.pop(context);
+                            //     _showFilterAirline(
+                            //         "Silicon Reservation System");
+                            //   },
+                            // ),
                           ],
                         ),
                       );
@@ -358,7 +351,7 @@ class _OneWaySearchFlightScreenState extends State<OneWaySearchFlightScreen> {
                                         buildButton(
                                             text: 'Recommanded',
                                             onPress: () {
-                                              _showFilterAirline(" ");
+                                              _showFilterAirline("a");
                                             }),
                                         buildButton(
                                             text: 'Low to High',
@@ -387,7 +380,7 @@ class _OneWaySearchFlightScreenState extends State<OneWaySearchFlightScreen> {
                           itemCount: data1![0]
                                   .outBound!
                                   .segments![0]
-                                  .airline!
+                                  .airlineName!
                                   .contains("$filterName")
                               ? data1.length
                               : 1,
@@ -395,8 +388,21 @@ class _OneWaySearchFlightScreenState extends State<OneWaySearchFlightScreen> {
                             bool isFiltered = data1[index]
                                 .outBound!
                                 .segments![0]
-                                .airline!
+                                .airlineName!
                                 .contains("$filterName");
+                            for (var item in data1) {
+                              if (item.outBound != null &&
+                                  item.outBound!.segments != null &&
+                                  item.outBound!.segments!.isNotEmpty) {
+                                String airlineName = item
+                                    .outBound!.segments![0].airlineName
+                                    .toString();
+                                if (!airlineNames.contains(airlineName)) {
+                                  airlineNames.add(airlineName);
+                                }
+                              }
+                            }
+                            print("Airline List: $airlineNames");
                             return isFiltered
                                 ? Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -661,7 +667,7 @@ class _OneWaySearchFlightScreenState extends State<OneWaySearchFlightScreen> {
                                                           ));
                                                     },
                                                     text:
-                                                        "Flights starts from \$ ${data1[index].totalAmount}"),
+                                                        "Flights starts from \$ ${data1[index].totalAmount.toStringAsFixed(2)}"),
                                                 // 0.01.ph,
                                                 // Align(
                                                 //   alignment: Alignment.centerRight,
