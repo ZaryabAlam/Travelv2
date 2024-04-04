@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, must_be_immutable
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +10,10 @@ import '../../../app/configs/app_colors.dart';
 import '../../../app/configs/app_size_config.dart';
 import '../../../app/utils/custom_widgets/common_text.dart';
 import '../../../app/utils/custom_widgets/custom_appbar.dart';
+import '../../../app/utils/custom_widgets/custom_button.dart';
+import '../../../app/utils/custom_widgets/gradient_snackbar.dart';
 import '../controller/search_PNR_controller.dart';
+import '../controller/share_ticket_controller.dart';
 import '../model/search_PNR_model.dart';
 
 class SearchPNRScreen extends StatefulWidget {
@@ -351,6 +354,34 @@ class _SearchPNRScreenState extends State<SearchPNRScreen> {
                                               ],
                                             ),
                                             Divider(),
+                                            0.02.ph,
+                                            CustomButton(
+                                                height: 40,
+                                                width: w,
+                                                text: 'Share',
+                                                onPress: () {
+                                                  showModalBottomSheet(
+                                                    enableDrag: true,
+                                                    isScrollControlled: true,
+                                                    showDragHandle: true,
+                                                    useSafeArea: true,
+                                                    context: context,
+                                                    builder:
+                                                        (BuildContext context) {
+                                                      return SingleChildScrollView(
+                                                        child: Container(
+                                                            padding: EdgeInsets.only(
+                                                                bottom: MediaQuery.of(
+                                                                        context)
+                                                                    .viewInsets
+                                                                    .bottom),
+                                                            child: BottomSheetWidget(
+                                                                pnr:
+                                                                    "${data0.parentPnr}")),
+                                                      );
+                                                    },
+                                                  );
+                                                })
                                           ],
                                         ),
                                       ),
@@ -362,6 +393,92 @@ class _SearchPNRScreenState extends State<SearchPNRScreen> {
                   })
           ],
         ),
+      ),
+    );
+  }
+}
+
+class BottomSheetWidget extends StatefulWidget {
+  String? pnr;
+  BottomSheetWidget({super.key, required this.pnr});
+
+  @override
+  State<BottomSheetWidget> createState() => _BottomSheetWidgetState();
+}
+
+class _BottomSheetWidgetState extends State<BottomSheetWidget> {
+  TextEditingController emailController = TextEditingController();
+  final ShareTicketController shareTicketController =
+      Get.put(ShareTicketController());
+  final RxBool isLoading = false.obs;
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Container(
+        padding: EdgeInsets.all(16.0),
+        child: Obx(() {
+          if (shareTicketController.isLoading.value) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                CommonText(
+                    text: "Share Ticket",
+                    weight: FontWeight.w400,
+                    fontSize: 18),
+                SizedBox(height: 5.0),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8.0),
+                    color: AppColors.appColorPrimary.withOpacity(0.1),
+                  ),
+                  child: TextFormField(
+                    controller: emailController,
+                    decoration: InputDecoration(
+                      hintText: 'example@email.com',
+                      prefixIcon: Icon(Icons.email_outlined),
+                      border: InputBorder.none,
+                      contentPadding: EdgeInsets.all(16.0),
+                    ),
+                    onChanged: (value) {},
+                  ),
+                ),
+                SizedBox(height: 16.0),
+                CustomButton(
+                    height: 40,
+                    width: w,
+                    text: 'Share',
+                    onPress: () {
+                      RegExp emailRegExp =
+                          RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+                      if (emailController.text.trim().isEmpty) {
+                        Get.showSnackbar(gradientSnackbar(
+                            "Error",
+                            "Email field is empty",
+                            AppColors.orange,
+                            Icons.warning_rounded));
+                      } else if (!emailRegExp
+                          .hasMatch(emailController.text.trim())) {
+                        Get.showSnackbar(gradientSnackbar(
+                            "Error",
+                            "Please type a valid email",
+                            AppColors.orange,
+                            Icons.warning_rounded));
+                      } else {
+                        shareTicketController.shareTicket(
+                            widget.pnr.toString(), emailController.text.trim());
+                      }
+                    })
+              ],
+            );
+          }
+        }),
       ),
     );
   }

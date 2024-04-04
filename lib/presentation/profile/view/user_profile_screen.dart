@@ -76,15 +76,15 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                         Icon(Icons.person, color: AppColors.appColorPrimary),
                         CommonText(
                           text: "First Name",
-                          weight: FontWeight.w500,
-                          fontSize: 18,
+                          weight: FontWeight.w300,
+                          fontSize: 14,
                         ),
                       ],
                     ),
                     CommonText(
                       text: data1.firstName.toString(),
-                      weight: FontWeight.w300,
-                      fontSize: 16,
+                      weight: FontWeight.w500,
+                      fontSize: 18,
                     ),
                     SizedBox(height: 10),
                     Row(
@@ -93,15 +93,15 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                             color: AppColors.appColorPrimary),
                         CommonText(
                           text: "Last Name",
-                          weight: FontWeight.w500,
-                          fontSize: 18,
+                          weight: FontWeight.w300,
+                          fontSize: 14,
                         ),
                       ],
                     ),
                     CommonText(
                       text: data1.lastName.toString(),
-                      weight: FontWeight.w300,
-                      fontSize: 16,
+                      weight: FontWeight.w500,
+                      fontSize: 18,
                     ),
                     SizedBox(height: 10),
                     Row(
@@ -111,32 +111,32 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                             color: AppColors.appColorPrimary),
                         CommonText(
                           text: "Username",
-                          weight: FontWeight.w500,
-                          fontSize: 18,
+                          weight: FontWeight.w300,
+                          fontSize: 14,
                         ),
                       ],
                     ),
                     CommonText(
                       text: data1.username.toString(),
-                      weight: FontWeight.w300,
+                      weight: FontWeight.w500,
                       fontSize: 16,
                     ),
                     SizedBox(height: 10),
                     Row(
                       children: [
-                        Icon(Icons.email_rounded,
+                        Icon(Icons.email_outlined,
                             color: AppColors.appColorPrimary),
                         CommonText(
                           text: "Email",
-                          weight: FontWeight.w500,
-                          fontSize: 18,
+                          weight: FontWeight.w300,
+                          fontSize: 14,
                         ),
                       ],
                     ),
                     CommonText(
                       text: data1.email.toString(),
-                      weight: FontWeight.w300,
-                      fontSize: 16,
+                      weight: FontWeight.w500,
+                      fontSize: 18,
                     ),
                     SizedBox(height: 20),
                     CustomButton(

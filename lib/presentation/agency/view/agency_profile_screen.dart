@@ -81,15 +81,15 @@ class _AgencyProfileScreenState extends State<AgencyProfileScreen> {
                                 color: AppColors.appColorPrimary),
                             CommonText(
                               text: "Code",
-                              weight: FontWeight.w500,
-                              fontSize: 18,
+                              weight: FontWeight.w300,
+                              fontSize: 14,
                             ),
                           ],
                         ),
                         CommonText(
                           text: data1.code ?? "- - -",
-                          weight: FontWeight.w300,
-                          fontSize: 16,
+                          weight: FontWeight.w500,
+                          fontSize: 18,
                         ),
                         SizedBox(height: 10),
                         Row(
@@ -98,15 +98,15 @@ class _AgencyProfileScreenState extends State<AgencyProfileScreen> {
                                 color: AppColors.appColorPrimary),
                             CommonText(
                               text: "Name",
-                              weight: FontWeight.w500,
-                              fontSize: 18,
+                              weight: FontWeight.w300,
+                              fontSize: 14,
                             ),
                           ],
                         ),
                         CommonText(
                           text: data1.name ?? "- - -",
-                          weight: FontWeight.w300,
-                          fontSize: 16,
+                          weight: FontWeight.w500,
+                          fontSize: 18,
                         ),
                         SizedBox(height: 10),
                         Row(
@@ -116,32 +116,32 @@ class _AgencyProfileScreenState extends State<AgencyProfileScreen> {
                                 color: AppColors.appColorPrimary),
                             CommonText(
                               text: "Address",
-                              weight: FontWeight.w500,
-                              fontSize: 18,
+                              weight: FontWeight.w300,
+                              fontSize: 14,
                             ),
                           ],
                         ),
                         CommonText(
                           text: data1.address ?? "- - -",
-                          weight: FontWeight.w300,
-                          fontSize: 16,
+                          weight: FontWeight.w500,
+                          fontSize: 18,
                         ),
                         SizedBox(height: 10),
                         Row(
                           children: [
-                            Icon(Icons.email_rounded,
+                            Icon(Icons.email_outlined,
                                 color: AppColors.appColorPrimary),
                             CommonText(
                               text: "Email",
-                              weight: FontWeight.w500,
-                              fontSize: 18,
+                              weight: FontWeight.w300,
+                              fontSize: 14,
                             ),
                           ],
                         ),
                         CommonText(
                           text: data1.email ?? "- - -",
-                          weight: FontWeight.w300,
-                          fontSize: 16,
+                          weight: FontWeight.w500,
+                          fontSize: 18,
                         ),
                         SizedBox(height: 10),
                         Row(
@@ -149,15 +149,15 @@ class _AgencyProfileScreenState extends State<AgencyProfileScreen> {
                             Icon(Icons.phone, color: AppColors.appColorPrimary),
                             CommonText(
                               text: "Phone 1",
-                              weight: FontWeight.w500,
-                              fontSize: 18,
+                              weight: FontWeight.w300,
+                              fontSize: 14,
                             ),
                           ],
                         ),
                         CommonText(
                           text: data1.phone1 ?? "- - -",
-                          weight: FontWeight.w300,
-                          fontSize: 16,
+                          weight: FontWeight.w500,
+                          fontSize: 18,
                         ),
                         SizedBox(height: 10),
                         Row(
@@ -166,32 +166,32 @@ class _AgencyProfileScreenState extends State<AgencyProfileScreen> {
                                 color: AppColors.appColorPrimary),
                             CommonText(
                               text: "Phone 2",
-                              weight: FontWeight.w500,
-                              fontSize: 18,
+                              weight: FontWeight.w300,
+                              fontSize: 14,
                             ),
                           ],
                         ),
                         CommonText(
                           text: data1.phone2 ?? "- - -",
-                          weight: FontWeight.w300,
-                          fontSize: 16,
+                          weight: FontWeight.w500,
+                          fontSize: 18,
                         ),
                         SizedBox(height: 10),
                         Row(
                           children: [
-                            Icon(Icons.manage_accounts_rounded,
+                            Icon(Icons.manage_accounts_outlined,
                                 color: AppColors.appColorPrimary),
                             CommonText(
                               text: "Contact Person",
-                              weight: FontWeight.w500,
-                              fontSize: 18,
+                              weight: FontWeight.w300,
+                              fontSize: 14,
                             ),
                           ],
                         ),
                         CommonText(
                           text: data1.contactPerson ?? "- - -",
-                          weight: FontWeight.w300,
-                          fontSize: 16,
+                          weight: FontWeight.w500,
+                          fontSize: 18,
                         ),
                         SizedBox(height: 20),
                         CustomButton(

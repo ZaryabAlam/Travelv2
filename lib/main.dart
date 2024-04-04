@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         fontFamily: GoogleFonts.poppins().fontFamily,
       ),
       // home: LoginScreen(),
-     home: SplashScreen(),
+      home: SplashScreen(),
     );
   }
 }

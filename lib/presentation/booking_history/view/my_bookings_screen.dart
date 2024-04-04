@@ -333,64 +333,75 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
   TextEditingController emailController = TextEditingController();
   final ShareTicketController shareTicketController =
       Get.put(ShareTicketController());
+  final RxBool isLoading = false.obs;
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
         padding: EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            CommonText(
-                text: "Share Ticket", weight: FontWeight.w400, fontSize: 18),
-            SizedBox(height: 5.0),
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.0),
-                color: AppColors.appColorPrimary.withOpacity(0.1),
-              ),
-              child: TextFormField(
-                controller: emailController,
-                decoration: InputDecoration(
-                  hintText: 'example@email.com',
-                  prefixIcon: Icon(Icons.email_outlined),
-                  border: InputBorder.none,
-                  contentPadding: EdgeInsets.all(16.0),
+        child: Obx(() {
+          if (shareTicketController.isLoading.value) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                CommonText(
+                    text: "Share Ticket",
+                    weight: FontWeight.w400,
+                    fontSize: 18),
+                SizedBox(height: 5.0),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8.0),
+                    color: AppColors.appColorPrimary.withOpacity(0.1),
+                  ),
+                  child: TextFormField(
+                    controller: emailController,
+                    decoration: InputDecoration(
+                      hintText: 'example@email.com',
+                      prefixIcon: Icon(Icons.email_outlined),
+                      border: InputBorder.none,
+                      contentPadding: EdgeInsets.all(16.0),
+                    ),
+                    onChanged: (value) {},
+                  ),
                 ),
-                onChanged: (value) {},
-              ),
-            ),
-            SizedBox(height: 16.0),
-            CustomButton(
-                height: 40,
-                width: w,
-                text: 'Share',
-                onPress: () {
-                  RegExp emailRegExp =
-                      RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-                  if (emailController.text.trim().isEmpty) {
-                    Get.showSnackbar(gradientSnackbar(
-                        "Error",
-                        "Email field is empty",
-                        AppColors.orange,
-                        Icons.warning_rounded));
-                  } else if (!emailRegExp
-                      .hasMatch(emailController.text.trim())) {
-                    Get.showSnackbar(gradientSnackbar(
-                        "Error",
-                        "Please type a valid email",
-                        AppColors.orange,
-                        Icons.warning_rounded));
-                  } else {
-                    shareTicketController.shareTicket(
-                        widget.pnr.toString(), emailController.text.trim());
-                  }
-                })
-          ],
-        ),
+                SizedBox(height: 16.0),
+                CustomButton(
+                    height: 40,
+                    width: w,
+                    text: 'Share',
+                    onPress: () {
+                      RegExp emailRegExp =
+                          RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+                      if (emailController.text.trim().isEmpty) {
+                        Get.showSnackbar(gradientSnackbar(
+                            "Error",
+                            "Email field is empty",
+                            AppColors.orange,
+                            Icons.warning_rounded));
+                      } else if (!emailRegExp
+                          .hasMatch(emailController.text.trim())) {
+                        Get.showSnackbar(gradientSnackbar(
+                            "Error",
+                            "Please type a valid email",
+                            AppColors.orange,
+                            Icons.warning_rounded));
+                      } else {
+                        shareTicketController.shareTicket(
+                            widget.pnr.toString(), emailController.text.trim());
+                      }
+                    })
+              ],
+            );
+          }
+        }),
       ),
     );
   }
