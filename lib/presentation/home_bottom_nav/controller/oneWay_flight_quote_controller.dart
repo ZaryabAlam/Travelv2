@@ -55,7 +55,7 @@ class OneWayFlightQuoteController extends GetxController {
         "IsFlexibleDates": true,
         "IsDirectFlight": false,
         "TripType": tripType,
-        "MicrositeClientId": dataController.mySupportId.value
+        "MicrositeClientId": 2
       });
       print(departCity);
       print(arriveCity);

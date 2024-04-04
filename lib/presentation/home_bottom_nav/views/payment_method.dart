@@ -517,6 +517,7 @@ class PaymentOptionBox extends StatelessWidget {
       },
       child: Container(
         padding: EdgeInsets.all(16),
+        margin: EdgeInsets.symmetric(vertical: 10),
         decoration: BoxDecoration(
           color: isSelected ? color.withOpacity(0.8) : color,
           borderRadius: BorderRadius.circular(10),

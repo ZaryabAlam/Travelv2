@@ -8,6 +8,7 @@ import 'package:travel_app/app/configs/app_colors.dart';
 import 'package:travel_app/app/configs/app_size_config.dart';
 import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_appbar.dart';
+import 'package:travel_app/presentation/agency/view/agency_profile_screen.dart';
 import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/check_in_view.dart';
 import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/search_view.dart';
 import 'package:travel_app/presentation/booking_history/view/my_bookings_screen.dart';
@@ -39,7 +40,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
       // const HomeScreen(),
       SearchScreen(cabinClass: widget.cabinClass),
       const BookingScreen(),
-      const CheckInScreen(),
+      // const CheckInScreen(),
       const UserProfileScreen(),
     ];
     if (widget.fromDetails!) {
@@ -55,14 +56,14 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
     // 'Home',
     'Search',
     'My Bookings',
-    'Check-Ins',
+    // 'Check-Ins',
     'User Profile',
   ];
   var tabsIcons = <Widget>[
     // const Icon(Icons.home),
     const Icon(FontAwesomeIcons.plane),
     const Icon(Icons.calendar_month_rounded),
-    const Icon(Icons.location_on),
+    // const Icon(Icons.location_on),
     const Icon(Icons.person_rounded),
   ];
 
@@ -72,7 +73,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
     {'Icon': Icons.arrow_back_sharp, 'Name': 'My Bookings'},
     {'Icon': Icons.arrow_back_sharp, 'Name': 'Check-Ins'},
     {'Icon': Icons.arrow_back_sharp, 'Name': 'User Profile'},
-    {'Icon': Icons.settings, 'Name': 'Settings'},
+    // {'Icon': Icons.settings, 'Name': 'Settings'},
   ];
 
   @override
@@ -117,6 +118,17 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
                     subtitle: const Divider(),
                   );
                 }),
+              ),
+              ListTile(
+                dense: true,
+                onTap: () async {
+                  Get.to(() => AgencyProfileScreen());
+                },
+                leading: Icon(
+                  Icons.arrow_back_sharp,
+                ),
+                title: CommonText(text: "Agency"),
+                subtitle: const Divider(),
               ),
               ListTile(
                 dense: true,

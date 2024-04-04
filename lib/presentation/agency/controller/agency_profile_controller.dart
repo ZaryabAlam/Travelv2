@@ -1,19 +1,20 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:travel_app/presentation/booking_history/model/search_PNR_model.dart';
 import '../../../app/configs/app_colors.dart';
 import '../../../app/data/data_controller.dart';
 import '../../../app/utils/api_utility/api_url.dart';
 import '../../../app/utils/custom_widgets/gradient_snackbar.dart';
+import '../model/agency_profile_model.dart';
 
-class ShareTicketController extends GetxController {
+class AgencyProfileController extends GetxController {
   final DataController dataController = Get.put(DataController());
   var isLoading = false.obs;
-  var searchPNRModel = SearchPNRModel().obs;
+  var agencyProfileModel = AgencyProfileModel().obs;
 
   Future<void> loadGetxData() async {
     await dataController.loadMyData();
@@ -25,7 +26,7 @@ class ShareTicketController extends GetxController {
     loadGetxData();
   }
 
-  Future<void> shareTicket(String PNR, String email) async {
+  Future<void> fetchAgency() async {
     isLoading.value = true;
     try {
       var headers = {
@@ -34,27 +35,24 @@ class ShareTicketController extends GetxController {
       };
 
       var response = await http.get(
-          Uri.parse('${baseURL}api/FlightBooking/parentPnr/$PNR/email/$email'),
+          Uri.parse('${baseURL}api/Agency/${dataController.mySupportId.value}'),
           headers: headers);
 
-      print("**** SearchPNR Response ****");
-      print("PNR Controller: ${response.body}");
+      var jsonData = json.decode(response.body) as Map<String, dynamic>;
+      agencyProfileModel.value = AgencyProfileModel.fromJson(jsonData);
+
+      print("**** AgencyProfile Response ****");
+      print("AgencyProfile Controller: ${response.body}");
 
       if (response.statusCode == 200) {
-        Get.back();
-        Get.showSnackbar(gradientSnackbar(
-            "Success",
-            "${"Ticket details has been emailed"}",
-            AppColors.green,
-            Icons.check_circle_rounded));
         isLoading.value = false;
       } else {
         print('Error: ${response.statusCode}');
       }
     } catch (e) {
       print('Error: $e');
-      // Get.showSnackbar(gradientSnackbar("Failure", "Something went wrong",
-      //     AppColors.orange, Icons.warning_rounded));
+      Get.showSnackbar(gradientSnackbar("Failure", "Something went wrong",
+          AppColors.orange, Icons.warning_rounded));
       isLoading.value = false;
     } finally {
       isLoading.value = false;
