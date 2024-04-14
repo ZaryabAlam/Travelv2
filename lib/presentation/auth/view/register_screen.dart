@@ -13,10 +13,16 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  final firstNameController = TextEditingController();
+  final midNameController = TextEditingController();
+  final lastNameController = TextEditingController();
   final userController = TextEditingController();
   final emailController = TextEditingController();
   final passController = TextEditingController();
   final confirmPassController = TextEditingController();
+  var isLoading = true.obs;
+  bool isValidForm = false;
+  final _formkey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -79,48 +85,66 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       child: Center(
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(height: 20),
-                              Custom_textfield_required(
-                                  requiredLabel: "Username",
-                                  hint: "Enter username here",
-                                  controller: userController),
-                              SizedBox(height: 20),
-                              Custom_textfield_required(
-                                  requiredLabel: "Email",
-                                  hint: "Enter email here",
-                                  obscureText: true,
-                                  controller: emailController),
-                              SizedBox(height: 20),
-                              Custom_textfield_required(
-                                  requiredLabel: "Password",
-                                  hint: "Enter username here",
-                                  controller: passController),
-                              SizedBox(height: 20),
-                              Custom_textfield_required(
-                                  requiredLabel: "Confirm Password",
-                                  hint: "Confirm password here",
-                                  obscureText: true,
-                                  controller: confirmPassController),
-                              SizedBox(height: 50),
-                              CustomButton(
-                                  onPress: () {
-                                    // Get.to(() => RegisterScreen());
-                                  },
-                                  text: "Sign up"),
-                              SizedBox(height: 10),
-                              TextButton(
-                                  onPressed: () {
-                                    Get.back();
-                                  },
-                                  child: CommonText(
-                                    text: "Back",
-                                    color: AppColors.appColorPrimary,
-                                    weight: FontWeight.bold,
-                                  ))
-                            ],
+                          child: Form(
+                            key: _formkey,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(height: 20),
+                                Custom_textfield_required(
+                                    requiredLabel: "First Name",
+                                    hint: "Enter First Name here",
+                                    controller: userController),
+                                SizedBox(height: 20),
+                                Custom_textfield_required(
+                                    requiredLabel: "Middle Name",
+                                    hint: "Enter Middle Name here",
+                                    controller: userController),
+                                SizedBox(height: 20),
+                                Custom_textfield_required(
+                                    requiredLabel: "Last Name",
+                                    hint: "Enter Last Name here",
+                                    controller: userController),
+                                SizedBox(height: 20),
+                                Custom_textfield_required(
+                                    requiredLabel: "Username",
+                                    hint: "Enter username here",
+                                    controller: userController),
+                                SizedBox(height: 20),
+                                Custom_textfield_required(
+                                    requiredLabel: "Email",
+                                    hint: "Enter email here",
+                                    obscureText: true,
+                                    controller: emailController),
+                                SizedBox(height: 20),
+                                Custom_textfield_required(
+                                    requiredLabel: "Password",
+                                    hint: "Enter username here",
+                                    controller: passController),
+                                SizedBox(height: 20),
+                                Custom_textfield_required(
+                                    requiredLabel: "Confirm Password",
+                                    hint: "Confirm password here",
+                                    obscureText: true,
+                                    controller: confirmPassController),
+                                SizedBox(height: 50),
+                                CustomButton(
+                                    onPress: () {
+                                      // Get.to(() => RegisterScreen());
+                                    },
+                                    text: "Sign up"),
+                                SizedBox(height: 10),
+                                TextButton(
+                                    onPressed: () {
+                                      Get.back();
+                                    },
+                                    child: CommonText(
+                                      text: "Back",
+                                      color: AppColors.appColorPrimary,
+                                      weight: FontWeight.bold,
+                                    ))
+                              ],
+                            ),
                           ),
                         ),
                       ),

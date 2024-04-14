@@ -4,6 +4,7 @@ import 'package:travel_app/app/configs/app_colors.dart';
 import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_button.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_textfield_required.dart';
+import 'package:travel_app/presentation/auth/view/customer_register_screen.dart';
 import 'package:travel_app/presentation/auth/view/register_screen.dart';
 
 import '../../../app/utils/custom_widgets/custom_outline_button_Wicon.dart';
@@ -22,9 +23,10 @@ class _LoginScreenState extends State<LoginScreen> {
   final userController = TextEditingController();
   final agentController = TextEditingController();
   final passController = TextEditingController();
-  String? username = "shoaibuldin5@hotmail.com";
-  String? username2 = "shoaibuldin@hotmail.com";
+  String? username = "shoaibuldin@hotmail.com";
   String? password = "1234";
+  String? username1 = "Allauun";
+  String? password1 = "9900";
   bool isButton1Selected = true;
   var isLoading = true.obs;
   bool isValidForm = false;
@@ -273,8 +275,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                   TextButton(
                                       onPressed: () {
+                                        _showModalSheet(context);
                                         // Get.to(() => RegisterScreen());
-                                        MyToast.snackToast("Coming Soon", 1);
+                                        // MyToast.snackToast("Coming Soon", 1);
                                       },
                                       child: CommonText(
                                         text: "Register",
@@ -295,6 +298,48 @@ class _LoginScreenState extends State<LoginScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  void _showModalSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isDismissible: true,
+      showDragHandle: true,
+      enableDrag: true,
+      builder: (BuildContext context) {
+        return Container(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              CommonText(
+                text: 'Select Profile',
+                weight: FontWeight.w600,
+                fontSize: 16,
+              ),
+              ListTile(
+                title: CommonText(text: 'Customer/Guest'),
+                subtitle: CommonText(
+                    text: 'B2C', weight: FontWeight.w200, fontSize: 10),
+                onTap: () {
+                  Navigator.pop(context);
+                  Get.to(() => CustomerRegisterScreen());
+                },
+              ),
+              ListTile(
+                title: CommonText(text: 'Agent'),
+                subtitle: CommonText(
+                    text: 'B2B', weight: FontWeight.w200, fontSize: 10),
+                onTap: () {
+                  Navigator.pop(context);
+                  Get.to(() => RegisterScreen());
+                },
+              ),
+              SizedBox(height: 20)
+            ],
+          ),
+        );
+      },
     );
   }
 }
