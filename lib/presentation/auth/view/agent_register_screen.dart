@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:travel_app/app/configs/app_colors.dart';
 import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_button.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_textfield_required.dart';
-import 'package:travel_app/presentation/auth/view/otp_screen.dart';
+import 'package:travel_app/presentation/auth/controller/agent_register_controller.dart';
 
-class CustomerAgentRegisterScreen extends StatefulWidget {
-  const CustomerAgentRegisterScreen({super.key});
+class AgentRegisterScreen extends StatefulWidget {
+  const AgentRegisterScreen({super.key});
 
   @override
-  State<CustomerAgentRegisterScreen> createState() =>
-      _CustomerAgentRegisterScreenState();
+  State<AgentRegisterScreen> createState() => _AgentRegisterScreenState();
 }
 
-class _CustomerAgentRegisterScreenState
-    extends State<CustomerAgentRegisterScreen> {
+class _AgentRegisterScreenState extends State<AgentRegisterScreen> {
+  final AgentRegisterController agentRegisterController =
+      Get.put(AgentRegisterController());
   final firstNameController = TextEditingController();
   final midNameController = TextEditingController();
   final lastNameController = TextEditingController();
@@ -24,11 +23,7 @@ class _CustomerAgentRegisterScreenState
   final emailController = TextEditingController();
   final passController = TextEditingController();
   final confirmPassController = TextEditingController();
-  TextEditingController numberController = TextEditingController();
-  String phoneNumber = '';
-  String phoneCode = '+1';
-  String countryCode = 'US';
-  PhoneNumber number = PhoneNumber(isoCode: 'US');
+  final codeController = TextEditingController();
   var isLoading = true.obs;
   bool isValidForm = false;
   final _formkey = GlobalKey<FormState>();
@@ -103,17 +98,17 @@ class _CustomerAgentRegisterScreenState
                                 Custom_textfield_required(
                                     requiredLabel: "First Name",
                                     hint: "Enter First Name here",
-                                    controller: userController),
+                                    controller: firstNameController),
                                 SizedBox(height: 20),
                                 Custom_textfield_required(
                                     requiredLabel: "Middle Name",
                                     hint: "Enter Middle Name here",
-                                    controller: userController),
+                                    controller: midNameController),
                                 SizedBox(height: 20),
                                 Custom_textfield_required(
                                     requiredLabel: "Last Name",
                                     hint: "Enter Last Name here",
-                                    controller: userController),
+                                    controller: lastNameController),
                                 SizedBox(height: 20),
                                 Custom_textfield_required(
                                     requiredLabel: "Username",
@@ -123,12 +118,12 @@ class _CustomerAgentRegisterScreenState
                                 Custom_textfield_required(
                                     requiredLabel: "Email",
                                     hint: "Enter email here",
-                                    obscureText: true,
                                     controller: emailController),
                                 SizedBox(height: 20),
                                 Custom_textfield_required(
                                     requiredLabel: "Password",
                                     hint: "Enter username here",
+                                    obscureText: true,
                                     controller: passController),
                                 SizedBox(height: 20),
                                 Custom_textfield_required(
@@ -137,101 +132,46 @@ class _CustomerAgentRegisterScreenState
                                     obscureText: true,
                                     controller: confirmPassController),
                                 SizedBox(height: 20),
-                                Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: RichText(
-                                    text: TextSpan(
-                                      children: [
-                                        TextSpan(
-                                          text: "Phone Number",
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                        TextSpan(
-                                          text: ' *',
-                                          style: TextStyle(color: Colors.red),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                InternationalPhoneNumberInput(
-                                    onInputChanged: (PhoneNumber number) {
-                                      setState(() {
-                                        phoneNumber = numberController.text;
-                                        phoneCode = number.dialCode!;
-                                        countryCode = number.isoCode!;
-                                      });
-                                    },
-                                    onInputValidated: (bool value) {
-                                      print(value);
-                                    },
-                                    selectorConfig: SelectorConfig(
-                                        trailingSpace: false,
-                                        selectorType:
-                                            PhoneInputSelectorType.BOTTOM_SHEET,
-                                        useEmoji: true),
-                                    ignoreBlank: false,
-                                    autoValidateMode: AutovalidateMode.disabled,
-                                    selectorTextStyle:
-                                        TextStyle(color: Colors.black),
-                                    initialValue: number,
-                                    textFieldController: numberController,
-                                    formatInput: true,
-                                    cursorColor: Colors.black,
-                                    keyboardType:
-                                        TextInputType.numberWithOptions(
-                                            signed: true, decimal: true),
-                                    inputBorder: UnderlineInputBorder(),
-                                    inputDecoration: InputDecoration(
-                                      isDense: true,
-                                      icon: Icon(Icons.arrow_drop_down_rounded),
-                                      hintText: "Enter Number Here",
-                                      hintStyle: const TextStyle(
-                                          color: Colors.grey,
-                                          fontSize: 14.0,
-                                          fontWeight: FontWeight.bold),
-                                      border: UnderlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          width: 0.5,
-                                          color: Colors.grey,
-                                        ),
-                                      ),
-                                      focusedBorder: UnderlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          width: 0.5,
-                                          color: Colors.grey,
-                                        ),
-                                      ),
-                                      enabledBorder: UnderlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          width: 0.5,
-                                          color: Colors.grey,
-                                        ),
-                                      ),
-                                    ),
-                                    onSaved: (PhoneNumber? number) {
-                                      if (number != null) {
-                                        print('On Saved: $number');
-                                        phoneNumber = number.phoneNumber!;
-                                        phoneCode = number.dialCode!;
-                                        countryCode = number.isoCode!;
-                                      }
-                                    },
-                                    validator: (inputValue) {
-                                      if (inputValue!.isEmpty) {
-                                        return "Enter Phone Number";
-                                      }
-                                      return null;
-                                    }),
-                                // CommonText(text: "Phone: $phoneCode $phoneNumber"),
+                                Custom_textfield_required(
+                                    requiredLabel: "Agent Code",
+                                    hint: "Enter Code here",
+                                    controller: codeController),
                                 SizedBox(height: 50),
-                                CustomButton(
-                                    onPress: () {
-                                      Get.to(() => OTPScreen());
-                                    },
-                                    text: "Sign up"),
+                                Obx(() {
+                                  return agentRegisterController.isLoading.value
+                                      ? Center(
+                                          child: CircularProgressIndicator(
+                                            color: AppColors.appColorPrimary,
+                                          ),
+                                        )
+                                      : CustomButton(
+                                          onPress: () {
+                                            if (_formkey.currentState!
+                                                .validate()) {
+                                              setState(() {
+                                                isValidForm = true;
+                                                // checkConnectivity();
+                                                agentRegisterController
+                                                    .registerAgent(
+                                                  firstNameController.text
+                                                      .trim(),
+                                                  midNameController.text.trim(),
+                                                  lastNameController.text
+                                                      .trim(),
+                                                  userController.text.trim(),
+                                                  passController.text.trim(),
+                                                  emailController.text.trim(),
+                                                  codeController.text.trim(),
+                                                );
+                                              });
+                                            } else {
+                                              setState(() {
+                                                isValidForm = false;
+                                              });
+                                            }
+                                          },
+                                          text: "Sign up");
+                                }),
                                 SizedBox(height: 10),
                                 TextButton(
                                     onPressed: () {

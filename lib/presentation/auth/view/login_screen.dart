@@ -5,9 +5,8 @@ import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_button.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_textfield_required.dart';
 import 'package:travel_app/presentation/auth/view/customer_register_screen.dart';
-import 'package:travel_app/presentation/auth/view/register_screen.dart';
+import 'package:travel_app/presentation/auth/view/agent_register_screen.dart';
 
-import '../../../app/utils/custom_widgets/custom_outline_button_Wicon.dart';
 import '../../../app/utils/custom_widgets/custom_toast.dart';
 import '../controller/login_controller.dart';
 
@@ -244,26 +243,26 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                 ],
                               ),
-                              SizedBox(height: 20),
-                              CommonText(
-                                  text: "Login with", color: Colors.black),
-                              SizedBox(height: 20),
-                              Outline_button_icon(
-                                text: "Sign in with Google",
-                                onPress: () {
-                                  MyToast.snackToast("Coming Soon", 1);
-                                },
-                                iconPath: "assets/icons/google_logo.png",
-                              ),
-                              SizedBox(height: 10),
-                              Outline_button_icon(
-                                text: "Sign in with Microsoft",
-                                onPress: () {
-                                  MyToast.snackToast("Coming Soon", 1);
-                                },
-                                iconPath: "assets/icons/ms_logo.png",
-                              ),
-                              SizedBox(height: 20),
+                              // SizedBox(height: 20),
+                              // CommonText(
+                              //     text: "Login with", color: Colors.black),
+                              // SizedBox(height: 20),
+                              // Outline_button_icon(
+                              //   text: "Sign in with Google",
+                              //   onPress: () {
+                              //     MyToast.snackToast("Coming Soon", 1);
+                              //   },
+                              //   iconPath: "assets/icons/google_logo.png",
+                              // ),
+                              // SizedBox(height: 10),
+                              // Outline_button_icon(
+                              //   text: "Sign in with Microsoft",
+                              //   onPress: () {
+                              //     MyToast.snackToast("Coming Soon", 1);
+                              //   },
+                              //   iconPath: "assets/icons/ms_logo.png",
+                              // ),
+                              // SizedBox(height: 20),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -276,7 +275,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   TextButton(
                                       onPressed: () {
                                         _showModalSheet(context);
-                                        // Get.to(() => RegisterScreen());
+                                        // Get.to(() => AgentRegisterScreen());
                                         // MyToast.snackToast("Coming Soon", 1);
                                       },
                                       child: CommonText(
@@ -323,7 +322,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     text: 'B2C', weight: FontWeight.w200, fontSize: 10),
                 onTap: () {
                   Navigator.pop(context);
-                  Get.to(() => CustomerRegisterScreen());
+                  Get.to(() => CustomerAgentRegisterScreen());
                 },
               ),
               ListTile(
@@ -332,7 +331,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     text: 'B2B', weight: FontWeight.w200, fontSize: 10),
                 onTap: () {
                   Navigator.pop(context);
-                  Get.to(() => RegisterScreen());
+                  Get.to(() => AgentRegisterScreen());
                 },
               ),
               SizedBox(height: 20)
