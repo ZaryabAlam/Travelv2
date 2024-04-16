@@ -16,19 +16,27 @@ class CustomerRegisterController extends GetxController {
     super.onInit();
   }
 
-  Future<void> registerCustomer(String? fname, String? midName, String? lname,
-      String? username, String? password, String? email, String? code) async {
+  Future<void> registerCustomer(
+      String? fname,
+      String? midName,
+      String? lname,
+      String? username,
+      String? password,
+      String? email,
+      String? phoneCode,
+      String? phoneNo) async {
     isLoading.value = true;
     try {
       var headers = {'Content-Type': 'application/json'};
       var body = json.encode({
-        "firstName": fname,
-        "middleName": midName,
-        "lastName": lname,
-        "username": username,
-        "password": password,
-        "email": email,
-        "agentCode": code,
+        "firstName": "Zaryab",
+        "middleName": "string",
+        "lastName": "Alam",
+        "username": "zaryabalam97@gmail.com",
+        "password": "1234",
+        "email": "zaryabalam97@gmail.comm",
+        "mobileNo": "+92",
+        "mobileCode": "3112136873",
         "microSiteClientId": 2
       });
 

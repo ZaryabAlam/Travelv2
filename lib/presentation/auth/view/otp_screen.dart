@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 import "package:get/get.dart";
@@ -5,9 +7,28 @@ import "package:get/get.dart";
 import "../../../app/configs/app_colors.dart";
 import "../../../app/utils/custom_widgets/common_text.dart";
 import "../../../app/utils/custom_widgets/custom_button.dart";
+import "../controller/verify_otp_controller.dart";
 
 class OTPScreen extends StatefulWidget {
-  const OTPScreen({super.key});
+  String? firstName;
+  String? midName;
+  String? lastName;
+  String? username;
+  String? password;
+  String? email;
+  String? phoneCode;
+  String? phoneNumber;
+  OTPScreen({
+    super.key,
+    required this.firstName,
+    required this.midName,
+    required this.lastName,
+    required this.username,
+    required this.password,
+    required this.email,
+    required this.phoneCode,
+    required this.phoneNumber,
+  });
 
   @override
   State<OTPScreen> createState() => _OTPScreenState();
@@ -18,6 +39,11 @@ class _OTPScreenState extends State<OTPScreen> {
   List<FocusNode> _focusNodes = List.generate(6, (index) => FocusNode());
   List<TextEditingController> _controllers =
       List.generate(6, (index) => TextEditingController());
+  var isLoading = true.obs;
+  bool isValidForm = false;
+  final _formkey = GlobalKey<FormState>();
+  final VerifyOtpController verifyOtpController =
+      Get.put(VerifyOtpController());
 
   @override
   void initState() {
@@ -173,13 +199,46 @@ class _OTPScreenState extends State<OTPScreen> {
                             padding: EdgeInsets.symmetric(horizontal: 20),
                             child: Column(
                               children: [
-                                CustomButton(
-                                    onPress: () {
-                                      // Get.to(() => OTPScreen());
+                                // CustomButton(
+                                //     onPress: () {
+                                // Get.to(() => OTPScreen());
 
-                                      print('Entered OTP: $otp');
-                                    },
-                                    text: "Verify"),
+                                // print('Entered OTP: $otp');
+                                // },
+                                // text: "Verify"),
+                                Obx(() {
+                                  return verifyOtpController.isLoading.value
+                                      ? Center(
+                                          child: CircularProgressIndicator(
+                                            color: AppColors.appColorPrimary,
+                                          ),
+                                        )
+                                      : CustomButton(
+                                          onPress: () {
+                                            if (_formkey.currentState!
+                                                .validate()) {
+                                              setState(() {
+                                                isValidForm = true;
+                                                // checkConnectivity();
+                                                verifyOtpController.verifyOTP(
+                                                    widget.firstName,
+                                                    widget.midName,
+                                                    widget.lastName,
+                                                    widget.username,
+                                                    widget.password,
+                                                    widget.email,
+                                                    widget.phoneCode,
+                                                    widget.phoneNumber,
+                                                    otp.toString());
+                                              });
+                                            } else {
+                                              setState(() {
+                                                isValidForm = false;
+                                              });
+                                            }
+                                          },
+                                          text: "Verify");
+                                }),
                                 SizedBox(height: 10),
                                 TextButton(
                                     onPressed: () {

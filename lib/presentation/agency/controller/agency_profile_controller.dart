@@ -35,7 +35,7 @@ class AgencyProfileController extends GetxController {
       };
 
       var response = await http.get(
-          Uri.parse('${baseURL}api/Agency/${dataController.mySupportId.value}'),
+          Uri.parse('${baseURL}api/Agency/${dataController.myRoleId.value}'),
           headers: headers);
 
       var jsonData = json.decode(response.body) as Map<String, dynamic>;

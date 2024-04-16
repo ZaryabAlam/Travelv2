@@ -9,11 +9,11 @@ import 'package:travel_app/app/configs/app_size_config.dart';
 import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_appbar.dart';
 import 'package:travel_app/presentation/agency/view/agency_profile_screen.dart';
-import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/check_in_view.dart';
 import 'package:travel_app/presentation/home_bottom_nav/nav_tabs/search_view.dart';
 import 'package:travel_app/presentation/booking_history/view/my_bookings_screen.dart';
 import 'package:travel_app/presentation/profile/view/user_profile_screen.dart';
 
+import '../../../app/data/data_controller.dart';
 import '../../auth/view/login_screen.dart';
 
 class BottomNavScreen extends StatefulWidget {
@@ -26,11 +26,13 @@ class BottomNavScreen extends StatefulWidget {
 }
 
 class _BottomNavScreenState extends State<BottomNavScreen> {
+  final DataController dataController = Get.put(DataController());
   var tabsList = [];
 
   @override
   void initState() {
     setArgs();
+    dataController.loadMyData();
     super.initState();
   }
 
@@ -97,8 +99,8 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               0.02.ph,
-              const CommonText(
-                text: 'Hello User',
+               CommonText(
+                text: 'Hello ${dataController.myName.value}',
                 fontSize: 20.0,
               ),
               0.02.ph,

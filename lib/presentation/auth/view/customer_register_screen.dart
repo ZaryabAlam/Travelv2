@@ -5,7 +5,8 @@ import 'package:travel_app/app/configs/app_colors.dart';
 import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_button.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_textfield_required.dart';
-import 'package:travel_app/presentation/auth/view/otp_screen.dart';
+
+import '../controller/otp_controller.dart';
 
 class CustomerAgentRegisterScreen extends StatefulWidget {
   const CustomerAgentRegisterScreen({super.key});
@@ -17,6 +18,7 @@ class CustomerAgentRegisterScreen extends StatefulWidget {
 
 class _CustomerAgentRegisterScreenState
     extends State<CustomerAgentRegisterScreen> {
+  final OtpController otpController = Get.put(OtpController());
   final firstNameController = TextEditingController();
   final midNameController = TextEditingController();
   final lastNameController = TextEditingController();
@@ -25,8 +27,8 @@ class _CustomerAgentRegisterScreenState
   final passController = TextEditingController();
   final confirmPassController = TextEditingController();
   TextEditingController numberController = TextEditingController();
-  String phoneNumber = '';
   String phoneCode = '+1';
+  String phoneNumber = '';
   String countryCode = 'US';
   PhoneNumber number = PhoneNumber(isoCode: 'US');
   var isLoading = true.obs;
@@ -103,17 +105,17 @@ class _CustomerAgentRegisterScreenState
                                 Custom_textfield_required(
                                     requiredLabel: "First Name",
                                     hint: "Enter First Name here",
-                                    controller: userController),
+                                    controller: firstNameController),
                                 SizedBox(height: 20),
                                 Custom_textfield_required(
                                     requiredLabel: "Middle Name",
                                     hint: "Enter Middle Name here",
-                                    controller: userController),
+                                    controller: midNameController),
                                 SizedBox(height: 20),
                                 Custom_textfield_required(
                                     requiredLabel: "Last Name",
                                     hint: "Enter Last Name here",
-                                    controller: userController),
+                                    controller: lastNameController),
                                 SizedBox(height: 20),
                                 Custom_textfield_required(
                                     requiredLabel: "Username",
@@ -123,12 +125,12 @@ class _CustomerAgentRegisterScreenState
                                 Custom_textfield_required(
                                     requiredLabel: "Email",
                                     hint: "Enter email here",
-                                    obscureText: true,
                                     controller: emailController),
                                 SizedBox(height: 20),
                                 Custom_textfield_required(
                                     requiredLabel: "Password",
                                     hint: "Enter username here",
+                                    obscureText: true,
                                     controller: passController),
                                 SizedBox(height: 20),
                                 Custom_textfield_required(
@@ -227,11 +229,42 @@ class _CustomerAgentRegisterScreenState
                                     }),
                                 // CommonText(text: "Phone: $phoneCode $phoneNumber"),
                                 SizedBox(height: 50),
-                                CustomButton(
-                                    onPress: () {
-                                      Get.to(() => OTPScreen());
-                                    },
-                                    text: "Sign up"),
+                                Obx(() {
+                                  return otpController.isLoading.value
+                                      ? Center(
+                                          child: CircularProgressIndicator(
+                                            color: AppColors.appColorPrimary,
+                                          ),
+                                        )
+                                      : CustomButton(
+                                          onPress: () {
+                                            if (_formkey.currentState!
+                                                .validate()) {
+                                              setState(() {
+                                                isValidForm = true;
+                                                // checkConnectivity();
+                                                otpController.sendOTP(
+                                                    firstNameController.text
+                                                        .trim(),
+                                                    midNameController.text
+                                                        .trim(),
+                                                    lastNameController.text
+                                                        .trim(),
+                                                    userController.text.trim(),
+                                                    passController.text.trim(),
+                                                    emailController.text.trim(),
+                                                    phoneCode,
+                                                    numberController.text
+                                                        .trim());
+                                              });
+                                            } else {
+                                              setState(() {
+                                                isValidForm = false;
+                                              });
+                                            }
+                                          },
+                                          text: "Sign up");
+                                }),
                                 SizedBox(height: 10),
                                 TextButton(
                                     onPressed: () {

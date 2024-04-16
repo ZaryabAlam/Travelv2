@@ -9,7 +9,7 @@ class DataController extends GetxController {
   RxString myUsername = ''.obs;
   RxString myToken = ''.obs;
   RxString myRefToken = ''.obs;
-  RxInt mySupportId = 1.obs;
+  RxInt myRoleId = 1.obs;
   RxBool myLoggedIn = false.obs;
 
 //////////////////////////////////////////////////////Get Stored Data
@@ -22,7 +22,7 @@ class DataController extends GetxController {
     String? _username = prefs.getString('savedUsername') ?? "Error";
     String? _token = prefs.getString('savedToken') ?? "Error";
     String? _refToken = prefs.getString('savedRefToken') ?? "Error";
-    int? _mySupportId = prefs.getInt("roleID") ?? 1;
+    int? _myRoleId = prefs.getInt("roleID") ?? 1;
     update();
     myID.value = _id;
     myLoggedIn.value = _loggedIn;
@@ -31,7 +31,7 @@ class DataController extends GetxController {
     myUsername.value = _username;
     myToken.value = _token;
     myRefToken.value = _refToken;
-    mySupportId.value = _mySupportId;
+    myRoleId.value = _myRoleId;
 
     update();
   }

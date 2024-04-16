@@ -16,13 +16,24 @@ class OtpController extends GetxController {
     super.onInit();
   }
 
-  Future<void> sendOTP(String? phoneCode, String? phoneNumber) async {
+  Future<void> sendOTP(
+      String? fName,
+      String? mName,
+      String? lName,
+      String? userName,
+      String? pass,
+      String? email2,
+      String? phoneCode2,
+      String? phoneNumber2) async {
     isLoading.value = true;
+
     try {
+      print(
+          "$fName, $mName, $lName, $userName, $pass, $email2, $phoneCode2, $phoneNumber2");
       var headers = {'Content-Type': 'application/json'};
       var body = json.encode({
-        "mobileNo": phoneNumber,
-        "mobileCode": phoneCode,
+        "mobileNo": phoneNumber2,
+        "mobileCode": phoneCode2,
         "microSiteClientId": 2
       });
       var response = await http.post(
@@ -36,7 +47,16 @@ class OtpController extends GetxController {
             AppColors.green, Icons.check_circle_rounded));
         isLoading.value = false;
 
-        await Get.to(() => OTPScreen());
+        await Get.to(() => OTPScreen(
+              firstName: fName,
+              midName: mName,
+              lastName: lName,
+              username: userName,
+              password: pass,
+              email: email2,
+              phoneCode: phoneCode2,
+              phoneNumber: phoneNumber2,
+            ));
       } else {
         var jsonData = json.decode(response.body) as Map<String, dynamic>;
         // loginModel.value = LoginModel.fromJson(jsonData);
