@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:travel_app/app/configs/app_colors.dart';
 import 'package:travel_app/presentation/home_bottom_nav/controller/payment_method_controller.dart';
-import 'package:travel_app/presentation/home_bottom_nav/views/passenger_details.dart';
 import 'package:travel_app/presentation/home_bottom_nav/views/payment_details.dart';
 
+import '../../../app/data/data_controller.dart';
 import '../../../app/utils/custom_widgets/custom_appbar.dart';
 import '../../../app/utils/custom_widgets/custom_button.dart';
 import '../../../app/utils/custom_widgets/custom_outline_button.dart';
 import '../../../app/utils/custom_widgets/gradient_snackbar.dart';
 import '../controller/flight_booking_controller.dart';
 import '../model/payment_method_model.dart';
+import 'payment_waafi_screen.dart';
 
 // ignore: must_be_immutable
 class PaymentMethodScreen extends StatefulWidget {
@@ -228,12 +229,14 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
   String selectedID = '';
   final FlightBookingController flightBookingController =
       Get.put(FlightBookingController());
+  final DataController dataController = Get.put(DataController());
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       paymentMethodController.fetchMethod();
+      dataController.loadMyData();
     });
   }
 
@@ -259,6 +262,9 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
+                      // CommonText(
+                      //   text: 'ID ${dataController.myRoleId.value}'
+                      // ),
                       Expanded(
                         child: Obx(() {
                           if (paymentMethodController.isLoading.value) {
@@ -278,6 +284,12 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                                     itemBuilder: (context, index) {
                                       var method = paymentMethodController
                                           .paymentMethods[index];
+                                      if (dataController.myRoleId.value == 4) {
+                                        if (method.name.toString() ==
+                                            "Waafi Pay") {
+                                          return SizedBox.shrink();
+                                        }
+                                      }
                                       return PaymentOptionBox(
                                         optionName: method.name.toString(),
                                         icon: Icons.payments_outlined,
@@ -319,85 +331,191 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                                       AppColors.orange,
                                       Icons.warning_rounded));
                                 } else {
-                                  flightBookingController.fetchBooking(
-                                    widget.searchID,
-                                    widget.flightID,
-                                    // paymentID,
-                                    selectedID,
-                                    widget.title,
-                                    widget.firstName,
-                                    widget.lastName,
-                                    widget.traveller,
-                                    widget.dob,
-                                    widget.passNumber,
-                                    widget.passExp,
-                                    widget.email,
-                                    widget.phone,
-                                    widget.phoneCode,
-                                    widget.countryCode,
-                                    widget.adultCount!,
-                                    widget.childCount!,
-                                    widget.infantCount!,
-                                    //
-                                    widget.adult2name,
-                                    widget.adult2Lname,
-                                    widget.adult2dob,
-                                    widget.adult2pass,
-                                    widget.adult2passExp,
-                                    widget.adult3name,
-                                    widget.adult3Lname,
-                                    widget.adult3dob,
-                                    widget.adult3pass,
-                                    widget.adult3passExp,
-                                    widget.adult4name,
-                                    widget.adult4Lname,
-                                    widget.adult4dob,
-                                    widget.adult4pass,
-                                    widget.adult4passExp,
-                                    //
-                                    widget.child1name,
-                                    widget.child1Lname,
-                                    widget.child1dob,
-                                    widget.child1pass,
-                                    widget.child1passExp,
-                                    widget.child2name,
-                                    widget.child2Lname,
-                                    widget.child2dob,
-                                    widget.child2pass,
-                                    widget.child2passExp,
-                                    widget.child3name,
-                                    widget.child3Lname,
-                                    widget.child3dob,
-                                    widget.child3pass,
-                                    widget.child3passExp,
-                                    widget.child4name,
-                                    widget.child4Lname,
-                                    widget.child4dob,
-                                    widget.child4pass,
-                                    widget.child4passExp,
-                                    //
-                                    widget.infant1name,
-                                    widget.infant1Lname,
-                                    widget.infant1dob,
-                                    widget.infant1pass,
-                                    widget.infant1passExp,
-                                    widget.infant2name,
-                                    widget.infant2Lname,
-                                    widget.infant2dob,
-                                    widget.infant2pass,
-                                    widget.infant2passExp,
-                                    widget.infant3name,
-                                    widget.infant3Lname,
-                                    widget.infant3dob,
-                                    widget.infant3pass,
-                                    widget.infant3passExp,
-                                    widget.infant4name,
-                                    widget.infant4Lname,
-                                    widget.infant4dob,
-                                    widget.infant4pass,
-                                    widget.infant4passExp,
-                                    //
-                                  );
+                                  if (selectedOption == "Waafi Pay") {
+                                    // Get.to(() => PaymentDetailsScreen(
+                                    Get.to(() => PaymentWaafiScreen(
+                                          countryCode: widget.countryCode,
+                                          dob: widget.dob,
+                                          email: widget.email,
+                                          firstName: widget.firstName,
+                                          lastName: widget.lastName,
+                                          nationality: widget.nationality,
+                                          passExp: widget.passExp,
+                                          passNumber: widget.passNumber,
+                                          phone: widget.phone,
+                                          phoneCode: widget.phoneCode,
+                                          title: widget.title,
+                                          fare: widget.fare.toString(),
+                                          tax: widget.tax.toString(),
+                                          total: widget.total.toString(),
+                                          traveller: widget.traveller,
+                                          cabinClass: widget.cabinClass,
+                                          searchID: widget.searchID,
+                                          flightID: widget.flightID,
+                                          paymentID: selectedID,
+                                          departFlight: widget.departFlight,
+                                          arriveFlight: widget.arriveFlight,
+                                          departFromDate1:
+                                              widget.departFromDate1,
+                                          departFromTime1:
+                                              widget.departFromTime1,
+                                          departFromCode1:
+                                              widget.departFromCode1,
+                                          departFromDate2:
+                                              widget.departFromDate2,
+                                          departFromTime2:
+                                              widget.departFromTime2,
+                                          departFromCode2:
+                                              widget.departFromCode2,
+                                          arriveToDate1: widget.arriveToDate1,
+                                          arriveToTime1: widget.arriveToTime1,
+                                          arriveToCode1: widget.arriveToCode1,
+                                          arriveToDate2: widget.arriveToDate2,
+                                          arriveToCode2: widget.arriveToCode2,
+                                          arriveToTime2: widget.arriveToTime2,
+                                          adultCount: widget.adultCount,
+                                          childCount: widget.childCount,
+                                          infantCount: widget.infantCount,
+                                          //
+                                          adult2name: widget.adult2name,
+                                          adult2Lname: widget.adult2Lname,
+                                          adult2dob: widget.adult2dob,
+                                          adult2pass: widget.adult2pass,
+                                          adult2passExp: widget.adult2passExp,
+                                          adult3name: widget.adult3name,
+                                          adult3Lname: widget.adult3Lname,
+                                          adult3dob: widget.adult3dob,
+                                          adult3pass: widget.adult3pass,
+                                          adult3passExp: widget.adult3passExp,
+                                          adult4name: widget.adult4name,
+                                          adult4Lname: widget.adult4Lname,
+                                          adult4dob: widget.adult4dob,
+                                          adult4pass: widget.adult4pass,
+                                          adult4passExp: widget.adult4passExp,
+                                          //
+                                          child1name: widget.child1name,
+                                          child1Lname: widget.child1Lname,
+                                          child1dob: widget.child1dob,
+                                          child1pass: widget.child1pass,
+                                          child1passExp: widget.child1passExp,
+                                          child2name: widget.child2name,
+                                          child2Lname: widget.child2Lname,
+                                          child2dob: widget.child2dob,
+                                          child2pass: widget.child2pass,
+                                          child2passExp: widget.child2passExp,
+                                          child3name: widget.child3name,
+                                          child3Lname: widget.child3Lname,
+                                          child3dob: widget.child3dob,
+                                          child3pass: widget.child3pass,
+                                          child3passExp: widget.child3passExp,
+                                          child4name: widget.child4name,
+                                          child4Lname: widget.child4Lname,
+                                          child4dob: widget.child4dob,
+                                          child4pass: widget.child4pass,
+                                          child4passExp: widget.child4passExp,
+                                          //
+                                          infant1name: widget.infant1name,
+                                          infant1Lname: widget.infant1Lname,
+                                          infant1dob: widget.infant1dob,
+                                          infant1pass: widget.infant1pass,
+                                          infant1passExp: widget.infant1passExp,
+                                          infant2name: widget.infant2name,
+                                          infant2Lname: widget.infant2Lname,
+                                          infant2dob: widget.infant2dob,
+                                          infant2pass: widget.infant2pass,
+                                          infant2passExp: widget.infant2passExp,
+                                          infant3name: widget.infant3name,
+                                          infant3Lname: widget.infant3Lname,
+                                          infant3dob: widget.infant3dob,
+                                          infant3pass: widget.infant3pass,
+                                          infant3passExp: widget.infant3passExp,
+                                          infant4name: widget.infant4name,
+                                          infant4Lname: widget.infant4Lname,
+                                          infant4dob: widget.infant4dob,
+                                          infant4pass: widget.infant4pass,
+                                          infant4passExp: widget.infant4passExp,
+                                        ));
+                                  } else {
+                                    flightBookingController.fetchBooking(
+                                      widget.searchID,
+                                      widget.flightID,
+                                      // paymentID,
+                                      selectedID,
+                                      widget.title,
+                                      widget.firstName,
+                                      widget.lastName,
+                                      widget.traveller,
+                                      widget.dob,
+                                      widget.passNumber,
+                                      widget.passExp,
+                                      widget.email,
+                                      widget.phone,
+                                      widget.phoneCode,
+                                      widget.countryCode,
+                                      widget.adultCount!,
+                                      widget.childCount!,
+                                      widget.infantCount!,
+                                      //
+                                      widget.adult2name,
+                                      widget.adult2Lname,
+                                      widget.adult2dob,
+                                      widget.adult2pass,
+                                      widget.adult2passExp,
+                                      widget.adult3name,
+                                      widget.adult3Lname,
+                                      widget.adult3dob,
+                                      widget.adult3pass,
+                                      widget.adult3passExp,
+                                      widget.adult4name,
+                                      widget.adult4Lname,
+                                      widget.adult4dob,
+                                      widget.adult4pass,
+                                      widget.adult4passExp,
+                                      //
+                                      widget.child1name,
+                                      widget.child1Lname,
+                                      widget.child1dob,
+                                      widget.child1pass,
+                                      widget.child1passExp,
+                                      widget.child2name,
+                                      widget.child2Lname,
+                                      widget.child2dob,
+                                      widget.child2pass,
+                                      widget.child2passExp,
+                                      widget.child3name,
+                                      widget.child3Lname,
+                                      widget.child3dob,
+                                      widget.child3pass,
+                                      widget.child3passExp,
+                                      widget.child4name,
+                                      widget.child4Lname,
+                                      widget.child4dob,
+                                      widget.child4pass,
+                                      widget.child4passExp,
+                                      //
+                                      widget.infant1name,
+                                      widget.infant1Lname,
+                                      widget.infant1dob,
+                                      widget.infant1pass,
+                                      widget.infant1passExp,
+                                      widget.infant2name,
+                                      widget.infant2Lname,
+                                      widget.infant2dob,
+                                      widget.infant2pass,
+                                      widget.infant2passExp,
+                                      widget.infant3name,
+                                      widget.infant3Lname,
+                                      widget.infant3dob,
+                                      widget.infant3pass,
+                                      widget.infant3passExp,
+                                      widget.infant4name,
+                                      widget.infant4Lname,
+                                      widget.infant4dob,
+                                      widget.infant4pass,
+                                      widget.infant4passExp,
+                                      //
+                                    );
+                                  }
                                   // Get.to(() => PaymentDetailsScreen(
                                   //       countryCode: widget.countryCode,
                                   //       dob: widget.dob,

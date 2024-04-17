@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:travel_app/app/configs/app_size_config.dart';
@@ -299,19 +301,19 @@ class _PaymentDetailsScreenState extends State<PaymentDetailsScreen> {
                       ),
                     ),
                     // FlightSummaryWidget(),
-                    0.01.ph,
+                    // 0.01.ph,
 
-                    Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                      Expanded(child: Icon(Icons.info)),
-                      // 0.02.pw,
-                      Expanded(
-                          flex: 8,
-                          child: CommonText(
-                            text:
-                                'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry.',
-                            textAlign: TextAlign.justify,
-                          ))
-                    ]),
+                    // Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                    //   Expanded(child: Icon(Icons.info)),
+                    //   // 0.02.pw,
+                    //   Expanded(
+                    //       flex: 8,
+                    //       child: CommonText(
+                    //         text:
+                    //             'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry.',
+                    //         textAlign: TextAlign.justify,
+                    //       ))
+                    // ]),
                   ],
                 ),
               );
