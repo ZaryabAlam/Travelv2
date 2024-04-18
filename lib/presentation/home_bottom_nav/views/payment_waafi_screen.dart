@@ -254,11 +254,11 @@ class _PaymentWaafiScreenState extends State<PaymentWaafiScreen> {
                           text: 'Account Details',
                           weight: FontWeight.w600,
                           fontSize: 18.0),
-                      0.03.ph,
-                      Custom_textfield_required(
-                          controller: fullNameController,
-                          requiredLabel: 'Full Name',
-                          hint: 'Enter Full Name'),
+                      // 0.03.ph,
+                      // Custom_textfield_required(
+                      //     controller: fullNameController,
+                      //     requiredLabel: 'Full Name',
+                      //     hint: 'Enter Full Name'),
                       0.03.ph,
                       Align(
                         alignment: Alignment.centerLeft,

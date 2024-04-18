@@ -284,15 +284,31 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                                     itemBuilder: (context, index) {
                                       var method = paymentMethodController
                                           .paymentMethods[index];
+                                      String? image;
+                                      image = "assets/icons/deposit_icon.png";
                                       if (dataController.myRoleId.value == 4) {
                                         if (method.name.toString() ==
                                             "Waafi Pay") {
+                                          image =
+                                              "assets/icons/waafipay_logo.png";
                                           return SizedBox.shrink();
                                         }
+                                      }
+                                      if (dataController.myRoleId.value == 6) {
+                                        if (method.name.toString() ==
+                                            "Deposit") {
+                                          return SizedBox.shrink();
+                                        }
+                                      }
+                                      if (method.name.toString() ==
+                                          "Waafi Pay") {
+                                        image =
+                                            "assets/icons/waafipay_logo.png";
                                       }
                                       return PaymentOptionBox(
                                         optionName: method.name.toString(),
                                         icon: Icons.payments_outlined,
+                                        image: image,
                                         color: AppColors.appColorPrimary
                                             .withOpacity(0.4),
                                         isSelected: selectedOption ==
@@ -615,6 +631,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
 class PaymentOptionBox extends StatelessWidget {
   final String optionName;
   final IconData icon;
+  final String image;
   final Color color;
   final bool isSelected;
   final Function onSelect;
@@ -622,6 +639,7 @@ class PaymentOptionBox extends StatelessWidget {
   PaymentOptionBox({
     required this.optionName,
     required this.icon,
+    required this.image,
     required this.color,
     required this.isSelected,
     required this.onSelect,
@@ -661,10 +679,15 @@ class PaymentOptionBox extends StatelessWidget {
                     onSelect();
                   },
                 ),
-                Icon(
-                  icon,
-                  size: 40,
-                  color: Colors.white,
+                // Icon(
+                //   icon,
+                //   size: 40,
+                //   color: Colors.white,
+                // ),
+                Container(
+                  height: 40,
+                  width: 40,
+                  child: Image(image: AssetImage(image), fit: BoxFit.cover),
                 ),
                 SizedBox(width: 10),
                 Text(

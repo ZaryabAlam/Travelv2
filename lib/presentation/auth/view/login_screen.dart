@@ -325,15 +325,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   Get.to(() => CustomerAgentRegisterScreen());
                 },
               ),
-              ListTile(
-                title: CommonText(text: 'Agent'),
-                subtitle: CommonText(
-                    text: 'B2B', weight: FontWeight.w200, fontSize: 10),
-                onTap: () {
-                  Navigator.pop(context);
-                  Get.to(() => AgentRegisterScreen());
-                },
-              ),
+              // ListTile(
+              //   title: CommonText(text: 'Agent'),
+              //   subtitle: CommonText(
+              //       text: 'B2B', weight: FontWeight.w200, fontSize: 10),
+              //   onTap: () {
+              //     Navigator.pop(context);
+              //     Get.to(() => AgentRegisterScreen());
+              //   },
+              // ),
               SizedBox(height: 20)
             ],
           ),
