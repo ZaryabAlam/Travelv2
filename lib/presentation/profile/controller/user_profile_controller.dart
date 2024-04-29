@@ -51,8 +51,11 @@ class UserProfileController extends GetxController {
       }
     } catch (e) {
       print('Error: $e');
-      Get.showSnackbar(gradientSnackbar("Failure", "Something went wrong",
-          AppColors.orange, Icons.warning_rounded));
+      if (dataController.myLoggedIn.value == true) {
+        Get.showSnackbar(gradientSnackbar("Failure", "Something went wrong",
+            AppColors.orange, Icons.warning_rounded));
+      }
+
       isLoading.value = false;
     } finally {
       isLoading.value = false;

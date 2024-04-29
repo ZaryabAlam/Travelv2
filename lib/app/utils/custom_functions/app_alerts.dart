@@ -92,7 +92,8 @@ class Dialogs {
   static void showAlertDialog(String message) {
     Get.defaultDialog(
         title: "Alert",
-        content: Text(message, style: const TextStyle(), textAlign: TextAlign.center),
+        content: Text(message,
+            style: const TextStyle(), textAlign: TextAlign.center),
         contentPadding: const EdgeInsets.all(20.0),
         cancel: Container(),
         confirm: SizedBox(
@@ -115,25 +116,37 @@ class Dialogs {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        backgroundColor: Get.theme.colorScheme.secondary,
-        content: Text(
-          text,
-          style: TextStyle(fontSize: 17, fontWeight: AppFontWeights.appTextFontWeightLight, color: Get.theme.colorScheme.onSecondary),
-          textAlign: TextAlign.center,
+        // backgroundColor: Get.theme.colorScheme.secondary,
+        backgroundColor: Colors.white,
+        content: CommonText(
+          text: text,
+          textAlign: TextAlign.left,
+          fontSize: 17,
+          weight: AppFontWeights.appTextFontWeightLight,
+          // color: Get.theme.colorScheme.onSecondary
         ),
+
         actions: <Widget>[
           TextButton(
-            style: TextButton.styleFrom(foregroundColor: Get.theme.colorScheme.onSecondary),
+            style: TextButton.styleFrom(
+                foregroundColor: AppColors.appColorPrimary),
             onPressed: onNo,
-            child: Text(
-              "No",
-              style: TextStyle(fontWeight: AppFontWeights.appTextFontWeightMedium, color: Get.theme.colorScheme.onSecondary),
+            child: CommonText(
+              text: "No",
+              weight: AppFontWeights.appTextFontWeightMedium,
+              // color: Get.theme.colorScheme.onSecondary,
             ),
           ),
           TextButton(
-            style: TextButton.styleFrom(backgroundColor: Get.theme.colorScheme.tertiary, foregroundColor: Get.theme.colorScheme.onSecondary),
+            style: TextButton.styleFrom(
+                backgroundColor: AppColors.appColorPrimary,
+                foregroundColor: Get.theme.colorScheme.onSecondary),
             onPressed: onYes,
-            child: const Text("Yes"),
+            child: CommonText(
+              text: "Yes",
+              weight: AppFontWeights.appTextFontWeightMedium,
+              color: Colors.white,
+            ),
           ),
         ],
       ),

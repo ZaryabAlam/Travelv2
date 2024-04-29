@@ -22,7 +22,7 @@ class DataController extends GetxController {
     String? _username = prefs.getString('savedUsername') ?? "Error";
     String? _token = prefs.getString('savedToken') ?? "Error";
     String? _refToken = prefs.getString('savedRefToken') ?? "Error";
-    int? _myRoleId = prefs.getInt("roleID") ?? 1;
+    int? _myRoleId = prefs.getInt("roleID") ?? 4;
     update();
     myID.value = _id;
     myLoggedIn.value = _loggedIn;

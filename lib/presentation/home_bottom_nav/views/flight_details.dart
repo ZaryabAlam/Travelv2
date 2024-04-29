@@ -8,8 +8,12 @@ import 'package:travel_app/app/configs/app_size_config.dart';
 import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_appbar.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_button.dart';
+import 'package:travel_app/presentation/auth/view/login_screen.dart';
 import 'package:travel_app/presentation/home_bottom_nav/controller/flight_fare_rule_controller.dart';
 import 'package:travel_app/presentation/home_bottom_nav/views/passenger_details.dart';
+
+import '../../../app/data/data_controller.dart';
+import '../../../app/utils/custom_functions/app_alerts.dart';
 
 // ignore: must_be_immutable
 class FlightDetailsScreen extends StatefulWidget {
@@ -91,6 +95,7 @@ class FlightDetailsScreen extends StatefulWidget {
 }
 
 class _FlightDetailsScreenState extends State<FlightDetailsScreen> {
+  final DataController dataController = Get.put(DataController());
   final FlightFareRuleController flightFareRuleController =
       Get.put(FlightFareRuleController());
 
@@ -98,6 +103,7 @@ class _FlightDetailsScreenState extends State<FlightDetailsScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      dataController.loadMyData();
       flightFareRuleController.fetchFareRule(widget.searchID, widget.flightID);
     });
   }
@@ -298,6 +304,21 @@ class FlightPackageWidget extends StatefulWidget {
 }
 
 class _FlightPackageWidgetState extends State<FlightPackageWidget> {
+  final DataController dataController = Get.put(DataController());
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      dataController.loadMyData();
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     dynamic? total = widget.charges + widget.tax!;
@@ -524,44 +545,52 @@ class _FlightPackageWidgetState extends State<FlightPackageWidget> {
                 text: "Book",
                 onPress: () {
                   // Get.to(() => PaymentMethodScreen(
-                  Get.to(() => PassengerDetailsScreen(
-                        fare: widget.charges.toString(),
-                        tax: widget.tax.toString(),
-                        total: total.toStringAsFixed(2),
-                        traveller: widget.traveller,
-                        cabinClass: widget.cabinClass,
-                        searchID: widget.searchID,
-                        flightID: widget.flightID,
-                        departFlight: widget.departFlight,
-                        arriveFlight: widget.arriveFlight,
-                        departFromDate1: widget.departFromDate1,
-                        departFromTime1: widget.departFromTime1,
-                        departFromCode1: widget.departFromCode1,
-                        departFromDate2: widget.departFromDate2,
-                        departFromTime2: widget.departFromTime2,
-                        departFromCode2: widget.departFromCode2,
-                        arriveToDate1: widget.arriveToDate1,
-                        arriveToTime1: widget.arriveToTime1,
-                        arriveToCode1: widget.arriveToCode1,
-                        arriveToDate2: widget.arriveToDate2,
-                        arriveToCode2: widget.arriveToCode2,
-                        arriveToTime2: widget.arriveToTime2,
-                        paymentID: '',
-                        adultCount: widget.adultCount,
-                        childCount: widget.childCount,
-                        infantCount: widget.infantCount,
-                        //
-                        child1age: widget.child1age,
-                        child2age: widget.child2age,
-                        child3age: widget.child3age,
-                        child4age: widget.child4age,
-                        //
-                        infant1age: widget.infant1age,
-                        infant2age: widget.infant2age,
-                        infant3age: widget.infant3age,
-                        infant4age: widget.infant4age,
-                        //
-                      ));
+                  dataController.myLoggedIn.value
+                      ? Get.to(() => PassengerDetailsScreen(
+                            fare: widget.charges.toString(),
+                            tax: widget.tax.toString(),
+                            total: total.toStringAsFixed(2),
+                            traveller: widget.traveller,
+                            cabinClass: widget.cabinClass,
+                            searchID: widget.searchID,
+                            flightID: widget.flightID,
+                            departFlight: widget.departFlight,
+                            arriveFlight: widget.arriveFlight,
+                            departFromDate1: widget.departFromDate1,
+                            departFromTime1: widget.departFromTime1,
+                            departFromCode1: widget.departFromCode1,
+                            departFromDate2: widget.departFromDate2,
+                            departFromTime2: widget.departFromTime2,
+                            departFromCode2: widget.departFromCode2,
+                            arriveToDate1: widget.arriveToDate1,
+                            arriveToTime1: widget.arriveToTime1,
+                            arriveToCode1: widget.arriveToCode1,
+                            arriveToDate2: widget.arriveToDate2,
+                            arriveToCode2: widget.arriveToCode2,
+                            arriveToTime2: widget.arriveToTime2,
+                            paymentID: '',
+                            adultCount: widget.adultCount,
+                            childCount: widget.childCount,
+                            infantCount: widget.infantCount,
+                            //
+                            child1age: widget.child1age,
+                            child2age: widget.child2age,
+                            child3age: widget.child3age,
+                            child4age: widget.child4age,
+                            //
+                            infant1age: widget.infant1age,
+                            infant2age: widget.infant2age,
+                            infant3age: widget.infant3age,
+                            infant4age: widget.infant4age,
+                            //
+                          ))
+                      : Dialogs.showCustomAlertDialog(context,
+                          "Login Required for booking flights.\n\nPlease Login",
+                          () {
+                          Get.offAll(() => LoginScreen());
+                        }, () {
+                          Get.back();
+                        });
                   // Get.to(() => PassengerDetailsScreen(
                   //       fare: widget.charges.toString(),
                   //       tax: widget.tax.toString(),

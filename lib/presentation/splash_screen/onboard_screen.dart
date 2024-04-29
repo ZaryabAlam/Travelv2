@@ -6,6 +6,8 @@ import 'package:travel_app/app/utils/custom_widgets/common_text.dart';
 import 'package:travel_app/app/utils/custom_widgets/custom_button.dart';
 import 'package:travel_app/presentation/auth/view/login_screen.dart';
 
+import '../home_bottom_nav/bnb/bottom_nav_view.dart';
+
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
 
@@ -27,6 +29,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        alignment: Alignment.center,
         child: PageView(
           controller: controller,
           onPageChanged: (index) {
@@ -63,6 +66,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     required String subtitle,
   }) =>
       Stack(
+        alignment: Alignment.center,
         children: [
           Container(
             decoration: BoxDecoration(
@@ -83,6 +87,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(height: 250),
               CommonText(
@@ -127,7 +132,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   onPress: () async {
                     SharedPreferences prefs =
                         await SharedPreferences.getInstance();
-                    Get.to(() => LoginScreen());
+                    // Get.to(() => LoginScreen());
+                    Get.to(() => BottomNavScreen());
                     prefs.setBool('isOnboardedStatus', true);
                   },
                   text: "Get Started"),
@@ -137,7 +143,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       onPressed: () async {
                         SharedPreferences prefs =
                             await SharedPreferences.getInstance();
-                        Get.to(() => LoginScreen());
+                        // Get.to(() => LoginScreen());
+                        Get.to(() => BottomNavScreen());
                         prefs.setBool('isOnboardedStatus', true);
                       },
                       child: CommonText(text: "Skip", color: Colors.white)),

@@ -15,6 +15,7 @@ import 'package:travel_app/presentation/profile/view/user_profile_screen.dart';
 
 import '../../../app/data/data_controller.dart';
 import '../../auth/view/login_screen.dart';
+import '../nav_tabs/home_view.dart';
 
 class BottomNavScreen extends StatefulWidget {
   BottomNavScreen({this.fromDetails = false, super.key, this.cabinClass});
@@ -48,6 +49,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
     if (widget.fromDetails!) {
       onSelectTab(1);
     }
+    setState(() {});
   }
 
   int selectedIndex = 0;
@@ -91,66 +93,96 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
       //   title: CommonText(text: tabsLables[selectedIndex], weight: AppFontWeights.appTextFontWeightBold, fontSize: 20.0),
       // ),
       // --------------------------------
-      drawer: Drawer(
-        backgroundColor: AppColors.appColorWhite,
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              0.02.ph,
-               CommonText(
-                text: 'Hello ${dataController.myName.value}',
-                fontSize: 20.0,
-              ),
-              0.02.ph,
-              Column(
-                children: List.generate(appDrawerData.length, (i) {
-                  var item = appDrawerData[i];
-                  return ListTile(
-                    dense: true,
-                    onTap: () {
-                      if (i < tabsList.length) {
-                        onSelectTab(i);
-                      }
-                      Get.back();
-                    },
-                    leading: Icon(item['Icon']),
-                    title: CommonText(text: item['Name']),
-                    subtitle: const Divider(),
-                  );
-                }),
-              ),
-              ListTile(
-                dense: true,
-                onTap: () async {
-                  Get.to(() => AgencyProfileScreen());
-                },
-                leading: Icon(
-                  Icons.arrow_back_sharp,
+      drawer: dataController.myLoggedIn.value
+          ? Drawer(
+              backgroundColor: AppColors.appColorWhite,
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    0.02.ph,
+                    CommonText(
+                      text: 'Hello ${dataController.myName.value}',
+                      fontSize: 20.0,
+                    ),
+                    0.02.ph,
+                    Column(
+                      children: List.generate(appDrawerData.length, (i) {
+                        var item = appDrawerData[i];
+                        return ListTile(
+                          dense: true,
+                          onTap: () {
+                            if (i < tabsList.length) {
+                              onSelectTab(i);
+                            }
+                            Get.back();
+                          },
+                          leading: Icon(item['Icon']),
+                          title: CommonText(text: item['Name']),
+                          subtitle: const Divider(),
+                        );
+                      }),
+                    ),
+                    ListTile(
+                      dense: true,
+                      onTap: () async {
+                        Get.to(() => AgencyProfileScreen());
+                      },
+                      leading: Icon(
+                        Icons.arrow_back_sharp,
+                      ),
+                      title: CommonText(text: "Agency"),
+                      subtitle: const Divider(),
+                    ),
+                    ListTile(
+                      dense: true,
+                      onTap: () async {
+                        SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
+                        await prefs.setBool('loggedInStatus', false);
+                        Get.offAll(() => LoginScreen());
+                      },
+                      leading: Icon(
+                        Icons.logout,
+                      ),
+                      title: CommonText(text: "Logout"),
+                      subtitle: const Divider(),
+                    )
+                  ],
                 ),
-                title: CommonText(text: "Agency"),
-                subtitle: const Divider(),
               ),
-              ListTile(
-                dense: true,
-                onTap: () async {
-                  SharedPreferences prefs =
-                      await SharedPreferences.getInstance();
-                  await prefs.setBool('loggedInStatus', false);
-                  Get.offAll(() => LoginScreen());
-                },
-                leading: Icon(
-                  Icons.logout,
+              // width: 50.0,
+            )
+          : Drawer(
+              backgroundColor: AppColors.appColorWhite,
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    0.04.ph,
+                    CommonText(
+                      text: 'Hello Guest',
+                      fontSize: 20.0,
+                    ),
+                    0.02.ph,
+                    Divider(),
+                    ListTile(
+                      dense: true,
+                      onTap: () async {
+                        Get.offAll(() => LoginScreen());
+                      },
+                      leading: Icon(
+                        Icons.login_rounded,
+                      ),
+                      title: CommonText(text: "Login"),
+                      subtitle: const Divider(),
+                    )
+                  ],
                 ),
-                title: CommonText(text: "Logout"),
-                subtitle: const Divider(),
-              )
-            ],
-          ),
-        ),
-        // width: 50.0,
-      ),
+              ),
+            ),
 
       // --------------------------------
       body: tabsList[selectedIndex],
