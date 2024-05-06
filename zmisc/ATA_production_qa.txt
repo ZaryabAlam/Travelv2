@@ -1,0 +1,17 @@
+Q1. 
+A. Testers utilized the majority of our app's features. Definitely, the user experience was designed to be highly friendly, giving users a easy and complete experience.
+
+Q2.
+A. Testers provided feedback on usability, performance, and features but also noting areas for improvement like bugs and interface inconsistencies. Feedback was gathered through verbal communication and emails.
+
+Q3. Who is the intended audience of your app?
+A. Users from all around the world.
+
+Q4. Describe how your app provides value to users.
+A. Our app delivers value through intuitive design, flawless functionality, and personalised features, enhancing user experiences effortlessly.
+
+Q5. What changes did you make to your app based on what you learned during your closed test?
+A. Changes were made were refined usability, fixed bugs, and added requested features for a smoother user experience.
+
+Q6. How did you decide that your app is ready for production?
+A. We determined readiness based on comprehensive testing, positive feedback and ensuring stability and functionality.
